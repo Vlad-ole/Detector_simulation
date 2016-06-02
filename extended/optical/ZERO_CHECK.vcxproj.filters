@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\git_repositories\Detector_simulation\extended\optical\CMakeFiles\44fa38fe19504af8ce0d99d416b236c6\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{9A70BF84-08CD-3228-809C-8BA0AFBACA3D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

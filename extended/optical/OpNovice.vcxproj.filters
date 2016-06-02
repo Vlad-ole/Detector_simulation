@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\OpNovice.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNoviceActionInitialization.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNoviceDetectorConstruction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNovicePhysicsList.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNovicePhysicsListMessenger.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNovicePrimaryGeneratorAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNovicePrimaryGeneratorMessenger.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNoviceRunAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNoviceStackingAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNoviceSteppingAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\src\OpNoviceSteppingVerbose.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNoviceActionInitialization.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNoviceDetectorConstruction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNovicePhysicsList.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNovicePhysicsListMessenger.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNovicePrimaryGeneratorAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNovicePrimaryGeneratorMessenger.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNoviceRunAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNoviceStackingAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNoviceSteppingAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\include\OpNoviceSteppingVerbose.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\OpNovice\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0C693899-98B7-399B-9A23-4CF3004D21E7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D92E2F63-0055-3BD5-883B-C87B4D88634C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
