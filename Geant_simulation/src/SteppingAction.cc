@@ -96,6 +96,8 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 								//Triger sensitive detector manually since photon is
 								//absorbed but status was Detection
 								{
+									//cout << "GetCopyNumber() =" <<  theStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() << endl;
+									
 									G4SDManager* SDman = G4SDManager::GetSDMpointer();
 									G4String sdName="/detector/sensitiveDetector";
 									CathodeSD* pmtSD = (CathodeSD*)SDman->FindSensitiveDetector(sdName);

@@ -5,6 +5,7 @@
 #include <G4ThreeVector.hh>
 #include <G4VUserDetectorConstruction.hh>
 #include "CathodeSD.hh"
+#include "DetectorParametrisation.h"
 
 
 class G4Trap;
@@ -104,6 +105,23 @@ private:
 	G4String sScintillatorFaceSurface;
 	G4String sScintillatorLateralSurface;
 
+
+
+
+
+
+
+
+
+	G4Box*            solid_SiPM;   // pointer to the box solid SiPM
+	G4LogicalVolume*   logic_SiPM;   // pointer to the logical Scintillator
+	G4VPhysicalVolume* physi_SiPM;   // pointer to the physical Scintillator
+
+
+
+
+
+
 	// surfaces
 	G4OpticalSurface *world_scintillator;
 	G4OpticalSurface *scintillator_grease;
@@ -149,6 +167,9 @@ private:
 	void defineSurfaces();
 
 	G4MaterialPropertiesTable *silicaCathodeMaterialProperty;
+
+
+	G4bool  fCheckOverlaps; // option to activate checking of volumes overlaps
 
 };
 

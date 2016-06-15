@@ -33,6 +33,7 @@ void DetectorConstruction::defineMaterials()
 	G4Element *Al = man->FindOrBuildElement("Al");
 	G4Element *Pr = man->FindOrBuildElement("Pr");
 
+
 	//------------------------------
 	// Air
 	G4Material* Air = man->FindOrBuildMaterial("G4_AIR");

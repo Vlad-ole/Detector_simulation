@@ -18,12 +18,19 @@
 
 #define DEBAG_MODE
 
-CathodeSD::CathodeSD(G4String name, G4VPhysicalVolume *cathode) : G4VSensitiveDetector(name), _cathode(cathode)
+CathodeSD::CathodeSD(G4String name, G4VPhysicalVolume *cathode, int N_SiPMs) : G4VSensitiveDetector(name), _cathode(cathode)
 {
+	N_SiPMs = n_SiPMs;
+	//N_reg.reserve(N_SiPMs);
+	N_reg.resize(11*11, 0);
 }
 
 CathodeSD::~CathodeSD()
 {
+	for (int i = 0; i < N_reg.size(); i++)
+	{
+		cout << i << " " << N_reg[i] << endl;
+	}
 }
 
 void CathodeSD::Initialize(G4HCofThisEvent* HCE)
@@ -49,6 +56,10 @@ G4bool CathodeSD::ProcessHits_Optical(const G4Step* aStep, G4TouchableHistory* )
 	//add information about hit to collection
 	_nHits++;
 
+	//cout << aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0) << endl;// right variant
+
+	N_reg[aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0)]++;
+		
 	/*G4StepPoint * thePrePoint  = aStep->GetPostStepPoint();
 	G4ThreeVector pos    = thePrePoint->GetPosition();
 	G4double energy = thePrePoint->GetTotalEnergy();

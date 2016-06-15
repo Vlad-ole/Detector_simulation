@@ -1,0 +1,4 @@
+D:/git_repositories/Detector_simulation/extended/LXe/CMakeFiles/LXe.dir
+D:/git_repositories/Detector_simulation/extended/LXe/CMakeFiles/INSTALL.dir
+D:/git_repositories/Detector_simulation/extended/LXe/CMakeFiles/ALL_BUILD.dir
+D:/git_repositories/Detector_simulation/extended/LXe/CMakeFiles/ZERO_CHECK.dir

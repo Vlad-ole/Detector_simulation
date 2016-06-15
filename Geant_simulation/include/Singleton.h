@@ -19,6 +19,7 @@ public:
 	static Singleton* get(); 
 	
 	ofstream file_num_of_photons;
+	ofstream file_num_of_photons_SiPM;
 	ofstream file_num_of_reg_photons;
 	ofstream file_ph_coll;
 	ofstream file_xy;

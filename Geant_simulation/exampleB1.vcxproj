@@ -275,6 +275,7 @@
     <ClCompile Include="src\DetectorConstruction.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\DetectorParametrisation.cpp" />
     <ClCompile Include="src\EventAction.cc" />
     <ClCompile Include="src\main.cc" />
     <ClCompile Include="src\materials_property.cpp" />
@@ -318,6 +319,7 @@
     <None Include="include\SteppingAction.hh" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\DetectorParametrisation.h" />
     <ClInclude Include="include\ReadConstants.h" />
     <ClInclude Include="include\Singleton.h" />
   </ItemGroup>

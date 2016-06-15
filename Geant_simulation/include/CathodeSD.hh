@@ -2,6 +2,9 @@
 #define CathodeSD_h 1
 
 #include <G4VSensitiveDetector.hh>
+#include <vector>
+
+using namespace std;
 
 class G4Step;
 class G4HCofThisEvent;
@@ -11,7 +14,7 @@ class G4HCofThisEvent;
 class CathodeSD : public G4VSensitiveDetector
 {
   public:
-      CathodeSD(G4String, G4VPhysicalVolume *cathode);
+      CathodeSD(G4String, G4VPhysicalVolume *cathode, int N_SiPMs);
      ~CathodeSD();
 
       void Initialize(G4HCofThisEvent*);
@@ -21,7 +24,9 @@ class CathodeSD : public G4VSensitiveDetector
 
   private:
       const G4VPhysicalVolume * _cathode;
+	  int n_SiPMs;
 	  int   _nHits;
+	  vector<int> N_reg;
 
 };
 

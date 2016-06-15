@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{B71C91BF-0D93-3F35-B223-F5BB3A3C857D}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>LXe</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\git_repositories\Detector_simulation\extended\LXe\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">LXe.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">LXe</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\git_repositories\Detector_simulation\extended\LXe\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">LXe.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">LXe</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\git_repositories\Detector_simulation\extended\LXe\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">LXe.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">LXe</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\git_repositories\Detector_simulation\extended\LXe\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">LXe.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">LXe</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions> -Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CONSOLE;_WIN32;WIN32;OS;XPNET;_CRT_SECURE_NO_DEPRECATE;G4USE_STD11;WIN32;_WINDOWS;_DEBUG;G4_STORE_TRAJECTORY;G4VERBOSE;G4UI_USE;G4VIS_USE;G4INTY_USE_WIN32;G4UI_USE_WIN32;G4VIS_USE_OPENGLWIN32;G4VIS_USE_OPENGL;G4LIB_BUILD_DLL;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_CONSOLE;_WIN32;WIN32;OS;XPNET;_CRT_SECURE_NO_DEPRECATE;G4USE_STD11;WIN32;_WINDOWS;_DEBUG;G4_STORE_TRAJECTORY;G4VERBOSE;G4UI_USE;G4VIS_USE;G4INTY_USE_WIN32;G4UI_USE_WIN32;G4VIS_USE_OPENGLWIN32;G4VIS_USE_OPENGL;G4LIB_BUILD_DLL;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4Tree.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4GMocren.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4visHepRep.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4RayTracer.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4VRML.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4OpenGL.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4gl2ps.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4interfaces.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4persistency.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4analysis.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4error_propagation.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4readout.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4physicslists.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4parmodels.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4FR.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4vis_management.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4modeling.lib;glu32.lib;opengl32.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4run.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4event.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4tracking.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4processes.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4expat.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4zlib.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4digits_hits.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4track.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4particles.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4geometry.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4materials.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4graphics_reps.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4intercoms.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4global.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4clhep.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/git_repositories/Detector_simulation/extended/LXe/Debug/LXe.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/git_repositories/Detector_simulation/extended/LXe/Debug/LXe.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions> -Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CONSOLE;_WIN32;WIN32;OS;XPNET;_CRT_SECURE_NO_DEPRECATE;G4USE_STD11;WIN32;_WINDOWS;NDEBUG;NDEBUG;G4_STORE_TRAJECTORY;G4VERBOSE;G4UI_USE;G4VIS_USE;G4INTY_USE_WIN32;G4UI_USE_WIN32;G4VIS_USE_OPENGLWIN32;G4VIS_USE_OPENGL;G4LIB_BUILD_DLL;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_CONSOLE;_WIN32;WIN32;OS;XPNET;_CRT_SECURE_NO_DEPRECATE;G4USE_STD11;WIN32;_WINDOWS;NDEBUG;NDEBUG;G4_STORE_TRAJECTORY;G4VERBOSE;G4UI_USE;G4VIS_USE;G4INTY_USE_WIN32;G4UI_USE_WIN32;G4VIS_USE_OPENGLWIN32;G4VIS_USE_OPENGL;G4LIB_BUILD_DLL;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4Tree.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4GMocren.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4visHepRep.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4RayTracer.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4VRML.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4OpenGL.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4gl2ps.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4interfaces.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4persistency.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4analysis.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4error_propagation.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4readout.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4physicslists.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4parmodels.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4FR.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4vis_management.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4modeling.lib;glu32.lib;opengl32.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4run.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4event.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4tracking.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4processes.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4expat.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4zlib.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4digits_hits.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4track.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4particles.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4geometry.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4materials.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4graphics_reps.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4intercoms.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4global.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4clhep.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/git_repositories/Detector_simulation/extended/LXe/Release/LXe.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/git_repositories/Detector_simulation/extended/LXe/Release/LXe.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalOptions> -Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CONSOLE;_WIN32;WIN32;OS;XPNET;_CRT_SECURE_NO_DEPRECATE;G4USE_STD11;WIN32;_WINDOWS;NDEBUG;NDEBUG;G4_STORE_TRAJECTORY;G4VERBOSE;G4UI_USE;G4VIS_USE;G4INTY_USE_WIN32;G4UI_USE_WIN32;G4VIS_USE_OPENGLWIN32;G4VIS_USE_OPENGL;G4LIB_BUILD_DLL;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_CONSOLE;_WIN32;WIN32;OS;XPNET;_CRT_SECURE_NO_DEPRECATE;G4USE_STD11;WIN32;_WINDOWS;NDEBUG;NDEBUG;G4_STORE_TRAJECTORY;G4VERBOSE;G4UI_USE;G4VIS_USE;G4INTY_USE_WIN32;G4UI_USE_WIN32;G4VIS_USE_OPENGLWIN32;G4VIS_USE_OPENGL;G4LIB_BUILD_DLL;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4Tree.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4GMocren.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4visHepRep.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4RayTracer.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4VRML.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4OpenGL.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4gl2ps.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4interfaces.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4persistency.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4analysis.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4error_propagation.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4readout.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4physicslists.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4parmodels.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4FR.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4vis_management.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4modeling.lib;glu32.lib;opengl32.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4run.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4event.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4tracking.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4processes.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4expat.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4zlib.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4digits_hits.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4track.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4particles.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4geometry.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4materials.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4graphics_reps.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4intercoms.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4global.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4clhep.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/git_repositories/Detector_simulation/extended/LXe/MinSizeRel/LXe.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/git_repositories/Detector_simulation/extended/LXe/MinSizeRel/LXe.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalOptions> -Zm200 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>_CONSOLE;_WIN32;WIN32;OS;XPNET;_CRT_SECURE_NO_DEPRECATE;G4USE_STD11;WIN32;_WINDOWS;NDEBUG;G4_STORE_TRAJECTORY;G4VERBOSE;G4UI_USE;G4VIS_USE;G4INTY_USE_WIN32;G4UI_USE_WIN32;G4VIS_USE_OPENGLWIN32;G4VIS_USE_OPENGL;G4LIB_BUILD_DLL;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_CONSOLE;_WIN32;WIN32;OS;XPNET;_CRT_SECURE_NO_DEPRECATE;G4USE_STD11;WIN32;_WINDOWS;NDEBUG;G4_STORE_TRAJECTORY;G4VERBOSE;G4UI_USE;G4VIS_USE;G4INTY_USE_WIN32;G4UI_USE_WIN32;G4VIS_USE_OPENGLWIN32;G4VIS_USE_OPENGL;G4LIB_BUILD_DLL;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Geant4\geant4_10_02_p01_install\include\Geant4;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4Tree.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4GMocren.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4visHepRep.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4RayTracer.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4VRML.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4OpenGL.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4gl2ps.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4interfaces.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4persistency.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4analysis.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4error_propagation.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4readout.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4physicslists.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4parmodels.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4FR.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4vis_management.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4modeling.lib;glu32.lib;opengl32.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4run.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4event.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4tracking.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4processes.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4expat.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4zlib.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4digits_hits.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4track.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4particles.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4geometry.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4materials.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4graphics_reps.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4intercoms.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4global.lib;D:\Geant4\geant4_10_02_p01_install\lib\G4clhep.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/git_repositories/Detector_simulation/extended/LXe/RelWithDebInfo/LXe.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/git_repositories/Detector_simulation/extended/LXe/RelWithDebInfo/LXe.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule D:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HD:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe -BD:/git_repositories/Detector_simulation/extended/LXe --check-stamp-file D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe/CMakeLists.txt;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeSystemSpecificInitialize.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeCCompiler.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCommonLanguageInclude.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4ConfigVersion.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4Config.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Modules\IntelCompileFeatures.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4LibraryDepends.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4LibraryDepends-relwithdebinfo.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\UseGeant4.cmake;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.out;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.in;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\defaults.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\cerenkov.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\wls.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\photon.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\reviewEvent.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\gui.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\icons.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\run.png;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\vis.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule D:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HD:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe -BD:/git_repositories/Detector_simulation/extended/LXe --check-stamp-file D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe/CMakeLists.txt;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeSystemSpecificInitialize.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeCCompiler.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCommonLanguageInclude.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4ConfigVersion.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4Config.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Modules\IntelCompileFeatures.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4LibraryDepends.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4LibraryDepends-relwithdebinfo.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\UseGeant4.cmake;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.out;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.in;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\defaults.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\cerenkov.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\wls.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\photon.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\reviewEvent.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\gui.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\icons.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\run.png;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\vis.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule D:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HD:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe -BD:/git_repositories/Detector_simulation/extended/LXe --check-stamp-file D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe/CMakeLists.txt;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeSystemSpecificInitialize.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeCCompiler.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCommonLanguageInclude.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4ConfigVersion.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4Config.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Modules\IntelCompileFeatures.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4LibraryDepends.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4LibraryDepends-relwithdebinfo.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\UseGeant4.cmake;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.out;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.in;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\defaults.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\cerenkov.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\wls.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\photon.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\reviewEvent.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\gui.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\icons.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\run.png;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\vis.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule D:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HD:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe -BD:/git_repositories/Detector_simulation/extended/LXe --check-stamp-file D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:/Geant4/geant4_10_02_p01_install/share/Geant4-10.2.1/examples/extended/optical/LXe/CMakeLists.txt;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeSystemSpecificInitialize.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeCCompiler.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC.cmake;D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\3.5.2\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeLanguageInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCommonLanguageInclude.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4ConfigVersion.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4Config.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Modules\IntelCompileFeatures.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4LibraryDepends.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\Geant4LibraryDepends-relwithdebinfo.cmake;D:\Geant4\geant4_10_02_p01_install\lib\Geant4-10.2.1\UseGeant4.cmake;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.out;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.in;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\defaults.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\cerenkov.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\wls.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\photon.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\reviewEvent.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\gui.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\icons.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\run.png;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\vis.mac;D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeActionInitialization.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeDetectorConstruction.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeDetectorMessenger.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeEMPhysics.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeEventAction.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeEventMessenger.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeGeneralPhysics.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeMainVolume.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeMuonPhysics.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXePhysicsList.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXePMTHit.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXePMTSD.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXePrimaryGeneratorAction.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeRecorderBase.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeRunAction.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeScintHit.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeScintSD.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeStackingAction.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeSteppingAction.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeSteppingMessenger.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeSteppingVerbose.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeTrackingAction.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeTrajectory.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeUserEventInformation.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeUserTrackInformation.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeWLSFiber.hh" />
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeWLSSlab.hh" />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeActionInitialization.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeDetectorConstruction.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeDetectorMessenger.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeEMPhysics.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeEventAction.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeEventMessenger.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeGeneralPhysics.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeMainVolume.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeMuonPhysics.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXePhysicsList.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXePMTHit.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXePMTSD.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXePrimaryGeneratorAction.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeRunAction.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeScintHit.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeScintSD.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeStackingAction.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeSteppingAction.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeSteppingMessenger.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeSteppingVerbose.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeTrackingAction.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeTrajectory.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeUserEventInformation.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeUserTrackInformation.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeWLSFiber.cc"  />
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeWLSSlab.cc"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:/git_repositories/Detector_simulation/extended/LXe/ZERO_CHECK.vcxproj">
+      <Project>C3A1453D-377F-3A20-B0F7-ECF0AF3795FB</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -8,12 +8,11 @@
 *.wrl
 *.db
 sets.txt
-Geant_simulation/Debug/
-Geant_simulation/exampleB1.dir/
-Geant_simulation/RelWithDebInfo/
 
 # Build results
 
+*.dir/
+RelWithDebInfo/
 [Dd]ebug/
 [Rr]elease/
 x64/

@@ -13,7 +13,7 @@ using namespace std;
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 
 //#define DIRECT_INCIDENCE
-//#define CENTRAL_INCIDENCE
+#define CENTRAL_INCIDENCE
 
 void PrimaryGeneratorAction::CommonPart()
 {
@@ -25,7 +25,7 @@ void PrimaryGeneratorAction::CommonPart()
 	// default particle kinematic
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 	G4String particleName;
-	G4ParticleDefinition* particle = particleTable->FindParticle(particleName= "gamma" /*"opticalphoton"*/);
+	G4ParticleDefinition* particle = particleTable->FindParticle(particleName= /*"gamma"*/ "opticalphoton");
 
 	particleGun->SetParticleDefinition(particle);
 	
@@ -98,8 +98,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	switch(xrType)
 	{
 	case MONO:
-		energy = 59.5; //original value
-		//energy = 2.8E-3;
+		//energy = 59.5; //original value [keV]
+		energy = 2.8E-3; // optical photon [keV]
 
 		break;
 
@@ -128,8 +128,10 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//cout << "inside DIRECT_INCIDENCE" << endl;
 	//system("pause");
 #else 
+	//uniform distribution
 	double phi = 2*pi*G4UniformRand();
-	double theta = pi/2*G4UniformRand();
+	//double theta = pi/2*G4UniformRand();
+	double theta = acos( G4UniformRand() );
 #endif //DIRECT_INCIDENCE		
 
 	particleGun->SetParticleMomentumDirection(G4ThreeVector(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta)));
@@ -152,7 +154,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		y = 4.0*(G4UniformRand() - 0.5)*mm; 
 	} while (x*x + y*y > 16*mm2);
 #endif
-	particleGun->SetParticlePosition(G4ThreeVector(x, y, -1*mm));
+	particleGun->SetParticlePosition(G4ThreeVector(x, y, 71.2*mm));
 	//------------------------------------
 	
 	

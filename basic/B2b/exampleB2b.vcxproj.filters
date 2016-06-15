@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\exampleB2b.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2ActionInitialization.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2bChamberParameterisation.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2bDetectorConstruction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2bDetectorMessenger.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2EventAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2PrimaryGeneratorAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2RunAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2TrackerHit.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\src\B2TrackerSD.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2ActionInitialization.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2bChamberParameterisation.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2bDetectorConstruction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2bDetectorMessenger.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2EventAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2PrimaryGeneratorAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2RunAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2TrackerHit.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\include\B2TrackerSD.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\basic\B2\B2b\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EB5458D0-2CA6-34CB-BCA9-1B9D443E273F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{851BF52A-DE8B-3B0C-8653-25C0FF562BA2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

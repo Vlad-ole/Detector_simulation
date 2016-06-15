@@ -72,7 +72,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//--------------------------------------------------------------------------------
 	//выставление размеров объектов
-	G4double HalfWorldLength = 3*cm;
+	G4double HalfWorldLength = 10*cm;
 
 	const G4double alpha = 0 * degree;
 	const double scintillator_length_x = 3.5*mm; // full length (or the narrower side)	
@@ -94,13 +94,55 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	const double cathode_diameter = glass_diameter;
 	const double cathode_height = 1 * um;
+
+
+
+
+	const double thickness_SiPM = 1*nm;
+	const double size_SiPM = 6 * mm;
+
+
+
+
+
+
+
+
+	G4int NbOfChambers = 5;
+	G4double chamberSpacing = 10 * mm; // from chamber center to center!
+
+	G4double chamberWidth = 6 * mm; // width of the chambers
+	G4double targetLength = 5.0*mm; // full length of Target
+
+	G4double trackerLength = (NbOfChambers + 1)*chamberSpacing;
+
+	G4double worldLength = 1.2 * (2 * targetLength + trackerLength);
+
+	G4double targetRadius = 0.5*targetLength;   // Radius of Target
+	targetLength = 0.5*targetLength;             // Half length of the Target  
+	G4double trackerSize = 0.5*trackerLength;  // Half length of the Tracker
+
+	G4double firstPosition = -trackerSize + chamberSpacing;
+	G4double firstLength = trackerLength / 10;
+	G4double lastLength = trackerLength;
+
 	//--------------------------------------------------------------------------------
+
+
+
+
+
+
+	//--------------------------------------------------------------------------------
+	//определение взаимного расположения объектов
 
 	//const G4double shift = scintillator_height / 2.0 + scintillator_length_x / 4.0 * tan(alpha);
 	const G4double shift = scintillator_height / 2.0;
 
-	//--------------------------------------------------------------------------------
-	//определение взаимного расположения объектов
+
+	const G4ThreeVector &position_SiPM = G4ThreeVector(0, 0, 79.2*mm + thickness_SiPM / 2.0);
+
+
 	const G4ThreeVector &scintillator_position = G4ThreeVector(0, 0, shift);
 	//const G4ThreeVector &absorber_position = G4ThreeVector(0, 0, scintillator_height * 0.99);
 	const G4ThreeVector &grease_position = G4ThreeVector(0, 0, 2*shift + grease_height / 2.0);
@@ -108,23 +150,6 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &cathode_position = G4ThreeVector(0, 0, 2*shift + grease_height + glass_height + cathode_height / 2.0);
 
 
-#ifdef CHAMFER
-
-	G4ThreeVector &chamfer_top_left_longitudinal_1 = G4ThreeVector(-scintillator_length_x/2.0, 0, -scintillator_height/2.0);
-	G4ThreeVector &chamfer_top_right_longitudinal_1 = G4ThreeVector(scintillator_length_x/2.0, 0, -scintillator_height/2.0);
-	G4ThreeVector &chamfer_bottom_left_longitudinal_1 = G4ThreeVector(-scintillator_length_x/2.0, 0, scintillator_height/2.0);
-	G4ThreeVector &chamfer_bottom_right_longitudinal_1 = G4ThreeVector(scintillator_length_x/2.0, 0, scintillator_height/2.0);
-
-	G4ThreeVector &chamfer_top_left_longitudinal_2 = G4ThreeVector(0, -scintillator_length_y/2.0, -scintillator_height/2.0);
-	G4ThreeVector &chamfer_top_right_longitudinal_2 = G4ThreeVector(0, scintillator_length_y/2.0, -scintillator_height/2.0);
-	G4ThreeVector &chamfer_bottom_left_longitudinal_2 = G4ThreeVector(0, -scintillator_length_y/2.0, scintillator_height/2.0);
-	G4ThreeVector &chamfer_bottom_right_longitudinal_2 = G4ThreeVector(0, scintillator_length_y/2.0, scintillator_height/2.0);
-
-	G4ThreeVector &chamfer_a_vertical = G4ThreeVector(scintillator_length_x/2.0, scintillator_length_y/2.0, 0);
-	G4ThreeVector &chamfer_b_vertical = G4ThreeVector(scintillator_length_x/2.0, -scintillator_length_y/2.0, 0);
-	G4ThreeVector &chamfer_c_vertical = G4ThreeVector(-scintillator_length_x/2.0, scintillator_length_y/2.0, 0);
-	G4ThreeVector &chamfer_d_vertical = G4ThreeVector(-scintillator_length_x/2.0, -scintillator_length_y/2.0, 0);
-#endif
 	//--------------------------------------------------------------------------------
 
 
@@ -154,191 +179,132 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 	//--------------------------------------------------------------------------------
-	// создание кристалла
+	// create SiPM matrix
 
+	int Nx_SiPMs = 11;
+	int Ny_SiPMs = 11;
 
+	solid_SiPM = new G4Box("sscintillator", size_SiPM / 2.0, size_SiPM / 2.0, thickness_SiPM / 2.0);
+	logic_SiPM = new G4LogicalVolume(solid_SiPM, G4Material::GetMaterial("Air"), "lSiPM", 0, 0, 0);
+	//physi_SiPM = new G4PVPlacement(0,
+	//	position_SiPM,  // at (x,y,z)
+	//	logic_SiPM,     // its logical volume
+	//	"pSiPM",        // its name
+	//	logicWorld,      // its mother  volume
+	//	false,           // no boolean operations
+	//	0);
 
-	////// for any crystall
-	solid_scintillator = new G4Box("sscintillator", scintillator_length_x/2.0, scintillator_length_y/2.0, scintillator_height/2.0);
-	//G4Trap* solid_scintillator = new G4Trap("sTrapscintillator", scintillator_length_x, scintillator_length_x, scintillator_length_x*tan(alpha) + scintillator_height, scintillator_height);
-	G4RotationMatrix* yRot90deg = new G4RotationMatrix;
-	//yRot90deg->rotateY(-90 * degree);
-	//yRot90deg->rotateY(180 * degree);
+	G4ThreeVector positionTracker = G4ThreeVector(0, 0, 0);
 
-	//++++++++++++++++++++++++++++++++++++++++++++++
-	//create chamfer
-#ifdef CHAMFER
-
-
-
-	G4double chamfer_parameter =  0.1*mm; // full length of 
-
-	G4Box*  box_longitudinal_1 = new G4Box("Box", chamfer_parameter/2.0, scintillator_length_y/2.0 + 1*mm, chamfer_parameter/2.0);
-	G4Box*  box_longitudinal_2 = new G4Box("Box", scintillator_length_x/2.0, chamfer_parameter/2.0, chamfer_parameter/2.0);
-	G4Box*  box_vertical = new G4Box("Box", chamfer_parameter/2.0, chamfer_parameter/2.0, scintillator_height/2.0);
-
-	G4RotationMatrix* yRot = new G4RotationMatrix;
-	yRot->rotateY(3.1416/4.*rad);
-
-	G4RotationMatrix* xRot = new G4RotationMatrix();
-	xRot->rotateX(3.1416/4.*rad);
-
-	G4RotationMatrix* zRot = new G4RotationMatrix();
-	zRot->rotateZ(3.1416/4.*rad);
-
-	G4SubtractionSolid* subtraction_top_left_longitudinal_1 = new G4SubtractionSolid("Box-Cylinder1", solid_scintillator, box_longitudinal_1, yRot, chamfer_top_left_longitudinal_1);
-	G4SubtractionSolid* subtraction_top_right_longitudinal_1 = new G4SubtractionSolid("Box-Cylinder2", subtraction_top_left_longitudinal_1, box_longitudinal_1, yRot, chamfer_top_right_longitudinal_1);
-	G4SubtractionSolid* subtraction_bottom_left_longitudinal_1 = new G4SubtractionSolid("Box-Cylinder3", subtraction_top_right_longitudinal_1, box_longitudinal_1, yRot, chamfer_bottom_left_longitudinal_1);
-	G4SubtractionSolid* subtraction_bottom_right_longitudinal_1 = new G4SubtractionSolid("Box-Cylinder4", subtraction_bottom_left_longitudinal_1, box_longitudinal_1, yRot, chamfer_bottom_right_longitudinal_1);
-
-	/*G4SubtractionSolid* subtraction_top_left_longitudinal_2 = new G4SubtractionSolid("Box-Cylinder", subtraction_bottom_right_longitudinal_1, box_longitudinal_2, xRot, chamfer_top_left_longitudinal_2);
-	G4SubtractionSolid* subtraction_top_right_longitudinal_2 = new G4SubtractionSolid("Box-Cylinder", subtraction_top_left_longitudinal_2, box_longitudinal_2, xRot, chamfer_top_right_longitudinal_2);
-	G4SubtractionSolid* subtraction_bottom_left_longitudinal_2 = new G4SubtractionSolid("Box-Cylinder", subtraction_top_right_longitudinal_2, box_longitudinal_2, xRot, chamfer_bottom_left_longitudinal_2);
-	G4SubtractionSolid* subtraction_bottom_right_longitudinal_2 = new G4SubtractionSolid("Box-Cylinder", subtraction_bottom_left_longitudinal_2, box_longitudinal_2, xRot, chamfer_bottom_right_longitudinal_2);*/
-
-	/*G4SubtractionSolid* subtraction_a_vertical = new G4SubtractionSolid("Box-Cylinder", subtraction_bottom_right_longitudinal_2, box_vertical, zRot, chamfer_a_vertical);
-	G4SubtractionSolid* subtraction_b_vertical = new G4SubtractionSolid("Box-Cylinder", subtraction_a_vertical, box_vertical, zRot, chamfer_b_vertical);
-	G4SubtractionSolid* subtraction_c_vertical = new G4SubtractionSolid("Box-Cylinder", subtraction_b_vertical, box_vertical, zRot, chamfer_c_vertical);
-	G4SubtractionSolid* subtraction_d_vertical = new G4SubtractionSolid("Box-Cylinder", subtraction_c_vertical, box_vertical, zRot, chamfer_d_vertical);*/
-
-	G4SubtractionSolid* subtraction_a_vertical = new G4SubtractionSolid("Box-Cylinder5", subtraction_bottom_right_longitudinal_1, box_vertical, zRot, chamfer_a_vertical);
-	G4SubtractionSolid* subtraction_b_vertical = new G4SubtractionSolid("Box-Cylinder6", subtraction_a_vertical, box_vertical, zRot, chamfer_b_vertical);
-	G4SubtractionSolid* subtraction_c_vertical = new G4SubtractionSolid("Box-Cylinder7", subtraction_b_vertical, box_vertical, zRot, chamfer_c_vertical);
-	G4SubtractionSolid* subtraction_d_vertical = new G4SubtractionSolid("Box-Cylinder8", subtraction_c_vertical, box_vertical, zRot, chamfer_d_vertical);
-
-#endif // CHAMFER
-	//++++++++++++++++++++++++++++++++++++++++++++++
-
-	logicScint = new G4LogicalVolume(solid_scintillator, G4Material::GetMaterial("LFS-3"), "lScintillator",0,0,0);
-
-	physiScint = new G4PVPlacement(yRot90deg,               
-		scintillator_position,  // at (x,y,z)
-		logicScint,     // its logical volume
-		"pScintillator",        // its name
-		logicWorld,      // its mother  volume
+	G4Box* trackerS
+		= new G4Box("tracker", 9*cm, 9 * cm, 9 * cm);
+	G4LogicalVolume* trackerLV
+		= new G4LogicalVolume(trackerS, G4Material::GetMaterial("Air"), "Tracker", 0, 0, 0);
+	G4VPhysicalVolume* phys_tracker = new G4PVPlacement(0,               // no rotation
+		positionTracker, // at (x,y,z)
+		trackerLV,       // its logical volume
+		"Tracker",       // its name
+		logicWorld,         // its mother  volume
 		false,           // no boolean operations
-		0); 
-
-	//_______________________________________________________________________________
-	////for YAP:Ce only
-	/*solidTrapScint = new G4Trap("sTrapscintillator", 2*mm, 10*mm, 3*mm, 2*mm);
-
-	logicScint = new G4LogicalVolume(solidTrapScint, G4Material::GetMaterial("YAP_Ce"), "lScintillator",0,0,0);
-
-	G4RotationMatrix* yRot90deg= new G4RotationMatrix;
-*/
-	////2x3x10
-	////no rotation
-
-	////2x3
-	/*yRot90deg->rotateX(90*degree);*/
-
-	////2x2
-	/*yRot90deg->rotateX(270*degree);*/
-
-	////2x10
-	//yRot90deg->rotateX(270*degree);
-	//yRot90deg->rotateZ(90*degree);
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
 
 
-	//physiScint = new G4PVPlacement(/*0*/ yRot90deg,
+
+	G4VPVParameterisation* chamberParam =
+		new DetectorParametrisation(Nx_SiPMs, Ny_SiPMs, 0, 0, 79.2*mm, 10*mm, 6*mm);
+			//NbOfChambers,   // NoChambers
+			//firstPosition,  // Z of center of first
+			//chamberSpacing, // Z spacing of centers
+			//chamberWidth,  // chamber width
+			//firstLength,    // initial length 
+			//lastLength);    // final length
+
+							// dummy value : kZAxis -- modified by parameterised volume
+
+	G4VPhysicalVolume* phys_SiPM = new G4PVParameterised("phys_SiPM",       // their name
+		logic_SiPM,   // their logical volume
+		trackerLV,       // Mother logical volume
+		kXAxis,          // Are placed along this axis 
+		Nx_SiPMs * Ny_SiPMs,    // Number of chambers
+		chamberParam,    // The parametrisation
+		fCheckOverlaps); // checking overlaps 
+
+	//G4cout << "There are " << NbOfChambers << " chambers in the tracker region. "
+	//	<< G4endl
+	//	<< "The chambers are " << chamberWidth / cm << " cm of "
+	//	<< fChamberMaterial->GetName() << G4endl
+	//	<< "The distance between chamber is " << chamberSpacing / cm << " cm"
+	//	<< G4endl;
+
+
+	//--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+	//////--------------------------------------------------------------------------------
+	////// создание кристалла
+
+
+
+	//////// for any crystall
+	//solid_scintillator = new G4Box("sscintillator", scintillator_length_x/2.0, scintillator_length_y/2.0, scintillator_height/2.0);
+	//G4RotationMatrix* yRot90deg = new G4RotationMatrix;
+	//
+	//logicScint = new G4LogicalVolume(solid_scintillator, G4Material::GetMaterial("LFS-3"), "lScintillator",0,0,0);
+
+	//physiScint = new G4PVPlacement(yRot90deg,               
 	//	scintillator_position,  // at (x,y,z)
 	//	logicScint,     // its logical volume
 	//	"pScintillator",        // its name
 	//	logicWorld,      // its mother  volume
 	//	false,           // no boolean operations
-	//	0);              // copy number
-	//_______________________________________________________________________________
+	//	0); 
 
-	//-------------------------------------------------------------------------------
-
+	////--------------------------------------------------------------------------------
 
 
 
-	//------------------------------------------------------------------------------
-	// создание оптической смазки
-	solid_grease = new G4Tubs("sgrease", 0.*cm, grease_diameter/2.0, grease_height/2.0, 0.*deg, 360.*deg);
-	logic_grease = new G4LogicalVolume(solid_grease, G4Material::GetMaterial("Polydimethylsiloxane"/*"Air"*/), "lGrease", 0, 0, 0);
-	physi_grease = new G4PVPlacement(0,               // no rotation
-		grease_position,  // at (x,y,z)
-		logic_grease,     // its logical volume
-		"pGrease",        // its name
-		logicWorld,      // its mother  volume
-		false,           // no boolean operations
-		0);              // copy number
-	//---------------------------------------------------------------------------
-
-
-	//---------------------------------------------------------------------------
-	//создание стекла
-	solid_glass = new G4Tubs("swindow", 0.*cm, glass_diameter/2.0, glass_height/2.0, 0.*deg, 360.*deg);
-	logic_glass = new G4LogicalVolume(solid_glass, G4Material::GetMaterial("FusedSilica"), "lEnvelope", 0,0,0);
-	physi_glass = new G4PVPlacement(0,               // no rotation
-		glass_position,  // at (x,y,z)
-		logic_glass,     // its logical volume
-		"pEnvelope",       // its name
-		logicWorld,        // its mother  volume
-		false,             // no boolean operations
-		0);                // copy number
-	//---------------------------------------------------------------------------
 
 
 
-	//-----------------------------------------------------------------------------
-	//создание фотокатода
-	solidCathode = new G4Tubs("scath", 0.*cm, cathode_diameter/2.0 , cathode_height/2.0, 0.*deg, 360.*deg);
-	logicCathode = new G4LogicalVolume(solidCathode, G4Material::GetMaterial("BialkaliCathode"), "BialkaliCathode_", 0,0,0);
-	physiCathode = new G4PVPlacement(0,               // no rotation
-		cathode_position,  // at (x,y,z)
-		logicCathode,     // its logical volume 
-		"pCath",          // its name
-		logicWorld,       // its mother  volume
-		false,            // no boolean operations
-		0);               // copy number
+	//////-----------------------------------------------------------------------------
+	////создание фотокатода
+	//solidCathode = new G4Tubs("scath", 0.*cm, cathode_diameter/2.0 , cathode_height/2.0, 0.*deg, 360.*deg);
+	//logicCathode = new G4LogicalVolume(solidCathode, G4Material::GetMaterial("BialkaliCathode"), "BialkaliCathode_", 0,0,0);
+	//physiCathode = new G4PVPlacement(0,               // no rotation
+	//	cathode_position,  // at (x,y,z)
+	//	logicCathode,     // its logical volume 
+	//	"pCath",          // its name
+	//	logicWorld,       // its mother  volume
+	//	false,            // no boolean operations
+	//	0);               // copy number
 
 
-	//--------------------------------------------------------------------------
-
-
-
-	////-----------------------------------------------------------------------------
-	////создание поглотителя
-
-	G4ThreeVector* tmp_vec = new G4ThreeVector(0, 0, 2*shift);
-
-	G4Tubs *solidAbs_tube = new G4Tubs("abs", 0, cathode_diameter / 2.0, cathode_height / 2.0, 0.*deg, 360.*deg);
-	G4SubtractionSolid* solidAbs = new G4SubtractionSolid("Absorber_solid", solidAbs_tube, solid_scintillator, yRot90deg, *tmp_vec);
-	
-	
-	const G4ThreeVector &absorber_position = G4ThreeVector(-0.0*mm, 0, 2 * shift * 0.99);
-	
-	logicAbs = new G4LogicalVolume(solidAbs, G4Material::GetMaterial("BialkaliCathode"), "Absorber_", 0, 0, 0);
-	physiAbs = new G4PVPlacement(0,               // no rotation
-		absorber_position,  // at (x,y,z)
-		logicAbs,     // its logical volume 
-		"pCath",          // its name
-		logicWorld,       // its mother  volume
-		false,            // no boolean operations
-		0);               // copy number
-
-
-	////--------------------------------------------------------------------------
+	//////--------------------------------------------------------------------------
 
 
 
 
 	//определение чувствительного объема
 	G4String sensitiveDetectorName = "/detector/sensitiveDetector";
-	theCathodeSD = new CathodeSD(sensitiveDetectorName, physiCathode);
+	theCathodeSD = new CathodeSD(sensitiveDetectorName, phys_SiPM, Nx_SiPMs * Ny_SiPMs);
 	G4SDManager::GetSDMpointer()->AddNewDetector( theCathodeSD );
-	logicCathode->SetSensitiveDetector( theCathodeSD );
-	//------------------------------------------------------------------------
+	logic_SiPM->SetSensitiveDetector( theCathodeSD );
+	////------------------------------------------------------------------------
 
 
 	//---------------------------------------------------------------------------
 	//установка поверхностей
-	G4LogicalBorderSurface* scintillator_world_logical = new G4LogicalBorderSurface("world_scintillator", physiScint, physiWorld, teflon_unified); // from physiScint to physiWorld
-	G4LogicalBorderSurface* world_scintillator_logical = new G4LogicalBorderSurface("scintillator_world", physiWorld, physiScint, teflon_unified); // from physiWorld to physiScint
+	//G4LogicalBorderSurface* scintillator_world_logical = new G4LogicalBorderSurface("world_scintillator", physiScint, physiWorld, teflon_unified); // from physiScint to physiWorld
+	//G4LogicalBorderSurface* world_scintillator_logical = new G4LogicalBorderSurface("scintillator_world", physiWorld, physiScint, teflon_unified); // from physiWorld to physiScint
 
 	//G4LogicalBorderSurface* scintillator_grease_logical = new G4LogicalBorderSurface("scintillator_world", physiScint, physi_grease, polishedAir);
 	//G4LogicalBorderSurface* grease_scintillator_logical = new G4LogicalBorderSurface("scintillator_world", physi_grease, physiScint, polishedAir);
@@ -346,8 +312,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//G4LogicalBorderSurface* grease_glass_logical = new G4LogicalBorderSurface("grease_glass_logical", physi_grease, physi_glass, polishedAir);
 	//G4LogicalBorderSurface* glass_grease_logical = new G4LogicalBorderSurface("glass_grease_logical", physi_glass, physi_grease, polishedAir);
 
-	G4LogicalBorderSurface* envelope2CathodeSurface = new G4LogicalBorderSurface("envelope2CathodeSurface", physi_glass, physiCathode, silicaCathodeMaterial);
-
+	//G4LogicalBorderSurface* envelope2CathodeSurface = new G4LogicalBorderSurface("envelope2CathodeSurface", physi_glass, physiCathode, silicaCathodeMaterial);
+	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("envelope2CathodeSurface", phys_tracker, phys_SiPM, silicaCathodeMaterial);
 
 
 	
@@ -364,9 +330,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4VisAttributes* GreaseVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.8));
 
 	logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
-	logicScint->SetVisAttributes(ScintVisAtt);
-	logic_grease->SetVisAttributes(GreaseVisAtt);
-	logicCathode->SetVisAttributes(CathodeVisAtt);
+	trackerLV->SetVisAttributes(G4VisAttributes::Invisible);
+//	logicScint->SetVisAttributes(ScintVisAtt);
+	//logic_grease->SetVisAttributes(GreaseVisAtt);
+	//logicCathode->SetVisAttributes(CathodeVisAtt);
 	//-----------------------------------------------------------------------------
 
 	return physiWorld;

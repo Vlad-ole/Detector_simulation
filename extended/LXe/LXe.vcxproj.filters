@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\LXe.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeActionInitialization.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeDetectorConstruction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeDetectorMessenger.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeEMPhysics.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeEventAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeEventMessenger.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeGeneralPhysics.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeMainVolume.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeMuonPhysics.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXePhysicsList.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXePMTHit.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXePMTSD.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXePrimaryGeneratorAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeRunAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeScintHit.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeScintSD.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeStackingAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeSteppingAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeSteppingMessenger.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeSteppingVerbose.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeTrackingAction.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeTrajectory.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeUserEventInformation.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeUserTrackInformation.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeWLSFiber.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\src\LXeWLSSlab.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeActionInitialization.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeDetectorConstruction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeDetectorMessenger.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeEMPhysics.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeEventAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeEventMessenger.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeGeneralPhysics.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeMainVolume.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeMuonPhysics.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXePhysicsList.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXePMTHit.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXePMTSD.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXePrimaryGeneratorAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeRecorderBase.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeRunAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeScintHit.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeScintSD.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeStackingAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeSteppingAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeSteppingMessenger.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeSteppingVerbose.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeTrackingAction.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeTrajectory.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeUserEventInformation.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeUserTrackInformation.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeWLSFiber.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\include\LXeWLSSlab.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\examples\extended\optical\LXe\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D28016C0-AFFB-33BB-9DC3-E4604371F332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{B1094515-234B-3DC6-811E-A241A9A6C98C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

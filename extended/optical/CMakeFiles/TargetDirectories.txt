@@ -1,4 +1,0 @@
-D:/git_repositories/Detector_simulation/extended/optical/CMakeFiles/INSTALL.dir
-D:/git_repositories/Detector_simulation/extended/optical/CMakeFiles/OpNovice.dir
-D:/git_repositories/Detector_simulation/extended/optical/CMakeFiles/ALL_BUILD.dir
-D:/git_repositories/Detector_simulation/extended/optical/CMakeFiles/ZERO_CHECK.dir
