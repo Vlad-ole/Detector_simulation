@@ -72,59 +72,28 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//--------------------------------------------------------------------------------
 	//выставление размеров объектов
-	G4double HalfWorldLength = 10*cm;
+	const G4double HalfWorldLength = 50*cm;
 
-	const G4double alpha = 0 * degree;
-	const double scintillator_length_x = 3.5*mm; // full length (or the narrower side)	
-	const double scintillator_height = 8.95*mm; // full length
-
-	const double scintillator_length_y = 3.5; // full length (or the wider side)
-	//double scintillator_height = 2*mm + 0.5*mm; // for YAP:Ce 2x10 only
-
-	cout << "scintillator_length_y = scintillator_height*tan(alpha) + 3.5 = " << scintillator_length_y << endl;
-	
-	const double grease_diameter = 1.5*max(scintillator_length_x, scintillator_length_y);
-	const double grease_height = 0.1*mm  /*0.0*mm*/;
-
-	const double absorber_diameter = grease_diameter;
-	const double absorber_height = 1 * um;
-
-	const double glass_diameter = 5 * cm;
-	const double glass_height = 2 * mm;
-
-	const double cathode_diameter = glass_diameter;
-	const double cathode_height = 1 * um;
-
-
-
-
+	//SiPMs
+	int Nx_SiPMs = 11;
+	int Ny_SiPMs = 11;
 	const double thickness_SiPM = 1*nm;
 	const double size_SiPM = 6 * mm;
+	const double chamberSpacing = 10 * mm;
+	const double z_SiPM_bottom = 79.2*mm;
+	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
 
+	//Anode_grid
+	const double thickness_anode_grid = 0.5 * mm;
+	const double size_anode_grid = 124 * mm;
+	const double size_anode_grid_hole = 60 * mm;
+	const double z_anode_grid_bottom = 76.2*mm;
+	const double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
 
-
-
-
-
-
-
-	G4int NbOfChambers = 5;
-	G4double chamberSpacing = 10 * mm; // from chamber center to center!
-
-	G4double chamberWidth = 6 * mm; // width of the chambers
-	G4double targetLength = 5.0*mm; // full length of Target
-
-	G4double trackerLength = (NbOfChambers + 1)*chamberSpacing;
-
-	G4double worldLength = 1.2 * (2 * targetLength + trackerLength);
-
-	G4double targetRadius = 0.5*targetLength;   // Radius of Target
-	targetLength = 0.5*targetLength;             // Half length of the Target  
-	G4double trackerSize = 0.5*trackerLength;  // Half length of the Tracker
-
-	G4double firstPosition = -trackerSize + chamberSpacing;
-	G4double firstLength = trackerLength / 10;
-	G4double lastLength = trackerLength;
+	//tracker
+	const double x_size_tracker = Nx_SiPMs * chamberSpacing + size_SiPM / 2.0;
+	const double y_size_tracker = Ny_SiPMs * chamberSpacing + size_SiPM / 2.0;
+	const double z_size_tracker = 0.1 * mm;
 
 	//--------------------------------------------------------------------------------
 
@@ -136,21 +105,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//--------------------------------------------------------------------------------
 	//определение взаимного расположения объектов
 
-	//const G4double shift = scintillator_height / 2.0 + scintillator_length_x / 4.0 * tan(alpha);
-	const G4double shift = scintillator_height / 2.0;
-
-
-	const G4ThreeVector &position_SiPM = G4ThreeVector(0, 0, 79.2*mm + thickness_SiPM / 2.0);
-
-
-	const G4ThreeVector &scintillator_position = G4ThreeVector(0, 0, shift);
-	//const G4ThreeVector &absorber_position = G4ThreeVector(0, 0, scintillator_height * 0.99);
-	const G4ThreeVector &grease_position = G4ThreeVector(0, 0, 2*shift + grease_height / 2.0);
-	const G4ThreeVector &glass_position = G4ThreeVector(0, 0, 2*shift + grease_height + glass_height / 2.0);
-	const G4ThreeVector &cathode_position = G4ThreeVector(0, 0, 2*shift + grease_height + glass_height + cathode_height / 2.0);
-
-
-	//--------------------------------------------------------------------------------
+	const G4ThreeVector &position_SiPM = G4ThreeVector(0, 0, 0);
+	const G4ThreeVector &position_anode_grid = G4ThreeVector(0, 0, z_anode_grid_center);
+	const G4ThreeVector &positionTracker = G4ThreeVector(0, 0, z_SiPM_center);
+	//-------------------------------------------------------------------------------
 
 
 
@@ -178,26 +136,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 
+
+
 	//--------------------------------------------------------------------------------
-	// create SiPM matrix
-
-	int Nx_SiPMs = 11;
-	int Ny_SiPMs = 11;
-
-	solid_SiPM = new G4Box("sscintillator", size_SiPM / 2.0, size_SiPM / 2.0, thickness_SiPM / 2.0);
-	logic_SiPM = new G4LogicalVolume(solid_SiPM, G4Material::GetMaterial("Air"), "lSiPM", 0, 0, 0);
-	//physi_SiPM = new G4PVPlacement(0,
-	//	position_SiPM,  // at (x,y,z)
-	//	logic_SiPM,     // its logical volume
-	//	"pSiPM",        // its name
-	//	logicWorld,      // its mother  volume
-	//	false,           // no boolean operations
-	//	0);
-
-	G4ThreeVector positionTracker = G4ThreeVector(0, 0, 0);
+	// create tracker (this need for SiPM_matrix parametrising)
 
 	G4Box* trackerS
-		= new G4Box("tracker", 9*cm, 9 * cm, 9 * cm);
+		= new G4Box("tracker", x_size_tracker / 2.0, y_size_tracker / 2.0, z_size_tracker / 2.0);
 	G4LogicalVolume* trackerLV
 		= new G4LogicalVolume(trackerS, G4Material::GetMaterial("Air"), "Tracker", 0, 0, 0);
 	G4VPhysicalVolume* phys_tracker = new G4PVPlacement(0,               // no rotation
@@ -209,10 +154,36 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
 
+	//--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+	//--------------------------------------------------------------------------------
+	// create SiPM matrix
+
+
+
+	solid_SiPM = new G4Box("sscintillator", size_SiPM / 2.0, size_SiPM / 2.0, thickness_SiPM / 2.0);
+	logic_SiPM = new G4LogicalVolume(solid_SiPM, G4Material::GetMaterial("Air"), "lSiPM", 0, 0, 0);
+	//physi_SiPM = new G4PVPlacement(0,
+	//	position_SiPM,  // at (x,y,z)
+	//	logic_SiPM,     // its logical volume
+	//	"pSiPM",        // its name
+	//	logicWorld,      // its mother  volume
+	//	false,           // no boolean operations
+	//	0);
+
+
+
 
 
 	G4VPVParameterisation* chamberParam =
-		new DetectorParametrisation(Nx_SiPMs, Ny_SiPMs, 0, 0, 79.2*mm, 10*mm, 6*mm);
+		new DetectorParametrisation(Nx_SiPMs, Ny_SiPMs, 0, 0, 0, chamberSpacing, size_SiPM);
 			//NbOfChambers,   // NoChambers
 			//firstPosition,  // Z of center of first
 			//chamberSpacing, // Z spacing of centers
@@ -244,53 +215,32 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 
+	//--------------------------------------------------------------------------------
+	//create anode grid
+	G4Box* solid_anode_grid_substrate = new G4Box("anode_grid_substrate", size_anode_grid / 2.0, size_anode_grid / 2.0, thickness_anode_grid / 2.0);
+	G4Box* solid_anode_grid_hole = new G4Box("anode_grid_hole", size_anode_grid_hole / 2.0, size_anode_grid_hole / 2.0, thickness_anode_grid * 0.52);
+
+	G4SubtractionSolid* solid_anode_grid_subtraction = new G4SubtractionSolid("anode_grid__substrate-hole", solid_anode_grid_substrate, solid_anode_grid_hole);
 
 
+	G4double a;  // atomic mass
+	G4double z;  // atomic number
+	G4double density;
+	G4Material* fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
+
+	logic_anode_grid = new G4LogicalVolume(solid_anode_grid_subtraction, fAl, "l_anode_grid", 0, 0, 0);
+	phys_anode_grid = new G4PVPlacement(0,
+		position_anode_grid,  // at (x,y,z)
+		logic_anode_grid,     // its logical volume
+		"p_anode_grid",        // its name
+		logicWorld,      // its mother  volume
+		false,           // no boolean operations
+		0); 
+
+	//--------------------------------------------------------------------------------
 
 
-
-	//////--------------------------------------------------------------------------------
-	////// создание кристалла
-
-
-
-	//////// for any crystall
-	//solid_scintillator = new G4Box("sscintillator", scintillator_length_x/2.0, scintillator_length_y/2.0, scintillator_height/2.0);
-	//G4RotationMatrix* yRot90deg = new G4RotationMatrix;
-	//
-	//logicScint = new G4LogicalVolume(solid_scintillator, G4Material::GetMaterial("LFS-3"), "lScintillator",0,0,0);
-
-	//physiScint = new G4PVPlacement(yRot90deg,               
-	//	scintillator_position,  // at (x,y,z)
-	//	logicScint,     // its logical volume
-	//	"pScintillator",        // its name
-	//	logicWorld,      // its mother  volume
-	//	false,           // no boolean operations
-	//	0); 
-
-	////--------------------------------------------------------------------------------
-
-
-
-
-
-
-	//////-----------------------------------------------------------------------------
-	////создание фотокатода
-	//solidCathode = new G4Tubs("scath", 0.*cm, cathode_diameter/2.0 , cathode_height/2.0, 0.*deg, 360.*deg);
-	//logicCathode = new G4LogicalVolume(solidCathode, G4Material::GetMaterial("BialkaliCathode"), "BialkaliCathode_", 0,0,0);
-	//physiCathode = new G4PVPlacement(0,               // no rotation
-	//	cathode_position,  // at (x,y,z)
-	//	logicCathode,     // its logical volume 
-	//	"pCath",          // its name
-	//	logicWorld,       // its mother  volume
-	//	false,            // no boolean operations
-	//	0);               // copy number
-
-
-	//////--------------------------------------------------------------------------
-
-
+	
 
 
 	//определение чувствительного объема
@@ -313,8 +263,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//G4LogicalBorderSurface* glass_grease_logical = new G4LogicalBorderSurface("glass_grease_logical", physi_glass, physi_grease, polishedAir);
 
 	//G4LogicalBorderSurface* envelope2CathodeSurface = new G4LogicalBorderSurface("envelope2CathodeSurface", physi_glass, physiCathode, silicaCathodeMaterial);
-	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("envelope2CathodeSurface", phys_tracker, phys_SiPM, silicaCathodeMaterial);
-
+	
+	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("tracker2SiPM", phys_tracker, phys_SiPM, silicaCathodeMaterial);
+	//G4LogicalBorderSurface* World2Traker = new G4LogicalBorderSurface("World2Traker", physiWorld, phys_tracker, AbsorberMaterial);
+	//G4LogicalBorderSurface* Traker2World = new G4LogicalBorderSurface("Traker2World", phys_tracker, physiWorld, AbsorberMaterial);
 
 	
 	//---------------------------------------------------------------------------
@@ -329,8 +281,12 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	G4VisAttributes* GreaseVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.8));
 
+	G4VisAttributes* AnodeGridVisAtt = new G4VisAttributes(G4Colour(1.0, 0.5, 0.0, 0.8));
+//	logic_anode_grid->SetVisAttributes(AnodeGridVisAtt);
+
 	logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
-	trackerLV->SetVisAttributes(G4VisAttributes::Invisible);
+//	trackerLV->SetVisAttributes(G4VisAttributes::Invisible);
+	//logic_SiPM->SetVisAttributes(G4VisAttributes::Invisible);
 //	logicScint->SetVisAttributes(ScintVisAtt);
 	//logic_grease->SetVisAttributes(GreaseVisAtt);
 	//logicCathode->SetVisAttributes(CathodeVisAtt);

@@ -143,8 +143,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 	double x, y;
 #ifdef CENTRAL_INCIDENCE
-	x = 0;
-	y = 0;
+	x = 0 * mm;
+	y = 0 * mm;
 	//cout << "inside CENTRAL_INCIDENCE" << endl;
 	//system("pause");
 #else

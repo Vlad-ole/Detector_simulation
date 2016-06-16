@@ -117,7 +117,9 @@ private:
 	G4LogicalVolume*   logic_SiPM;   // pointer to the logical Scintillator
 	G4VPhysicalVolume* physi_SiPM;   // pointer to the physical Scintillator
 
-
+	G4Box*            solid_anode_grid;   
+	G4LogicalVolume*   logic_anode_grid;
+	G4VPhysicalVolume* phys_anode_grid;
 
 
 

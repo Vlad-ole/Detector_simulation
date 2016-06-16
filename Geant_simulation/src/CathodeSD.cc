@@ -22,15 +22,26 @@ CathodeSD::CathodeSD(G4String name, G4VPhysicalVolume *cathode, int N_SiPMs) : G
 {
 	N_SiPMs = n_SiPMs;
 	//N_reg.reserve(N_SiPMs);
-	N_reg.resize(11*11, 0);
+	N_reg_number.resize(11*11, 0);
 }
 
 CathodeSD::~CathodeSD()
 {
-	for (int i = 0; i < N_reg.size(); i++)
+	double x_pos;
+	double y_pos;
+	double step = 10;
+	
+	for (int i = 0; i < N_reg_number.size(); i++)
 	{
-		cout << i << " " << N_reg[i] << endl;
+		
+		x_pos = (i % 11 - 5) * step;
+		y_pos = (i / 11 - 5) * step;
+		
+		
+		cout << i << " " << x_pos << " " << y_pos << " " << N_reg_number[i] << endl;
+		g()->file_num_of_photons_SiPM << i << "\t" << x_pos << "\t" << y_pos << "\t" << N_reg_number[i] << endl;
 	}
+	
 }
 
 void CathodeSD::Initialize(G4HCofThisEvent* HCE)
@@ -58,8 +69,8 @@ G4bool CathodeSD::ProcessHits_Optical(const G4Step* aStep, G4TouchableHistory* )
 
 	//cout << aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0) << endl;// right variant
 
-	N_reg[aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0)]++;
-		
+	N_reg_number[aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0)]++;
+
 	/*G4StepPoint * thePrePoint  = aStep->GetPostStepPoint();
 	G4ThreeVector pos    = thePrePoint->GetPosition();
 	G4double energy = thePrePoint->GetTotalEnergy();

@@ -26,8 +26,9 @@ class CathodeSD : public G4VSensitiveDetector
       const G4VPhysicalVolume * _cathode;
 	  int n_SiPMs;
 	  int   _nHits;
-	  vector<int> N_reg;
-
+	  vector<int> N_reg_number;
+	  vector<double> position_x;
+	  vector<double> position_y;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

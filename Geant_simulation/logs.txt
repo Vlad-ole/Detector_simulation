@@ -1,0 +1,21 @@
+Current time used as seed: 1466071253
+
+--------- Ranecu engine status ---------
+ Initial seed (index) = 13
+ Current couple of seeds = 754087163, 967585717
+----------------------------------------
+
+*************************************************************
+ Geant4 version Name: geant4-10-02-patch-01    (26-February-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTiO.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTiO.dat read in! 
+scintillator_length_y = scintillator_height*tan(alpha) + 3.5 = 3.5
+Checking overlaps for volume Tracker ... OK! 
+Checking overlaps for parameterised volume phys_SiPM ... OK! 
