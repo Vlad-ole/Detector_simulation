@@ -1,8 +1,8 @@
-Current time used as seed: 1466071253
+Current time used as seed: 1466157188
 
 --------- Ranecu engine status ---------
- Initial seed (index) = 13
- Current couple of seeds = 754087163, 967585717
+ Initial seed (index) = 163
+ Current couple of seeds = 385895673, 1940360872
 ----------------------------------------
 
 *************************************************************
@@ -16,6 +16,333 @@ LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\Rea
 LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTeflon.dat read in! 
 LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTiO.dat read in! 
 LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTiO.dat read in! 
-scintillator_length_y = scintillator_height*tan(alpha) + 3.5 = 3.5
 Checking overlaps for volume Tracker ... OK! 
 Checking overlaps for parameterised volume phys_SiPM ... OK! 
+Current time used as seed: 1466157222
+
+--------- Ranecu engine status ---------
+ Initial seed (index) = 197
+ Current couple of seeds = 1490240510, 251341855
+----------------------------------------
+
+*************************************************************
+ Geant4 version Name: geant4-10-02-patch-01    (26-February-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTiO.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTiO.dat read in! 
+Checking overlaps for volume Tracker ... OK! 
+Checking overlaps for parameterised volume phys_SiPM ... OK! 
+Current time used as seed: 1466158638
+
+--------- Ranecu engine status ---------
+ Initial seed (index) = 108
+ Current couple of seeds = 652370909, 2144304938
+----------------------------------------
+
+*************************************************************
+ Geant4 version Name: geant4-10-02-patch-01    (26-February-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTiO.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTiO.dat read in! 
+Checking overlaps for volume Tracker ... OK! 
+Checking overlaps for volume phys_tracker_anode_grid ... OK! 
+Checking overlaps for parameterised volume phys_SiPM ... OK! 
+PhysicsList::SetCuts:CutLength : 10 um 
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomMgt1001
+      issued by : G4RegionStore::GetRegion()
+Region NOT found in store !
+        Region MyRegion NOT found in store !
+        Returning NULL pointer.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+ASCIITree (ATree)
+DAWNFILE (DAWNFILE)
+G4HepRep (HepRepXML)
+G4HepRepFile (HepRepFile)
+RayTracer (RayTracer)
+VRML1FILE (VRML1FILE)
+VRML2FILE (VRML2FILE)
+gMocrenFile (gMocrenFile)
+OpenGLImmediateWin32 (OGLIWin32)
+OpenGLStoredWin32 (OGLSWin32)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+Visualization verbosity changed to quiet (0)
+Visualization verbosity changed to errors (2)
+/tracking/storeTrajectory 2
+Attributes available for modeling and filtering with
+  "/vis/modeling/trajectories/create/drawByAttribute" and
+  "/vis/filtering/trajectories/create/attributeFilter" commands:
+G4TrajectoriesModel:
+  Event ID (EventID): G4int
+  Run ID (RunID): G4int
+G4SmoothTrajectory:
+  Charge (Ch): unit: e+ (G4double)
+  Track ID (ID): G4int
+  Initial kinetic energy (IKE): G4BestUnit (G4double)
+  Initial momentum magnitude (IMag): G4BestUnit (G4double)
+  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
+  No. of points (NTP): G4int
+  PDG Encoding (PDG): G4int
+  Parent ID (PID): G4int
+  Particle Name (PN): G4String
+G4SmoothTrajectoryPoint:
+  Auxiliary Point Position (Aux): G4BestUnit (G4ThreeVector)
+  Step Position (Pos): G4BestUnit (G4ThreeVector)
+
+### ===  Deexcitation model UAtomDeexcitation is activated for 1 region:
+          DefaultRegionForTheWorld
+
+phot:   for  gamma    SubType= 12  BuildTable= 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+       PhotoElectric :  Emin=        0 eV    Emax=      100 eV    AngularGenSauterGavrila  FluoActive
+ LivermorePhElectric :  Emin=      100 eV    Emax=      150 keV   AngularGenSauterGavrila  FluoActive
+
+compt:   for  gamma    SubType= 13  BuildTable= 1
+      Lambda table from 10 eV  to 150 keV, 29 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+       Klein-Nishina :  Emin=        0 eV    Emax=      100 eV 
+    LivermoreCompton :  Emin=      100 eV    Emax=      150 keV  FluoActive
+
+Rayl:   for  gamma    SubType= 11  BuildTable= 1
+      Lambda table from 10 eV  to 100 keV, 29 bins per decade, spline: 0
+      LambdaPrime table from 100 keV to 150 keV in 5 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+   LivermoreRayleigh :  Emin=        0 eV    Emax=      150 keV   CullenGenerator
+
+msc:   for e-    SubType= 10
+      RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=      150 keV  Table with 87 bins Emin=    100 eV    Emax=    150 keV
+
+eIoni:   for  e-    SubType= 2
+      dE/dx and range tables from 10 eV  to 150 keV in 120 bins
+      Lambda tables from threshold to 150 keV, 29 bins per decade, spline: 1
+      finalRange(mm)= 1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        MollerBhabha :  Emin=        0 eV    Emax=      100 eV 
+       LowEnergyIoni :  Emin=      100 eV    Emax=      150 keV   deltaVI
+
+eBrem:   for  e-    SubType= 3
+      dE/dx and range tables from 10 eV  to 150 keV in 120 bins
+      Lambda tables from threshold to 150 keV, 29 bins per decade, spline: 1
+      LPM flag: 1 for E > 0.00015 GeV,  HighEnergyThreshold(GeV)= 10000
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           LowEnBrem :  Emin=        0 eV    Emax=      150 keV   AngularGen2BS
+
+========= Table of registered couples ==============================
+
+Index : 0     used in the geometry : Yes
+ Material : Air
+ Range cuts        :  gamma  10 um     e-  10 um     e+  10 um  proton 10 um 
+ Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton -1 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+====================================================================
+
+
+RunAction::BeginOfRunAction. Run 0 start.
+New event started! 0 Particle energy: 0.0028 keV. 
+
+---> Begin of event: 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+===========================================
+Output VRML 2.0 file: g4_10.wrl
+Maximum number of files in the destination directory: 100
+  (Customizable with the environment variable: G4VRMLFILE_MAX_FILE_NUM) 
+===========================================
+RunAction::EndOfRunAction. number of event = 1
+-nan(ind)
+ User=0.016s Real=0s Sys=0s
+***** void G4VRML2SCENEHANDLER::AddPrimitive( const G4Text& text ) not implemented yet.
+***** void G4VRML2SCENEHANDLER::AddPrimitive( const G4Text& text ) not implemented yet.
+***** void G4VRML2SCENEHANDLER::AddPrimitive( const G4Text& text ) not implemented yet.
+***** void G4VRML2SCENEHANDLER::AddPrimitive( const G4Text& text ) not implemented yet.
+***** void G4VRML2SCENEHANDLER::AddPrimitive( const G4Text& text ) not implemented yet.
+***** void G4VRML2SCENEHANDLER::AddPrimitive( const G4Text& text ) not implemented yet.
+*** VRML 2.0 File  g4_10.wrl  is generated.
+MESSAGE from VRML2FILE driver:
+    Set an environmental variable  G4VRMLFILE_VIEWER
+    if you want to visualize the generated VRML file
+    automatically.  For example, 
+    setenv  G4VRMLFILE_VIEWER  vrwave 
+Graphics systems deleted.
+Visualization Manager deleting...
+0 -50 -50 0
+1 -40 -50 0
+2 -30 -50 0
+3 -20 -50 0
+4 -10 -50 0
+5 0 -50 0
+6 10 -50 0
+7 20 -50 0
+8 30 -50 0
+9 40 -50 0
+10 50 -50 0
+11 -50 -40 0
+12 -40 -40 0
+13 -30 -40 0
+14 -20 -40 0
+15 -10 -40 0
+16 0 -40 0
+17 10 -40 0
+18 20 -40 0
+19 30 -40 0
+20 40 -40 0
+21 50 -40 0
+22 -50 -30 0
+23 -40 -30 0
+24 -30 -30 0
+25 -20 -30 0
+26 -10 -30 0
+27 0 -30 0
+28 10 -30 0
+29 20 -30 0
+30 30 -30 0
+31 40 -30 0
+32 50 -30 0
+33 -50 -20 0
+34 -40 -20 0
+35 -30 -20 0
+36 -20 -20 0
+37 -10 -20 0
+38 0 -20 0
+39 10 -20 0
+40 20 -20 0
+41 30 -20 0
+42 40 -20 0
+43 50 -20 0
+44 -50 -10 0
+45 -40 -10 0
+46 -30 -10 0
+47 -20 -10 0
+48 -10 -10 0
+49 0 -10 0
+50 10 -10 0
+51 20 -10 0
+52 30 -10 0
+53 40 -10 0
+54 50 -10 0
+55 -50 0 0
+56 -40 0 0
+57 -30 0 0
+58 -20 0 0
+59 -10 0 0
+60 0 0 0
+61 10 0 0
+62 20 0 0
+63 30 0 0
+64 40 0 0
+65 50 0 0
+66 -50 10 0
+67 -40 10 0
+68 -30 10 0
+69 -20 10 0
+70 -10 10 0
+71 0 10 0
+72 10 10 0
+73 20 10 0
+74 30 10 0
+75 40 10 0
+76 50 10 0
+77 -50 20 0
+78 -40 20 0
+79 -30 20 0
+80 -20 20 0
+81 -10 20 0
+82 0 20 0
+83 10 20 0
+84 20 20 0
+85 30 20 0
+86 40 20 0
+87 50 20 0
+88 -50 30 0
+89 -40 30 0
+90 -30 30 0
+91 -20 30 0
+92 -10 30 0
+93 0 30 0
+94 10 30 0
+95 20 30 0
+96 30 30 0
+97 40 30 0
+98 50 30 0
+99 -50 40 0
+100 -40 40 0
+101 -30 40 0
+102 -20 40 0
+103 -10 40 0
+104 0 40 0
+105 10 40 0
+106 20 40 0
+107 30 40 0
+108 40 40 0
+109 50 40 0
+110 -50 50 0
+111 -40 50 0
+112 -30 50 0
+113 -20 50 0
+114 -10 50 0
+115 0 50 0
+116 10 50 0
+117 20 50 0
+118 30 50 0
+119 40 50 0
+120 50 50 0
+   
+Lead time is 4.191 seconds  (or 0.06985 minutes)
+
+Для продолжения нажмите любую клавишу . . . 

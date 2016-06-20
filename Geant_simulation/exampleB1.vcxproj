@@ -271,6 +271,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AnodeGridParametrisation.cpp" />
     <ClCompile Include="src\CathodeSD.cc" />
     <ClCompile Include="src\DetectorConstruction.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -319,6 +320,7 @@
     <None Include="include\SteppingAction.hh" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AnodeGridParametrisation.h" />
     <ClInclude Include="include\DetectorParametrisation.h" />
     <ClInclude Include="include\ReadConstants.h" />
     <ClInclude Include="include\Singleton.h" />

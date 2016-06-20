@@ -42,6 +42,8 @@
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 #include <string>
 
+#include "AnodeGridParametrisation.h"
+
 
 using namespace std;
 
@@ -72,16 +74,23 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//--------------------------------------------------------------------------------
 	//выставление размеров объектов
-	const G4double HalfWorldLength = 50*cm;
+	const G4double HalfWorldLength = 50 * cm;
 
 	//SiPMs
-	int Nx_SiPMs = 11;
-	int Ny_SiPMs = 11;
-	const double thickness_SiPM = 1*nm;
+	const int Nx_SiPMs = 11;
+	const int Ny_SiPMs = 11;
+
+	const double thickness_SiPM = 1 * nm;
 	const double size_SiPM = 6 * mm;
 	const double chamberSpacing = 10 * mm;
 	const double z_SiPM_bottom = 79.2*mm;
 	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
+
+	//anode wire
+	const double radius_wire = 150 * um;
+	const double length_wire = 60 * mm;
+	const double step_wire = 1 * mm;
+	const int N_wire = 59;
 
 	//Anode_grid
 	const double thickness_anode_grid = 0.5 * mm;
@@ -90,10 +99,30 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double z_anode_grid_bottom = 76.2*mm;
 	const double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
 
-	//tracker
+	//tracker SiPM
 	const double x_size_tracker = Nx_SiPMs * chamberSpacing + size_SiPM / 2.0;
 	const double y_size_tracker = Ny_SiPMs * chamberSpacing + size_SiPM / 2.0;
 	const double z_size_tracker = 0.1 * mm;
+
+	//tracker Anode_grid
+	const double x_size_tracker_anode_grid = size_anode_grid;
+	const double y_size_tracker_anode_grid = size_anode_grid;
+	const double z_size_tracker_anode_grid = thickness_anode_grid;
+
+	//PMMA plate
+	const double x_size_PMMA_plate = size_anode_grid;
+	const double y_size_PMMA_plate = size_anode_grid;
+	const double z_size_PMMA_plate = 1.5 * mm;
+	const double z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
+
+
+	if (thickness_anode_grid < 2 * radius_wire)
+	{
+		cout << "error: thickness_anode_grid < 2*radius_wire" << endl;
+		system("pause");
+	}
+
+
 
 	//--------------------------------------------------------------------------------
 
@@ -108,6 +137,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_SiPM = G4ThreeVector(0, 0, 0);
 	const G4ThreeVector &position_anode_grid = G4ThreeVector(0, 0, z_anode_grid_center);
 	const G4ThreeVector &positionTracker = G4ThreeVector(0, 0, z_SiPM_center);
+	const G4ThreeVector &position_PMMA_plate = G4ThreeVector(0, 0, z_PMMA_plate_center);
 	//-------------------------------------------------------------------------------
 
 
@@ -160,6 +190,23 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 
+	//--------------------------------------------------------------------------------
+	// create tracker_anode_grid (this need for anode_grid parametrising)
+
+	G4Box* solid_tracker_anode_grid = new G4Box("solid_tracker_anode_grid", x_size_tracker_anode_grid / 2.0, y_size_tracker_anode_grid / 2.0, z_size_tracker_anode_grid / 2.0);
+	G4LogicalVolume* logic_tracker_anode_grid = new G4LogicalVolume(solid_tracker_anode_grid, G4Material::GetMaterial("Air"), "logic_tracker_anode_grid", 0, 0, 0);
+	G4VPhysicalVolume* phys_tracker_anode_grid = new G4PVPlacement(0,               // no rotation
+		position_anode_grid, // at (x,y,z)
+		logic_tracker_anode_grid,       // its logical volume
+		"phys_tracker_anode_grid",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+	//--------------------------------------------------------------------------------
+
+
 
 
 
@@ -177,10 +224,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//	logicWorld,      // its mother  volume
 	//	false,           // no boolean operations
 	//	0);
-
-
-
-
+	
 
 	G4VPVParameterisation* chamberParam =
 		new DetectorParametrisation(Nx_SiPMs, Ny_SiPMs, 0, 0, 0, chamberSpacing, size_SiPM);
@@ -214,6 +258,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 
+	G4double a;  // atomic mass
+	G4double z;  // atomic number
+	G4double density;
+	G4Material* fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
+
 
 	//--------------------------------------------------------------------------------
 	//create anode grid
@@ -221,12 +270,6 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Box* solid_anode_grid_hole = new G4Box("anode_grid_hole", size_anode_grid_hole / 2.0, size_anode_grid_hole / 2.0, thickness_anode_grid * 0.52);
 
 	G4SubtractionSolid* solid_anode_grid_subtraction = new G4SubtractionSolid("anode_grid__substrate-hole", solid_anode_grid_substrate, solid_anode_grid_hole);
-
-
-	G4double a;  // atomic mass
-	G4double z;  // atomic number
-	G4double density;
-	G4Material* fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
 
 	logic_anode_grid = new G4LogicalVolume(solid_anode_grid_subtraction, fAl, "l_anode_grid", 0, 0, 0);
 	phys_anode_grid = new G4PVPlacement(0,
@@ -240,7 +283,52 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//--------------------------------------------------------------------------------
 
 
-	
+
+
+
+
+
+	//--------------------------------------------------------------------------------
+	//create anode wire
+	G4Tubs* solid_wire = new G4Tubs("solid_wire", 0, radius_wire, length_wire / 2.0, 0.*deg, 360.*deg);
+	G4LogicalVolume* logic_wire = new G4LogicalVolume(solid_wire, fAl, "lwire", 0, 0, 0);
+	G4VPVParameterisation* param_wire = new AnodeGridParametrisation(N_wire, 0, 0, 0, step_wire, radius_wire, length_wire);
+
+	G4VPhysicalVolume* phys_wire = new G4PVParameterised("phys_wire",       // their name
+		logic_wire,   // their logical volume
+		logic_tracker_anode_grid,       // Mother logical volume
+		kXAxis,          // Are placed along this axis 
+		N_wire,    // Number of chambers
+		param_wire,    // The parametrisation
+		fCheckOverlaps); // checking overlaps 
+
+
+	//--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+	//--------------------------------------------------------------------------------
+	//create PMMA plate
+	G4Box* solid_PMMA_plate = new G4Box("solid_tracker_anode_grid", x_size_PMMA_plate / 2.0, y_size_PMMA_plate / 2.0, z_size_PMMA_plate / 2.0);
+	G4LogicalVolume* logic_PMMA_plate = new G4LogicalVolume(solid_PMMA_plate, G4Material::GetMaterial("PMMA"), "logic_PMMA_plate", 0, 0, 0);
+	G4VPhysicalVolume* phys_PMMA_plate = new G4PVPlacement(0,               // no rotation
+		position_PMMA_plate, // at (x,y,z)
+		logic_PMMA_plate,       // its logical volume
+		"phys_PMMA_plate",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+
+	//--------------------------------------------------------------------------------
+
+
 
 
 	//определение чувствительного объема
@@ -280,6 +368,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	CathodeVisAtt->SetForceWireframe(true);
 
 	G4VisAttributes* GreaseVisAtt = new G4VisAttributes(G4Colour(1.0,1.0,0.0,0.8));
+	logic_anode_grid->SetVisAttributes(GreaseVisAtt);
+
+	G4VisAttributes* WireVisAtt = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.8));
+	logic_wire->SetVisAttributes(WireVisAtt);
 
 	G4VisAttributes* AnodeGridVisAtt = new G4VisAttributes(G4Colour(1.0, 0.5, 0.0, 0.8));
 //	logic_anode_grid->SetVisAttributes(AnodeGridVisAtt);

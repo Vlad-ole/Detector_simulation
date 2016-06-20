@@ -51,6 +51,31 @@ void DetectorConstruction::defineMaterials()
 
 
 
+
+
+	//------------------------------
+	// PMMA
+
+	G4Material* PMMA = new G4Material("PMMA", 1.000*g / cm3, 3);
+	PMMA->AddElement(C, 5);
+	PMMA->AddElement(O, 2);
+	PMMA->AddElement(H, 8);
+	const G4int numentries_PMMA = 2;
+	G4double energies_PMMA[numentries_PMMA] = { 0.1*eV, 10.0*eV };
+	G4double rindices_PMMA[numentries_PMMA] = { 5.5, 5.5 };
+	G4double absorpti_PMMA[numentries_PMMA] = { 10 * m, 10 * m }; // avoid infinite light-paths
+	G4MaterialPropertiesTable* prop_PMMA = new G4MaterialPropertiesTable();
+	prop_PMMA->AddProperty("ABSLENGTH", energies_PMMA, absorpti_PMMA, numentries_PMMA);
+	prop_PMMA->AddProperty("RINDEX", energies_PMMA, rindices_PMMA, numentries_PMMA);
+	PMMA->SetMaterialPropertiesTable(prop_PMMA);
+	//------------------------------
+
+
+
+
+
+
+
 	//---------------------------------------------------------------------------------------
 	//создание материала LYSO:Ce
 	G4Material* LYSO = new G4Material("LYSO_Ce", 7.1*g/cm3, 5, kStateSolid);
