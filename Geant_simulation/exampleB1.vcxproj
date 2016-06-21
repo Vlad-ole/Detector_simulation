@@ -271,6 +271,9 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PMTParametrization.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\AnodeGridParametrisation.cpp" />
     <ClCompile Include="src\CathodeSD.cc" />
     <ClCompile Include="src\DetectorConstruction.cpp">
@@ -324,6 +327,9 @@
     <ClInclude Include="include\DetectorParametrisation.h" />
     <ClInclude Include="include\ReadConstants.h" />
     <ClInclude Include="include\Singleton.h" />
+    <ClInclude Include="PMTParametrization.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

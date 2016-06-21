@@ -116,6 +116,25 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
 
 
+	//tracker THGEM2
+	const double x_size_tracker_THGEM2 = size_anode_grid;
+	const double y_size_tracker_THGEM2 = size_anode_grid;
+	const double z_size_tracker_THGEM2 = 500 * um;
+	const double z_tracker_THGEM2_center = 70.7 * mm + z_size_tracker_THGEM2 / 2.0;
+
+	//THGEM sizes
+	//const double x_size_foil = ;
+
+	//Insulator_box
+	const double x_size_Insulator_box_inner = 143 * mm;
+	const double y_size_Insulator_box_inner = x_size_Insulator_box_inner;
+	const double thickness_Insulator_box = 2 * mm;
+	const double x_size_Insulator_box_outer = x_size_Insulator_box_inner + thickness_Insulator_box * 2;
+	const double y_size_Insulator_box_outer = x_size_Insulator_box_outer;
+	const double z_size_Insulator_box = 150 * mm;
+	const double z_Insulator_box_center = z_size_Insulator_box / 2.0;
+
+
 	if (thickness_anode_grid < 2 * radius_wire)
 	{
 		cout << "error: thickness_anode_grid < 2*radius_wire" << endl;
@@ -138,6 +157,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_anode_grid = G4ThreeVector(0, 0, z_anode_grid_center);
 	const G4ThreeVector &positionTracker = G4ThreeVector(0, 0, z_SiPM_center);
 	const G4ThreeVector &position_PMMA_plate = G4ThreeVector(0, 0, z_PMMA_plate_center);
+	const G4ThreeVector &position_tracker_THGEM2 = G4ThreeVector(0, 0, z_tracker_THGEM2_center);
+	const G4ThreeVector &position_Insulator_box = G4ThreeVector(0, 0, z_Insulator_box_center);
 	//-------------------------------------------------------------------------------
 
 
@@ -324,11 +345,55 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
+	//--------------------------------------------------------------------------------
+
+
+
+
+	//--------------------------------------------------------------------------------
+	//create THGEM2 tracker
 
 
 	//--------------------------------------------------------------------------------
 
 
+
+
+	//--------------------------------------------------------------------------------
+	//create THGEM2
+	//too difficult!
+
+	//--------------------------------------------------------------------------------
+
+
+
+	//--------------------------------------------------------------------------------
+	//create Insulator box
+	G4Box* solid_Insulator_box_inner = new G4Box("solid_Insulator_box_inner", x_size_Insulator_box_inner / 2.0, y_size_Insulator_box_inner / 2.0, z_size_Insulator_box / 2.0);
+	G4Box* solid_Insulator_box_outer = new G4Box("solid_Insulator_box_outer", x_size_Insulator_box_outer / 2.0, y_size_Insulator_box_outer / 2.0, z_size_Insulator_box / 2.0);
+	G4SubtractionSolid* solid_Insulator_box_subtraction = new G4SubtractionSolid("solid_Insulator_box_subtraction", solid_Insulator_box_outer, solid_Insulator_box_inner);
+
+	G4LogicalVolume* logic_Insulator_box = new G4LogicalVolume(solid_Insulator_box_subtraction, G4Material::GetMaterial("PMMA"), "logic_Insulator_box", 0, 0, 0);
+	G4VPhysicalVolume* phys_Insulator_box = new G4PVPlacement(0,               // no rotation
+		position_Insulator_box, // at (x,y,z)
+		logic_Insulator_box,       // its logical volume
+		"phys_Insulator_box",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+	//--------------------------------------------------------------------------------
+
+
+
+
+
+	//--------------------------------------------------------------------------------
+	//create Insulator box
+
+
+	//--------------------------------------------------------------------------------
 
 
 	//определение чувствительного объема

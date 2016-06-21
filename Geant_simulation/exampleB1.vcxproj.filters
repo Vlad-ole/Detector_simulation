@@ -81,6 +81,9 @@
     <ClCompile Include="src\AnodeGridParametrisation.cpp">
       <Filter>Source Files\DetectorConstruction</Filter>
     </ClCompile>
+    <ClCompile Include="PMTParametrization.cpp">
+      <Filter>Source Files\DetectorConstruction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Messenger.hh">
@@ -134,6 +137,9 @@
       <Filter>Header Files\DetectorConstruction</Filter>
     </ClInclude>
     <ClInclude Include="include\AnodeGridParametrisation.h">
+      <Filter>Header Files\DetectorConstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="PMTParametrization.h">
       <Filter>Header Files\DetectorConstruction</Filter>
     </ClInclude>
   </ItemGroup>
