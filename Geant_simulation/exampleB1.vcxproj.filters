@@ -19,6 +19,12 @@
     <Filter Include="Header Files\PhysicsList">
       <UniqueIdentifier>{35e78983-6517-4c9c-b49e-c0c3f8d19ff4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sensitive detector">
+      <UniqueIdentifier>{a7c44839-0b7a-414f-a62f-c55a08676e57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sensitive detector">
+      <UniqueIdentifier>{2bbb0d67-7157-4c50-abaa-8487bffd3794}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Messenger.cc">
@@ -54,9 +60,6 @@
     <ClCompile Include="src\RunAction.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\CathodeSD.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Surface.cpp">
       <Filter>Source Files\DetectorConstruction</Filter>
     </ClCompile>
@@ -81,15 +84,21 @@
     <ClCompile Include="src\AnodeGridParametrisation.cpp">
       <Filter>Source Files\DetectorConstruction</Filter>
     </ClCompile>
-    <ClCompile Include="PMTParametrization.cpp">
+    <ClCompile Include="src\CathodeSD.cc">
+      <Filter>Source Files\Sensitive detector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PMTSD.cpp">
+      <Filter>Source Files\Sensitive detector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PMTParametrization.cpp">
       <Filter>Source Files\DetectorConstruction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PMTHits.cpp">
+      <Filter>Source Files\Sensitive detector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Messenger.hh">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="include\CathodeSD.hh">
       <Filter>Header Files</Filter>
     </None>
     <None Include="include\PrimaryGeneratorAction.hh">
@@ -125,6 +134,9 @@
     <None Include="include\PhysListEmStandard.hh">
       <Filter>Header Files\PhysicsList</Filter>
     </None>
+    <None Include="include\CathodeSD.hh">
+      <Filter>Header Files\Sensitive detector</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Singleton.h">
@@ -139,8 +151,15 @@
     <ClInclude Include="include\AnodeGridParametrisation.h">
       <Filter>Header Files\DetectorConstruction</Filter>
     </ClInclude>
+    <ClInclude Include="include\PMTSD.h">
+      <Filter>Header Files\Sensitive detector</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PMTParametrization.h" />
     <ClInclude Include="PMTParametrization.h">
       <Filter>Header Files\DetectorConstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PMTHits.h">
+      <Filter>Header Files\Sensitive detector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

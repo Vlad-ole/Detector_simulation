@@ -43,7 +43,7 @@
 #include <string>
 
 #include "AnodeGridParametrisation.h"
-
+#include "PMTSD.h"
 
 using namespace std;
 
@@ -134,6 +134,12 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double z_size_Insulator_box = 150 * mm;
 	const double z_Insulator_box_center = z_size_Insulator_box / 2.0;
 
+	//PMTs
+	const double radius_PMT = 45 * mm / 2.0;
+	const double z_size_PMT = 1 * um;
+	const double x_pos_PMT = 152 * mm / 2.0;
+	const double y_pos_PMT = x_pos_PMT;
+	const double z_pos_PMT = 27.2 * mm + 63 * mm / 2.0;
 
 	if (thickness_anode_grid < 2 * radius_wire)
 	{
@@ -159,6 +165,17 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_PMMA_plate = G4ThreeVector(0, 0, z_PMMA_plate_center);
 	const G4ThreeVector &position_tracker_THGEM2 = G4ThreeVector(0, 0, z_tracker_THGEM2_center);
 	const G4ThreeVector &position_Insulator_box = G4ThreeVector(0, 0, z_Insulator_box_center);
+
+	const G4ThreeVector &position_PMT_0 = G4ThreeVector(-x_pos_PMT, 0, z_pos_PMT);
+	const G4ThreeVector &position_PMT_1 = G4ThreeVector(x_pos_PMT, 0, z_pos_PMT);
+	const G4ThreeVector &position_PMT_2 = G4ThreeVector(0, -y_pos_PMT, z_pos_PMT);
+	const G4ThreeVector &position_PMT_3 = G4ThreeVector(0, y_pos_PMT, z_pos_PMT);
+
+	G4RotationMatrix* rotX = new G4RotationMatrix();
+	rotX->rotateX(90 * deg);
+
+	G4RotationMatrix* rotY = new G4RotationMatrix();
+	rotY->rotateY(90 * deg);
 	//-------------------------------------------------------------------------------
 
 
@@ -390,10 +407,53 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 	//--------------------------------------------------------------------------------
-	//create Insulator box
+	//create PMTs
+	G4Tubs* solid_PMT = new G4Tubs("solid_PMT", 0, radius_PMT, z_size_PMT / 2.0, 0.*deg, 360.*deg);
+	G4LogicalVolume* logic_PMT0 = new G4LogicalVolume(solid_PMT, fAl, "logic_PMT0", 0, 0, 0);
+	G4LogicalVolume* logic_PMT1 = new G4LogicalVolume(solid_PMT, fAl, "logic_PMT1", 0, 0, 0);
+	G4LogicalVolume* logic_PMT2 = new G4LogicalVolume(solid_PMT, fAl, "logic_PMT2", 0, 0, 0);
+	G4LogicalVolume* logic_PMT3 = new G4LogicalVolume(solid_PMT, fAl, "logic_PMT3", 0, 0, 0);
 
+	G4VPhysicalVolume* phys_PMT0 = new G4PVPlacement(rotY,               // no rotation
+		position_PMT_0, // at (x,y,z)
+		logic_PMT0,       // its logical volume
+		"phys_PMT0",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+	G4VPhysicalVolume* phys_PMT1 = new G4PVPlacement(rotY,               // no rotation
+		position_PMT_1, // at (x,y,z)
+		logic_PMT1,       // its logical volume
+		"phys_PMT1",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+	G4VPhysicalVolume* phys_PMT2 = new G4PVPlacement(rotX,               // no rotation
+		position_PMT_2, // at (x,y,z)
+		logic_PMT2,       // its logical volume
+		"phys_PMT2",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+	G4VPhysicalVolume* phys_PMT3 = new G4PVPlacement(rotX,               // no rotation
+		position_PMT_3, // at (x,y,z)
+		logic_PMT3,       // its logical volume
+		"phys_PMT3",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
 
 	//--------------------------------------------------------------------------------
+
+
+
 
 
 	//определение чувствительного объема
@@ -401,6 +461,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	theCathodeSD = new CathodeSD(sensitiveDetectorName, phys_SiPM, Nx_SiPMs * Ny_SiPMs);
 	G4SDManager::GetSDMpointer()->AddNewDetector( theCathodeSD );
 	logic_SiPM->SetSensitiveDetector( theCathodeSD );
+
+	//PMTSD* thePMTSD = new PMTSD("/detector/sensitiveDetector_PMT0", phys_PMT0, 1);
+	//G4SDManager::GetSDMpointer()->AddNewDetector(thePMTSD);
+	//logic_PMT0->SetSensitiveDetector(thePMTSD);
+
 	////------------------------------------------------------------------------
 
 
@@ -418,6 +483,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//G4LogicalBorderSurface* envelope2CathodeSurface = new G4LogicalBorderSurface("envelope2CathodeSurface", physi_glass, physiCathode, silicaCathodeMaterial);
 	
 	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("tracker2SiPM", phys_tracker, phys_SiPM, silicaCathodeMaterial);
+	G4LogicalBorderSurface* world2PMT0 = new G4LogicalBorderSurface("world2PMT0", physiWorld, phys_PMT0, silicaCathodeMaterial);
+	G4LogicalBorderSurface* world2PMT1 = new G4LogicalBorderSurface("world2PMT1", physiWorld, phys_PMT1, silicaCathodeMaterial);
+	G4LogicalBorderSurface* world2PMT2 = new G4LogicalBorderSurface("world2PMT2", physiWorld, phys_PMT2, silicaCathodeMaterial);
+	G4LogicalBorderSurface* world2PMT3 = new G4LogicalBorderSurface("world2PMT3", physiWorld, phys_PMT3, silicaCathodeMaterial);
 	//G4LogicalBorderSurface* World2Traker = new G4LogicalBorderSurface("World2Traker", physiWorld, phys_tracker, AbsorberMaterial);
 	//G4LogicalBorderSurface* Traker2World = new G4LogicalBorderSurface("Traker2World", phys_tracker, physiWorld, AbsorberMaterial);
 
@@ -440,6 +509,16 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	G4VisAttributes* AnodeGridVisAtt = new G4VisAttributes(G4Colour(1.0, 0.5, 0.0, 0.8));
 //	logic_anode_grid->SetVisAttributes(AnodeGridVisAtt);
+
+	G4VisAttributes* PMT0_VisAtt = new G4VisAttributes(G4Colour(0.4, 0.5, 0.7, 0.8));
+	G4VisAttributes* PMT1_VisAtt = new G4VisAttributes(G4Colour(0.4, 0.5, 0.7, 0.8));
+	G4VisAttributes* PMT2_VisAtt = new G4VisAttributes(G4Colour(0.4, 0.5, 0.7, 0.8));
+	G4VisAttributes* PMT3_VisAtt = new G4VisAttributes(G4Colour(0.4, 0.5, 0.7, 0.8));
+	logic_PMT0->SetVisAttributes(PMT0_VisAtt);
+	logic_PMT1->SetVisAttributes(PMT1_VisAtt);
+	logic_PMT2->SetVisAttributes(PMT2_VisAtt);
+	logic_PMT3->SetVisAttributes(PMT3_VisAtt);
+
 
 	logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
 //	trackerLV->SetVisAttributes(G4VisAttributes::Invisible);

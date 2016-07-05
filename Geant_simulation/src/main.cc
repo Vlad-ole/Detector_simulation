@@ -20,6 +20,7 @@
 #include <conio.h>
 #include <iostream>
 #include "Singleton.h"
+#include "PMTHits.h"
 
 //#include <time.h>
 
@@ -106,8 +107,9 @@ int main(int argc, char** argv)
 	// job termination
 	delete runManager;
 
+	
+	
 	cout << "\a \a \a \a";
-
 	long t2 = clock();
 
 	cout << endl;

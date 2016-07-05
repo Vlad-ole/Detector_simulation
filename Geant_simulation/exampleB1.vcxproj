@@ -271,9 +271,6 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="PMTParametrization.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="src\AnodeGridParametrisation.cpp" />
     <ClCompile Include="src\CathodeSD.cc" />
     <ClCompile Include="src\DetectorConstruction.cpp">
@@ -295,6 +292,13 @@
     </ClCompile>
     <ClCompile Include="src\PhysListEmStandard.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\PMTHits.cpp" />
+    <ClCompile Include="src\PMTParametrization.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\PMTSD.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\PrimaryGeneratorAction.cc" />
     <ClCompile Include="src\ReadConstants.cpp" />
@@ -325,6 +329,11 @@
   <ItemGroup>
     <ClInclude Include="include\AnodeGridParametrisation.h" />
     <ClInclude Include="include\DetectorParametrisation.h" />
+    <ClInclude Include="include\PMTHits.h" />
+    <ClInclude Include="include\PMTParametrization.h" />
+    <ClInclude Include="include\PMTSD.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="include\ReadConstants.h" />
     <ClInclude Include="include\Singleton.h" />
     <ClInclude Include="PMTParametrization.h">

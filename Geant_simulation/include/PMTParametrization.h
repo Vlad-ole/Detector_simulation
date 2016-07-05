@@ -1,4 +1,3 @@
-#pragma once
 #ifndef PMTParametrization_h
 #define PMTParametrization_h 1
 

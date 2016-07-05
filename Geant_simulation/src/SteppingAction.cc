@@ -13,13 +13,17 @@
 #include "SteppingAction.hh"
 #include "DetectorConstruction.hh"
 #include "EventAction.hh"
-#include "CathodeSD.hh"
-#include "Singleton.h"
 
+#include "CathodeSD.hh"
+#include "PMTSD.h"
+
+#include "Singleton.h"
+#include "PMTHits.h"
 
 SteppingAction::SteppingAction(DetectorConstruction* myDC, EventAction* myEA)
 :myDetector(myDC), eventAction(myEA)
 {
+	pmt_hits = new PMTHits();
 }
 
 void SteppingAction::UserSteppingAction(const G4Step* theStep)
@@ -100,8 +104,27 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 									
 									G4SDManager* SDman = G4SDManager::GetSDMpointer();
 									G4String sdName="/detector/sensitiveDetector";
-									CathodeSD* pmtSD = (CathodeSD*)SDman->FindSensitiveDetector(sdName);
-									if(pmtSD)pmtSD->ProcessHits_Optical(theStep,NULL);
+									CathodeSD* sipmSD = (CathodeSD*)SDman->FindSensitiveDetector(sdName);
+									if(sipmSD)sipmSD->ProcessHits_Optical(theStep,NULL);
+
+									//cout << theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() << endl;
+
+												
+									if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT0")
+										pmt_hits->IncrValuebyOne(0);
+
+									if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT1")
+										pmt_hits->IncrValuebyOne(1);
+
+									if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT2")
+										pmt_hits->IncrValuebyOne(2);
+
+									if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT3")
+										pmt_hits->IncrValuebyOne(3);
+ 									
+									//PMTSD* pmtSD = (PMTSD*)SDman->FindSensitiveDetector("/detector/sensitiveDetector_PMT0");
+									//if (pmtSD)pmtSD->ProcessHits_Optical(theStep, NULL);
+
 								}
 								break;
 
