@@ -49,7 +49,23 @@ void DetectorConstruction::defineMaterials()
 	//------------------------------
 
 
+	//------------------------------
+	//FR4
 
+	//I don't know a real chemical composition. So it's dummy
+	G4Material* FR4 = new G4Material("FR4", 1.000*g / cm3, 3);	
+	FR4->AddElement(C, 5);
+	FR4->AddElement(O, 2);
+	FR4->AddElement(H, 8);
+	const G4int numentries_FR4 = 2;
+	G4double energies_FR4[numentries_FR4] = { 0.1*eV, 10.0*eV };
+	G4double rindices_FR4[numentries_FR4] = { 1.5, 1.5 };
+	G4double absorpti_FR4[numentries_FR4] = { 10 * m, 10 * m }; // avoid infinite light-paths
+	G4MaterialPropertiesTable* prop_FR4 = new G4MaterialPropertiesTable();
+	prop_FR4->AddProperty("ABSLENGTH", energies_FR4, absorpti_FR4, numentries_FR4);
+	prop_FR4->AddProperty("RINDEX", energies_FR4, rindices_FR4, numentries_FR4);
+	FR4->SetMaterialPropertiesTable(prop_FR4);
+	//------------------------------
 
 
 

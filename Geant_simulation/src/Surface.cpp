@@ -54,7 +54,29 @@ void DetectorConstruction::defineSurfaces()
 	//polishedAir_property->AddProperty("REFLECTIVITY", ener, teflon_refl, 2);
 	polishedAir->SetMaterialPropertiesTable(polishedAir_property);
 	//-------------------------------------------------------------------------------
-	
+
+
+
+
+
+	//-------------------------------------------------------------------------------
+	//FR4_unified
+	FR4_unified = new G4OpticalSurface("FR4_unified", unified);
+	FR4_unified->SetType(dielectric_metal);
+	FR4_unified->SetModel(unified);
+	FR4_unified->SetFinish(polished);
+	FR4_unified->SetSigmaAlpha(0.);
+
+	G4MaterialPropertiesTable *FR4_MaterialProperty = new G4MaterialPropertiesTable();
+	G4double FR4_Materialrefl[2] = { 1.0, 1.0 };
+	G4double FR4_Materialeff[2] = { 0, 0 };
+
+	FR4_MaterialProperty->AddProperty("REFLECTIVITY", ener, FR4_Materialrefl, 2);
+	FR4_MaterialProperty->AddProperty("EFFICIENCY", ener, FR4_Materialeff, 2);
+
+	FR4_unified->SetMaterialPropertiesTable(FR4_MaterialProperty);
+	//-------------------------------------------------------------------------------
+		
 	
 	
 	//---------------------------------------------------------------------------
@@ -78,7 +100,7 @@ void DetectorConstruction::defineSurfaces()
 	teflon_unified_property->AddProperty("REFLECTIVITY", ener, teflon_refl, 2);
 	teflon_unified->SetMaterialPropertiesTable(teflon_unified_property);
 	//-------------------------------------------------------------------------------
-
+	 
 	
 	
 	//---------------------------------------------------------------------------

@@ -87,14 +87,11 @@
     <ClCompile Include="src\CathodeSD.cc">
       <Filter>Source Files\Sensitive detector</Filter>
     </ClCompile>
-    <ClCompile Include="src\PMTSD.cpp">
-      <Filter>Source Files\Sensitive detector</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PMTParametrization.cpp">
-      <Filter>Source Files\DetectorConstruction</Filter>
-    </ClCompile>
     <ClCompile Include="src\PMTHits.cpp">
       <Filter>Source Files\Sensitive detector</Filter>
+    </ClCompile>
+    <ClCompile Include="src\THGEMParametrisation.cpp">
+      <Filter>Source Files\DetectorConstruction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,15 +148,12 @@
     <ClInclude Include="include\AnodeGridParametrisation.h">
       <Filter>Header Files\DetectorConstruction</Filter>
     </ClInclude>
-    <ClInclude Include="include\PMTSD.h">
-      <Filter>Header Files\Sensitive detector</Filter>
-    </ClInclude>
     <ClInclude Include="include\PMTParametrization.h" />
-    <ClInclude Include="PMTParametrization.h">
-      <Filter>Header Files\DetectorConstruction</Filter>
-    </ClInclude>
     <ClInclude Include="include\PMTHits.h">
       <Filter>Header Files\Sensitive detector</Filter>
+    </ClInclude>
+    <ClInclude Include="include\THGEMParametrisation.h">
+      <Filter>Header Files\DetectorConstruction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

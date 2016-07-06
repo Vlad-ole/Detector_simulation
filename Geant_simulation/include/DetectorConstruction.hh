@@ -159,6 +159,7 @@ private:
 	G4OpticalSurface *teflon_unified;
 	G4OpticalSurface *MgO_unified;
 	G4OpticalSurface *TiO2_unified;
+	G4OpticalSurface *FR4_unified;
 
 	G4OpticalSurface *Glass_surface;
 

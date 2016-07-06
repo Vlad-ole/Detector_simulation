@@ -36,7 +36,7 @@
 
 #
 # Draw coordinate axes:
-/vis/scene/add/axes 0 0 0 50 mm
+#/vis/scene/add/axes 0 0 0 50 mm
 
 # Store generated trajectories
 /tracking/storeTrajectory 1

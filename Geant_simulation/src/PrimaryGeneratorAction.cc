@@ -154,7 +154,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		y = 4.0*(G4UniformRand() - 0.5)*mm; 
 	} while (x*x + y*y > 16*mm2);
 #endif
-	particleGun->SetParticlePosition(G4ThreeVector(x, y, 71.2*mm));
+	particleGun->SetParticlePosition(G4ThreeVector(x, y, 65*mm));
 	//------------------------------------
 	
 	
