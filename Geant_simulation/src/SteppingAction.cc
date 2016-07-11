@@ -19,114 +19,213 @@
 
 #include "Singleton.h"
 #include "PMTHits.h"
+#include "G4SystemOfUnits.hh"
 
 SteppingAction::SteppingAction(DetectorConstruction* myDC, EventAction* myEA)
-:myDetector(myDC), eventAction(myEA)
+	:myDetector(myDC), eventAction(myEA)
 {
 	pmt_hits = new PMTHits();
 }
 
 void SteppingAction::UserSteppingAction(const G4Step* theStep)
 {
-  G4Track* theTrack = theStep->GetTrack();
- 
-  G4StepPoint* thePrePoint = theStep->GetPreStepPoint();
-  G4VPhysicalVolume* thePrePV = thePrePoint->GetPhysicalVolume();
+	G4Track* theTrack = theStep->GetTrack();
 
-  G4StepPoint* thePostPoint = theStep->GetPostStepPoint();
-  G4VPhysicalVolume* thePostPV = thePostPoint->GetPhysicalVolume();
+	G4StepPoint* thePrePoint = theStep->GetPreStepPoint();
+	G4VPhysicalVolume* thePrePV = thePrePoint->GetPhysicalVolume();
 
-  //---------------------
+	G4StepPoint* thePostPoint = theStep->GetPostStepPoint();
+	G4VPhysicalVolume* thePostPV = thePostPoint->GetPhysicalVolume();
 
-
-  //---------------------
+	//---------------------
 
 
-  //find the boundary process only once
-  static G4OpBoundaryProcess* boundary=NULL;
-  if(!boundary)
-  {
-    G4ProcessManager* pm = theStep->GetTrack()->GetDefinition()->GetProcessManager();
-    G4int nprocesses     = pm->GetProcessListLength();
-    G4ProcessVector* pv  = pm->GetProcessList();
+	//---------------------
 
-	for(G4int i=0;i<nprocesses;i++)
+
+	//find the boundary process only once
+	static G4OpBoundaryProcess* boundary = NULL;
+	if (!boundary)
 	{
-      if((*pv)[i]->GetProcessName()=="OpBoundary")
-	  {
-        boundary = (G4OpBoundaryProcess*)(*pv)[i];
-        break;
-      }
-    }
-  }
+		G4ProcessManager* pm = theStep->GetTrack()->GetDefinition()->GetProcessManager();
+		G4int nprocesses = pm->GetProcessListLength();
+		G4ProcessVector* pv = pm->GetProcessList();
 
-
-  //For Optical photon only
-  G4ParticleDefinition* particleType = theTrack->GetDefinition();
-  if(particleType==G4OpticalPhoton::OpticalPhotonDefinition())
-  {
-
-    //Check to see if the partcile was actually at a boundary
-    //Otherwise the boundary status may not be valid
-    //Prior to Geant4.6.0-p1 this would not have been enough to check
-    if(thePostPoint->GetStepStatus() == fGeomBoundary)
-	{
-		if(boundary)
+		for (G4int i = 0; i < nprocesses; i++)
 		{
-			G4OpBoundaryProcessStatus boundaryStatus = boundary->GetStatus();
-
-			if(boundaryStatus == FresnelReflection)
-				g()->NumberOfReflections++;
-			
-			
-			//--------------------------------------------------------------------
-			//G4ThreeVector v_temp_poz = theTrack->GetPosition();
-			//G4ThreeVector v_temp_mom = theTrack->GetMomentumDirection();
-			//
-			//if( boundaryStatus != 12  && (v_temp_poz.getZ() > 0) && (v_temp_mom.getZ() > 0) )
-			//{
-			//	
-			//	g()->file_boundary_process << boundaryStatus /*<< "\t" << v_temp_poz.getZ() << "\t" << v_temp_mom.getZ()*/  << endl;
-			//}
-			//--------------------------------------------------------------------
-			
-
-			switch(boundaryStatus)
+			if ((*pv)[i]->GetProcessName() == "OpBoundary")
 			{
+				boundary = (G4OpBoundaryProcess*)(*pv)[i];
+				break;
+			}
+		}
+	}
+
+
+	//For Optical photon only
+	G4ParticleDefinition* particleType = theTrack->GetDefinition();
+	if (particleType == G4OpticalPhoton::OpticalPhotonDefinition())
+	{
+
+		//Check to see if the partcile was actually at a boundary
+		//Otherwise the boundary status may not be valid
+		//Prior to Geant4.6.0-p1 this would not have been enough to check
+		if (thePostPoint->GetStepStatus() == fGeomBoundary)
+		{
+			if (boundary)
+			{
+				G4OpBoundaryProcessStatus boundaryStatus = boundary->GetStatus();
+
+				if (boundaryStatus == FresnelReflection)
+					g()->NumberOfReflections++;
+
+				//change MomentumDirection and position for optical photon incidents on THGEM2
+				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM2")
+				{
+					const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
+					if (pos_i.z() >= 70.7 && pos_i.z() < 70.8)
+					{
+						//get
+						const G4ThreeVector& MomentumDirection_i = theStep->GetTrack()->GetMomentumDirection();
+						const G4ThreeVector& Position_i = theStep->GetTrack()->GetPosition();
+
+						const double step = 1.1 * mm;
+						const double step_y = step * sqrt(3) / 2;
+						const double radius = 0.25 * mm;
+
+						double y_center;
+						double x_center;
+
+						// the nearest y_center
+						if( fabs(Position_i.y()) < (step_y / 2) )
+						{
+							y_center = 0;
+						}
+						else
+						{
+							y_center = ( (int)( (fabs(Position_i.y()) - (step_y / 2)) / (step_y) ) + 1 ) * (step_y) * Position_i.y() / fabs(Position_i.y());
+						}
+
+						//the nearest x_center
+						if (fabs(Position_i.y()) < (step_y / 2))
+						{
+							int n_x = (int)(Position_i.x() / step);
+							int sign = Position_i.x() > 0 ? 1 : -1;
+							x_center = (n_x + sign * 0.5) * step;
+							
+							//x_center = ((int)((fabs(Position_i.x()) - (step / 2)) / step) + 1 ) * step * Position_i.x() / fabs(Position_i.x()) + step / 2 * Position_i.x() / fabs(Position_i.x());
+						}
+						else
+						{
+							if (((int)((fabs(Position_i.y()) - (step_y / 2)) / (step_y)) + 1) % 2 == 1 /*if y row is odd*/)
+							{
+								if ( fabs( Position_i.x() ) < step/2.0 )
+								{
+									x_center = 0;
+								}
+								else
+								{
+									int n_x = ( fabs(Position_i.x()) - step / 2 ) / step;
+									int sign = Position_i.x() > 0 ? 1 : -1;
+									x_center = (n_x + 1) * step * sign;
+								}
+								
+								//x_center = (int)(Position_i.x() / step) * step; // старый вариант
+							}
+							else
+							{
+								int n_x = (int)(Position_i.x() / step);
+								int sign = Position_i.x() > 0 ? 1 : -1;
+								x_center = (n_x + sign * 0.5) * step;
+								//x_center = ((int)((fabs(Position_i.x()) - (step / 2)) / step)) * step * Position_i.x() / fabs(Position_i.x()) + step / 2 * Position_i.x() / fabs(Position_i.x());
+							}
+						}
+
+						//kill or allow photon to pass
+						double distance = sqrt(pow(Position_i.x() - x_center, 2.0) + pow(Position_i.y() - y_center, 2.0));
+						if (distance < radius)
+						{
+							//set
+							const G4ThreeVector& MomentumDirection_f = G4ThreeVector(0, 1, 0);
+							const double dx = MomentumDirection_i.x() * 0.5*mm / sqrt(MomentumDirection_i.x() * MomentumDirection_i.x() + MomentumDirection_i.z() * MomentumDirection_i.z());
+							const double dy = MomentumDirection_i.y() * 0.5*mm / sqrt(MomentumDirection_i.y() * MomentumDirection_i.y() + MomentumDirection_i.z() * MomentumDirection_i.z());
+							const G4ThreeVector& Position_f = G4ThreeVector(Position_i.x() + dx, Position_i.y() + dy, 71.2);
+
+							distance = sqrt(pow(Position_f.x() - x_center, 2.0) + pow(Position_f.y() - y_center, 2.0));
+							if (distance < radius)
+							{
+								//cout << "dx = " << dx << "\t dy = " << dy << endl;
+								//const G4ThreeVector& Position_f = G4ThreeVector(10, 15, 71.2);
+								theStep->GetTrack()->SetPosition(Position_f);
+								//theStep->GetTrack()->SetMomentumDirection(MomentumDirection_i); // I see strange result and don't know why
+								cout << "InHole !" << "x_center = " << x_center << " \t y_center = " << y_center <<  endl;
+							}
+							else
+							{
+								theStep->GetTrack()->SetTrackStatus(fStopAndKill);
+							}
+
+						}
+						else
+						{
+							cout << "OutHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
+							theStep->GetTrack()->SetTrackStatus(fStopAndKill);
+						}
+
+
+
+					}
+					//G4cout << pos_i.x() << "\t " << pos_i.y() << "\t " << pos_i.z() << G4endl;
+				}
+
+				//--------------------------------------------------------------------
+				//G4ThreeVector v_temp_poz = theTrack->GetPosition();
+				//G4ThreeVector v_temp_mom = theTrack->GetMomentumDirection();
+				//
+				//if( boundaryStatus != 12  && (v_temp_poz.getZ() > 0) && (v_temp_mom.getZ() > 0) )
+				//{
+				//	
+				//	g()->file_boundary_process << boundaryStatus /*<< "\t" << v_temp_poz.getZ() << "\t" << v_temp_mom.getZ()*/  << endl;
+				//}
+				//--------------------------------------------------------------------
+
+
+				switch (boundaryStatus)
+				{
 				case Detection://Note, this assumes that the volume causing detection
 								//is the photocathode because it is the only one with
 								//non-zero efficiency
 
 								//Triger sensitive detector manually since photon is
 								//absorbed but status was Detection
-								{
-									//cout << "GetCopyNumber() =" <<  theStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() << endl;
-									
-									G4SDManager* SDman = G4SDManager::GetSDMpointer();
-									G4String sdName="/detector/sensitiveDetector";
-									CathodeSD* sipmSD = (CathodeSD*)SDman->FindSensitiveDetector(sdName);
-									if(sipmSD)sipmSD->ProcessHits_Optical(theStep,NULL);
+				{
+					//cout << "GetCopyNumber() =" <<  theStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() << endl;
 
-									//cout << theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() << endl;
+					G4SDManager* SDman = G4SDManager::GetSDMpointer();
+					G4String sdName = "/detector/sensitiveDetector";
+					CathodeSD* sipmSD = (CathodeSD*)SDman->FindSensitiveDetector(sdName);
+					if (sipmSD)sipmSD->ProcessHits_Optical(theStep, NULL);
 
-												
-									if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT0")
-										pmt_hits->IncrValuebyOne(0);
+					//cout << theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() << endl;
 
-									if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT1")
-										pmt_hits->IncrValuebyOne(1);
 
-									if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT2")
-										pmt_hits->IncrValuebyOne(2);
+					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT0")
+						pmt_hits->IncrValuebyOne(0);
 
-									if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT3")
-										pmt_hits->IncrValuebyOne(3);
- 									
-									//PMTSD* pmtSD = (PMTSD*)SDman->FindSensitiveDetector("/detector/sensitiveDetector_PMT0");
-									//if (pmtSD)pmtSD->ProcessHits_Optical(theStep, NULL);
+					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT1")
+						pmt_hits->IncrValuebyOne(1);
 
-								}
-								break;
+					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT2")
+						pmt_hits->IncrValuebyOne(2);
+
+					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT3")
+						pmt_hits->IncrValuebyOne(3);
+
+					//PMTSD* pmtSD = (PMTSD*)SDman->FindSensitiveDetector("/detector/sensitiveDetector_PMT0");
+					//if (pmtSD)pmtSD->ProcessHits_Optical(theStep, NULL);
+
+				}
+				break;
 
 				case Absorption:
 				case FresnelReflection:
@@ -135,14 +234,14 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 				case LobeReflection:
 				case SpikeReflection:
 				case BackScattering:
-				break;
+					break;
 
 				default:
-				break;
+					break;
+				}
 			}
-		}
-    }//if Boundary
-  }//if opt photons
+		}//if Boundary
+	}//if opt photons
 }
 
 

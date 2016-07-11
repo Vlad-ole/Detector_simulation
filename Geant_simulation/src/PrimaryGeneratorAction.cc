@@ -12,8 +12,8 @@ using namespace std;
 
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 
-//#define DIRECT_INCIDENCE
-#define CENTRAL_INCIDENCE
+#define DIRECT_INCIDENCE
+//#define CENTRAL_INCIDENCE
 
 void PrimaryGeneratorAction::CommonPart()
 {
@@ -124,7 +124,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 #ifdef DIRECT_INCIDENCE
 	double phi = 0;
-	double theta = 0;
+	double theta = -20 * deg;
 	//cout << "inside DIRECT_INCIDENCE" << endl;
 	//system("pause");
 #else 
@@ -143,18 +143,21 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 	double x, y;
 #ifdef CENTRAL_INCIDENCE
-	x = 0 * mm;
-	y = 0 * mm;
+	x = 1.1 * mm * 1.5  ;
+	//y = 1.1 * mm * sqrt(3) / 2 * 2;
+	//x = 0;
+	y = -0.1 * mm;
 	//cout << "inside CENTRAL_INCIDENCE" << endl;
 	//system("pause");
 #else
-	do
-	{
-		x = 4.0*(G4UniformRand() - 0.5)*mm; 
-		y = 4.0*(G4UniformRand() - 0.5)*mm; 
-	} while (x*x + y*y > 16*mm2);
+	double radius = 2; //0.250;
+	//do
+	//{
+	x = 2 * radius*(G4UniformRand() - 0.5)*mm;// +1.1 * mm * (-1);
+	y = 2 * radius*(G4UniformRand() - 0.5)*mm;// +1.1 * mm * sqrt(3) / 2 * (-1);
+	//} while (x*x + y*y > pow(radius, 2.0)*mm2);
 #endif
-	particleGun->SetParticlePosition(G4ThreeVector(x, y, 65*mm));
+	particleGun->SetParticlePosition(G4ThreeVector(x, y, 68*mm));
 	//------------------------------------
 	
 	

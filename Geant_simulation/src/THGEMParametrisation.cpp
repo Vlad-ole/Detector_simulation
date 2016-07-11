@@ -35,7 +35,14 @@ void THGEMParametrisation::ComputeTransformation
 {
 
 	// Note: copyNo will start with zero!
+	
 	G4double Xposition = fStartX + (-fNx / 2 + copyNo % fNx) * fSpacing;
+	if ( (copyNo / fNx) % 2 == 0 )
+	{
+		Xposition -= fSpacing / 2.0;
+		//G4cout << G4endl << copyNo << "\t" << copyNo / fNx << "\t" << (copyNo / fNx) % 2 << "\t" << ((copyNo / fNx) % 2 == 0) << G4endl;
+	}
+	
 	G4double Yposition = fStartY + (-fNy / 2 + copyNo / fNx) * (fSpacing * sqrt(3) / 2 );
 
 	//G4cout << "copyNo = " << copyNo << "; Xposition = " << Xposition << "; Yposition = " << Yposition << G4endl;

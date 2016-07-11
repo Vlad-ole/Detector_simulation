@@ -4,6 +4,7 @@
 #include "G4UserSteppingAction.hh"
 #include "globals.hh"
 #include "PMTHits.h"
+#include <G4ThreeVector.hh>
 
 class DetectorConstruction;
 class EventAction;

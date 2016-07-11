@@ -59,7 +59,7 @@ void DetectorConstruction::defineMaterials()
 	FR4->AddElement(H, 8);
 	const G4int numentries_FR4 = 2;
 	G4double energies_FR4[numentries_FR4] = { 0.1*eV, 10.0*eV };
-	G4double rindices_FR4[numentries_FR4] = { 1.5, 1.5 };
+	G4double rindices_FR4[numentries_FR4] = { 1.0, 1.0 };
 	G4double absorpti_FR4[numentries_FR4] = { 10 * m, 10 * m }; // avoid infinite light-paths
 	G4MaterialPropertiesTable* prop_FR4 = new G4MaterialPropertiesTable();
 	prop_FR4->AddProperty("ABSLENGTH", energies_FR4, absorpti_FR4, numentries_FR4);

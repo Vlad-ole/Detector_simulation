@@ -325,7 +325,6 @@
     <ClInclude Include="include\AnodeGridParametrisation.h" />
     <ClInclude Include="include\DetectorParametrisation.h" />
     <ClInclude Include="include\PMTHits.h" />
-    <ClInclude Include="include\PMTParametrization.h" />
     <ClInclude Include="include\ReadConstants.h" />
     <ClInclude Include="include\Singleton.h" />
     <ClInclude Include="include\THGEMParametrisation.h" />

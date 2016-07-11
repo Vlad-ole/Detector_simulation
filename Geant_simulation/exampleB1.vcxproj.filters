@@ -148,7 +148,6 @@
     <ClInclude Include="include\AnodeGridParametrisation.h">
       <Filter>Header Files\DetectorConstruction</Filter>
     </ClInclude>
-    <ClInclude Include="include\PMTParametrization.h" />
     <ClInclude Include="include\PMTHits.h">
       <Filter>Header Files\Sensitive detector</Filter>
     </ClInclude>
