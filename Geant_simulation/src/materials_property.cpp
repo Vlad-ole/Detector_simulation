@@ -32,7 +32,7 @@ void DetectorConstruction::defineMaterials()
 	G4Element *Gd = man->FindOrBuildElement("Gd");
 	G4Element *Al = man->FindOrBuildElement("Al");
 	G4Element *Pr = man->FindOrBuildElement("Pr");
-
+	G4Element *Ar = man->FindOrBuildElement("Ar");
 
 	//------------------------------
 	// Air
@@ -47,6 +47,23 @@ void DetectorConstruction::defineMaterials()
 	airprop->AddProperty("RINDEX", energies, vacrindices, numentries);
 	Air->SetMaterialPropertiesTable(airprop);
 	//------------------------------
+
+
+
+	//------------------------------
+	// LAr
+	G4Material* LAr = new G4Material("LAr", 1.400*g / cm3, 1);
+	LAr->AddElement(Ar, 1);
+	const G4int LAr_numentries = 2;
+	G4double LAr_energies[LAr_numentries] = { 0.1*eV, 10.0*eV };
+	G4double LAr_rindices[LAr_numentries] = { 1.25, 1.25 }; // https://arxiv.org/pdf/1502.04213v2.pdf (page 10) Index of refraction, Rayleigh scattering length, and Sellmeier coefficients
+	G4double LAr_absorpti[LAr_numentries] = { 2 * m, 2 * m }; // avoid infinite light-paths
+	G4MaterialPropertiesTable* LAr_prop = new G4MaterialPropertiesTable();
+	LAr_prop->AddProperty("ABSLENGTH", LAr_energies, LAr_absorpti, LAr_numentries);
+	LAr_prop->AddProperty("RINDEX", LAr_energies, LAr_rindices, LAr_numentries);
+	LAr->SetMaterialPropertiesTable(LAr_prop);
+	//------------------------------
+	
 
 
 	//------------------------------

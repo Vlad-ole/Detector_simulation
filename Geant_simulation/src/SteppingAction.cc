@@ -79,116 +79,22 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 				if (boundaryStatus == FresnelReflection)
 					g()->NumberOfReflections++;
 
-				//change MomentumDirection and position for optical photon incidents on THGEM2
+
+
 				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM2")
 				{
-					const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
-					if (pos_i.z() >= 70.7 && pos_i.z() < 70.8)
-					{
-						//get
-						const G4ThreeVector& MomentumDirection_i = theStep->GetTrack()->GetMomentumDirection();
-						const G4ThreeVector& Position_i = theStep->GetTrack()->GetPosition();
-
-						const double step = 1.1 * mm;
-						const double step_y = step * sqrt(3) / 2;
-						const double radius = 0.25 * mm;
-
-						double y_center;
-						double x_center;
-
-						// the nearest y_center
-						if( fabs(Position_i.y()) < (step_y / 2) )
-						{
-							y_center = 0;
-						}
-						else
-						{
-							y_center = ( (int)( (fabs(Position_i.y()) - (step_y / 2)) / (step_y) ) + 1 ) * (step_y) * Position_i.y() / fabs(Position_i.y());
-						}
-
-						//the nearest x_center
-						if (fabs(Position_i.y()) < (step_y / 2))
-						{
-							int n_x = (int)(Position_i.x() / step);
-							int sign = Position_i.x() > 0 ? 1 : -1;
-							x_center = (n_x + sign * 0.5) * step;
-							
-							//x_center = ((int)((fabs(Position_i.x()) - (step / 2)) / step) + 1 ) * step * Position_i.x() / fabs(Position_i.x()) + step / 2 * Position_i.x() / fabs(Position_i.x());
-						}
-						else
-						{
-							if (((int)((fabs(Position_i.y()) - (step_y / 2)) / (step_y)) + 1) % 2 == 1 /*if y row is odd*/)
-							{
-								if ( fabs( Position_i.x() ) < step/2.0 )
-								{
-									x_center = 0;
-								}
-								else
-								{
-									int n_x = ( fabs(Position_i.x()) - step / 2 ) / step;
-									int sign = Position_i.x() > 0 ? 1 : -1;
-									x_center = (n_x + 1) * step * sign;
-								}
-								
-								//x_center = (int)(Position_i.x() / step) * step; // старый вариант
-							}
-							else
-							{
-								int n_x = (int)(Position_i.x() / step);
-								int sign = Position_i.x() > 0 ? 1 : -1;
-								x_center = (n_x + sign * 0.5) * step;
-								//x_center = ((int)((fabs(Position_i.x()) - (step / 2)) / step)) * step * Position_i.x() / fabs(Position_i.x()) + step / 2 * Position_i.x() / fabs(Position_i.x());
-							}
-						}
-
-						//kill or allow photon to pass
-						double distance = sqrt(pow(Position_i.x() - x_center, 2.0) + pow(Position_i.y() - y_center, 2.0));
-						if (distance < radius)
-						{
-							//set
-							const G4ThreeVector& MomentumDirection_f = G4ThreeVector(0, 1, 0);
-							const double dx = MomentumDirection_i.x() * 0.5*mm / sqrt(MomentumDirection_i.x() * MomentumDirection_i.x() + MomentumDirection_i.z() * MomentumDirection_i.z());
-							const double dy = MomentumDirection_i.y() * 0.5*mm / sqrt(MomentumDirection_i.y() * MomentumDirection_i.y() + MomentumDirection_i.z() * MomentumDirection_i.z());
-							const G4ThreeVector& Position_f = G4ThreeVector(Position_i.x() + dx, Position_i.y() + dy, 71.2);
-
-							distance = sqrt(pow(Position_f.x() - x_center, 2.0) + pow(Position_f.y() - y_center, 2.0));
-							if (distance < radius)
-							{
-								//cout << "dx = " << dx << "\t dy = " << dy << endl;
-								//const G4ThreeVector& Position_f = G4ThreeVector(10, 15, 71.2);
-								theStep->GetTrack()->SetPosition(Position_f);
-								//theStep->GetTrack()->SetMomentumDirection(MomentumDirection_i); // I see strange result and don't know why
-								cout << "InHole !" << "x_center = " << x_center << " \t y_center = " << y_center <<  endl;
-							}
-							else
-							{
-								theStep->GetTrack()->SetTrackStatus(fStopAndKill);
-							}
-
-						}
-						else
-						{
-							cout << "OutHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
-							theStep->GetTrack()->SetTrackStatus(fStopAndKill);
-						}
-
-
-
-					}
-					//G4cout << pos_i.x() << "\t " << pos_i.y() << "\t " << pos_i.z() << G4endl;
+					PassThroughGEM(theStep, 70.7 * mm, 500 * um);
 				}
 
-				//--------------------------------------------------------------------
-				//G4ThreeVector v_temp_poz = theTrack->GetPosition();
-				//G4ThreeVector v_temp_mom = theTrack->GetMomentumDirection();
-				//
-				//if( boundaryStatus != 12  && (v_temp_poz.getZ() > 0) && (v_temp_mom.getZ() > 0) )
-				//{
-				//	
-				//	g()->file_boundary_process << boundaryStatus /*<< "\t" << v_temp_poz.getZ() << "\t" << v_temp_mom.getZ()*/  << endl;
-				//}
-				//--------------------------------------------------------------------
+				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM1")
+				{
+					PassThroughGEM(theStep, 66.2 * mm, 500 * um);
+				}
 
+				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM0")
+				{
+					PassThroughGEM(theStep, 50.2 * mm, 500 * um);
+				}
 
 				switch (boundaryStatus)
 				{
@@ -199,27 +105,22 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 								//Triger sensitive detector manually since photon is
 								//absorbed but status was Detection
 				{
-					//cout << "GetCopyNumber() =" <<  theStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber() << endl;
-
-					G4SDManager* SDman = G4SDManager::GetSDMpointer();
-					G4String sdName = "/detector/sensitiveDetector";
-					CathodeSD* sipmSD = (CathodeSD*)SDman->FindSensitiveDetector(sdName);
-					if (sipmSD)sipmSD->ProcessHits_Optical(theStep, NULL);
-
-					//cout << theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() << endl;
-
 
 					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT0")
 						pmt_hits->IncrValuebyOne(0);
-
-					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT1")
+					else if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT1")
 						pmt_hits->IncrValuebyOne(1);
-
-					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT2")
+					else if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT2")
 						pmt_hits->IncrValuebyOne(2);
-
-					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT3")
+					else if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT3")
 						pmt_hits->IncrValuebyOne(3);
+					else
+					{
+						G4SDManager* SDman = G4SDManager::GetSDMpointer();
+						G4String sdName = "/detector/sensitiveDetector";
+						CathodeSD* sipmSD = (CathodeSD*)SDman->FindSensitiveDetector(sdName);
+						if (sipmSD)sipmSD->ProcessHits_Optical(theStep, NULL);
+					}
 
 					//PMTSD* pmtSD = (PMTSD*)SDman->FindSensitiveDetector("/detector/sensitiveDetector_PMT0");
 					//if (pmtSD)pmtSD->ProcessHits_Optical(theStep, NULL);
@@ -242,6 +143,103 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 			}
 		}//if Boundary
 	}//if opt photons
+}
+
+
+
+
+void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4double z_size)
+{
+	//change MomentumDirection and position for optical photon incidents on THGEM
+
+	const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
+	if (pos_i.z() > (z_pos - 0.1) && pos_i.z() < (z_pos + 0.1))
+	{
+		//get
+		const G4ThreeVector& MomentumDirection_i = theStep->GetTrack()->GetMomentumDirection();
+		const G4ThreeVector& Position_i = theStep->GetTrack()->GetPosition();
+
+		const double step = 0.9 * mm;
+		const double step_y = step * sqrt(3) / 2;
+		const double radius = 0.25 * mm;
+
+		double y_center;
+		double x_center;
+
+		// the nearest y_center
+		if (fabs(Position_i.y()) < (step_y / 2))
+		{
+			y_center = 0;
+		}
+		else
+		{
+			y_center = ((int)((fabs(Position_i.y()) - (step_y / 2)) / (step_y)) + 1) * (step_y)* Position_i.y() / fabs(Position_i.y());
+		}
+
+		//the nearest x_center
+		if (fabs(Position_i.y()) < (step_y / 2))
+		{
+			int n_x = (int)(Position_i.x() / step);
+			int sign = Position_i.x() > 0 ? 1 : -1;
+			x_center = (n_x + sign * 0.5) * step;
+		}
+		else
+		{
+			if (((int)((fabs(Position_i.y()) - (step_y / 2)) / (step_y)) + 1) % 2 == 1 /*if y row is odd*/)
+			{
+				if (fabs(Position_i.x()) < step / 2.0)
+				{
+					x_center = 0;
+				}
+				else
+				{
+					int n_x = (fabs(Position_i.x()) - step / 2) / step;
+					int sign = Position_i.x() > 0 ? 1 : -1;
+					x_center = (n_x + 1) * step * sign;
+				}
+			}
+			else
+			{
+				int n_x = (int)(Position_i.x() / step);
+				int sign = Position_i.x() > 0 ? 1 : -1;
+				x_center = (n_x + sign * 0.5) * step;
+			}
+		}
+
+		//kill or allow photon to pass
+		double distance = sqrt(pow(Position_i.x() - x_center, 2.0) + pow(Position_i.y() - y_center, 2.0));
+		if (distance < radius)
+		{
+			//set
+			const G4ThreeVector& MomentumDirection_f = G4ThreeVector(0, 1, 0);
+			const double dx = MomentumDirection_i.x() * 0.5*mm / sqrt(MomentumDirection_i.x() * MomentumDirection_i.x() + MomentumDirection_i.z() * MomentumDirection_i.z());
+			const double dy = MomentumDirection_i.y() * 0.5*mm / sqrt(MomentumDirection_i.y() * MomentumDirection_i.y() + MomentumDirection_i.z() * MomentumDirection_i.z());
+			const G4ThreeVector& Position_f = G4ThreeVector(Position_i.x() + dx, Position_i.y() + dy, (z_pos + z_size) );
+
+			distance = sqrt(pow(Position_f.x() - x_center, 2.0) + pow(Position_f.y() - y_center, 2.0));
+			if (distance < radius)
+			{
+				theStep->GetTrack()->SetPosition(Position_f);
+				//theStep->GetTrack()->SetMomentumDirection(MomentumDirection_i); // I see strange result and don't know why
+				//cout << "InHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
+			}
+			else
+			{
+				theStep->GetTrack()->SetTrackStatus(fStopAndKill);
+				//system("pause");
+			}
+
+		}
+		else
+		{
+			//cout << "OutHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
+			theStep->GetTrack()->SetTrackStatus(fStopAndKill);
+		}
+
+
+
+	}
+
 }
 
 

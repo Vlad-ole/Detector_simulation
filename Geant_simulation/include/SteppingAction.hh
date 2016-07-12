@@ -22,6 +22,7 @@ class SteppingAction : public G4UserSteppingAction
   private:
     DetectorConstruction* myDetector;
     EventAction* eventAction;
+	void PassThroughGEM(const G4Step*, G4double z_pos, G4double z_size);
 
 	
 

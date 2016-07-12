@@ -1,6 +1,7 @@
 void Reconstruct()
 {
-	char* file_in_name = "D:\\git_repositories\\Detector_simulation\\Geant_simulation\\experiment\\num_of_photons_SiPM.dat";
+	//char* file_in_name = "D:\\git_repositories\\Detector_simulation\\Geant_simulation\\experiment\\num_of_photons_SiPM.dat";
+	char* file_in_name = "D:\\git_repositories\\Detector_simulation\\Geant_simulation\\experiment\\num_of_photons_PMT.dat";
 	FILE* file_in = fopen(file_in_name,"r");
 	
 	if(file_in == NULL)
