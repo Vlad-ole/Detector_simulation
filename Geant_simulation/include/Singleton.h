@@ -78,6 +78,11 @@ public:
 
 	//Cathode
 	string string_Cathode_REFLECTIVITY;
+
+	//SiPM
+	string string_SiPM_EFFICIENCY;
+
+	string string_GAr_86K_1atm_avalanche_scint_NIR;
 	
 	//
 	double summ_number_of_photons;

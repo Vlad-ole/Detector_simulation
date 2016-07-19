@@ -56,12 +56,12 @@ using namespace std;
 
 DetectorConstruction::DetectorConstruction()
 {
-	messenger = new Messenger(this); 
+	messenger = new Messenger(this);
 }
 
 DetectorConstruction::~DetectorConstruction()
 {
-	delete messenger; 
+	delete messenger;
 }
 
 
@@ -72,6 +72,17 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	defineMaterials(); // внешн€€ функци€. «десь определ€ютс€ различные материалы.
 	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
+
+#define bSiPM
+#define bPMMA_plate
+#define bAnode_grid
+#define bInsulator_box
+#define bPMTs
+#define bTHGEM2
+#define bTHGEM1
+
+	//bool bLAr_inner = false;
+	//bool bLAr_outer = false;
 
 	//--------------------------------------------------------------------------------
 	//выставление размеров объектов
@@ -84,20 +95,20 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double thickness_SiPM = 1 * nm;
 	const double size_SiPM = 6 * mm;
 	const double chamberSpacing = 10 * mm;
-	const double z_SiPM_bottom = 79.2*mm;
+	const double z_SiPM_bottom = 85.7*mm;
 	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
 
 	//anode wire
-	const double radius_wire = 150 * um;
-	const double length_wire = 60 * mm;
+	const double radius_wire = 100 * um;
+	const double length_wire = 108 * mm /*future case*/;  //60 * mm /*real case*/;
 	const double step_wire = 1 * mm;
-	const int N_wire = 59;
+	const int N_wire = 107;
 
 	//Anode_grid
 	const double thickness_anode_grid = 0.5 * mm;
 	const double size_anode_grid = 124 * mm;
-	const double size_anode_grid_hole = 60 * mm;
-	const double z_anode_grid_bottom = 76.2*mm;
+	const double size_anode_grid_hole = length_wire /*future case*/;  //60 * mm /*real case*/;
+	const double z_anode_grid_bottom = 82.7*mm;
 	const double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
 
 	//tracker SiPM
@@ -106,7 +117,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double z_size_tracker = 0.1 * mm;
 
 	//tracker Anode_grid
-	const double x_size_tracker_anode_grid = 60*mm;
+	const double x_size_tracker_anode_grid = length_wire;
 	const double y_size_tracker_anode_grid = x_size_tracker_anode_grid;
 	const double z_size_tracker_anode_grid = thickness_anode_grid;
 
@@ -118,10 +129,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 	//tracker THGEM2 (active region with holes)
-	const double x_size_tracker_THGEM2 = 100*mm;
+	const double x_size_tracker_THGEM2 = 100 * mm;
 	const double y_size_tracker_THGEM2 = 100 * mm;
 	const double z_size_tracker_THGEM2 = 500 * um;
-	const double z_tracker_THGEM2_center = 70.7 * mm + z_size_tracker_THGEM2 / 2.0;
+	const double z_tracker_THGEM2_center = 77.2 * mm + z_size_tracker_THGEM2 / 2.0;
 
 	//THGEM0
 	const double z_THGEM0_bottom = 50.2 * mm;
@@ -155,7 +166,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//PMTs
 	const double radius_PMT = 45 * mm / 2.0;
 	const double z_size_PMT = 1 * um;
-	const double x_pos_PMT = 152 * mm / 2.0 + z_size_PMT/2;
+	const double x_pos_PMT = 152 * mm / 2.0 + z_size_PMT / 2;
 	const double y_pos_PMT = x_pos_PMT;
 	const double z_pos_PMT = 27.2 * mm + 63 * mm / 2.0;
 
@@ -170,6 +181,19 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double x_size_LAr_outer_out = 152 * mm;
 	const double y_size_LAr_outer_out = x_size_LAr_outer_out;
 	const double z_size_LAr_outer = z_size_LAr_inner;
+
+	//Bottom_absorber
+	const double x_size_Bottom_absorber = x_size_LAr_outer_out;
+	const double y_size_Bottom_absorber = y_size_LAr_outer_out;
+	const double z_size_Bottom_absorber = 10 * mm;
+
+	//FieldTHGEM
+	const double x_size_FieldTHGEM = size_anode_grid;
+	const double y_size_FieldTHGEM = size_anode_grid;
+	const double z_size_FieldTHGEM = z_size_tracker_THGEM2;
+	const double z_center_FieldTHGEM_1 = 18.2*mm + z_size_FieldTHGEM / 2;
+	const double z_center_FieldTHGEM_2 = 34.2*mm + z_size_FieldTHGEM / 2;
+	const double hole_size_FieldTHGEM = 88 * mm;
 
 	if (thickness_anode_grid < 2 * radius_wire)
 	{
@@ -193,18 +217,26 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_anode_grid = G4ThreeVector(0, 0, z_anode_grid_center);
 	const G4ThreeVector &positionTracker = G4ThreeVector(0, 0, z_SiPM_center);
 	const G4ThreeVector &position_PMMA_plate = G4ThreeVector(0, 0, z_PMMA_plate_center);
+
 	const G4ThreeVector &position_tracker_THGEM2 = G4ThreeVector(0, 0, z_tracker_THGEM2_center);
-	const G4ThreeVector &position_tracker_THGEM1 = G4ThreeVector(0, 0, 66.2 * mm + z_size_tracker_THGEM2 / 2.0);
+	const G4ThreeVector &position_tracker_THGEM1 = G4ThreeVector(0, 0, 72.7 * mm + z_size_tracker_THGEM2 / 2.0);
 	const G4ThreeVector &position_tracker_THGEM0 = G4ThreeVector(0, 0, z_THGEM0_bottom + z_size_tracker_THGEM2 / 2.0 - z_size_LAr_inner / 2.0);
+
 	const G4ThreeVector &position_Insulator_box = G4ThreeVector(0, 0, z_Insulator_box_center);
+
 	const G4ThreeVector &position_LAr_inner = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
 	const G4ThreeVector &position_LAr_outer = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
-	
+
+	const G4ThreeVector &position_Bottom_absorber = G4ThreeVector(0, 0, -z_size_Bottom_absorber / 2.0);
 
 	const G4ThreeVector &position_PMT_0 = G4ThreeVector(-x_pos_PMT, 0, z_pos_PMT);
 	const G4ThreeVector &position_PMT_1 = G4ThreeVector(x_pos_PMT, 0, z_pos_PMT);
 	const G4ThreeVector &position_PMT_2 = G4ThreeVector(0, -y_pos_PMT, z_pos_PMT);
 	const G4ThreeVector &position_PMT_3 = G4ThreeVector(0, y_pos_PMT, z_pos_PMT);
+
+
+	const G4ThreeVector &position_FieldTHGEM_1 = G4ThreeVector(0, 0, z_center_FieldTHGEM_1 - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_FieldTHGEM_2 = G4ThreeVector(0, 0, z_center_FieldTHGEM_2 - z_size_LAr_inner / 2.0);
 
 	G4RotationMatrix* rotX = new G4RotationMatrix();
 	rotX->rotateX(90 * deg);
@@ -214,13 +246,17 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//-------------------------------------------------------------------------------
 
 
+	G4double a;  // atomic mass
+	G4double z;  // atomic number
+	G4double density;
+	G4Material* fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
 
 
 
 	//----------------------------------------------------------------------------------
 	// создание мира
-	solidWorld= new G4Box("sworld", HalfWorldLength, HalfWorldLength, HalfWorldLength);
-	logicWorld= new G4LogicalVolume( solidWorld, G4Material::GetMaterial("Air"), "lWorld", 0, 0, 0);
+	solidWorld = new G4Box("sworld", HalfWorldLength, HalfWorldLength, HalfWorldLength);
+	logicWorld = new G4LogicalVolume(solidWorld, G4Material::GetMaterial("Air"), "lWorld", 0, 0, 0);
 
 	//  Must place the World Physical volume unrotated at (0,0,0).
 	//
@@ -234,13 +270,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	// Set user cuts to avoid deadlocks
 	G4double maxStep = 10.0*m, maxLength = 10.0*m, maxTime = 100.0*ns, minEkin = 0.5*eV;
-	logicWorld->SetUserLimits(new G4UserLimits(maxStep,maxLength,maxTime,minEkin));
+	logicWorld->SetUserLimits(new G4UserLimits(maxStep, maxLength, maxTime, minEkin));
 	//-------------------------------------------------------------------------------
 
 
 	//-------------------------------------------------------------------------------
 	//create LAr box contaned inside the PMMA insulator
-	
+
 	G4Box* solid_LAr_inner
 		= new G4Box("solid_LAr_inner", x_size_LAr_inner / 2.0, y_size_LAr_inner / 2.0, z_size_LAr_inner / 2.0);
 	G4LogicalVolume* logic_LAr_inner
@@ -283,27 +319,55 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 	//--------------------------------------------------------------------------------
-	// create tracker (this need for SiPM_matrix parametrising)
+	//create FieldTHGEM
+	G4Box* solid_FieldTHGEM_out = new G4Box("solid_FieldTHGEM_out", x_size_FieldTHGEM / 2.0, y_size_FieldTHGEM / 2.0, z_size_FieldTHGEM / 2.0);
+	G4Box* solid_FieldTHGEM_in = new G4Box("solid_FieldTHGEM_in", hole_size_FieldTHGEM / 2.0, hole_size_FieldTHGEM / 2.0, z_size_FieldTHGEM / 2.0);
+	G4SubtractionSolid* solid_FieldTHGEM = new G4SubtractionSolid("solid_FieldTHGEM", solid_FieldTHGEM_out, solid_FieldTHGEM_in);
 
-	G4Box* trackerS
-		= new G4Box("tracker", x_size_tracker / 2.0, y_size_tracker / 2.0, z_size_tracker / 2.0);
-	G4LogicalVolume* trackerLV
-		= new G4LogicalVolume(trackerS, G4Material::GetMaterial("Air"), "Tracker", 0, 0, 0);
-	G4VPhysicalVolume* phys_tracker = new G4PVPlacement(0,               // no rotation
-		positionTracker, // at (x,y,z)
-		trackerLV,       // its logical volume
-		"Tracker",       // its name
-		logicWorld,         // its mother  volume
+	G4LogicalVolume* logic_FieldTHGEM = new G4LogicalVolume(solid_FieldTHGEM, G4Material::GetMaterial("FR4"), "logic_FieldTHGEM", 0, 0, 0);
+
+	G4VPhysicalVolume* phys_FieldTHGEM_1 = new G4PVPlacement(0,               // no rotation
+		position_FieldTHGEM_1, // at (x,y,z)
+		logic_FieldTHGEM,       // its logical volume
+		"phys_FieldTHGEM_1",       // its name
+		logic_LAr_inner,         // its mother  volume
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
 
-	//--------------------------------------------------------------------------------
+
+	G4VPhysicalVolume* phys_FieldTHGEM_2 = new G4PVPlacement(0,               // no rotation
+		position_FieldTHGEM_2, // at (x,y,z)
+		logic_FieldTHGEM,       // its logical volume
+		"phys_FieldTHGEM_2",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+	 //--------------------------------------------------------------------------------
 
 
 
 
+	//-------------------------------------------------------------------------------
+	//create Bottom_absorber
 
+	G4Box* solid_Bottom_absorber
+		= new G4Box("solid_Bottom_absorber", x_size_Bottom_absorber / 2.0, y_size_Bottom_absorber / 2.0, z_size_Bottom_absorber / 2.0);
+	G4LogicalVolume* logic_Bottom_absorber
+		= new G4LogicalVolume(solid_Bottom_absorber, G4Material::GetMaterial("Air"), "logic_Bottom_absorber", 0, 0, 0);
+	G4VPhysicalVolume* phys_Bottom_absorber = new G4PVPlacement(0,               // no rotation
+		position_Bottom_absorber, // at (x,y,z)
+		logic_Bottom_absorber,       // its logical volume
+		"phys_Bottom_absorber",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+	 //-------------------------------------------------------------------------------
+
+
+#ifdef bAnode_grid
 	//--------------------------------------------------------------------------------
 	// create tracker_anode_grid (this need for anode_grid parametrising)
 
@@ -321,63 +385,6 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//--------------------------------------------------------------------------------
 
 
-
-
-
-	//--------------------------------------------------------------------------------
-	// create SiPM matrix
-
-
-
-	solid_SiPM = new G4Box("sscintillator", size_SiPM / 2.0, size_SiPM / 2.0, thickness_SiPM / 2.0);
-	logic_SiPM = new G4LogicalVolume(solid_SiPM, G4Material::GetMaterial("Air"), "lSiPM", 0, 0, 0);
-	//physi_SiPM = new G4PVPlacement(0,
-	//	position_SiPM,  // at (x,y,z)
-	//	logic_SiPM,     // its logical volume
-	//	"pSiPM",        // its name
-	//	logicWorld,      // its mother  volume
-	//	false,           // no boolean operations
-	//	0);
-	
-
-	G4VPVParameterisation* chamberParam =
-		new DetectorParametrisation(Nx_SiPMs, Ny_SiPMs, 0, 0, 0, chamberSpacing, size_SiPM);
-			//NbOfChambers,   // NoChambers
-			//firstPosition,  // Z of center of first
-			//chamberSpacing, // Z spacing of centers
-			//chamberWidth,  // chamber width
-			//firstLength,    // initial length 
-			//lastLength);    // final length
-
-							// dummy value : kZAxis -- modified by parameterised volume
-
-	G4VPhysicalVolume* phys_SiPM = new G4PVParameterised("phys_SiPM",       // their name
-		logic_SiPM,   // their logical volume
-		trackerLV,       // Mother logical volume
-		kXAxis,          // Are placed along this axis 
-		Nx_SiPMs * Ny_SiPMs,    // Number of chambers
-		chamberParam,    // The parametrisation
-		fCheckOverlaps); // checking overlaps 
-
-	//G4cout << "There are " << NbOfChambers << " chambers in the tracker region. "
-	//	<< G4endl
-	//	<< "The chambers are " << chamberWidth / cm << " cm of "
-	//	<< fChamberMaterial->GetName() << G4endl
-	//	<< "The distance between chamber is " << chamberSpacing / cm << " cm"
-	//	<< G4endl;
-
-
-	//--------------------------------------------------------------------------------
-
-
-
-
-	G4double a;  // atomic mass
-	G4double z;  // atomic number
-	G4double density;
-	G4Material* fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
-
-
 	//--------------------------------------------------------------------------------
 	//create anode grid
 	G4Box* solid_anode_grid_substrate = new G4Box("anode_grid_substrate", size_anode_grid / 2.0, size_anode_grid / 2.0, thickness_anode_grid / 2.0);
@@ -392,7 +399,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		"p_anode_grid",        // its name
 		logicWorld,      // its mother  volume
 		false,           // no boolean operations
-		0); 
+		0);
 
 	//--------------------------------------------------------------------------------
 
@@ -417,7 +424,55 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		fCheckOverlaps); // checking overlaps 
 
 
+						 //--------------------------------------------------------------------------------
+#endif // bAnode_grid
+
+
+
+
+#ifdef bSiPM
+		//--------------------------------------------------------------------------------
+		// create tracker (this need for SiPM_matrix parametrising)
+
+	G4Box* trackerS
+		= new G4Box("tracker", x_size_tracker / 2.0, y_size_tracker / 2.0, z_size_tracker / 2.0);
+	G4LogicalVolume* trackerLV
+		= new G4LogicalVolume(trackerS, G4Material::GetMaterial("Air"), "Tracker", 0, 0, 0);
+	G4VPhysicalVolume* phys_tracker = new G4PVPlacement(0,               // no rotation
+		positionTracker, // at (x,y,z)
+		trackerLV,       // its logical volume
+		"Tracker",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+	 //--------------------------------------------------------------------------------		
+
+
+
 	//--------------------------------------------------------------------------------
+	// create SiPM matrix
+
+	solid_SiPM = new G4Box("sscintillator", size_SiPM / 2.0, size_SiPM / 2.0, thickness_SiPM / 2.0);
+	logic_SiPM = new G4LogicalVolume(solid_SiPM, G4Material::GetMaterial("Air"), "lSiPM", 0, 0, 0);
+
+	G4VPVParameterisation* chamberParam =
+		new DetectorParametrisation(Nx_SiPMs, Ny_SiPMs, 0, 0, 0, chamberSpacing, size_SiPM);
+
+	// dummy value : kZAxis -- modified by parameterised volume
+
+	G4VPhysicalVolume* phys_SiPM = new G4PVParameterised("phys_SiPM",       // their name
+		logic_SiPM,   // their logical volume
+		trackerLV,       // Mother logical volume
+		kXAxis,          // Are placed along this axis 
+		Nx_SiPMs * Ny_SiPMs,    // Number of chambers
+		chamberParam,    // The parametrisation
+		fCheckOverlaps); // checking overlaps 
+
+
+//--------------------------------------------------------------------------------
+#endif //bSiPM
 
 
 
@@ -425,7 +480,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 
-
+#ifdef bPMMA_plate
 	//--------------------------------------------------------------------------------
 	//create PMMA plate
 	G4Box* solid_PMMA_plate = new G4Box("solid_tracker_anode_grid", x_size_PMMA_plate / 2.0, y_size_PMMA_plate / 2.0, z_size_PMMA_plate / 2.0);
@@ -439,7 +494,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
 	//--------------------------------------------------------------------------------
-
+#endif // bPMMA_plate
 
 
 
@@ -463,8 +518,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
-	
-	
+
+#ifdef	bTHGEM1
 	G4VPhysicalVolume* phys_tracker_THGEM1 = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM1, // at (x,y,z)
 		logic_tracker_THGEM2,       // its logical volume
@@ -473,7 +528,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
+#endif //bTHGEM1
 
+
+#ifdef bTHGEM2
 	G4VPhysicalVolume* phys_tracker_THGEM2 = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM2, // at (x,y,z)
 		logic_tracker_THGEM2,       // its logical volume
@@ -482,6 +540,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
+#endif // bTHGEM2
 
 
 
@@ -494,13 +553,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//create THGEM (region without holes)
 	G4Box* solid_THGEM_without_holes_base
 		= new G4Box("solid_THGEM_without_holes_base", x_size_THGEM_without_holes / 2.0, y_size_THGEM_without_holes / 2.0, z_size_THGEM_without_holes / 2.0);
-	
+
 	G4SubtractionSolid* solid_THGEM_without_holes = new G4SubtractionSolid("solid_THGEM_without_holes", solid_THGEM_without_holes_base, solid_tracker_THGEM2);
 
 	G4LogicalVolume* logic_THGEM_without_holes
 		= new G4LogicalVolume(solid_THGEM_without_holes, G4Material::GetMaterial("FR4"), "logic_THGEM_without_holes", 0, 0, 0);
 
-	
+
 	G4VPhysicalVolume* phys_THGEM0_without_holes = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM0, // at (x,y,z)
 		logic_THGEM_without_holes,       // its logical volume
@@ -510,7 +569,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
 
-	
+#ifdef	bTHGEM1
 	G4VPhysicalVolume* phys_THGEM1_without_holes = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM1, // at (x,y,z)
 		logic_THGEM_without_holes,       // its logical volume
@@ -519,7 +578,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
+#endif //bTHGEM1
 
+
+#ifdef bTHGEM2
 	G4VPhysicalVolume* phys_THGEM2_without_holes = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM2, // at (x,y,z)
 		logic_THGEM_without_holes,       // its logical volume
@@ -528,6 +590,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
+#endif // bTHGEM2
 
 	//--------------------------------------------------------------------------------
 
@@ -561,7 +624,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	////--------------------------------------------------------------------------------
 
 
-
+#ifdef bInsulator_box
 	//--------------------------------------------------------------------------------
 	//create Insulator box
 	G4Box* solid_Insulator_box_inner = new G4Box("solid_Insulator_box_inner", x_size_Insulator_box_inner / 2.0, y_size_Insulator_box_inner / 2.0, z_size_Insulator_box / 2.0);
@@ -579,10 +642,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		fCheckOverlaps); // checking overlaps 
 
 	//--------------------------------------------------------------------------------
+#endif // bInsulator_box
 
 
 
 
+
+#ifdef bPMTs
 	////--------------------------------------------------------------------------------
 	//create PMTs
 	G4Tubs* solid_PMT = new G4Tubs("solid_PMT", 0, radius_PMT, z_size_PMT / 2.0, 0.*deg, 360.*deg);
@@ -628,17 +694,19 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		fCheckOverlaps); // checking overlaps 
 
 	////--------------------------------------------------------------------------------
-
+#endif //bPMTs
 
 
 
 
 
 	//определение чувствительного объема
+#ifdef bSiPM
 	G4String sensitiveDetectorName = "/detector/sensitiveDetector";
 	theCathodeSD = new CathodeSD(sensitiveDetectorName, phys_SiPM, Nx_SiPMs * Ny_SiPMs);
-	G4SDManager::GetSDMpointer()->AddNewDetector( theCathodeSD );
-	logic_SiPM->SetSensitiveDetector( theCathodeSD );
+	G4SDManager::GetSDMpointer()->AddNewDetector(theCathodeSD);
+	logic_SiPM->SetSensitiveDetector(theCathodeSD);
+#endif //bSiPM
 
 
 	////------------------------------------------------------------------------
@@ -655,57 +723,92 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//---------------------------------------------------------------------------
 	//установка поверхностей
 
+#ifdef bSiPM
 	//SiPM
-	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("tracker2SiPM", phys_tracker, phys_SiPM, silicaCathodeMaterial);
+	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("tracker2SiPM", phys_tracker, phys_SiPM, SiPM_OpticalSurface /*silicaCathodeMaterial*/);
+#endif //bSiPM
 
+	//Bottom_absorber
+	G4LogicalBorderSurface* LAr_inner2Bottom_absorber = new G4LogicalBorderSurface("LAr_inner2Bottom_absorber", phys_LAr_inner, phys_Bottom_absorber, AbsorberMaterial);
+	G4LogicalBorderSurface* LAr_outer2Bottom_absorber = new G4LogicalBorderSurface("LAr_outer2Bottom_absorber", phys_LAr_outer, phys_Bottom_absorber, AbsorberMaterial);
+
+#ifdef bInsulator_box
+	G4LogicalBorderSurface* Insulator_box2Bottom_absorber = new G4LogicalBorderSurface("Insulator_box2Bottom_absorber", phys_Insulator_box, phys_Bottom_absorber, AbsorberMaterial);
+#endif //bInsulator_box
+
+
+#ifdef	bPMTs
 	//________________________________________________
 	//PMT
 	G4LogicalBorderSurface* world2PMT0 = new G4LogicalBorderSurface("world2PMT0", physiWorld, phys_PMT0, silicaCathodeMaterial);
 	G4LogicalBorderSurface* world2PMT1 = new G4LogicalBorderSurface("world2PMT1", physiWorld, phys_PMT1, silicaCathodeMaterial);
 	G4LogicalBorderSurface* world2PMT2 = new G4LogicalBorderSurface("world2PMT2", physiWorld, phys_PMT2, silicaCathodeMaterial);
 	G4LogicalBorderSurface* world2PMT3 = new G4LogicalBorderSurface("world2PMT3", physiWorld, phys_PMT3, silicaCathodeMaterial);
-	
+
 	G4LogicalBorderSurface* LAr_outer2PMT0 = new G4LogicalBorderSurface("LAr_outer2PMT0", phys_LAr_outer, phys_PMT0, silicaCathodeMaterial);
 	G4LogicalBorderSurface* LAr_outer2PMT1 = new G4LogicalBorderSurface("LAr_outer2PMT1", phys_LAr_outer, phys_PMT1, silicaCathodeMaterial);
 	G4LogicalBorderSurface* LAr_outer2PMT2 = new G4LogicalBorderSurface("LAr_outer2PMT2", phys_LAr_outer, phys_PMT2, silicaCathodeMaterial);
 	G4LogicalBorderSurface* LAr_outer2PMT3 = new G4LogicalBorderSurface("LAr_outer2PMT3", phys_LAr_outer, phys_PMT3, silicaCathodeMaterial);
 	//________________________________________________
+#endif //bPMTs
 
 
 
+#ifdef	bAnode_grid
 	//anode_grid
 	G4LogicalBorderSurface* physiWorld2anode_grid = new G4LogicalBorderSurface("physiWorld2anode_grid", physiWorld, phys_anode_grid, AbsorberMaterial);
-	G4LogicalBorderSurface* PMMA_plate2anode_grid = new G4LogicalBorderSurface("PMMA_plate2anode_grid", phys_PMMA_plate, phys_anode_grid, AbsorberMaterial);
 	G4LogicalBorderSurface* tracker_anode_grid2wire = new G4LogicalBorderSurface("tracker_anode_grid2wire", phys_tracker_anode_grid, phys_wire, AbsorberMaterial);
 	G4LogicalBorderSurface* tracker_anode_grid2anode_grid = new G4LogicalBorderSurface("tracker_anode_grid2anode_grid", phys_tracker_anode_grid, phys_anode_grid, AbsorberMaterial);
+#endif //bAnode_grid
+
+
+#ifdef bPMMA_plate
+	G4LogicalBorderSurface* PMMA_plate2anode_grid = new G4LogicalBorderSurface("PMMA_plate2anode_grid", phys_PMMA_plate, phys_anode_grid, AbsorberMaterial);
+#endif // bPMMA_plate
+
+
 
 	//THGEMs
+#ifdef bTHGEM2
 	G4LogicalBorderSurface* World2THGEM2_without_hole = new G4LogicalBorderSurface("World2THGEM2_without_hole", physiWorld, phys_THGEM2_without_holes, AbsorberMaterial);
+#endif //bTHGEM2
+
+#ifdef bTHGEM1
 	G4LogicalBorderSurface* World2THGEM1_without_hole = new G4LogicalBorderSurface("World2THGEM1_without_hole", physiWorld, phys_THGEM1_without_holes, AbsorberMaterial);
+#endif //bTHGEM1
+
 	G4LogicalBorderSurface* phys_LAr_inner2THGEM0_without_hole = new G4LogicalBorderSurface("phys_LAr_inner2THGEM0_without_hole", phys_LAr_inner, phys_THGEM0_without_holes, AbsorberMaterial);
 
-	
+
+	//FieldTHGEMs
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldTHGEM_1 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldTHGEM_1", phys_LAr_inner, phys_FieldTHGEM_1, AbsorberMaterial);
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldTHGEM_2 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldTHGEM_2", phys_LAr_inner, phys_FieldTHGEM_2, AbsorberMaterial);
+
 	//---------------------------------------------------------------------------
 
-	
+
 
 
 	//------------------------------------------------------------------------------
 	// установка атрибутов визуализации
 
+#ifdef bAnode_grid
 	//anode grid
 	G4VisAttributes* WireVisAtt = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.8));
 	logic_wire->SetVisAttributes(WireVisAtt);
 	G4VisAttributes* AnodeGridVisAtt = new G4VisAttributes(G4Colour(1.0, 0.5, 0.0, 0.8));
 	logic_anode_grid->SetVisAttributes(AnodeGridVisAtt);
+#endif // bAnode_grid
 
+
+#ifdef	bPMTs
 	//PMT
 	G4VisAttributes* PMT_VisAtt = new G4VisAttributes(G4Colour(0.8, 0.5, 0.2, 0.8));
 	logic_PMT0->SetVisAttributes(PMT_VisAtt);
 	logic_PMT1->SetVisAttributes(PMT_VisAtt);
 	logic_PMT2->SetVisAttributes(PMT_VisAtt);
 	logic_PMT3->SetVisAttributes(PMT_VisAtt);
-
+#endif //bPMTs
 
 
 
@@ -714,7 +817,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	logic_tracker_THGEM2->SetVisAttributes(tracker_THGEM2_VisAtt);
 	logic_tracker_THGEM0_LAr->SetVisAttributes(tracker_THGEM2_VisAtt);
 	G4VisAttributes* THGEM_without_holes_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.5, 0.0, 0.8));
-	logic_THGEM_without_holes->SetVisAttributes(THGEM_without_holes_VisAtt);	
+	logic_THGEM_without_holes->SetVisAttributes(THGEM_without_holes_VisAtt);
 
 
 	//LAr
@@ -723,17 +826,22 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	logic_LAr_outer->SetVisAttributes(LAr_inside_VisAtt);
 
 
+	//FieldTHGEM
+	G4VisAttributes* FieldTHGEM_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.7, 0.3, 0.8));
+	logic_FieldTHGEM->SetVisAttributes(FieldTHGEM_VisAtt);
+
+
 	logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
-//	logic_Insulator_box->SetVisAttributes(G4VisAttributes::Invisible);
-	
+	//	logic_Insulator_box->SetVisAttributes(G4VisAttributes::Invisible);
 
 
-//	trackerLV->SetVisAttributes(G4VisAttributes::Invisible);
-	//logic_SiPM->SetVisAttributes(G4VisAttributes::Invisible);
-//	logicScint->SetVisAttributes(ScintVisAtt);
-	//logic_grease->SetVisAttributes(GreaseVisAtt);
-	//logicCathode->SetVisAttributes(CathodeVisAtt);
-	//-----------------------------------------------------------------------------
+
+	//	trackerLV->SetVisAttributes(G4VisAttributes::Invisible);
+		//logic_SiPM->SetVisAttributes(G4VisAttributes::Invisible);
+	//	logicScint->SetVisAttributes(ScintVisAtt);
+		//logic_grease->SetVisAttributes(GreaseVisAtt);
+		//logicCathode->SetVisAttributes(CathodeVisAtt);
+		//-----------------------------------------------------------------------------
 
 	return physiWorld;
 }

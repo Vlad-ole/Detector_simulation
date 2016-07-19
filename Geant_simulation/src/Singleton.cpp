@@ -65,6 +65,10 @@ Singleton::Singleton()
 	//
 	string_Cathode_REFLECTIVITY = path_read + "reflectivity\\Cathode_Motta_REFLECTIVITY_eV_1.dat";
 
+	string_SiPM_EFFICIENCY = path_read + "detector_efficiency\\s13360-6050pe.dat";
+
+	string_GAr_86K_1atm_avalanche_scint_NIR = path_read + "energy_spectrum\\GAr_86K_1atm_avalanche_scint_NIR.dat";
+	
 }
 
 Singleton* Singleton::get() 

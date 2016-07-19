@@ -79,21 +79,51 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 				if (boundaryStatus == FresnelReflection)
 					g()->NumberOfReflections++;
 
-
+				const double width = 500 * um;
 
 				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM2")
 				{
-					PassThroughGEM(theStep, 70.7 * mm, 500 * um);
+					const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();					
+					const double z_bottom = 77.2;
+					const double z_top = z_bottom + width;
+					if (pos_i.z() < (z_top + 0.1)*mm &&  pos_i.z() > (z_top - 0.1)*mm)
+					{
+						PassThroughGEM(theStep, z_top * mm, width);
+					}
+					else if (pos_i.z() < (z_bottom + 0.1)*mm &&  pos_i.z() > (z_bottom - 0.1)*mm)
+					{
+						PassThroughGEM(theStep, z_bottom * mm, width);
+					}
 				}
 
 				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM1")
 				{
-					PassThroughGEM(theStep, 66.2 * mm, 500 * um);
+					const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
+					const double z_bottom = 72.7;
+					const double z_top = z_bottom + width;
+					if ( pos_i.z() < (z_top + 0.1)*mm &&  pos_i.z() > (z_top - 0.1)*mm )
+					{
+						PassThroughGEM(theStep, z_top * mm, width);
+					}
+					else if (pos_i.z() < (z_bottom + 0.1)*mm &&  pos_i.z() > (z_bottom - 0.1)*mm)
+					{
+						PassThroughGEM(theStep, z_bottom * mm, width);
+					}
 				}
 
 				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM0")
 				{
-					PassThroughGEM(theStep, 50.2 * mm, 500 * um);
+						const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
+						const double z_bottom = 50.2;
+						const double z_top = z_bottom + width;
+						if ( pos_i.z() < (z_top + 0.1)*mm &&  pos_i.z() > (z_top - 0.1)*mm )
+						{
+							PassThroughGEM(theStep, z_top * mm, width);
+						}
+						else if (pos_i.z() < (z_bottom + 0.1)*mm &&  pos_i.z() > (z_bottom - 0.1)*mm)
+						{
+							PassThroughGEM(theStep, z_bottom * mm, width);
+						}					
 				}
 
 				switch (boundaryStatus)
@@ -214,7 +244,8 @@ void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4dou
 			const G4ThreeVector& MomentumDirection_f = G4ThreeVector(0, 1, 0);
 			const double dx = MomentumDirection_i.x() * 0.5*mm / sqrt(MomentumDirection_i.x() * MomentumDirection_i.x() + MomentumDirection_i.z() * MomentumDirection_i.z());
 			const double dy = MomentumDirection_i.y() * 0.5*mm / sqrt(MomentumDirection_i.y() * MomentumDirection_i.y() + MomentumDirection_i.z() * MomentumDirection_i.z());
-			const G4ThreeVector& Position_f = G4ThreeVector(Position_i.x() + dx, Position_i.y() + dy, (z_pos + z_size) );
+			const double sign = MomentumDirection_i.z() > 0 ? 1 : -1 ;
+			const G4ThreeVector& Position_f = G4ThreeVector(Position_i.x() + dx, Position_i.y() + dy, (z_pos + z_size*sign) );
 
 			distance = sqrt(pow(Position_f.x() - x_center, 2.0) + pow(Position_f.y() - y_center, 2.0));
 			if (distance < radius)

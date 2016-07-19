@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\git_repositories\Detector_simulation\extended\hadronic\Hadr04\CMakeFiles\40478897a7e294fecf409ec97ac0a74e\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{88C7B82E-F643-3AE0-961E-4574AE869063}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

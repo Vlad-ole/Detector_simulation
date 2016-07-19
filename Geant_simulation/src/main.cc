@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 	runManager->SetUserAction(new RunAction);
 
 	string temp_string = g()->path_read + "x_ray\\Analytical_model_out.dat";
-	runManager->SetUserAction(new PrimaryGeneratorAction( /*temp_string.c_str() */));
+	runManager->SetUserAction(new PrimaryGeneratorAction( g()->string_GAr_86K_1atm_avalanche_scint_NIR.c_str(), 1) );
 
 	EventAction* eventAction = new EventAction;
 	runManager->SetUserAction(eventAction);

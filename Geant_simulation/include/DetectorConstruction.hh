@@ -154,6 +154,7 @@ private:
 	G4OpticalSurface *Ground_Air_TiO2;
 	G4OpticalSurface *airGroundAluminum; // ground aluminm surface
 	G4OpticalSurface *silicaCathodeMaterial; // surface between window and cathode
+	G4OpticalSurface *SiPM_OpticalSurface;
 	G4OpticalSurface *AbsorberMaterial;
 
 	G4OpticalSurface *teflon_unified;

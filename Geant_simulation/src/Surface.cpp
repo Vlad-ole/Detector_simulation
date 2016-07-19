@@ -191,6 +191,43 @@ void DetectorConstruction::defineSurfaces()
 	//--------------------------------------------------------------------------------
 
 
+
+
+
+	//-----------------------------------------------------------------------------
+	// SiPM_OpticalSurface
+	SiPM_OpticalSurface = new G4OpticalSurface("SiPM_OpticalSurface", unified);
+	SiPM_OpticalSurface->SetType(dielectric_metal);
+	SiPM_OpticalSurface->SetModel(unified);
+	SiPM_OpticalSurface->SetFinish(polished);
+	SiPM_OpticalSurface->SetSigmaAlpha(0.);
+	
+
+	G4MaterialPropertiesTable* SiPM_MaterialProperty = new G4MaterialPropertiesTable();
+	G4double SiPM_refl[2] = { 0, 0 };
+	//G4double cathodeeff[2] = { 1, 1 };
+
+	ReadConstants *SiPM_EFFICIENCY = new ReadConstants(g()->string_SiPM_EFFICIENCY, 1*eV, 1);
+	//ReadConstants *Cathode_REFLECTIVITY = new ReadConstants(g()->string_Cathode_REFLECTIVITY, 1*eV, 1);
+
+
+	//silicaCathodeMaterialProperty->AddProperty("REFLECTIVITY", Cathode_REFLECTIVITY->get_x_array(), Cathode_REFLECTIVITY->get_y_array(), Cathode_REFLECTIVITY->get_array_size());
+	SiPM_MaterialProperty->AddProperty("EFFICIENCY", SiPM_EFFICIENCY->get_x_array(), SiPM_EFFICIENCY->get_y_array(), SiPM_EFFICIENCY->get_array_size());
+
+
+	SiPM_MaterialProperty->AddProperty("REFLECTIVITY", ener, SiPM_refl, 2);
+	//SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);
+
+	SiPM_OpticalSurface->SetMaterialPropertiesTable(SiPM_MaterialProperty);
+	//--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 	//-----------------------------------------------------------------------------
 	// описание поверхности поглотителя
 	AbsorberMaterial = new G4OpticalSurface("Absorber", unified);

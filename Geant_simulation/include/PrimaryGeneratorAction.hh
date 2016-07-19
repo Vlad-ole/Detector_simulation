@@ -2,13 +2,15 @@
 #define PrimaryGeneratorAction_h 1
 
 #include "G4VUserPrimaryGeneratorAction.hh"
+#include <vector>
 
 #define  MAX_SPECTER_DATALINES  150
 
 enum XRAY_TYPE
 {
 	MONO,
-	SPECTER
+	SPECTER_continuous,
+	SPECTER_discrete
 };
 
 
@@ -20,7 +22,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
   public:
     PrimaryGeneratorAction();              //mono
-	PrimaryGeneratorAction(const char* fname);   //specter
+	PrimaryGeneratorAction(const char* fname, bool IsDiscrete);   //specter continuous
    ~PrimaryGeneratorAction();
 
   public:
@@ -35,6 +37,9 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     double    dEnergy[MAX_SPECTER_DATALINES];
     double    dWeight[MAX_SPECTER_DATALINES];
     double    dMaxWeight;
+	vector<double> Ev;
+	vector<double> pv;
+	vector<double> pv_edge;//right edge
 };
 
 #endif
