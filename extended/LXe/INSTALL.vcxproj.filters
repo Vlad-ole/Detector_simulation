@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\git_repositories\Detector_simulation\extended\LXe\CMakeFiles\ebdad38738bcd0a2d807fc9bf11a80db\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1AAF155A-F643-3D33-B414-6FC68E4CB985}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

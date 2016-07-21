@@ -1,0 +1,4 @@
+D:/git_repositories/Detector_simulation/basic/B2b/CMakeFiles/exampleB2b.dir
+D:/git_repositories/Detector_simulation/basic/B2b/CMakeFiles/INSTALL.dir
+D:/git_repositories/Detector_simulation/basic/B2b/CMakeFiles/ALL_BUILD.dir
+D:/git_repositories/Detector_simulation/basic/B2b/CMakeFiles/ZERO_CHECK.dir
