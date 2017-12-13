@@ -81,7 +81,7 @@ int main(int argc, char** argv)
 
 
 	//for
-	for (int i = 0; i < 100 /*num of runs*/; i++)
+	for (int i = 0; i < 1 /*num of runs*/; i++)
 	{
 		
 		g()->CathRefl_index = 0.0;

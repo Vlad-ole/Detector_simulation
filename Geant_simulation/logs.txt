@@ -1,0 +1,2778 @@
+Current time used as seed: 1469684929
+
+--------- Ranecu engine status ---------
+ Initial seed (index) = 184
+ Current couple of seeds = 993194547, 678147923
+----------------------------------------
+
+*************************************************************
+ Geant4 version Name: geant4-10-02-patch-01    (26-February-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTiO.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTiO.dat read in! 
+Checking overlaps for volume phys_LAr_inner ... OK! 
+76	76
+Checking overlaps for volume phys_LAr_outer ... OK! 
+Checking overlaps for volume phys_FieldTHGEM_1 ... OK! 
+Checking overlaps for volume phys_FieldTHGEM_2 ... OK! 
+Checking overlaps for volume phys_Bottom_absorber ... OK! 
+Checking overlaps for volume phys_tracker_anode_grid ... OK! 
+Checking overlaps for parameterised volume phys_wire ... OK! 
+Checking overlaps for volume Tracker ... OK! 
+Checking overlaps for parameterised volume phys_SiPM ... OK! 
+Checking overlaps for volume phys_PMMA_plate ... OK! 
+Checking overlaps for volume phys_tracker_THGEM0 ... OK! 
+Checking overlaps for volume phys_tracker_THGEM1 ... OK! 
+Checking overlaps for volume phys_tracker_THGEM2 ... OK! 
+Checking overlaps for volume phys_THGEM0_without_holes ... OK! 
+Checking overlaps for volume phys_THGEM1_without_holes ... OK! 
+Checking overlaps for volume phys_THGEM2_without_holes ... OK! 
+Checking overlaps for volume phys_Insulator_box ... OK! 
+Checking overlaps for volume phys_PMT0 ... OK! 
+Checking overlaps for volume phys_PMT1 ... OK! 
+Checking overlaps for volume phys_PMT2 ... OK! 
+Checking overlaps for volume phys_PMT3 ... OK! 
+PhysicsList::SetCuts:CutLength : 10 um 
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomMgt1001
+      issued by : G4RegionStore::GetRegion()
+Region NOT found in store !
+        Region MyRegion NOT found in store !
+        Returning NULL pointer.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+ASCIITree (ATree)
+DAWNFILE (DAWNFILE)
+G4HepRep (HepRepXML)
+G4HepRepFile (HepRepFile)
+RayTracer (RayTracer)
+VRML1FILE (VRML1FILE)
+VRML2FILE (VRML2FILE)
+gMocrenFile (gMocrenFile)
+OpenGLImmediateWin32 (OGLIWin32)
+OpenGLStoredWin32 (OGLSWin32)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+Visualization verbosity changed to quiet (0)
+Visualization verbosity changed to errors (2)
+/tracking/storeTrajectory 2
+Attributes available for modeling and filtering with
+  "/vis/modeling/trajectories/create/drawByAttribute" and
+  "/vis/filtering/trajectories/create/attributeFilter" commands:
+G4TrajectoriesModel:
+  Event ID (EventID): G4int
+  Run ID (RunID): G4int
+G4SmoothTrajectory:
+  Charge (Ch): unit: e+ (G4double)
+  Track ID (ID): G4int
+  Initial kinetic energy (IKE): G4BestUnit (G4double)
+  Initial momentum magnitude (IMag): G4BestUnit (G4double)
+  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
+  No. of points (NTP): G4int
+  PDG Encoding (PDG): G4int
+  Parent ID (PID): G4int
+  Particle Name (PN): G4String
+G4SmoothTrajectoryPoint:
+  Auxiliary Point Position (Aux): G4BestUnit (G4ThreeVector)
+  Step Position (Pos): G4BestUnit (G4ThreeVector)
+
+### ===  Deexcitation model UAtomDeexcitation is activated for 1 region:
+          DefaultRegionForTheWorld
+
+phot:   for  gamma    SubType= 12  BuildTable= 0
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+       PhotoElectric :  Emin=        0 eV    Emax=      100 eV    AngularGenSauterGavrila  FluoActive
+ LivermorePhElectric :  Emin=      100 eV    Emax=      150 keV   AngularGenSauterGavrila  FluoActive
+
+compt:   for  gamma    SubType= 13  BuildTable= 1
+      Lambda table from 10 eV  to 150 keV, 29 bins per decade, spline: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+       Klein-Nishina :  Emin=        0 eV    Emax=      100 eV 
+    LivermoreCompton :  Emin=      100 eV    Emax=      150 keV  FluoActive
+
+Rayl:   for  gamma    SubType= 11  BuildTable= 1
+      Lambda table from 10 eV  to 100 keV, 29 bins per decade, spline: 0
+      LambdaPrime table from 100 keV to 150 keV in 5 bins 
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+   LivermoreRayleigh :  Emin=        0 eV    Emax=      150 keV   CullenGenerator
+
+msc:   for e-    SubType= 10
+      RangeFactor= 0.04, stepLimitType: 1, latDisplacement: 1
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+            UrbanMsc :  Emin=        0 eV    Emax=      150 keV  Table with 87 bins Emin=    100 eV    Emax=    150 keV
+
+eIoni:   for  e-    SubType= 2
+      dE/dx and range tables from 10 eV  to 150 keV in 120 bins
+      Lambda tables from threshold to 150 keV, 29 bins per decade, spline: 1
+      finalRange(mm)= 1, dRoverRange= 0.2, integral: 1, fluct: 1, linLossLimit= 0.01
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+        MollerBhabha :  Emin=        0 eV    Emax=      100 eV 
+       LowEnergyIoni :  Emin=      100 eV    Emax=      150 keV   deltaVI
+
+eBrem:   for  e-    SubType= 3
+      dE/dx and range tables from 10 eV  to 150 keV in 120 bins
+      Lambda tables from threshold to 150 keV, 29 bins per decade, spline: 1
+      LPM flag: 1 for E > 0.00015 GeV,  HighEnergyThreshold(GeV)= 10000
+      ===== EM models for the G4Region  DefaultRegionForTheWorld ======
+           LowEnBrem :  Emin=        0 eV    Emax=      150 keV   AngularGen2BS
+
+========= Table of registered couples ==============================
+
+Index : 0     used in the geometry : Yes
+ Material : Air
+ Range cuts        :  gamma  10 um     e-  10 um     e+  10 um  proton 10 um 
+ Energy thresholds :  gamma  990 eV     e-  990 eV     e+  990 eV  proton -1 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 1     used in the geometry : Yes
+ Material : LAr
+ Range cuts        :  gamma  10 um     e-  10 um     e+  10 um  proton 10 um 
+ Energy thresholds :  gamma  990 eV     e-  14.6295 keV    e+  14.2684 keV proton -1 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 2     used in the geometry : Yes
+ Material : FR4
+ Range cuts        :  gamma  10 um     e-  10 um     e+  10 um  proton 10 um 
+ Energy thresholds :  gamma  990 eV     e-  13.8839 keV    e+  13.4902 keV proton -1 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 3     used in the geometry : Yes
+ Material : Al
+ Range cuts        :  gamma  10 um     e-  10 um     e+  10 um  proton 10 um 
+ Energy thresholds :  gamma  990 eV     e-  34.1725 keV    e+  33.9436 keV proton -1 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+Index : 4     used in the geometry : Yes
+ Material : PMMA
+ Range cuts        :  gamma  10 um     e-  10 um     e+  10 um  proton 10 um 
+ Energy thresholds :  gamma  990 eV     e-  13.8839 keV    e+  13.4902 keV proton -1 MeV
+ Region(s) which use this couple : 
+    DefaultRegionForTheWorld
+
+====================================================================
+
+
+RunAction::BeginOfRunAction. Run 0 start.
+particle_counter = 0	 x_shift = 0.45	 y_shift = 0
+New event started! 0 Particle energy: 0.00162391 keV. 
+
+---> Begin of event: 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+===========================================
+Output VRML 2.0 file: g4_23.wrl
+Maximum number of files in the destination directory: 100
+  (Customizable with the environment variable: G4VRMLFILE_MAX_FILE_NUM) 
+===========================================
+particle_counter = 1	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 1
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 2	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 2
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 3	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 3
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 4	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 4
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 5	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 5
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 6	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 6
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 7	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 7
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 8	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 8
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 9	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 9
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : ZeroPolarization
+      issued by : G4PrimaryTransformer::GenerateSingleTrack
+Polarization of the optical photon is null. Random polarization is assumed.
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 10	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 10
+particle_counter = 11	 x_shift = 0.45	 y_shift = 0
+particle_counter = 12	 x_shift = 0.45	 y_shift = 0
+particle_counter = 13	 x_shift = 0.45	 y_shift = 0
+particle_counter = 14	 x_shift = 0.45	 y_shift = 0
+particle_counter = 15	 x_shift = 0.45	 y_shift = 0
+particle_counter = 16	 x_shift = 0.45	 y_shift = 0
+particle_counter = 17	 x_shift = 0.45	 y_shift = 0
+particle_counter = 18	 x_shift = 0.45	 y_shift = 0
+particle_counter = 19	 x_shift = 0.45	 y_shift = 0
+particle_counter = 20	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 20
+particle_counter = 21	 x_shift = 0.45	 y_shift = 0
+particle_counter = 22	 x_shift = 0.45	 y_shift = 0
+particle_counter = 23	 x_shift = 0.45	 y_shift = 0
+particle_counter = 24	 x_shift = 0.45	 y_shift = 0
+particle_counter = 25	 x_shift = 0.45	 y_shift = 0
+particle_counter = 26	 x_shift = 0.45	 y_shift = 0
+particle_counter = 27	 x_shift = 0.45	 y_shift = 0
+particle_counter = 28	 x_shift = 0.45	 y_shift = 0
+particle_counter = 29	 x_shift = 0.45	 y_shift = 0
+particle_counter = 30	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 30
+particle_counter = 31	 x_shift = 0.45	 y_shift = 0
+particle_counter = 32	 x_shift = 0.45	 y_shift = 0
+particle_counter = 33	 x_shift = 0.45	 y_shift = 0
+particle_counter = 34	 x_shift = 0.45	 y_shift = 0
+particle_counter = 35	 x_shift = 0.45	 y_shift = 0
+particle_counter = 36	 x_shift = 0.45	 y_shift = 0
+particle_counter = 37	 x_shift = 0.45	 y_shift = 0
+particle_counter = 38	 x_shift = 0.45	 y_shift = 0
+particle_counter = 39	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.543921 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.9472 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.9472 mm.
+     The tolerated accuracy is 1e-06 mm.
+  This problem can be due to either 
+    - a process that has proposed a displacement larger than the current safety , or
+    - inaccuracy in the computation of the safety We suggest that you 
+   - find i) what particle is being tracked, and  ii) through what part of your geometry 
+      for example by re-running this event with 
+         /tracking/verbose 1 
+    - check which processes you declare for this particle (and look at non-standard ones)
+   - in case, create a detailed logfile of this event using:
+         /tracking/verbose 6 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 24.4748
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 40	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 40
+particle_counter = 41	 x_shift = 0.45	 y_shift = 0
+particle_counter = 42	 x_shift = 0.45	 y_shift = 0
+particle_counter = 43	 x_shift = 0.45	 y_shift = 0
+particle_counter = 44	 x_shift = 0.45	 y_shift = 0
+particle_counter = 45	 x_shift = 0.45	 y_shift = 0
+particle_counter = 46	 x_shift = 0.45	 y_shift = 0
+particle_counter = 47	 x_shift = 0.45	 y_shift = 0
+particle_counter = 48	 x_shift = 0.45	 y_shift = 0
+particle_counter = 49	 x_shift = 0.45	 y_shift = 0
+particle_counter = 50	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 50
+particle_counter = 51	 x_shift = 0.45	 y_shift = 0
+particle_counter = 52	 x_shift = 0.45	 y_shift = 0
+particle_counter = 53	 x_shift = 0.45	 y_shift = 0
+particle_counter = 54	 x_shift = 0.45	 y_shift = 0
+particle_counter = 55	 x_shift = 0.45	 y_shift = 0
+particle_counter = 56	 x_shift = 0.45	 y_shift = 0
+particle_counter = 57	 x_shift = 0.45	 y_shift = 0
+particle_counter = 58	 x_shift = 0.45	 y_shift = 0
+particle_counter = 59	 x_shift = 0.45	 y_shift = 0
+particle_counter = 60	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 60
+particle_counter = 61	 x_shift = 0.45	 y_shift = 0
+particle_counter = 62	 x_shift = 0.45	 y_shift = 0
+particle_counter = 63	 x_shift = 0.45	 y_shift = 0
+particle_counter = 64	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.611349 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 5.80678 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 5.80678 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 33.7187
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 65	 x_shift = 0.45	 y_shift = 0
+particle_counter = 66	 x_shift = 0.45	 y_shift = 0
+particle_counter = 67	 x_shift = 0.45	 y_shift = 0
+particle_counter = 68	 x_shift = 0.45	 y_shift = 0
+particle_counter = 69	 x_shift = 0.45	 y_shift = 0
+particle_counter = 70	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 70
+particle_counter = 71	 x_shift = 0.45	 y_shift = 0
+particle_counter = 72	 x_shift = 0.45	 y_shift = 0
+particle_counter = 73	 x_shift = 0.45	 y_shift = 0
+particle_counter = 74	 x_shift = 0.45	 y_shift = 0
+particle_counter = 75	 x_shift = 0.45	 y_shift = 0
+particle_counter = 76	 x_shift = 0.45	 y_shift = 0
+particle_counter = 77	 x_shift = 0.45	 y_shift = 0
+particle_counter = 78	 x_shift = 0.45	 y_shift = 0
+particle_counter = 79	 x_shift = 0.45	 y_shift = 0
+particle_counter = 80	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 80
+particle_counter = 81	 x_shift = 0.45	 y_shift = 0
+particle_counter = 82	 x_shift = 0.45	 y_shift = 0
+particle_counter = 83	 x_shift = 0.45	 y_shift = 0
+particle_counter = 84	 x_shift = 0.45	 y_shift = 0
+particle_counter = 85	 x_shift = 0.45	 y_shift = 0
+particle_counter = 86	 x_shift = 0.45	 y_shift = 0
+particle_counter = 87	 x_shift = 0.45	 y_shift = 0
+particle_counter = 88	 x_shift = 0.45	 y_shift = 0
+particle_counter = 89	 x_shift = 0.45	 y_shift = 0
+particle_counter = 90	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 90
+particle_counter = 91	 x_shift = 0.45	 y_shift = 0
+particle_counter = 92	 x_shift = 0.45	 y_shift = 0
+particle_counter = 93	 x_shift = 0.45	 y_shift = 0
+particle_counter = 94	 x_shift = 0.45	 y_shift = 0
+particle_counter = 95	 x_shift = 0.45	 y_shift = 0
+particle_counter = 96	 x_shift = 0.45	 y_shift = 0
+particle_counter = 97	 x_shift = 0.45	 y_shift = 0
+particle_counter = 98	 x_shift = 0.45	 y_shift = 0
+particle_counter = 99	 x_shift = 0.45	 y_shift = 0
+particle_counter = 100	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 100
+particle_counter = 101	 x_shift = 0.45	 y_shift = 0
+particle_counter = 102	 x_shift = 0.45	 y_shift = 0
+particle_counter = 103	 x_shift = 0.45	 y_shift = 0
+particle_counter = 104	 x_shift = 0.45	 y_shift = 0
+particle_counter = 105	 x_shift = 0.45	 y_shift = 0
+particle_counter = 106	 x_shift = 0.45	 y_shift = 0
+particle_counter = 107	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.500611 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.50551 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.50551 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 20.2996
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 108	 x_shift = 0.45	 y_shift = 0
+particle_counter = 109	 x_shift = 0.45	 y_shift = 0
+particle_counter = 110	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 110
+particle_counter = 111	 x_shift = 0.45	 y_shift = 0
+particle_counter = 112	 x_shift = 0.45	 y_shift = 0
+particle_counter = 113	 x_shift = 0.45	 y_shift = 0
+particle_counter = 114	 x_shift = 0.45	 y_shift = 0
+particle_counter = 115	 x_shift = 0.45	 y_shift = 0
+particle_counter = 116	 x_shift = 0.45	 y_shift = 0
+particle_counter = 117	 x_shift = 0.45	 y_shift = 0
+particle_counter = 118	 x_shift = 0.45	 y_shift = 0
+particle_counter = 119	 x_shift = 0.45	 y_shift = 0
+particle_counter = 120	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 120
+particle_counter = 121	 x_shift = 0.45	 y_shift = 0
+particle_counter = 122	 x_shift = 0.45	 y_shift = 0
+particle_counter = 123	 x_shift = 0.45	 y_shift = 0
+particle_counter = 124	 x_shift = 0.45	 y_shift = 0
+particle_counter = 125	 x_shift = 0.45	 y_shift = 0
+particle_counter = 126	 x_shift = 0.45	 y_shift = 0
+particle_counter = 127	 x_shift = 0.45	 y_shift = 0
+particle_counter = 128	 x_shift = 0.45	 y_shift = 0
+particle_counter = 129	 x_shift = 0.45	 y_shift = 0
+particle_counter = 130	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 130
+particle_counter = 131	 x_shift = 0.45	 y_shift = 0
+particle_counter = 132	 x_shift = 0.45	 y_shift = 0
+particle_counter = 133	 x_shift = 0.45	 y_shift = 0
+particle_counter = 134	 x_shift = 0.45	 y_shift = 0
+particle_counter = 135	 x_shift = 0.45	 y_shift = 0
+particle_counter = 136	 x_shift = 0.45	 y_shift = 0
+particle_counter = 137	 x_shift = 0.45	 y_shift = 0
+particle_counter = 138	 x_shift = 0.45	 y_shift = 0
+particle_counter = 139	 x_shift = 0.45	 y_shift = 0
+particle_counter = 140	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 140
+particle_counter = 141	 x_shift = 0.45	 y_shift = 0
+particle_counter = 142	 x_shift = 0.45	 y_shift = 0
+particle_counter = 143	 x_shift = 0.45	 y_shift = 0
+particle_counter = 144	 x_shift = 0.45	 y_shift = 0
+particle_counter = 145	 x_shift = 0.45	 y_shift = 0
+particle_counter = 146	 x_shift = 0.45	 y_shift = 0
+particle_counter = 147	 x_shift = 0.45	 y_shift = 0
+particle_counter = 148	 x_shift = 0.45	 y_shift = 0
+particle_counter = 149	 x_shift = 0.45	 y_shift = 0
+particle_counter = 150	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 150
+particle_counter = 151	 x_shift = 0.45	 y_shift = 0
+particle_counter = 152	 x_shift = 0.45	 y_shift = 0
+particle_counter = 153	 x_shift = 0.45	 y_shift = 0
+particle_counter = 154	 x_shift = 0.45	 y_shift = 0
+particle_counter = 155	 x_shift = 0.45	 y_shift = 0
+particle_counter = 156	 x_shift = 0.45	 y_shift = 0
+particle_counter = 157	 x_shift = 0.45	 y_shift = 0
+particle_counter = 158	 x_shift = 0.45	 y_shift = 0
+particle_counter = 159	 x_shift = 0.45	 y_shift = 0
+particle_counter = 160	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 160
+particle_counter = 161	 x_shift = 0.45	 y_shift = 0
+particle_counter = 162	 x_shift = 0.45	 y_shift = 0
+particle_counter = 163	 x_shift = 0.45	 y_shift = 0
+particle_counter = 164	 x_shift = 0.45	 y_shift = 0
+particle_counter = 165	 x_shift = 0.45	 y_shift = 0
+particle_counter = 166	 x_shift = 0.45	 y_shift = 0
+particle_counter = 167	 x_shift = 0.45	 y_shift = 0
+particle_counter = 168	 x_shift = 0.45	 y_shift = 0
+particle_counter = 169	 x_shift = 0.45	 y_shift = 0
+particle_counter = 170	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 170
+particle_counter = 171	 x_shift = 0.45	 y_shift = 0
+particle_counter = 172	 x_shift = 0.45	 y_shift = 0
+particle_counter = 173	 x_shift = 0.45	 y_shift = 0
+particle_counter = 174	 x_shift = 0.45	 y_shift = 0
+particle_counter = 175	 x_shift = 0.45	 y_shift = 0
+particle_counter = 176	 x_shift = 0.45	 y_shift = 0
+particle_counter = 177	 x_shift = 0.45	 y_shift = 0
+particle_counter = 178	 x_shift = 0.45	 y_shift = 0
+particle_counter = 179	 x_shift = 0.45	 y_shift = 0
+particle_counter = 180	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 180
+particle_counter = 181	 x_shift = 0.45	 y_shift = 0
+particle_counter = 182	 x_shift = 0.45	 y_shift = 0
+particle_counter = 183	 x_shift = 0.45	 y_shift = 0
+particle_counter = 184	 x_shift = 0.45	 y_shift = 0
+particle_counter = 185	 x_shift = 0.45	 y_shift = 0
+particle_counter = 186	 x_shift = 0.45	 y_shift = 0
+particle_counter = 187	 x_shift = 0.45	 y_shift = 0
+particle_counter = 188	 x_shift = 0.45	 y_shift = 0
+particle_counter = 189	 x_shift = 0.45	 y_shift = 0
+particle_counter = 190	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 190
+particle_counter = 191	 x_shift = 0.45	 y_shift = 0
+particle_counter = 192	 x_shift = 0.45	 y_shift = 0
+particle_counter = 193	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.539155 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.89947 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.89947 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 24.0048
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 194	 x_shift = 0.45	 y_shift = 0
+particle_counter = 195	 x_shift = 0.45	 y_shift = 0
+particle_counter = 196	 x_shift = 0.45	 y_shift = 0
+particle_counter = 197	 x_shift = 0.45	 y_shift = 0
+particle_counter = 198	 x_shift = 0.45	 y_shift = 0
+particle_counter = 199	 x_shift = 0.45	 y_shift = 0
+particle_counter = 200	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 200
+particle_counter = 201	 x_shift = 0.45	 y_shift = 0
+particle_counter = 202	 x_shift = 0.45	 y_shift = 0
+particle_counter = 203	 x_shift = 0.45	 y_shift = 0
+particle_counter = 204	 x_shift = 0.45	 y_shift = 0
+particle_counter = 205	 x_shift = 0.45	 y_shift = 0
+particle_counter = 206	 x_shift = 0.45	 y_shift = 0
+particle_counter = 207	 x_shift = 0.45	 y_shift = 0
+particle_counter = 208	 x_shift = 0.45	 y_shift = 0
+particle_counter = 209	 x_shift = 0.45	 y_shift = 0
+particle_counter = 210	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 210
+particle_counter = 211	 x_shift = 0.45	 y_shift = 0
+particle_counter = 212	 x_shift = 0.45	 y_shift = 0
+particle_counter = 213	 x_shift = 0.45	 y_shift = 0
+particle_counter = 214	 x_shift = 0.45	 y_shift = 0
+particle_counter = 215	 x_shift = 0.45	 y_shift = 0
+particle_counter = 216	 x_shift = 0.45	 y_shift = 0
+particle_counter = 217	 x_shift = 0.45	 y_shift = 0
+particle_counter = 218	 x_shift = 0.45	 y_shift = 0
+particle_counter = 219	 x_shift = 0.45	 y_shift = 0
+particle_counter = 220	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 220
+particle_counter = 221	 x_shift = 0.45	 y_shift = 0
+particle_counter = 222	 x_shift = 0.45	 y_shift = 0
+particle_counter = 223	 x_shift = 0.45	 y_shift = 0
+particle_counter = 224	 x_shift = 0.45	 y_shift = 0
+particle_counter = 225	 x_shift = 0.45	 y_shift = 0
+particle_counter = 226	 x_shift = 0.45	 y_shift = 0
+particle_counter = 227	 x_shift = 0.45	 y_shift = 0
+particle_counter = 228	 x_shift = 0.45	 y_shift = 0
+particle_counter = 229	 x_shift = 0.45	 y_shift = 0
+particle_counter = 230	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 230
+particle_counter = 231	 x_shift = 0.45	 y_shift = 0
+particle_counter = 232	 x_shift = 0.45	 y_shift = 0
+particle_counter = 233	 x_shift = 0.45	 y_shift = 0
+particle_counter = 234	 x_shift = 0.45	 y_shift = 0
+particle_counter = 235	 x_shift = 0.45	 y_shift = 0
+particle_counter = 236	 x_shift = 0.45	 y_shift = 0
+particle_counter = 237	 x_shift = 0.45	 y_shift = 0
+particle_counter = 238	 x_shift = 0.45	 y_shift = 0
+particle_counter = 239	 x_shift = 0.45	 y_shift = 0
+particle_counter = 240	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 240
+particle_counter = 241	 x_shift = 0.45	 y_shift = 0
+particle_counter = 242	 x_shift = 0.45	 y_shift = 0
+particle_counter = 243	 x_shift = 0.45	 y_shift = 0
+particle_counter = 244	 x_shift = 0.45	 y_shift = 0
+particle_counter = 245	 x_shift = 0.45	 y_shift = 0
+particle_counter = 246	 x_shift = 0.45	 y_shift = 0
+particle_counter = 247	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.508502 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.57882 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.57882 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 20.9656
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.505455 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.55004 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.55004 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 20.7028
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 248	 x_shift = 0.45	 y_shift = 0
+particle_counter = 249	 x_shift = 0.45	 y_shift = 0
+particle_counter = 250	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 250
+particle_counter = 251	 x_shift = 0.45	 y_shift = 0
+particle_counter = 252	 x_shift = 0.45	 y_shift = 0
+particle_counter = 253	 x_shift = 0.45	 y_shift = 0
+particle_counter = 254	 x_shift = 0.45	 y_shift = 0
+particle_counter = 255	 x_shift = 0.45	 y_shift = 0
+particle_counter = 256	 x_shift = 0.45	 y_shift = 0
+particle_counter = 257	 x_shift = 0.45	 y_shift = 0
+particle_counter = 258	 x_shift = 0.45	 y_shift = 0
+particle_counter = 259	 x_shift = 0.45	 y_shift = 0
+particle_counter = 260	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 260
+particle_counter = 261	 x_shift = 0.45	 y_shift = 0
+particle_counter = 262	 x_shift = 0.45	 y_shift = 0
+particle_counter = 263	 x_shift = 0.45	 y_shift = 0
+particle_counter = 264	 x_shift = 0.45	 y_shift = 0
+particle_counter = 265	 x_shift = 0.45	 y_shift = 0
+particle_counter = 266	 x_shift = 0.45	 y_shift = 0
+particle_counter = 267	 x_shift = 0.45	 y_shift = 0
+particle_counter = 268	 x_shift = 0.45	 y_shift = 0
+particle_counter = 269	 x_shift = 0.45	 y_shift = 0
+particle_counter = 270	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 270
+particle_counter = 271	 x_shift = 0.45	 y_shift = 0
+particle_counter = 272	 x_shift = 0.45	 y_shift = 0
+particle_counter = 273	 x_shift = 0.45	 y_shift = 0
+particle_counter = 274	 x_shift = 0.45	 y_shift = 0
+particle_counter = 275	 x_shift = 0.45	 y_shift = 0
+particle_counter = 276	 x_shift = 0.45	 y_shift = 0
+particle_counter = 277	 x_shift = 0.45	 y_shift = 0
+particle_counter = 278	 x_shift = 0.45	 y_shift = 0
+particle_counter = 279	 x_shift = 0.45	 y_shift = 0
+particle_counter = 280	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 280
+particle_counter = 281	 x_shift = 0.45	 y_shift = 0
+particle_counter = 282	 x_shift = 0.45	 y_shift = 0
+particle_counter = 283	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.643844 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 6.9405 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 6.9405 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 48.1705
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 284	 x_shift = 0.45	 y_shift = 0
+particle_counter = 285	 x_shift = 0.45	 y_shift = 0
+particle_counter = 286	 x_shift = 0.45	 y_shift = 0
+particle_counter = 287	 x_shift = 0.45	 y_shift = 0
+particle_counter = 288	 x_shift = 0.45	 y_shift = 0
+particle_counter = 289	 x_shift = 0.45	 y_shift = 0
+particle_counter = 290	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 290
+particle_counter = 291	 x_shift = 0.45	 y_shift = 0
+particle_counter = 292	 x_shift = 0.45	 y_shift = 0
+particle_counter = 293	 x_shift = 0.45	 y_shift = 0
+particle_counter = 294	 x_shift = 0.45	 y_shift = 0
+particle_counter = 295	 x_shift = 0.45	 y_shift = 0
+particle_counter = 296	 x_shift = 0.45	 y_shift = 0
+particle_counter = 297	 x_shift = 0.45	 y_shift = 0
+particle_counter = 298	 x_shift = 0.45	 y_shift = 0
+particle_counter = 299	 x_shift = 0.45	 y_shift = 0
+particle_counter = 300	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 300
+particle_counter = 301	 x_shift = 0.45	 y_shift = 0
+particle_counter = 302	 x_shift = 0.45	 y_shift = 0
+particle_counter = 303	 x_shift = 0.45	 y_shift = 0
+particle_counter = 304	 x_shift = 0.45	 y_shift = 0
+particle_counter = 305	 x_shift = 0.45	 y_shift = 0
+particle_counter = 306	 x_shift = 0.45	 y_shift = 0
+particle_counter = 307	 x_shift = 0.45	 y_shift = 0
+particle_counter = 308	 x_shift = 0.45	 y_shift = 0
+particle_counter = 309	 x_shift = 0.45	 y_shift = 0
+particle_counter = 310	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 310
+particle_counter = 311	 x_shift = 0.45	 y_shift = 0
+particle_counter = 312	 x_shift = 0.45	 y_shift = 0
+particle_counter = 313	 x_shift = 0.45	 y_shift = 0
+particle_counter = 314	 x_shift = 0.45	 y_shift = 0
+particle_counter = 315	 x_shift = 0.45	 y_shift = 0
+particle_counter = 316	 x_shift = 0.45	 y_shift = 0
+particle_counter = 317	 x_shift = 0.45	 y_shift = 0
+particle_counter = 318	 x_shift = 0.45	 y_shift = 0
+particle_counter = 319	 x_shift = 0.45	 y_shift = 0
+particle_counter = 320	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 320
+particle_counter = 321	 x_shift = 0.45	 y_shift = 0
+particle_counter = 322	 x_shift = 0.45	 y_shift = 0
+particle_counter = 323	 x_shift = 0.45	 y_shift = 0
+particle_counter = 324	 x_shift = 0.45	 y_shift = 0
+particle_counter = 325	 x_shift = 0.45	 y_shift = 0
+particle_counter = 326	 x_shift = 0.45	 y_shift = 0
+particle_counter = 327	 x_shift = 0.45	 y_shift = 0
+particle_counter = 328	 x_shift = 0.45	 y_shift = 0
+particle_counter = 329	 x_shift = 0.45	 y_shift = 0
+particle_counter = 330	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 330
+particle_counter = 331	 x_shift = 0.45	 y_shift = 0
+particle_counter = 332	 x_shift = 0.45	 y_shift = 0
+particle_counter = 333	 x_shift = 0.45	 y_shift = 0
+particle_counter = 334	 x_shift = 0.45	 y_shift = 0
+particle_counter = 335	 x_shift = 0.45	 y_shift = 0
+particle_counter = 336	 x_shift = 0.45	 y_shift = 0
+particle_counter = 337	 x_shift = 0.45	 y_shift = 0
+particle_counter = 338	 x_shift = 0.45	 y_shift = 0
+particle_counter = 339	 x_shift = 0.45	 y_shift = 0
+particle_counter = 340	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 340
+particle_counter = 341	 x_shift = 0.45	 y_shift = 0
+particle_counter = 342	 x_shift = 0.45	 y_shift = 0
+particle_counter = 343	 x_shift = 0.45	 y_shift = 0
+particle_counter = 344	 x_shift = 0.45	 y_shift = 0
+particle_counter = 345	 x_shift = 0.45	 y_shift = 0
+particle_counter = 346	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.507266 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.56712 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.56712 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 20.8586
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 347	 x_shift = 0.45	 y_shift = 0
+particle_counter = 348	 x_shift = 0.45	 y_shift = 0
+particle_counter = 349	 x_shift = 0.45	 y_shift = 0
+particle_counter = 350	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 350
+particle_counter = 351	 x_shift = 0.45	 y_shift = 0
+particle_counter = 352	 x_shift = 0.45	 y_shift = 0
+particle_counter = 353	 x_shift = 0.45	 y_shift = 0
+particle_counter = 354	 x_shift = 0.45	 y_shift = 0
+particle_counter = 355	 x_shift = 0.45	 y_shift = 0
+particle_counter = 356	 x_shift = 0.45	 y_shift = 0
+particle_counter = 357	 x_shift = 0.45	 y_shift = 0
+particle_counter = 358	 x_shift = 0.45	 y_shift = 0
+particle_counter = 359	 x_shift = 0.45	 y_shift = 0
+particle_counter = 360	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 360
+particle_counter = 361	 x_shift = 0.45	 y_shift = 0
+particle_counter = 362	 x_shift = 0.45	 y_shift = 0
+particle_counter = 363	 x_shift = 0.45	 y_shift = 0
+particle_counter = 364	 x_shift = 0.45	 y_shift = 0
+particle_counter = 365	 x_shift = 0.45	 y_shift = 0
+particle_counter = 366	 x_shift = 0.45	 y_shift = 0
+particle_counter = 367	 x_shift = 0.45	 y_shift = 0
+particle_counter = 368	 x_shift = 0.45	 y_shift = 0
+particle_counter = 369	 x_shift = 0.45	 y_shift = 0
+particle_counter = 370	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 370
+particle_counter = 371	 x_shift = 0.45	 y_shift = 0
+particle_counter = 372	 x_shift = 0.45	 y_shift = 0
+particle_counter = 373	 x_shift = 0.45	 y_shift = 0
+particle_counter = 374	 x_shift = 0.45	 y_shift = 0
+particle_counter = 375	 x_shift = 0.45	 y_shift = 0
+particle_counter = 376	 x_shift = 0.45	 y_shift = 0
+particle_counter = 377	 x_shift = 0.45	 y_shift = 0
+particle_counter = 378	 x_shift = 0.45	 y_shift = 0
+particle_counter = 379	 x_shift = 0.45	 y_shift = 0
+particle_counter = 380	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 380
+particle_counter = 381	 x_shift = 0.45	 y_shift = 0
+particle_counter = 382	 x_shift = 0.45	 y_shift = 0
+particle_counter = 383	 x_shift = 0.45	 y_shift = 0
+particle_counter = 384	 x_shift = 0.45	 y_shift = 0
+particle_counter = 385	 x_shift = 0.45	 y_shift = 0
+particle_counter = 386	 x_shift = 0.45	 y_shift = 0
+particle_counter = 387	 x_shift = 0.45	 y_shift = 0
+particle_counter = 388	 x_shift = 0.45	 y_shift = 0
+particle_counter = 389	 x_shift = 0.45	 y_shift = 0
+particle_counter = 390	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 390
+particle_counter = 391	 x_shift = 0.45	 y_shift = 0
+particle_counter = 392	 x_shift = 0.45	 y_shift = 0
+particle_counter = 393	 x_shift = 0.45	 y_shift = 0
+particle_counter = 394	 x_shift = 0.45	 y_shift = 0
+particle_counter = 395	 x_shift = 0.45	 y_shift = 0
+particle_counter = 396	 x_shift = 0.45	 y_shift = 0
+particle_counter = 397	 x_shift = 0.45	 y_shift = 0
+particle_counter = 398	 x_shift = 0.45	 y_shift = 0
+particle_counter = 399	 x_shift = 0.45	 y_shift = 0
+particle_counter = 400	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 400
+particle_counter = 401	 x_shift = 0.45	 y_shift = 0
+particle_counter = 402	 x_shift = 0.45	 y_shift = 0
+particle_counter = 403	 x_shift = 0.45	 y_shift = 0
+particle_counter = 404	 x_shift = 0.45	 y_shift = 0
+particle_counter = 405	 x_shift = 0.45	 y_shift = 0
+particle_counter = 406	 x_shift = 0.45	 y_shift = 0
+particle_counter = 407	 x_shift = 0.45	 y_shift = 0
+particle_counter = 408	 x_shift = 0.45	 y_shift = 0
+particle_counter = 409	 x_shift = 0.45	 y_shift = 0
+particle_counter = 410	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 410
+particle_counter = 411	 x_shift = 0.45	 y_shift = 0
+particle_counter = 412	 x_shift = 0.45	 y_shift = 0
+particle_counter = 413	 x_shift = 0.45	 y_shift = 0
+particle_counter = 414	 x_shift = 0.45	 y_shift = 0
+particle_counter = 415	 x_shift = 0.45	 y_shift = 0
+particle_counter = 416	 x_shift = 0.45	 y_shift = 0
+particle_counter = 417	 x_shift = 0.45	 y_shift = 0
+particle_counter = 418	 x_shift = 0.45	 y_shift = 0
+particle_counter = 419	 x_shift = 0.45	 y_shift = 0
+particle_counter = 420	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 420
+particle_counter = 421	 x_shift = 0.45	 y_shift = 0
+particle_counter = 422	 x_shift = 0.45	 y_shift = 0
+particle_counter = 423	 x_shift = 0.45	 y_shift = 0
+particle_counter = 424	 x_shift = 0.45	 y_shift = 0
+particle_counter = 425	 x_shift = 0.45	 y_shift = 0
+particle_counter = 426	 x_shift = 0.45	 y_shift = 0
+particle_counter = 427	 x_shift = 0.45	 y_shift = 0
+particle_counter = 428	 x_shift = 0.45	 y_shift = 0
+particle_counter = 429	 x_shift = 0.45	 y_shift = 0
+particle_counter = 430	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 430
+particle_counter = 431	 x_shift = 0.45	 y_shift = 0
+particle_counter = 432	 x_shift = 0.45	 y_shift = 0
+particle_counter = 433	 x_shift = 0.45	 y_shift = 0
+particle_counter = 434	 x_shift = 0.45	 y_shift = 0
+particle_counter = 435	 x_shift = 0.45	 y_shift = 0
+particle_counter = 436	 x_shift = 0.45	 y_shift = 0
+particle_counter = 437	 x_shift = 0.45	 y_shift = 0
+particle_counter = 438	 x_shift = 0.45	 y_shift = 0
+particle_counter = 439	 x_shift = 0.45	 y_shift = 0
+particle_counter = 440	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 440
+particle_counter = 441	 x_shift = 0.45	 y_shift = 0
+particle_counter = 442	 x_shift = 0.45	 y_shift = 0
+particle_counter = 443	 x_shift = 0.45	 y_shift = 0
+particle_counter = 444	 x_shift = 0.45	 y_shift = 0
+particle_counter = 445	 x_shift = 0.45	 y_shift = 0
+particle_counter = 446	 x_shift = 0.45	 y_shift = 0
+particle_counter = 447	 x_shift = 0.45	 y_shift = 0
+particle_counter = 448	 x_shift = 0.45	 y_shift = 0
+particle_counter = 449	 x_shift = 0.45	 y_shift = 0
+particle_counter = 450	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 450
+particle_counter = 451	 x_shift = 0.45	 y_shift = 0
+particle_counter = 452	 x_shift = 0.45	 y_shift = 0
+particle_counter = 453	 x_shift = 0.45	 y_shift = 0
+particle_counter = 454	 x_shift = 0.45	 y_shift = 0
+particle_counter = 455	 x_shift = 0.45	 y_shift = 0
+particle_counter = 456	 x_shift = 0.45	 y_shift = 0
+particle_counter = 457	 x_shift = 0.45	 y_shift = 0
+particle_counter = 458	 x_shift = 0.45	 y_shift = 0
+particle_counter = 459	 x_shift = 0.45	 y_shift = 0
+particle_counter = 460	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 460
+particle_counter = 461	 x_shift = 0.45	 y_shift = 0
+particle_counter = 462	 x_shift = 0.45	 y_shift = 0
+particle_counter = 463	 x_shift = 0.45	 y_shift = 0
+particle_counter = 464	 x_shift = 0.45	 y_shift = 0
+particle_counter = 465	 x_shift = 0.45	 y_shift = 0
+particle_counter = 466	 x_shift = 0.45	 y_shift = 0
+particle_counter = 467	 x_shift = 0.45	 y_shift = 0
+particle_counter = 468	 x_shift = 0.45	 y_shift = 0
+particle_counter = 469	 x_shift = 0.45	 y_shift = 0
+particle_counter = 470	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 470
+particle_counter = 471	 x_shift = 0.45	 y_shift = 0
+particle_counter = 472	 x_shift = 0.45	 y_shift = 0
+particle_counter = 473	 x_shift = 0.45	 y_shift = 0
+particle_counter = 474	 x_shift = 0.45	 y_shift = 0
+particle_counter = 475	 x_shift = 0.45	 y_shift = 0
+particle_counter = 476	 x_shift = 0.45	 y_shift = 0
+particle_counter = 477	 x_shift = 0.45	 y_shift = 0
+particle_counter = 478	 x_shift = 0.45	 y_shift = 0
+particle_counter = 479	 x_shift = 0.45	 y_shift = 0
+particle_counter = 480	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 480
+particle_counter = 481	 x_shift = 0.45	 y_shift = 0
+particle_counter = 482	 x_shift = 0.45	 y_shift = 0
+particle_counter = 483	 x_shift = 0.45	 y_shift = 0
+particle_counter = 484	 x_shift = 0.45	 y_shift = 0
+particle_counter = 485	 x_shift = 0.45	 y_shift = 0
+particle_counter = 486	 x_shift = 0.45	 y_shift = 0
+particle_counter = 487	 x_shift = 0.45	 y_shift = 0
+particle_counter = 488	 x_shift = 0.45	 y_shift = 0
+particle_counter = 489	 x_shift = 0.45	 y_shift = 0
+particle_counter = 490	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 490
+particle_counter = 491	 x_shift = 0.45	 y_shift = 0
+particle_counter = 492	 x_shift = 0.45	 y_shift = 0
+particle_counter = 493	 x_shift = 0.45	 y_shift = 0
+particle_counter = 494	 x_shift = 0.45	 y_shift = 0
+particle_counter = 495	 x_shift = 0.45	 y_shift = 0
+particle_counter = 496	 x_shift = 0.45	 y_shift = 0
+particle_counter = 497	 x_shift = 0.45	 y_shift = 0
+particle_counter = 498	 x_shift = 0.45	 y_shift = 0
+particle_counter = 499	 x_shift = 0.45	 y_shift = 0
+particle_counter = 500	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 500
+particle_counter = 501	 x_shift = 0.45	 y_shift = 0
+particle_counter = 502	 x_shift = 0.45	 y_shift = 0
+particle_counter = 503	 x_shift = 0.45	 y_shift = 0
+particle_counter = 504	 x_shift = 0.45	 y_shift = 0
+particle_counter = 505	 x_shift = 0.45	 y_shift = 0
+particle_counter = 506	 x_shift = 0.45	 y_shift = 0
+particle_counter = 507	 x_shift = 0.45	 y_shift = 0
+particle_counter = 508	 x_shift = 0.45	 y_shift = 0
+particle_counter = 509	 x_shift = 0.45	 y_shift = 0
+particle_counter = 510	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 510
+particle_counter = 511	 x_shift = 0.45	 y_shift = 0
+particle_counter = 512	 x_shift = 0.45	 y_shift = 0
+particle_counter = 513	 x_shift = 0.45	 y_shift = 0
+particle_counter = 514	 x_shift = 0.45	 y_shift = 0
+particle_counter = 515	 x_shift = 0.45	 y_shift = 0
+particle_counter = 516	 x_shift = 0.45	 y_shift = 0
+particle_counter = 517	 x_shift = 0.45	 y_shift = 0
+particle_counter = 518	 x_shift = 0.45	 y_shift = 0
+particle_counter = 519	 x_shift = 0.45	 y_shift = 0
+particle_counter = 520	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 520
+particle_counter = 521	 x_shift = 0.45	 y_shift = 0
+particle_counter = 522	 x_shift = 0.45	 y_shift = 0
+particle_counter = 523	 x_shift = 0.45	 y_shift = 0
+particle_counter = 524	 x_shift = 0.45	 y_shift = 0
+particle_counter = 525	 x_shift = 0.45	 y_shift = 0
+particle_counter = 526	 x_shift = 0.45	 y_shift = 0
+particle_counter = 527	 x_shift = 0.45	 y_shift = 0
+particle_counter = 528	 x_shift = 0.45	 y_shift = 0
+particle_counter = 529	 x_shift = 0.45	 y_shift = 0
+particle_counter = 530	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 530
+particle_counter = 531	 x_shift = 0.45	 y_shift = 0
+particle_counter = 532	 x_shift = 0.45	 y_shift = 0
+particle_counter = 533	 x_shift = 0.45	 y_shift = 0
+particle_counter = 534	 x_shift = 0.45	 y_shift = 0
+particle_counter = 535	 x_shift = 0.45	 y_shift = 0
+particle_counter = 536	 x_shift = 0.45	 y_shift = 0
+particle_counter = 537	 x_shift = 0.45	 y_shift = 0
+particle_counter = 538	 x_shift = 0.45	 y_shift = 0
+particle_counter = 539	 x_shift = 0.45	 y_shift = 0
+particle_counter = 540	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 540
+particle_counter = 541	 x_shift = 0.45	 y_shift = 0
+particle_counter = 542	 x_shift = 0.45	 y_shift = 0
+particle_counter = 543	 x_shift = 0.45	 y_shift = 0
+particle_counter = 544	 x_shift = 0.45	 y_shift = 0
+particle_counter = 545	 x_shift = 0.45	 y_shift = 0
+particle_counter = 546	 x_shift = 0.45	 y_shift = 0
+particle_counter = 547	 x_shift = 0.45	 y_shift = 0
+particle_counter = 548	 x_shift = 0.45	 y_shift = 0
+particle_counter = 549	 x_shift = 0.45	 y_shift = 0
+particle_counter = 550	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 550
+particle_counter = 551	 x_shift = 0.45	 y_shift = 0
+particle_counter = 552	 x_shift = 0.45	 y_shift = 0
+particle_counter = 553	 x_shift = 0.45	 y_shift = 0
+particle_counter = 554	 x_shift = 0.45	 y_shift = 0
+particle_counter = 555	 x_shift = 0.45	 y_shift = 0
+particle_counter = 556	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.530898 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.7979 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.7979 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 23.0199
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 557	 x_shift = 0.45	 y_shift = 0
+particle_counter = 558	 x_shift = 0.45	 y_shift = 0
+particle_counter = 559	 x_shift = 0.45	 y_shift = 0
+particle_counter = 560	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 560
+particle_counter = 561	 x_shift = 0.45	 y_shift = 0
+particle_counter = 562	 x_shift = 0.45	 y_shift = 0
+particle_counter = 563	 x_shift = 0.45	 y_shift = 0
+particle_counter = 564	 x_shift = 0.45	 y_shift = 0
+particle_counter = 565	 x_shift = 0.45	 y_shift = 0
+particle_counter = 566	 x_shift = 0.45	 y_shift = 0
+particle_counter = 567	 x_shift = 0.45	 y_shift = 0
+particle_counter = 568	 x_shift = 0.45	 y_shift = 0
+particle_counter = 569	 x_shift = 0.45	 y_shift = 0
+particle_counter = 570	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 570
+particle_counter = 571	 x_shift = 0.45	 y_shift = 0
+particle_counter = 572	 x_shift = 0.45	 y_shift = 0
+particle_counter = 573	 x_shift = 0.45	 y_shift = 0
+particle_counter = 574	 x_shift = 0.45	 y_shift = 0
+particle_counter = 575	 x_shift = 0.45	 y_shift = 0
+particle_counter = 576	 x_shift = 0.45	 y_shift = 0
+particle_counter = 577	 x_shift = 0.45	 y_shift = 0
+particle_counter = 578	 x_shift = 0.45	 y_shift = 0
+particle_counter = 579	 x_shift = 0.45	 y_shift = 0
+particle_counter = 580	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 580
+particle_counter = 581	 x_shift = 0.45	 y_shift = 0
+particle_counter = 582	 x_shift = 0.45	 y_shift = 0
+particle_counter = 583	 x_shift = 0.45	 y_shift = 0
+particle_counter = 584	 x_shift = 0.45	 y_shift = 0
+particle_counter = 585	 x_shift = 0.45	 y_shift = 0
+particle_counter = 586	 x_shift = 0.45	 y_shift = 0
+particle_counter = 587	 x_shift = 0.45	 y_shift = 0
+particle_counter = 588	 x_shift = 0.45	 y_shift = 0
+particle_counter = 589	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.650258 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 6.3906 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 6.3906 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 40.8398
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 590	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 590
+particle_counter = 591	 x_shift = 0.45	 y_shift = 0
+particle_counter = 592	 x_shift = 0.45	 y_shift = 0
+particle_counter = 593	 x_shift = 0.45	 y_shift = 0
+particle_counter = 594	 x_shift = 0.45	 y_shift = 0
+particle_counter = 595	 x_shift = 0.45	 y_shift = 0
+particle_counter = 596	 x_shift = 0.45	 y_shift = 0
+particle_counter = 597	 x_shift = 0.45	 y_shift = 0
+particle_counter = 598	 x_shift = 0.45	 y_shift = 0
+particle_counter = 599	 x_shift = 0.45	 y_shift = 0
+particle_counter = 600	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 600
+particle_counter = 601	 x_shift = 0.45	 y_shift = 0
+particle_counter = 602	 x_shift = 0.45	 y_shift = 0
+particle_counter = 603	 x_shift = 0.45	 y_shift = 0
+particle_counter = 604	 x_shift = 0.45	 y_shift = 0
+particle_counter = 605	 x_shift = 0.45	 y_shift = 0
+particle_counter = 606	 x_shift = 0.45	 y_shift = 0
+particle_counter = 607	 x_shift = 0.45	 y_shift = 0
+particle_counter = 608	 x_shift = 0.45	 y_shift = 0
+particle_counter = 609	 x_shift = 0.45	 y_shift = 0
+particle_counter = 610	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 610
+particle_counter = 611	 x_shift = 0.45	 y_shift = 0
+particle_counter = 612	 x_shift = 0.45	 y_shift = 0
+particle_counter = 613	 x_shift = 0.45	 y_shift = 0
+particle_counter = 614	 x_shift = 0.45	 y_shift = 0
+particle_counter = 615	 x_shift = 0.45	 y_shift = 0
+particle_counter = 616	 x_shift = 0.45	 y_shift = 0
+particle_counter = 617	 x_shift = 0.45	 y_shift = 0
+particle_counter = 618	 x_shift = 0.45	 y_shift = 0
+particle_counter = 619	 x_shift = 0.45	 y_shift = 0
+particle_counter = 620	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 620
+particle_counter = 621	 x_shift = 0.45	 y_shift = 0
+particle_counter = 622	 x_shift = 0.45	 y_shift = 0
+particle_counter = 623	 x_shift = 0.45	 y_shift = 0
+particle_counter = 624	 x_shift = 0.45	 y_shift = 0
+particle_counter = 625	 x_shift = 0.45	 y_shift = 0
+particle_counter = 626	 x_shift = 0.45	 y_shift = 0
+particle_counter = 627	 x_shift = 0.45	 y_shift = 0
+particle_counter = 628	 x_shift = 0.45	 y_shift = 0
+particle_counter = 629	 x_shift = 0.45	 y_shift = 0
+particle_counter = 630	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 630
+particle_counter = 631	 x_shift = 0.45	 y_shift = 0
+particle_counter = 632	 x_shift = 0.45	 y_shift = 0
+particle_counter = 633	 x_shift = 0.45	 y_shift = 0
+particle_counter = 634	 x_shift = 0.45	 y_shift = 0
+particle_counter = 635	 x_shift = 0.45	 y_shift = 0
+particle_counter = 636	 x_shift = 0.45	 y_shift = 0
+particle_counter = 637	 x_shift = 0.45	 y_shift = 0
+particle_counter = 638	 x_shift = 0.45	 y_shift = 0
+particle_counter = 639	 x_shift = 0.45	 y_shift = 0
+particle_counter = 640	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 640
+particle_counter = 641	 x_shift = 0.45	 y_shift = 0
+particle_counter = 642	 x_shift = 0.45	 y_shift = 0
+particle_counter = 643	 x_shift = 0.45	 y_shift = 0
+particle_counter = 644	 x_shift = 0.45	 y_shift = 0
+particle_counter = 645	 x_shift = 0.45	 y_shift = 0
+particle_counter = 646	 x_shift = 0.45	 y_shift = 0
+particle_counter = 647	 x_shift = 0.45	 y_shift = 0
+particle_counter = 648	 x_shift = 0.45	 y_shift = 0
+particle_counter = 649	 x_shift = 0.45	 y_shift = 0
+particle_counter = 650	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 650
+particle_counter = 651	 x_shift = 0.45	 y_shift = 0
+particle_counter = 652	 x_shift = 0.45	 y_shift = 0
+particle_counter = 653	 x_shift = 0.45	 y_shift = 0
+particle_counter = 654	 x_shift = 0.45	 y_shift = 0
+particle_counter = 655	 x_shift = 0.45	 y_shift = 0
+particle_counter = 656	 x_shift = 0.45	 y_shift = 0
+particle_counter = 657	 x_shift = 0.45	 y_shift = 0
+particle_counter = 658	 x_shift = 0.45	 y_shift = 0
+particle_counter = 659	 x_shift = 0.45	 y_shift = 0
+particle_counter = 660	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 660
+particle_counter = 661	 x_shift = 0.45	 y_shift = 0
+particle_counter = 662	 x_shift = 0.45	 y_shift = 0
+particle_counter = 663	 x_shift = 0.45	 y_shift = 0
+particle_counter = 664	 x_shift = 0.45	 y_shift = 0
+particle_counter = 665	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.509697 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.58939 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.58939 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 21.0625
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 666	 x_shift = 0.45	 y_shift = 0
+particle_counter = 667	 x_shift = 0.45	 y_shift = 0
+particle_counter = 668	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.574058 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 5.35125 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 5.35125 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 28.6359
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 669	 x_shift = 0.45	 y_shift = 0
+particle_counter = 670	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 670
+particle_counter = 671	 x_shift = 0.45	 y_shift = 0
+particle_counter = 672	 x_shift = 0.45	 y_shift = 0
+particle_counter = 673	 x_shift = 0.45	 y_shift = 0
+particle_counter = 674	 x_shift = 0.45	 y_shift = 0
+particle_counter = 675	 x_shift = 0.45	 y_shift = 0
+particle_counter = 676	 x_shift = 0.45	 y_shift = 0
+particle_counter = 677	 x_shift = 0.45	 y_shift = 0
+particle_counter = 678	 x_shift = 0.45	 y_shift = 0
+particle_counter = 679	 x_shift = 0.45	 y_shift = 0
+particle_counter = 680	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 680
+particle_counter = 681	 x_shift = 0.45	 y_shift = 0
+particle_counter = 682	 x_shift = 0.45	 y_shift = 0
+particle_counter = 683	 x_shift = 0.45	 y_shift = 0
+particle_counter = 684	 x_shift = 0.45	 y_shift = 0
+particle_counter = 685	 x_shift = 0.45	 y_shift = 0
+particle_counter = 686	 x_shift = 0.45	 y_shift = 0
+particle_counter = 687	 x_shift = 0.45	 y_shift = 0
+particle_counter = 688	 x_shift = 0.45	 y_shift = 0
+particle_counter = 689	 x_shift = 0.45	 y_shift = 0
+particle_counter = 690	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 690
+particle_counter = 691	 x_shift = 0.45	 y_shift = 0
+particle_counter = 692	 x_shift = 0.45	 y_shift = 0
+particle_counter = 693	 x_shift = 0.45	 y_shift = 0
+particle_counter = 694	 x_shift = 0.45	 y_shift = 0
+particle_counter = 695	 x_shift = 0.45	 y_shift = 0
+particle_counter = 696	 x_shift = 0.45	 y_shift = 0
+particle_counter = 697	 x_shift = 0.45	 y_shift = 0
+particle_counter = 698	 x_shift = 0.45	 y_shift = 0
+particle_counter = 699	 x_shift = 0.45	 y_shift = 0
+particle_counter = 700	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 700
+particle_counter = 701	 x_shift = 0.45	 y_shift = 0
+particle_counter = 702	 x_shift = 0.45	 y_shift = 0
+particle_counter = 703	 x_shift = 0.45	 y_shift = 0
+particle_counter = 704	 x_shift = 0.45	 y_shift = 0
+particle_counter = 705	 x_shift = 0.45	 y_shift = 0
+particle_counter = 706	 x_shift = 0.45	 y_shift = 0
+particle_counter = 707	 x_shift = 0.45	 y_shift = 0
+particle_counter = 708	 x_shift = 0.45	 y_shift = 0
+particle_counter = 709	 x_shift = 0.45	 y_shift = 0
+particle_counter = 710	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 710
+particle_counter = 711	 x_shift = 0.45	 y_shift = 0
+particle_counter = 712	 x_shift = 0.45	 y_shift = 0
+particle_counter = 713	 x_shift = 0.45	 y_shift = 0
+particle_counter = 714	 x_shift = 0.45	 y_shift = 0
+particle_counter = 715	 x_shift = 0.45	 y_shift = 0
+particle_counter = 716	 x_shift = 0.45	 y_shift = 0
+particle_counter = 717	 x_shift = 0.45	 y_shift = 0
+particle_counter = 718	 x_shift = 0.45	 y_shift = 0
+particle_counter = 719	 x_shift = 0.45	 y_shift = 0
+particle_counter = 720	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 720
+particle_counter = 721	 x_shift = 0.45	 y_shift = 0
+particle_counter = 722	 x_shift = 0.45	 y_shift = 0
+particle_counter = 723	 x_shift = 0.45	 y_shift = 0
+particle_counter = 724	 x_shift = 0.45	 y_shift = 0
+particle_counter = 725	 x_shift = 0.45	 y_shift = 0
+particle_counter = 726	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.507447 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.56879 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.56879 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 20.8738
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 727	 x_shift = 0.45	 y_shift = 0
+particle_counter = 728	 x_shift = 0.45	 y_shift = 0
+particle_counter = 729	 x_shift = 0.45	 y_shift = 0
+particle_counter = 730	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 730
+particle_counter = 731	 x_shift = 0.45	 y_shift = 0
+particle_counter = 732	 x_shift = 0.45	 y_shift = 0
+particle_counter = 733	 x_shift = 0.45	 y_shift = 0
+particle_counter = 734	 x_shift = 0.45	 y_shift = 0
+particle_counter = 735	 x_shift = 0.45	 y_shift = 0
+particle_counter = 736	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.506071 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.55578 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.55578 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 20.7551
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 737	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.535968 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.8474 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.8474 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 23.4973
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 738	 x_shift = 0.45	 y_shift = 0
+particle_counter = 739	 x_shift = 0.45	 y_shift = 0
+particle_counter = 740	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 740
+particle_counter = 741	 x_shift = 0.45	 y_shift = 0
+particle_counter = 742	 x_shift = 0.45	 y_shift = 0
+particle_counter = 743	 x_shift = 0.45	 y_shift = 0
+particle_counter = 744	 x_shift = 0.45	 y_shift = 0
+particle_counter = 745	 x_shift = 0.45	 y_shift = 0
+particle_counter = 746	 x_shift = 0.45	 y_shift = 0
+particle_counter = 747	 x_shift = 0.45	 y_shift = 0
+particle_counter = 748	 x_shift = 0.45	 y_shift = 0
+particle_counter = 749	 x_shift = 0.45	 y_shift = 0
+particle_counter = 750	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 750
+particle_counter = 751	 x_shift = 0.45	 y_shift = 0
+particle_counter = 752	 x_shift = 0.45	 y_shift = 0
+particle_counter = 753	 x_shift = 0.45	 y_shift = 0
+particle_counter = 754	 x_shift = 0.45	 y_shift = 0
+particle_counter = 755	 x_shift = 0.45	 y_shift = 0
+particle_counter = 756	 x_shift = 0.45	 y_shift = 0
+particle_counter = 757	 x_shift = 0.45	 y_shift = 0
+particle_counter = 758	 x_shift = 0.45	 y_shift = 0
+particle_counter = 759	 x_shift = 0.45	 y_shift = 0
+particle_counter = 760	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 760
+particle_counter = 761	 x_shift = 0.45	 y_shift = 0
+particle_counter = 762	 x_shift = 0.45	 y_shift = 0
+particle_counter = 763	 x_shift = 0.45	 y_shift = 0
+particle_counter = 764	 x_shift = 0.45	 y_shift = 0
+particle_counter = 765	 x_shift = 0.45	 y_shift = 0
+particle_counter = 766	 x_shift = 0.45	 y_shift = 0
+particle_counter = 767	 x_shift = 0.45	 y_shift = 0
+particle_counter = 768	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.533373 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.84107 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.84107 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 23.4359
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.521597 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 4.71056 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 4.71056 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 22.1894
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 769	 x_shift = 0.45	 y_shift = 0
+particle_counter = 770	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 770
+particle_counter = 771	 x_shift = 0.45	 y_shift = 0
+particle_counter = 772	 x_shift = 0.45	 y_shift = 0
+particle_counter = 773	 x_shift = 0.45	 y_shift = 0
+particle_counter = 774	 x_shift = 0.45	 y_shift = 0
+particle_counter = 775	 x_shift = 0.45	 y_shift = 0
+particle_counter = 776	 x_shift = 0.45	 y_shift = 0
+particle_counter = 777	 x_shift = 0.45	 y_shift = 0
+particle_counter = 778	 x_shift = 0.45	 y_shift = 0
+particle_counter = 779	 x_shift = 0.45	 y_shift = 0
+particle_counter = 780	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 780
+particle_counter = 781	 x_shift = 0.45	 y_shift = 0
+particle_counter = 782	 x_shift = 0.45	 y_shift = 0
+particle_counter = 783	 x_shift = 0.45	 y_shift = 0
+particle_counter = 784	 x_shift = 0.45	 y_shift = 0
+particle_counter = 785	 x_shift = 0.45	 y_shift = 0
+particle_counter = 786	 x_shift = 0.45	 y_shift = 0
+particle_counter = 787	 x_shift = 0.45	 y_shift = 0
+particle_counter = 788	 x_shift = 0.45	 y_shift = 0
+particle_counter = 789	 x_shift = 0.45	 y_shift = 0
+particle_counter = 790	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 790
+particle_counter = 791	 x_shift = 0.45	 y_shift = 0
+particle_counter = 792	 x_shift = 0.45	 y_shift = 0
+particle_counter = 793	 x_shift = 0.45	 y_shift = 0
+particle_counter = 794	 x_shift = 0.45	 y_shift = 0
+particle_counter = 795	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.524396 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 5.78319 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 5.78319 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 33.4453
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 796	 x_shift = 0.45	 y_shift = 0
+particle_counter = 797	 x_shift = 0.45	 y_shift = 0
+particle_counter = 798	 x_shift = 0.45	 y_shift = 0
+particle_counter = 799	 x_shift = 0.45	 y_shift = 0
+particle_counter = 800	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 800
+particle_counter = 801	 x_shift = 0.45	 y_shift = 0
+particle_counter = 802	 x_shift = 0.45	 y_shift = 0
+particle_counter = 803	 x_shift = 0.45	 y_shift = 0
+particle_counter = 804	 x_shift = 0.45	 y_shift = 0
+particle_counter = 805	 x_shift = 0.45	 y_shift = 0
+particle_counter = 806	 x_shift = 0.45	 y_shift = 0
+particle_counter = 807	 x_shift = 0.45	 y_shift = 0
+particle_counter = 808	 x_shift = 0.45	 y_shift = 0
+particle_counter = 809	 x_shift = 0.45	 y_shift = 0
+particle_counter = 810	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 810
+particle_counter = 811	 x_shift = 0.45	 y_shift = 0
+particle_counter = 812	 x_shift = 0.45	 y_shift = 0
+particle_counter = 813	 x_shift = 0.45	 y_shift = 0
+particle_counter = 814	 x_shift = 0.45	 y_shift = 0
+particle_counter = 815	 x_shift = 0.45	 y_shift = 0
+particle_counter = 816	 x_shift = 0.45	 y_shift = 0
+particle_counter = 817	 x_shift = 0.45	 y_shift = 0
+particle_counter = 818	 x_shift = 0.45	 y_shift = 0
+particle_counter = 819	 x_shift = 0.45	 y_shift = 0
+particle_counter = 820	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 820
+particle_counter = 821	 x_shift = 0.45	 y_shift = 0
+particle_counter = 822	 x_shift = 0.45	 y_shift = 0
+particle_counter = 823	 x_shift = 0.45	 y_shift = 0
+particle_counter = 824	 x_shift = 0.45	 y_shift = 0
+particle_counter = 825	 x_shift = 0.45	 y_shift = 0
+particle_counter = 826	 x_shift = 0.45	 y_shift = 0
+particle_counter = 827	 x_shift = 0.45	 y_shift = 0
+particle_counter = 828	 x_shift = 0.45	 y_shift = 0
+particle_counter = 829	 x_shift = 0.45	 y_shift = 0
+particle_counter = 830	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 830
+particle_counter = 831	 x_shift = 0.45	 y_shift = 0
+particle_counter = 832	 x_shift = 0.45	 y_shift = 0
+particle_counter = 833	 x_shift = 0.45	 y_shift = 0
+particle_counter = 834	 x_shift = 0.45	 y_shift = 0
+particle_counter = 835	 x_shift = 0.45	 y_shift = 0
+particle_counter = 836	 x_shift = 0.45	 y_shift = 0
+particle_counter = 837	 x_shift = 0.45	 y_shift = 0
+particle_counter = 838	 x_shift = 0.45	 y_shift = 0
+particle_counter = 839	 x_shift = 0.45	 y_shift = 0
+particle_counter = 840	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 840
+particle_counter = 841	 x_shift = 0.45	 y_shift = 0
+particle_counter = 842	 x_shift = 0.45	 y_shift = 0
+particle_counter = 843	 x_shift = 0.45	 y_shift = 0
+particle_counter = 844	 x_shift = 0.45	 y_shift = 0
+particle_counter = 845	 x_shift = 0.45	 y_shift = 0
+particle_counter = 846	 x_shift = 0.45	 y_shift = 0
+particle_counter = 847	 x_shift = 0.45	 y_shift = 0
+particle_counter = 848	 x_shift = 0.45	 y_shift = 0
+particle_counter = 849	 x_shift = 0.45	 y_shift = 0
+particle_counter = 850	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 850
+particle_counter = 851	 x_shift = 0.45	 y_shift = 0
+particle_counter = 852	 x_shift = 0.45	 y_shift = 0
+particle_counter = 853	 x_shift = 0.45	 y_shift = 0
+particle_counter = 854	 x_shift = 0.45	 y_shift = 0
+particle_counter = 855	 x_shift = 0.45	 y_shift = 0
+particle_counter = 856	 x_shift = 0.45	 y_shift = 0
+particle_counter = 857	 x_shift = 0.45	 y_shift = 0
+particle_counter = 858	 x_shift = 0.45	 y_shift = 0
+particle_counter = 859	 x_shift = 0.45	 y_shift = 0
+particle_counter = 860	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 860
+particle_counter = 861	 x_shift = 0.45	 y_shift = 0
+particle_counter = 862	 x_shift = 0.45	 y_shift = 0
+particle_counter = 863	 x_shift = 0.45	 y_shift = 0
+particle_counter = 864	 x_shift = 0.45	 y_shift = 0
+particle_counter = 865	 x_shift = 0.45	 y_shift = 0
+particle_counter = 866	 x_shift = 0.45	 y_shift = 0
+particle_counter = 867	 x_shift = 0.45	 y_shift = 0
+particle_counter = 868	 x_shift = 0.45	 y_shift = 0
+particle_counter = 869	 x_shift = 0.45	 y_shift = 0
+particle_counter = 870	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 870
+particle_counter = 871	 x_shift = 0.45	 y_shift = 0
+particle_counter = 872	 x_shift = 0.45	 y_shift = 0
+particle_counter = 873	 x_shift = 0.45	 y_shift = 0
+particle_counter = 874	 x_shift = 0.45	 y_shift = 0
+particle_counter = 875	 x_shift = 0.45	 y_shift = 0
+particle_counter = 876	 x_shift = 0.45	 y_shift = 0
+particle_counter = 877	 x_shift = 0.45	 y_shift = 0
+particle_counter = 878	 x_shift = 0.45	 y_shift = 0
+particle_counter = 879	 x_shift = 0.45	 y_shift = 0
+particle_counter = 880	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 880
+particle_counter = 881	 x_shift = 0.45	 y_shift = 0
+particle_counter = 882	 x_shift = 0.45	 y_shift = 0
+particle_counter = 883	 x_shift = 0.45	 y_shift = 0
+particle_counter = 884	 x_shift = 0.45	 y_shift = 0
+particle_counter = 885	 x_shift = 0.45	 y_shift = 0
+particle_counter = 886	 x_shift = 0.45	 y_shift = 0
+particle_counter = 887	 x_shift = 0.45	 y_shift = 0
+particle_counter = 888	 x_shift = 0.45	 y_shift = 0
+particle_counter = 889	 x_shift = 0.45	 y_shift = 0
+particle_counter = 890	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 890
+particle_counter = 891	 x_shift = 0.45	 y_shift = 0
+particle_counter = 892	 x_shift = 0.45	 y_shift = 0
+particle_counter = 893	 x_shift = 0.45	 y_shift = 0
+particle_counter = 894	 x_shift = 0.45	 y_shift = 0
+particle_counter = 895	 x_shift = 0.45	 y_shift = 0
+particle_counter = 896	 x_shift = 0.45	 y_shift = 0
+particle_counter = 897	 x_shift = 0.45	 y_shift = 0
+particle_counter = 898	 x_shift = 0.45	 y_shift = 0
+particle_counter = 899	 x_shift = 0.45	 y_shift = 0
+particle_counter = 900	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 900
+particle_counter = 901	 x_shift = 0.45	 y_shift = 0
+particle_counter = 902	 x_shift = 0.45	 y_shift = 0
+particle_counter = 903	 x_shift = 0.45	 y_shift = 0
+particle_counter = 904	 x_shift = 0.45	 y_shift = 0
+particle_counter = 905	 x_shift = 0.45	 y_shift = 0
+particle_counter = 906	 x_shift = 0.45	 y_shift = 0
+particle_counter = 907	 x_shift = 0.45	 y_shift = 0
+particle_counter = 908	 x_shift = 0.45	 y_shift = 0
+particle_counter = 909	 x_shift = 0.45	 y_shift = 0
+particle_counter = 910	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 910
+particle_counter = 911	 x_shift = 0.45	 y_shift = 0
+particle_counter = 912	 x_shift = 0.45	 y_shift = 0
+particle_counter = 913	 x_shift = 0.45	 y_shift = 0
+particle_counter = 914	 x_shift = 0.45	 y_shift = 0
+particle_counter = 915	 x_shift = 0.45	 y_shift = 0
+particle_counter = 916	 x_shift = 0.45	 y_shift = 0
+particle_counter = 917	 x_shift = 0.45	 y_shift = 0
+particle_counter = 918	 x_shift = 0.45	 y_shift = 0
+particle_counter = 919	 x_shift = 0.45	 y_shift = 0
+particle_counter = 920	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 920
+particle_counter = 921	 x_shift = 0.45	 y_shift = 0
+particle_counter = 922	 x_shift = 0.45	 y_shift = 0
+particle_counter = 923	 x_shift = 0.45	 y_shift = 0
+particle_counter = 924	 x_shift = 0.45	 y_shift = 0
+particle_counter = 925	 x_shift = 0.45	 y_shift = 0
+particle_counter = 926	 x_shift = 0.45	 y_shift = 0
+particle_counter = 927	 x_shift = 0.45	 y_shift = 0
+particle_counter = 928	 x_shift = 0.45	 y_shift = 0
+particle_counter = 929	 x_shift = 0.45	 y_shift = 0
+particle_counter = 930	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 930
+particle_counter = 931	 x_shift = 0.45	 y_shift = 0
+particle_counter = 932	 x_shift = 0.45	 y_shift = 0
+particle_counter = 933	 x_shift = 0.45	 y_shift = 0
+particle_counter = 934	 x_shift = 0.45	 y_shift = 0
+particle_counter = 935	 x_shift = 0.45	 y_shift = 0
+particle_counter = 936	 x_shift = 0.45	 y_shift = 0
+particle_counter = 937	 x_shift = 0.45	 y_shift = 0
+particle_counter = 938	 x_shift = 0.45	 y_shift = 0
+particle_counter = 939	 x_shift = 0.45	 y_shift = 0
+particle_counter = 940	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 940
+particle_counter = 941	 x_shift = 0.45	 y_shift = 0
+particle_counter = 942	 x_shift = 0.45	 y_shift = 0
+particle_counter = 943	 x_shift = 0.45	 y_shift = 0
+particle_counter = 944	 x_shift = 0.45	 y_shift = 0
+particle_counter = 945	 x_shift = 0.45	 y_shift = 0
+particle_counter = 946	 x_shift = 0.45	 y_shift = 0
+particle_counter = 947	 x_shift = 0.45	 y_shift = 0
+particle_counter = 948	 x_shift = 0.45	 y_shift = 0
+particle_counter = 949	 x_shift = 0.45	 y_shift = 0
+particle_counter = 950	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 950
+particle_counter = 951	 x_shift = 0.45	 y_shift = 0
+particle_counter = 952	 x_shift = 0.45	 y_shift = 0
+particle_counter = 953	 x_shift = 0.45	 y_shift = 0
+particle_counter = 954	 x_shift = 0.45	 y_shift = 0
+particle_counter = 955	 x_shift = 0.45	 y_shift = 0
+particle_counter = 956	 x_shift = 0.45	 y_shift = 0
+particle_counter = 957	 x_shift = 0.45	 y_shift = 0
+particle_counter = 958	 x_shift = 0.45	 y_shift = 0
+particle_counter = 959	 x_shift = 0.45	 y_shift = 0
+particle_counter = 960	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 960
+particle_counter = 961	 x_shift = 0.45	 y_shift = 0
+particle_counter = 962	 x_shift = 0.45	 y_shift = 0
+particle_counter = 963	 x_shift = 0.45	 y_shift = 0
+particle_counter = 964	 x_shift = 0.45	 y_shift = 0
+particle_counter = 965	 x_shift = 0.45	 y_shift = 0
+particle_counter = 966	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.598138 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 5.57785 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 5.57785 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 31.1124
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 967	 x_shift = 0.45	 y_shift = 0
+particle_counter = 968	 x_shift = 0.45	 y_shift = 0
+particle_counter = 969	 x_shift = 0.45	 y_shift = 0
+particle_counter = 970	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 970
+particle_counter = 971	 x_shift = 0.45	 y_shift = 0
+particle_counter = 972	 x_shift = 0.45	 y_shift = 0
+particle_counter = 973	 x_shift = 0.45	 y_shift = 0
+particle_counter = 974	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.55363 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 5.09087 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 5.09087 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 25.917
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 975	 x_shift = 0.45	 y_shift = 0
+particle_counter = 976	 x_shift = 0.45	 y_shift = 0
+particle_counter = 977	 x_shift = 0.45	 y_shift = 0
+particle_counter = 978	 x_shift = 0.45	 y_shift = 0
+particle_counter = 979	 x_shift = 0.45	 y_shift = 0
+particle_counter = 980	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 980
+particle_counter = 981	 x_shift = 0.45	 y_shift = 0
+particle_counter = 982	 x_shift = 0.45	 y_shift = 0
+particle_counter = 983	 x_shift = 0.45	 y_shift = 0
+particle_counter = 984	 x_shift = 0.45	 y_shift = 0
+particle_counter = 985	 x_shift = 0.45	 y_shift = 0
+particle_counter = 986	 x_shift = 0.45	 y_shift = 0
+particle_counter = 987	 x_shift = 0.45	 y_shift = 0
+particle_counter = 988	 x_shift = 0.45	 y_shift = 0
+particle_counter = 989	 x_shift = 0.45	 y_shift = 0
+particle_counter = 990	 x_shift = 0.45	 y_shift = 0
+
+---> Begin of event: 990
+particle_counter = 991	 x_shift = 0.45	 y_shift = 0
+particle_counter = 992	 x_shift = 0.45	 y_shift = 0
+particle_counter = 993	 x_shift = 0.45	 y_shift = 0
+particle_counter = 994	 x_shift = 0.45	 y_shift = 0
+particle_counter = 995	 x_shift = 0.45	 y_shift = 0
+particle_counter = 996	 x_shift = 0.45	 y_shift = 0
+particle_counter = 997	 x_shift = 0.45	 y_shift = 0
+particle_counter = 998	 x_shift = 0.45	 y_shift = 0
+particle_counter = 999	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1000	 x_shift = 0.45	 y_shift = 0
+New event started! 1000 Particle energy: 0.00165308 keV. 
+
+---> Begin of event: 1000
+particle_counter = 1001	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1002	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1003	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1004	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1005	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1006	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1007	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1008	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1009	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1010	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1011	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1012	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1013	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1014	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1015	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1016	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1017	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1018	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1019	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1020	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1021	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1022	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1023	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1024	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1025	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1026	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1027	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1028	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1029	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1030	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1031	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1032	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1033	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1034	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1035	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1036	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1037	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1038	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1039	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1040	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.656558 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 6.76465 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 6.76465 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 45.7605
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 1041	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1042	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1043	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1044	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1045	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1046	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1047	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1048	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1049	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1050	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1051	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1052	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1053	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1054	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1055	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1056	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1057	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1058	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1059	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1060	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1061	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1062	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1063	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1064	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1065	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1066	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1067	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1068	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1069	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1070	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1071	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1072	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1073	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1074	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1075	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1076	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1077	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1078	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1079	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1080	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1081	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1082	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1083	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1084	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1085	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1086	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1087	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1088	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1089	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1090	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1091	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1092	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1093	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1094	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1095	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1096	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1097	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1098	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1099	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1100	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1101	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1102	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1103	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1104	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1105	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1106	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1107	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1108	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1109	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1110	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1111	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1112	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1113	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1114	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1115	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1116	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1117	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1118	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1119	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1120	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1121	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1122	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1123	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1124	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1125	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1126	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1127	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1128	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1129	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1130	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1131	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1132	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1133	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1134	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1135	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1136	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1137	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1138	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1139	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1140	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1141	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1142	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1143	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1144	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1145	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1146	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1147	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1148	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1149	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1150	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1151	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1152	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1153	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1154	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1155	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1156	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1157	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1158	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1159	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1160	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1161	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1162	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1163	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1164	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1165	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1166	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1167	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1168	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1169	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1170	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1171	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1172	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1173	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1174	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1175	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1176	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1177	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1178	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1179	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1180	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1181	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1182	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1183	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1184	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1185	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1186	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1187	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1188	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1189	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1190	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1191	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1192	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1193	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1194	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1195	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1196	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1197	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1198	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1199	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1200	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1201	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1202	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1203	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1204	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1205	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1206	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1207	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1208	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1209	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1210	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1211	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1212	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1213	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1214	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1215	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1216	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1217	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1218	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1219	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1220	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1221	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1222	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1223	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1224	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1225	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1226	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1227	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1228	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1229	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1230	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1231	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1232	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1233	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1234	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1235	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1236	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1237	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1238	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1239	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1240	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1241	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1242	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1243	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1244	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1245	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1246	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1247	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1248	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1249	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1250	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1251	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1252	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1253	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1254	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1255	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1256	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1257	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1258	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1259	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1260	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1261	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1262	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1263	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1264	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1265	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1266	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1267	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1268	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1269	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1270	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1271	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1272	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1273	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1274	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1275	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1276	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1277	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1278	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1279	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1280	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1281	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1282	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1283	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1284	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1285	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1286	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1287	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1288	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1289	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1290	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1291	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1292	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1293	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1294	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1295	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1296	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1297	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1298	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1299	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1300	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1301	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1302	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1303	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1304	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1305	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1306	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1307	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1308	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1309	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1310	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1311	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1312	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1313	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1314	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1315	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1316	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1317	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1318	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1319	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1320	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1321	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1322	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1323	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1324	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1325	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1326	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1327	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1328	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1329	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1330	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1331	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1332	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.631707 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 7.48072 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 7.48072 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 55.9612
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 1333	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1334	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1335	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1336	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1337	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1338	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1339	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1340	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1341	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1342	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1343	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1344	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1345	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1346	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1347	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1348	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1349	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1350	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1351	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1352	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1353	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1354	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1355	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1356	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1357	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1358	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1359	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1360	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1361	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1362	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1363	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1364	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1365	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1366	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1367	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1368	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1369	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1370	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1371	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1372	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1373	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1374	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1375	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1376	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1377	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1378	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1379	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1380	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1381	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1382	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1383	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1384	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1385	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1386	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1387	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1388	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1389	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1390	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1391	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1392	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1393	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1394	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1395	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1396	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1397	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1398	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1399	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1400	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1401	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1402	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1403	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1404	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1405	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1406	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1407	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1408	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1409	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1410	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1411	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1412	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1413	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1414	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1415	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1416	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1417	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1418	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1419	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1420	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1421	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1422	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1423	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1424	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1425	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1426	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1427	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1428	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1429	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1430	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1431	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1432	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1433	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1434	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1435	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1436	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1437	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1438	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1439	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.585091 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 5.42279 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 5.42279 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 29.4067
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 1440	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1441	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1442	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1443	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1444	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1445	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1446	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.584415 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 5.51085 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 5.51085 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 30.3694
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 1447	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1448	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1449	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1450	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1451	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1452	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1453	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1454	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1455	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1456	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1457	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1458	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1459	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1460	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1461	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1462	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1463	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1464	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1465	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1466	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1467	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1468	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1469	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1470	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1471	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1472	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1473	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1474	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1475	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1476	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1477	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1478	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1479	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1480	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1481	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1482	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1483	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1484	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1485	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1486	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1487	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1488	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1489	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1490	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1491	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1492	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1493	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1494	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1495	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1496	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1497	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1498	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1499	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1500	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1501	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1502	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1503	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1504	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1505	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1506	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1507	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1508	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1509	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1510	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1511	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1512	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1513	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1514	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1515	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1516	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1517	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1518	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1519	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1520	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1521	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1522	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1523	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1524	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1525	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1526	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1527	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1528	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1529	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1530	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1531	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1532	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1533	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1534	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1535	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1536	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1537	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1538	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1539	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1540	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1541	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1542	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1543	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1544	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1545	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1546	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1547	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1548	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1549	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1550	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1551	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1552	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1553	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1554	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1555	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1556	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1557	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1558	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1559	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1560	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1561	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1562	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1563	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1564	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1565	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1566	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1567	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1568	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1569	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1570	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1571	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1572	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1573	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1574	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1575	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1576	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1577	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1578	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1579	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1580	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1581	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1582	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1583	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1584	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1585	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1586	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1587	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1588	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1589	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1590	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1591	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1592	 x_shift = 0.45	 y_shift = 0
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+Accuracy error or slightly inaccurate position shift.
+     The Step's starting point has moved 0.592778 mm 
+     since the last call to a Locate method.
+     This has resulted in moving 5.56446 mm  from the last point at which the safety      was calculated 
+     which is more than the computed safety= 0 mm  at that point.
+     This difference is 5.56446 mm.
+     The tolerated accuracy is 1e-06 mm. 
+
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+
+-------- WWWW ------- G4Exception-START -------- WWWW -------
+*** G4Exception : GeomNav1002
+      issued by : G4Navigator::ComputeStep()
+May lead to a crash or unreliable results.
+        Position has shifted considerably without notifying the navigator !
+        Tolerated safety: 1e-06
+        Computed shift  : 30.9633
+*** This is just a warning message. ***
+-------- WWWW -------- G4Exception-END --------- WWWW -------
+
+particle_counter = 1593	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1594	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1595	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1596	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1597	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1598	 x_shift = 0.45	 y_shift = 0
+particle_counter = 1599	 x_shift = 0.45	 y_shift = 0
+RunAction::EndOfRunAction. number of event = 1600
+inf
+ User=0.141s Real=0s Sys=0.016s
+*** VRML 2.0 File  g4_23.wrl  is generated.
+MESSAGE from VRML2FILE driver:
+    Set an environmental variable  G4VRMLFILE_VIEWER
+    if you want to visualize the generated VRML file
+    automatically.  For example, 
+    setenv  G4VRMLFILE_VIEWER  vrwave 
+Graphics systems deleted.
+Visualization Manager deleting...
+   
+Lead time is 7.207 seconds  (or 0.120117 minutes)
+
+Для продолжения нажмите любую клавишу . . . 
