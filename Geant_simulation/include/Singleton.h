@@ -22,6 +22,7 @@ public:
 	ofstream file_num_of_photons;
 	ofstream file_num_of_photons_SiPM;
 	ofstream file_coord_from_SiPM;
+	ofstream file_total_num_of_reg_photons_SiPM;
 	ofstream file_num_of_photons_PMT;
 	ofstream file_num_of_reg_photons;
 	ofstream file_ph_coll;
@@ -102,4 +103,9 @@ public:
 
 	Hits* SiPM_hits;
 	Hits* PMT_hits;
+
+	//x,y,z coord of source
+	double x_source;
+	double y_source;
+	double z_source;
 };

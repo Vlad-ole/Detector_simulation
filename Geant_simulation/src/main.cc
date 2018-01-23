@@ -81,11 +81,20 @@ int main(int argc, char** argv)
 
 
 	//for
-	for (int i = 0; i < 1 /*num of runs*/; i++)
+	const int N_runs = 1000;
+	for (int i = 0; i < N_runs; i++)
 	{
 		
 		g()->CathRefl_index = 0.0;
 		g()->SigmaAlpha_index = 0.0741;
+
+		double val_from = -50;
+		double val_to = 50;
+		double step = (val_to - val_from) / (N_runs - 1);
+
+		g()->x_source = /*val_from + step*(i)*/ 0;
+		g()->y_source = 0;
+		g()->z_source = 54.7;
 
 		if (argc == 1)
 		{
@@ -120,7 +129,7 @@ int main(int argc, char** argv)
 	cout << "Lead time is " << (t2 - t1) / 1000.0 << " seconds " << " (or " << (t2 - t1) / 60000.0 << " minutes)" << endl;
 	cout << endl;
 
-	system("pause");
+	//system("pause");
 
 	return 0;
 }

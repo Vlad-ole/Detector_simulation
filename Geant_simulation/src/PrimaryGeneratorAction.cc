@@ -19,15 +19,13 @@ using namespace std;
 //#define SPHERE_4PI
 
 //set (x,y,z) position
-//#define CENTRAL_INCIDENCE
+#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-#define EL_GAP 
+//#define EL_GAP 
 
 
 void PrimaryGeneratorAction::CommonPart()
 {
-
-
 	G4int n_particle = 1;
 	particleGun = new G4ParticleGun(n_particle);
 
@@ -37,7 +35,6 @@ void PrimaryGeneratorAction::CommonPart()
 	G4ParticleDefinition* particle = particleTable->FindParticle(particleName = /*"gamma"*/ "opticalphoton");
 
 	particleGun->SetParticleDefinition(particle);
-
 }
 
 PrimaryGeneratorAction::PrimaryGeneratorAction()
@@ -230,9 +227,9 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef CENTRAL_INCIDENCE
 	//x = 1.1 * mm * 1.5  ;
 	//y = 1.1 * mm * sqrt(3) / 2 * 2;
-	x = 0;
-	y = 0;
-	z = 54.7;
+	x = g()->x_source;
+	y = g()->y_source;
+	z = g()->z_source;
 #endif //CENTRAL_INCIDENCE
 
 #ifdef GEM_HOLE

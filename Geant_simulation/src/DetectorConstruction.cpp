@@ -74,11 +74,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
 
 #define bSiPM
-#define bPMMA_plate
-#define bAnode_grid
+//#define bPMMA_plate
+//#define bAnode_grid
 //#define bInsulator_box
 //#define bPMTs
-#define bTHGEM2
+//#define bTHGEM2
 //#define bTHGEM1
 //#define	bLArOuter
 
@@ -87,7 +87,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//--------------------------------------------------------------------------------
 	//выставление размеров объектов
-	const G4double HalfWorldLength = 50 * cm;
+	const G4double HalfWorldLength = 20 * cm;
 
 	//SiPMs
 	const int Nx_SiPMs = 11;
