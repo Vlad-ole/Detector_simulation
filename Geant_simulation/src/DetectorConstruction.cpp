@@ -76,10 +76,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #define bSiPM
 #define bPMMA_plate
 #define bAnode_grid
-#define bInsulator_box
-#define bPMTs
+//#define bInsulator_box
+//#define bPMTs
 #define bTHGEM2
-#define bTHGEM1
+//#define bTHGEM1
+//#define	bLArOuter
 
 	//bool bLAr_inner = false;
 	//bool bLAr_outer = false;
@@ -97,12 +98,12 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double chamberSpacing = 10 * mm;
 	const double z_SiPM_bottom = 85.7*mm;
 	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
-
+	
 	//anode wire
 	const double radius_wire = 100 * um;
-	const double length_wire = 108 * mm /*future case*/;  //60 * mm /*real case*/;
+	const double length_wire = 60 * mm /* 108*mm future case*/;  //60*mm /*real case*/;
 	const double step_wire = 1 * mm;
-	const int N_wire = 107;
+	const int N_wire = length_wire/step_wire - 1 /* 107 future case*/;
 
 	//Anode_grid
 	const double thickness_anode_grid = 0.5 * mm;
@@ -295,7 +296,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 
-
+#ifdef bLArOuter
 	//--------------------------------------------------------------------------------
 	//create LAr box contaned outside the PMMA insulator
 	cout << x_size_LAr_outer_out / 2.0 << "\t" << y_size_LAr_outer_out / 2.0 << endl;
@@ -314,7 +315,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		fCheckOverlaps); // checking overlaps 
 
 	//--------------------------------------------------------------------------------
-
+#endif // bLArOuter
 
 
 
@@ -730,7 +731,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//Bottom_absorber
 	G4LogicalBorderSurface* LAr_inner2Bottom_absorber = new G4LogicalBorderSurface("LAr_inner2Bottom_absorber", phys_LAr_inner, phys_Bottom_absorber, AbsorberMaterial);
+
+#ifdef bLArOuter
 	G4LogicalBorderSurface* LAr_outer2Bottom_absorber = new G4LogicalBorderSurface("LAr_outer2Bottom_absorber", phys_LAr_outer, phys_Bottom_absorber, AbsorberMaterial);
+#endif // bLArOuter
+	
 
 #ifdef bInsulator_box
 	G4LogicalBorderSurface* Insulator_box2Bottom_absorber = new G4LogicalBorderSurface("Insulator_box2Bottom_absorber", phys_Insulator_box, phys_Bottom_absorber, AbsorberMaterial);
@@ -745,10 +750,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* world2PMT2 = new G4LogicalBorderSurface("world2PMT2", physiWorld, phys_PMT2, silicaCathodeMaterial);
 	G4LogicalBorderSurface* world2PMT3 = new G4LogicalBorderSurface("world2PMT3", physiWorld, phys_PMT3, silicaCathodeMaterial);
 
+#ifdef bLArOuter
 	G4LogicalBorderSurface* LAr_outer2PMT0 = new G4LogicalBorderSurface("LAr_outer2PMT0", phys_LAr_outer, phys_PMT0, silicaCathodeMaterial);
 	G4LogicalBorderSurface* LAr_outer2PMT1 = new G4LogicalBorderSurface("LAr_outer2PMT1", phys_LAr_outer, phys_PMT1, silicaCathodeMaterial);
 	G4LogicalBorderSurface* LAr_outer2PMT2 = new G4LogicalBorderSurface("LAr_outer2PMT2", phys_LAr_outer, phys_PMT2, silicaCathodeMaterial);
 	G4LogicalBorderSurface* LAr_outer2PMT3 = new G4LogicalBorderSurface("LAr_outer2PMT3", phys_LAr_outer, phys_PMT3, silicaCathodeMaterial);
+#endif // bLArOuter
+
 	//________________________________________________
 #endif //bPMTs
 
@@ -823,7 +831,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//LAr
 	G4VisAttributes* LAr_inside_VisAtt = new G4VisAttributes(G4Colour(0.0, 0.0, 1.0, 0.3));
 	logic_LAr_inner->SetVisAttributes(LAr_inside_VisAtt);
+
+#ifdef bLArOuter
 	logic_LAr_outer->SetVisAttributes(LAr_inside_VisAtt);
+#endif // bLArOuter
+	
 
 
 	//FieldTHGEM

@@ -13,8 +13,16 @@ using namespace std;
 
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 
+//set angle distribution
 //#define DIRECT_INCIDENCE
+#define TOP_HEMISPHERE
+//#define SPHERE_4PI
+
+//set (x,y,z) position
 //#define CENTRAL_INCIDENCE
+//#define GEM_HOLE
+#define EL_GAP 
+
 
 void PrimaryGeneratorAction::CommonPart()
 {
@@ -180,7 +188,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//-------------------------------------
 	//Set particle direction
 
-
 	const double pi = 3.1416;
 
 #ifdef DIRECT_INCIDENCE
@@ -188,15 +195,27 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	double theta = 0 * deg;
 	//cout << "inside DIRECT_INCIDENCE" << endl;
 	//system("pause");
-#else 
+#endif //DIRECT_INCIDENCE	
+	
+#ifdef	SPHERE_4PI
 	//uniform distribution
 	double phi = 2 * pi*G4UniformRand();
 	//double theta = pi/2*G4UniformRand();
 	double theta = acos((G4UniformRand() - 0.5) * 2);
-#endif //DIRECT_INCIDENCE		
+#endif //SPHERE_4PI	
+
+
+#ifdef TOP_HEMISPHERE
+	double phi = 2 * pi*G4UniformRand();
+	double theta = acos( G4UniformRand() );
+#endif //TOP_HEMISPHERE
 
 	particleGun->SetParticleMomentumDirection(G4ThreeVector(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta)));
 	//------------------------------------
+
+
+
+
 
 
 	//-------------------------------------
@@ -206,15 +225,17 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	int ph_per_hole = G_THGEM * avalanche_light_yield;
 
 	double x, y, z;
+
+
 #ifdef CENTRAL_INCIDENCE
 	//x = 1.1 * mm * 1.5  ;
 	//y = 1.1 * mm * sqrt(3) / 2 * 2;
 	x = 0;
 	y = 0;
-	z = 80;
-	//cout << "inside CENTRAL_INCIDENCE" << endl;
-	//system("pause");
-#else
+	z = 54.7;
+#endif //CENTRAL_INCIDENCE
+
+#ifdef GEM_HOLE
 	double radius = 0.250;
 	
 	x_shift = 0.9 * mm * (0.5);
@@ -245,7 +266,16 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		y = 2 * radius*(G4UniformRand() - 0.5)*mm + y_shift; // +1.1 * mm * sqrt(3) / 2 * (-1);
 		z = 77.7;
 	} while (pow(x - x_shift, 2.0) + pow(y - y_shift, 2.0) > pow(radius, 2.0)*mm2);
-#endif
+#endif //GEM_HOLE
+
+
+#ifdef EL_GAP
+	x = 0;
+	y = 0;
+	z = 54.7 + (72.7 - 54.7)*G4UniformRand();
+#endif //EL_GAP
+
+
 	particleGun->SetParticlePosition(G4ThreeVector(x, y, z));
 	//------------------------------------
 
