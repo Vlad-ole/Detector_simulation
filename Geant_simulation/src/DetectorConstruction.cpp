@@ -74,8 +74,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
 
 #define bSiPM
-//#define bPMMA_plate
-//#define bAnode_grid
+#define bPMMA_plate
+#define bAnode_grid
 //#define bInsulator_box
 //#define bPMTs
 //#define bTHGEM2

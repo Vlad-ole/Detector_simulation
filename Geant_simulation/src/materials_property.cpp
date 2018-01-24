@@ -95,7 +95,7 @@ void DetectorConstruction::defineMaterials()
 	PMMA->AddElement(H, 8);
 	const G4int numentries_PMMA = 2;
 	G4double energies_PMMA[numentries_PMMA] = { 0.1*eV, 10.0*eV };
-	G4double rindices_PMMA[numentries_PMMA] = { 1.5, 1.5 };
+	G4double rindices_PMMA[numentries_PMMA] = { 1.5, 1.5 };//good approximation from 400 to 1000 nm (in real n = (1.5, 1.48) ) 
 	G4double absorpti_PMMA[numentries_PMMA] = { 10 * m, 10 * m }; // avoid infinite light-paths
 	G4MaterialPropertiesTable* prop_PMMA = new G4MaterialPropertiesTable();
 	prop_PMMA->AddProperty("ABSLENGTH", energies_PMMA, absorpti_PMMA, numentries_PMMA);

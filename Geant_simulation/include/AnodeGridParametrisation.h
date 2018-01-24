@@ -2,6 +2,7 @@
 #define AnodeGridParametrisation_h 1
 
 #include "G4VPVParameterisation.hh"
+#include "G4RotationMatrix.hh";
 
 class G4VPhysicalVolume;
 class G4Box;
@@ -75,6 +76,8 @@ private:
 	G4double fRadius;
 	G4double fLength;
 
+	G4RotationMatrix *rotX;
+	double *example;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

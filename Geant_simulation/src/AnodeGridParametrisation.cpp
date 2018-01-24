@@ -10,7 +10,8 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-AnodeGridParametrisation::AnodeGridParametrisation(G4int  NoObj, G4double startX, G4double startY, G4double startZ, G4double spacing, G4double radius, G4double length)
+AnodeGridParametrisation::AnodeGridParametrisation
+(G4int  NoObj, G4double startX, G4double startY, G4double startZ, G4double spacing, G4double radius, G4double length)
 {
 	fNoObj = NoObj;
 	fStartX = startX;
@@ -19,6 +20,9 @@ AnodeGridParametrisation::AnodeGridParametrisation(G4int  NoObj, G4double startX
 	fSpacing = spacing;
 	fRadius = radius;
 	fLength = length;
+
+	rotX = new G4RotationMatrix();
+	rotX->rotateX(90 * deg);
 
 	if (fNoObj > 0 && spacing < 2*radius)
 	{
@@ -33,6 +37,7 @@ AnodeGridParametrisation::AnodeGridParametrisation(G4int  NoObj, G4double startX
 
 AnodeGridParametrisation::~AnodeGridParametrisation()
 {
+	delete rotX;
 }
 
 
@@ -46,9 +51,7 @@ void AnodeGridParametrisation::ComputeTransformation
 
 	//G4cout << "copyNo = " << copyNo << "; Xposition = " << Xposition << "; Yposition = " << Yposition << G4endl;
 
-	G4ThreeVector origin(Xposition, fStartY, fStartZ);
-	G4RotationMatrix* rotX = new G4RotationMatrix();
-	rotX->rotateX(90*deg);
+	G4ThreeVector origin(Xposition, fStartY, fStartZ);	
 
 	physVol->SetTranslation(origin);
 	physVol->SetRotation(rotX);
