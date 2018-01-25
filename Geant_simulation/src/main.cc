@@ -11,6 +11,7 @@
 #include "DetectorConstruction.hh"
 #include "PhysicsList.hh"
 #include "RunAction.hh"
+#include "MyExceptionHandler.hh"
 #include "PrimaryGeneratorAction.hh"
 
 #include "EventAction.hh"
@@ -50,6 +51,8 @@ int main(int argc, char** argv)
 
 	// Construct the default run manager
 	G4RunManager * runManager = new G4RunManager;
+	MyExceptionHandler* myExepHand = new MyExceptionHandler();
+	
 
 	//	// set mandatory initialization classes
 	DetectorConstruction* detector = new DetectorConstruction;
@@ -81,7 +84,7 @@ int main(int argc, char** argv)
 
 
 	//for
-	const int N_runs = /*101*/10000;
+	const int N_runs = /*101*/ /*10000*/ 3;
 	for (int i = 0; i < N_runs; i++)
 	{
 		/*if (i % 1000 == 0 || i == (N_runs - 1))
@@ -98,9 +101,9 @@ int main(int argc, char** argv)
 		double val_to = 50;
 		double step = (N_runs > 1) ? (val_to - val_from) / (N_runs - 1) : 0;
 
-		g()->x_source = /*val_from + step*(i) */ 0;
+		g()->x_source = val_from + step*(i)  /*0*/;
 		g()->y_source = /*val_from + step*(i)*/ 0;
-		g()->z_source = 54.7;
+		//g()->z_source = 54.7;
 
 		if (argc == 1)
 		{

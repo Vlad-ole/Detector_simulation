@@ -19,9 +19,9 @@ using namespace std;
 //#define SPHERE_4PI
 
 //set (x,y,z) position
-#define CENTRAL_INCIDENCE
+//#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-//#define EL_GAP 
+#define EL_GAP 
 
 
 void PrimaryGeneratorAction::CommonPart()
@@ -229,6 +229,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//y = 1.1 * mm * sqrt(3) / 2 * 2;
 	x = g()->x_source;
 	y = g()->y_source;
+	g()->z_source = 54.7;
 	z = g()->z_source;
 #endif //CENTRAL_INCIDENCE
 
@@ -267,8 +268,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 
 #ifdef EL_GAP
-	x = 0;
-	y = 0;
+	x = g()->x_source;
+	y = g()->y_source;
 	z = 54.7 + (72.7 - 54.7)*G4UniformRand();
 #endif //EL_GAP
 
@@ -282,7 +283,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	G4int  n_event = anEvent->GetEventID();
 	if ((n_event % 1000) == 0)
 	{
-		cout << "New event started! " << anEvent->GetEventID() << " Particle energy: " << energy << " keV. " << endl;
+		//cout << "New event started! " << anEvent->GetEventID() << " Particle energy: " << energy << " keV. " << endl;
 	}
 
 }

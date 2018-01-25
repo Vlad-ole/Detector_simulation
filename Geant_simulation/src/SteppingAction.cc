@@ -22,7 +22,7 @@
 #include "G4SystemOfUnits.hh"
 
 //#define bTHGEM2
-//#define bTHGEM1
+#define bTHGEM1
 
 SteppingAction::SteppingAction(DetectorConstruction* myDC, EventAction* myEA)
 	:myDetector(myDC), eventAction(myEA)

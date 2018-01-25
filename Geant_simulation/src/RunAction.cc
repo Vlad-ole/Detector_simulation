@@ -27,8 +27,8 @@ RunAction::~RunAction()
 
 void RunAction::BeginOfRunAction(const G4Run* aRun)
 {
-	cout << endl;
-	cout << "RunAction::BeginOfRunAction. Run " << aRun->GetRunID() << " start." << endl;
+	//cout << endl;
+	//cout << "RunAction::BeginOfRunAction. Run " << aRun->GetRunID() << " start." << endl;
 	timer->Start();
 
 	(g()->LightCollection).clear();
@@ -42,7 +42,7 @@ void RunAction::BeginOfRunAction(const G4Run* aRun)
 void RunAction::EndOfRunAction(const G4Run* aRun)
 {
 	timer->Stop();
-	cout << "RunAction::EndOfRunAction. number of event = " << aRun->GetNumberOfEvent() << endl;
+	//cout << "RunAction::EndOfRunAction. number of event = " << aRun->GetNumberOfEvent() << endl;
 	
 	double sum_lc = 0;
 	for (int i = 0; i < (g()->LightCollection).size(); i++)
@@ -51,19 +51,20 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 	}
 
 	
-	cout << sum_lc / (g()->LightCollection).size() << endl;
+	//cout << sum_lc / (g()->LightCollection).size() << endl;
 	//g()->file_run_lc << /*g()->abs_index << "\t" << */ g()->CathRefl_index << "\t" << sum_lc / (g()->LightCollection).size() << endl;
 	//g()->file_boundary_process << g()->SigmaAlpha_index << "\t" << ((double) g()->NumberOfReflections) / g()->NumberOfBornPhotons << endl;
 	//g()->file_boundary_process << g()->NumberOfRegPhotons << "\t" << ((double) g()->NumberOfReflections) <<  endl;
 
-
+	const int n_x_SiPM = 11;
+	const int y_x_SiPM = 11;
 	double x_pos = 0;
 	double y_pos = 0;
 	double step = 10;
 	for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
-	{
-		x_pos = (i % 11 - 5) * step;
-		y_pos = (i / 11 - 5) * step;
+	{		
+		x_pos = (i % n_x_SiPM - 5) * step;
+		y_pos = (i / y_x_SiPM - 5) * step;
 
 		g()->SiPM_hits->xpos_v[i] = x_pos;
 		g()->SiPM_hits->ypos_v[i] = y_pos;
@@ -77,11 +78,26 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 
 	for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
 	{
-		x_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->xpos_v[i];
-		y_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->ypos_v[i];
-		q_mean += g()->SiPM_hits->N_reg_v[i];
-		////cout << i << "\t x_pos = " << g()->SiPM_hits->xpos_v[i] << "\t y_pos = " << g()->SiPM_hits->ypos_v[i] <<"\t N_reg = " << g()->SiPM_hits->N_reg_v[i] << "\t x_mean =  " << x_mean << "\t y_mean = " << y_mean << "\t q_mean = " << q_mean << endl;
-		//g()->file_num_of_photons_SiPM << i << "\t" << g()->SiPM_hits->xpos_v[i] << "\t" << g()->SiPM_hits->ypos_v[i] << "\t" << g()->SiPM_hits->N_reg_v[i] << endl;
+		// condition to choose 5x5 matrix
+		if (g()->SiPM_hits->xpos_v[i] > -2.5*step && g()->SiPM_hits->xpos_v[i] < 2.5*step && 
+			g()->SiPM_hits->ypos_v[i] > -2.5*step && g()->SiPM_hits->ypos_v[i] < 2.5*step)
+		{
+			if(i != 40)
+			{ 
+				x_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->xpos_v[i];
+				y_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->ypos_v[i];
+				q_mean += g()->SiPM_hits->N_reg_v[i];
+				////cout << i << "\t x_pos = " << g()->SiPM_hits->xpos_v[i] << "\t y_pos = " << g()->SiPM_hits->ypos_v[i] <<"\t N_reg = " << g()->SiPM_hits->N_reg_v[i] << "\t x_mean =  " << x_mean << "\t y_mean = " << y_mean << "\t q_mean = " << q_mean << endl;
+				//g()->file_num_of_photons_SiPM << i << "\t" << g()->SiPM_hits->xpos_v[i] << "\t" << g()->SiPM_hits->ypos_v[i] << "\t" << g()->SiPM_hits->N_reg_v[i] << endl;
+			}
+			else
+			{
+				double N_pe = (g()->SiPM_hits->N_reg_v[39] + g()->SiPM_hits->N_reg_v[51] + g()->SiPM_hits->N_reg_v[50]/sqrt(2))/3.0;
+				x_mean += N_pe * g()->SiPM_hits->xpos_v[i];
+				y_mean += N_pe * g()->SiPM_hits->ypos_v[i];
+				q_mean += N_pe;
+			}
+		}
 	}
 
 	//g()->file_num_of_photons_SiPM << endl << endl;
@@ -99,6 +115,6 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 
 		
 	delete g()->SiPM_hits;
-	cout << " " << *timer << endl;
+	//cout << " " << *timer << endl;
 }
 

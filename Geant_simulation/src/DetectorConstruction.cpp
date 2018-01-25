@@ -79,7 +79,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 //#define bInsulator_box
 //#define bPMTs
 //#define bTHGEM2
-//#define bTHGEM1
+#define bTHGEM1
 //#define	bLArOuter
 
 	//bool bLAr_inner = false;

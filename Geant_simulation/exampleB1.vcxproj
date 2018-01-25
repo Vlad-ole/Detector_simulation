@@ -284,6 +284,7 @@
     <ClCompile Include="src\Messenger.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\MyExceptionHandler.cc" />
     <ClCompile Include="src\PhysicsList.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -326,6 +327,7 @@
     <ClInclude Include="include\AnodeGridParametrisation.h" />
     <ClInclude Include="include\DetectorParametrisation.h" />
     <ClInclude Include="include\Hits.h" />
+    <ClInclude Include="include\MyExceptionHandler.hh" />
     <ClInclude Include="include\PMTHits.h" />
     <ClInclude Include="include\ReadConstants.h" />
     <ClInclude Include="include\Singleton.h" />

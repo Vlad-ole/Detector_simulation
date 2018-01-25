@@ -96,6 +96,9 @@
     <ClCompile Include="src\Hits.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\MyExceptionHandler.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Messenger.hh">
@@ -158,6 +161,9 @@
       <Filter>Header Files\DetectorConstruction</Filter>
     </ClInclude>
     <ClInclude Include="include\Hits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MyExceptionHandler.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
