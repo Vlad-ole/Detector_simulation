@@ -94,16 +94,6 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//выставление размеров объектов
 	const G4double HalfWorldLength = 20 * cm;
 
-	//SiPMs
-	const int Nx_SiPMs = 11;
-	const int Ny_SiPMs = 11;
-
-	const double thickness_SiPM = 1 * nm;
-	const double size_SiPM = 6 * mm;
-	const double chamberSpacing = 10 * mm;
-	const double z_SiPM_bottom = 85.7*mm;
-	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
-	
 	//anode wire
 	const double radius_wire = 100 * um;
 	const double length_wire = 60 * mm /* 108*mm future case*/;  //60*mm /*real case*/;
@@ -114,8 +104,25 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double thickness_anode_grid = 0.5 * mm;
 	const double size_anode_grid = 124 * mm;
 	const double size_anode_grid_hole = length_wire /*future case*/;  //60 * mm /*real case*/;
-	const double z_anode_grid_bottom = 82.7*mm;
+	const double z_anode_grid_bottom = 78.2 /*78.2 in case of one THGEM*/ /*82.7*mm in case of two THGEM*/;
 	const double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
+
+	//PMMA plate
+	const double x_size_PMMA_plate = size_anode_grid;
+	const double y_size_PMMA_plate = size_anode_grid;
+	const double z_size_PMMA_plate = 1.5 * mm;
+	const double z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
+
+	//SiPMs
+	const int Nx_SiPMs = 11;
+	const int Ny_SiPMs = 11;
+	const double thickness_SiPM = 1 * nm;
+	const double size_SiPM = 6 * mm;
+	const double chamberSpacing = 10 * mm;
+	const double z_SiPM_bottom = z_anode_grid_bottom + thickness_anode_grid + z_size_PMMA_plate /* 85.7*mm in case of two THGEM*/;
+	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
+
+	cout << "z_SiPM_bottom = " << z_SiPM_bottom << endl;
 
 	//tracker SiPM
 	const double x_size_tracker = Nx_SiPMs * chamberSpacing + size_SiPM / 2.0;
@@ -127,11 +134,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double y_size_tracker_anode_grid = x_size_tracker_anode_grid;
 	const double z_size_tracker_anode_grid = thickness_anode_grid;
 
-	//PMMA plate
-	const double x_size_PMMA_plate = size_anode_grid;
-	const double y_size_PMMA_plate = size_anode_grid;
-	const double z_size_PMMA_plate = 1.5 * mm;
-	const double z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
+	
 
 
 
@@ -215,8 +218,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//Al_window
 	const double diameter_size_Al_window = 50 * mm;
-	const double z_size_Al_window = 1.5 * mm;
-	const double z_space_Al_window = 20 * mm;
+	const double z_size_Al_window = 1.0 * mm;
+	const double z_space_Al_window = 21 * mm;
 
 	
 
