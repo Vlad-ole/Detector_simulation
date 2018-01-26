@@ -81,6 +81,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 //#define bTHGEM2
 #define bTHGEM1
 //#define	bLArOuter
+#define bCathode
+#define bLArInactive
+#define bPMMA_bottom
+#define bAl_window
+
 
 	//bool bLAr_inner = false;
 	//bool bLAr_outer = false;
@@ -127,6 +132,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double y_size_PMMA_plate = size_anode_grid;
 	const double z_size_PMMA_plate = 1.5 * mm;
 	const double z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
+
+
 
 
 	//tracker THGEM2 (active region with holes)
@@ -183,11 +190,6 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double y_size_LAr_outer_out = x_size_LAr_outer_out;
 	const double z_size_LAr_outer = z_size_LAr_inner;
 
-	//Bottom_absorber
-	const double x_size_Bottom_absorber = x_size_LAr_outer_out;
-	const double y_size_Bottom_absorber = y_size_LAr_outer_out;
-	const double z_size_Bottom_absorber = 10 * mm;
-
 	//FieldTHGEM
 	const double x_size_FieldTHGEM = size_anode_grid;
 	const double y_size_FieldTHGEM = size_anode_grid;
@@ -195,6 +197,28 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double z_center_FieldTHGEM_1 = 18.2*mm + z_size_FieldTHGEM / 2;
 	const double z_center_FieldTHGEM_2 = 34.2*mm + z_size_FieldTHGEM / 2;
 	const double hole_size_FieldTHGEM = 88 * mm;
+
+	//Cathode
+	const double x_size_Cathode = x_size_LAr_outer_out;
+	const double y_size_Cathode = y_size_LAr_outer_out;
+	const double z_size_Cathode = 0.5 * mm;
+	
+	//LArInactive
+	const double x_size_LArInactive = x_size_LAr_outer_out;
+	const double y_size_LArInactive = y_size_LAr_outer_out;
+	const double z_size_LArInactive = 2 * mm;
+
+	//PMMA_bottom
+	const double x_size_PMMA_bottom = x_size_LAr_outer_out;
+	const double y_size_PMMA_bottom = y_size_LAr_outer_out;
+	const double z_size_PMMA_bottom = 3 * mm;
+
+	//Al_window
+	const double diameter_size_Al_window = 50 * mm;
+	const double z_size_Al_window = 1.5 * mm;
+	const double z_space_Al_window = 20 * mm;
+
+	
 
 	if (thickness_anode_grid < 2 * radius_wire)
 	{
@@ -228,7 +252,12 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_LAr_inner = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
 	const G4ThreeVector &position_LAr_outer = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
 
-	const G4ThreeVector &position_Bottom_absorber = G4ThreeVector(0, 0, -z_size_Bottom_absorber / 2.0);
+	const G4ThreeVector &position_Cathode = G4ThreeVector(0, 0, -z_size_Cathode / 2.0);
+	const G4ThreeVector &position_LArInactive = G4ThreeVector(0, 0, -z_size_Cathode - z_size_LArInactive / 2.0);
+	const G4ThreeVector &position_PMMA_bottom = G4ThreeVector(0, 0, -z_size_Cathode - z_size_LArInactive - z_size_PMMA_bottom / 2.0);
+	const double z_size_Al_window_tmp = -z_size_Cathode - z_size_LArInactive - z_size_PMMA_bottom;
+	const G4ThreeVector &position_Al_window_top = G4ThreeVector(0, 0, z_size_Al_window_tmp - z_size_Al_window / 2.0);	
+	const G4ThreeVector &position_Al_window_bottom = G4ThreeVector(0, 0, z_size_Al_window_tmp - z_size_Al_window - z_space_Al_window - z_size_Al_window / 2.0);
 
 	const G4ThreeVector &position_PMT_0 = G4ThreeVector(-x_pos_PMT, 0, z_pos_PMT);
 	const G4ThreeVector &position_PMT_1 = G4ThreeVector(x_pos_PMT, 0, z_pos_PMT);
@@ -351,21 +380,78 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 	//-------------------------------------------------------------------------------
-	//create Bottom_absorber
-
-	G4Box* solid_Bottom_absorber
-		= new G4Box("solid_Bottom_absorber", x_size_Bottom_absorber / 2.0, y_size_Bottom_absorber / 2.0, z_size_Bottom_absorber / 2.0);
-	G4LogicalVolume* logic_Bottom_absorber
-		= new G4LogicalVolume(solid_Bottom_absorber, G4Material::GetMaterial("Air"), "logic_Bottom_absorber", 0, 0, 0);
-	G4VPhysicalVolume* phys_Bottom_absorber = new G4PVPlacement(0,               // no rotation
-		position_Bottom_absorber, // at (x,y,z)
-		logic_Bottom_absorber,       // its logical volume
-		"phys_Bottom_absorber",       // its name
+	//create bCathode
+#ifdef bCathode
+	G4Box* solid_bCathode
+		= new G4Box("solid_bCathode", x_size_Cathode / 2.0, y_size_Cathode / 2.0, z_size_Cathode / 2.0);
+	G4LogicalVolume* logic_bCathode
+		= new G4LogicalVolume(solid_bCathode, G4Material::GetMaterial("FR4"), "logic_bCathode", 0, 0, 0);
+	G4VPhysicalVolume* phys_bCathode = new G4PVPlacement(0,               // no rotation
+		position_Cathode, // at (x,y,z)
+		logic_bCathode,       // its logical volume
+		"phys_bCathode",       // its name
 		logicWorld,         // its mother  volume
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps
 	 //-------------------------------------------------------------------------------
+#endif // bCathode
+
+
+#ifdef	bLArInactive
+	G4Box* solid_LArInactive
+		= new G4Box("solid_LArInactive", x_size_LArInactive / 2.0, y_size_LArInactive / 2.0, z_size_LArInactive / 2.0);
+	G4LogicalVolume* logic_LArInactive
+		= new G4LogicalVolume(solid_LArInactive, G4Material::GetMaterial("LAr"), "logic_LArInactive", 0, 0, 0);
+	G4VPhysicalVolume* phys_LArInactive = new G4PVPlacement(0,               // no rotation
+		position_LArInactive, // at (x,y,z)
+		logic_LArInactive,       // its logical volume
+		"phys_LArInactive",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif // bLArInactive
+
+
+#ifdef	bPMMA_bottom
+	G4Box* solid_PMMA_bottom
+		= new G4Box("solid_PMMA_bottom", x_size_PMMA_bottom / 2.0, y_size_PMMA_bottom / 2.0, z_size_PMMA_bottom / 2.0);
+	G4LogicalVolume* logic_PMMA_bottom
+		= new G4LogicalVolume(solid_PMMA_bottom, G4Material::GetMaterial("PMMA"), "logic_PMMA_bottom", 0, 0, 0);
+	G4VPhysicalVolume* phys_PMMA_bottom = new G4PVPlacement(0,               // no rotation
+		position_PMMA_bottom, // at (x,y,z)
+		logic_PMMA_bottom,       // its logical volume
+		"phys_PMMA_bottom",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif // bPMMA_bottom
+
+
+#ifdef	bAl_window
+	G4Tubs* solid_Al_window
+		= new G4Tubs("solid_Al_window", 0, 	diameter_size_Al_window/2.0, z_size_Al_window/2.0, 0. *deg, 360.*deg);	
+	G4LogicalVolume* logic_Al_window
+		= new G4LogicalVolume(solid_Al_window, G4Material::GetMaterial("Al"), "logic_Al_window", 0, 0, 0);
+	G4VPhysicalVolume* phys_Al_window_top = new G4PVPlacement(0,               // no rotation
+		position_Al_window_top, // at (x,y,z)
+		logic_Al_window,       // its logical volume
+		"phys_Al_window_top",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+	G4VPhysicalVolume* phys_Al_window_bottom = new G4PVPlacement(0,               // no rotation
+		position_Al_window_bottom, // at (x,y,z)
+		logic_Al_window,       // its logical volume
+		"phys_Al_window_bottom",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif // bAl_window
 
 
 #ifdef bAnode_grid
@@ -729,20 +815,24 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("tracker2SiPM", phys_tracker, phys_SiPM, SiPM_OpticalSurface /*silicaCathodeMaterial*/);
 #endif //bSiPM
 
-	//Bottom_absorber
-	G4LogicalBorderSurface* LAr_inner2Bottom_absorber = new G4LogicalBorderSurface("LAr_inner2Bottom_absorber", phys_LAr_inner, phys_Bottom_absorber, AbsorberMaterial);
+
+#ifdef bCathode
+	//bCathode
+	G4LogicalBorderSurface* LAr_inner2bCathode = new G4LogicalBorderSurface("LAr_inner2bCathode", phys_LAr_inner, phys_bCathode, AbsorberMaterial);
+#endif // bCathode
+
 
 #ifdef bLArOuter
-	G4LogicalBorderSurface* LAr_outer2Bottom_absorber = new G4LogicalBorderSurface("LAr_outer2Bottom_absorber", phys_LAr_outer, phys_Bottom_absorber, AbsorberMaterial);
+	G4LogicalBorderSurface* LAr_outer2bCathode = new G4LogicalBorderSurface("LAr_outer2bCathode", phys_LAr_outer, phys_bCathode, AbsorberMaterial);
 #endif // bLArOuter
 	
 
 #ifdef bInsulator_box
-	G4LogicalBorderSurface* Insulator_box2Bottom_absorber = new G4LogicalBorderSurface("Insulator_box2Bottom_absorber", phys_Insulator_box, phys_Bottom_absorber, AbsorberMaterial);
+	G4LogicalBorderSurface* Insulator_box2bCathode = new G4LogicalBorderSurface("Insulator_box2bCathode", phys_Insulator_box, phys_bCathode, AbsorberMaterial);
 #endif //bInsulator_box
 
 
-#ifdef	bPMTs
+#ifdef bPMTs
 	//________________________________________________
 	//PMT
 	G4LogicalBorderSurface* world2PMT0 = new G4LogicalBorderSurface("world2PMT0", physiWorld, phys_PMT0, silicaCathodeMaterial);
@@ -836,7 +926,18 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	logic_LAr_outer->SetVisAttributes(LAr_inside_VisAtt);
 #endif // bLArOuter
 	
+#ifdef bLArInactive
+	logic_LArInactive->SetVisAttributes(LAr_inside_VisAtt);
+#endif // bLArInactive
 
+#ifdef bCathode
+	logic_bCathode->SetVisAttributes(tracker_THGEM2_VisAtt);
+#endif // bCathode
+
+#ifdef bAl_window
+	logic_Al_window->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 1.0, 0.0, 0.8)));
+#endif // bAl_window
+	
 
 	//FieldTHGEM
 	G4VisAttributes* FieldTHGEM_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.7, 0.3, 0.8));
