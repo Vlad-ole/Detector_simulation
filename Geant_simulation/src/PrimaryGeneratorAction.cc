@@ -21,8 +21,8 @@ using namespace std;
 //set (x,y,z) position
 //#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-//#define EL_GAP 
-#define CIRCLE_EL_GAP
+#define EL_GAP 
+//#define CIRCLE_EL_GAP
 
 
 void PrimaryGeneratorAction::CommonPart()

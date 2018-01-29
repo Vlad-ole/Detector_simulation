@@ -75,7 +75,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #define bSiPM
 #define bPMMA_plate
-//#define bAnode_grid
+#define bAnode_grid
 //#define bInsulator_box
 //#define bPMTs
 //#define bTHGEM2
