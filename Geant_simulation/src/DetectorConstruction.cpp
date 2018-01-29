@@ -85,6 +85,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #define bLArInactive
 #define bPMMA_bottom
 #define bAl_window
+//#define bExternalColl6mm
+#define bExternalColl2mm
 
 
 	//bool bLAr_inner = false;
@@ -92,7 +94,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//--------------------------------------------------------------------------------
 	//выставление размеров объектов
-	const G4double HalfWorldLength = 20 * cm;
+	const G4double HalfWorldLength = 13 * cm;
 
 	//anode wire
 	const double radius_wire = 100 * um;
@@ -215,11 +217,25 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double x_size_PMMA_bottom = x_size_LAr_outer_out;
 	const double y_size_PMMA_bottom = y_size_LAr_outer_out;
 	const double z_size_PMMA_bottom = 3 * mm;
+	const double PMMA_bottom_center = -z_size_Cathode - z_size_LArInactive - z_size_PMMA_bottom / 2.0;
 
 	//Al_window
 	const double diameter_size_Al_window = 50 * mm;
 	const double z_size_Al_window = 1.0 * mm;
 	const double z_space_Al_window = 21 * mm;
+	const double Al_window_top_center = PMMA_bottom_center - z_size_PMMA_bottom / 2.0 - z_size_Al_window / 2.0;
+	const double Al_window_bottom_center = Al_window_top_center - z_size_Al_window/2.0 - z_space_Al_window - z_size_Al_window / 2.0;
+
+	//ExternalColl
+	const double diameter_ExternalColl = diameter_size_Al_window;
+	const double z_size_ExternalColl = 12 * mm;
+#ifdef bExternalColl6mm
+	const double diameter_inter_ExternalColl = 6 * mm;
+#endif // bExternalColl6mm
+#ifdef bExternalColl2mm
+	const double diameter_inter_ExternalColl = 2 * mm;
+#endif // bExternalColl2mm
+	const double ExternalColl_center = Al_window_bottom_center - z_size_Al_window / 2.0 - z_size_ExternalColl / 2.0;
 
 	
 
@@ -257,10 +273,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	const G4ThreeVector &position_Cathode = G4ThreeVector(0, 0, -z_size_Cathode / 2.0);
 	const G4ThreeVector &position_LArInactive = G4ThreeVector(0, 0, -z_size_Cathode - z_size_LArInactive / 2.0);
-	const G4ThreeVector &position_PMMA_bottom = G4ThreeVector(0, 0, -z_size_Cathode - z_size_LArInactive - z_size_PMMA_bottom / 2.0);
-	const double z_size_Al_window_tmp = -z_size_Cathode - z_size_LArInactive - z_size_PMMA_bottom;
-	const G4ThreeVector &position_Al_window_top = G4ThreeVector(0, 0, z_size_Al_window_tmp - z_size_Al_window / 2.0);	
-	const G4ThreeVector &position_Al_window_bottom = G4ThreeVector(0, 0, z_size_Al_window_tmp - z_size_Al_window - z_space_Al_window - z_size_Al_window / 2.0);
+	const G4ThreeVector &position_PMMA_bottom = G4ThreeVector(0, 0, PMMA_bottom_center);	
+	const G4ThreeVector &position_Al_window_top = G4ThreeVector(0, 0, Al_window_top_center);
+	const G4ThreeVector &position_Al_window_bottom = G4ThreeVector(0, 0, Al_window_bottom_center);
+	const G4ThreeVector &position_ExternalColl = G4ThreeVector(0, 0, ExternalColl_center);
 
 	const G4ThreeVector &position_PMT_0 = G4ThreeVector(-x_pos_PMT, 0, z_pos_PMT);
 	const G4ThreeVector &position_PMT_1 = G4ThreeVector(x_pos_PMT, 0, z_pos_PMT);
@@ -283,6 +299,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4double z;  // atomic number
 	G4double density;
 	G4Material* fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
+	G4Material* fFe = new G4Material("Fe", z = 26., a = 55.85*g / mole, density = 7.874 *g / cm3);
 
 
 
@@ -455,6 +472,21 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps
 #endif // bAl_window
+
+#if defined(bExternalColl6mm) || defined(bExternalColl2mm)
+	G4Tubs* solid_ExternalColl
+		= new G4Tubs("solid_ExternalColl", diameter_inter_ExternalColl / 2.0, diameter_ExternalColl / 2.0, z_size_ExternalColl / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_ExternalColl
+		= new G4LogicalVolume(solid_ExternalColl, G4Material::GetMaterial("Fe"), "logic_ExternalColl", 0, 0, 0);
+	G4VPhysicalVolume* phys_ExternalColl = new G4PVPlacement(0,               // no rotation
+		position_ExternalColl, // at (x,y,z)
+		logic_ExternalColl,       // its logical volume
+		"phys_ExternalColl",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif
 
 
 #ifdef bAnode_grid
@@ -947,7 +979,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	logic_FieldTHGEM->SetVisAttributes(FieldTHGEM_VisAtt);
 
 
-	logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
+	//logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
+	logicWorld->SetVisAttributes(G4Colour(0.0, 0.0, 0.0, 0.0));
 	//	logic_Insulator_box->SetVisAttributes(G4VisAttributes::Invisible);
 
 

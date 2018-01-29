@@ -1,8 +1,8 @@
-Current time used as seed: 1516859244
+Current time used as seed: 1517226486
 
 --------- Ranecu engine status ---------
- Initial seed (index) = 59
- Current couple of seeds = 546207020, 801809439
+ Initial seed (index) = 81
+ Current couple of seeds = 1915108623, 983900604
 ----------------------------------------
 
 *************************************************************
@@ -16,11 +16,193 @@ LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\Rea
 LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTeflon.dat read in! 
 LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTiO.dat read in! 
 LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTiO.dat read in! 
+z_SiPM_bottom = 80.3
 Checking overlaps for volume phys_LAr_inner ... OK! 
 Checking overlaps for volume phys_FieldTHGEM_1 ... OK! 
 Checking overlaps for volume phys_FieldTHGEM_2 ... OK! 
-Checking overlaps for volume phys_Bottom_absorber ... OK! 
+Checking overlaps for volume phys_bCathode ... OK! 
+Checking overlaps for volume phys_LArInactive ... OK! 
+Checking overlaps for volume phys_PMMA_bottom ... OK! 
+Checking overlaps for volume phys_Al_window_top ... OK! 
+Checking overlaps for volume phys_Al_window_bottom ... OK! 
+G4Material::GetMaterial() WARNING: The material: Fe does not exist in the table. Return NULL pointer.
+Checking overlaps for volume phys_ExternalColl ... OK! 
 Checking overlaps for volume phys_tracker_anode_grid ... OK! 
 Checking overlaps for parameterised volume phys_wire ... OK! 
 Checking overlaps for volume Tracker ... OK! 
 Checking overlaps for parameterised volume phys_SiPM ... OK! 
+Checking overlaps for volume phys_PMMA_plate ... OK! 
+Checking overlaps for volume phys_tracker_THGEM0 ... OK! 
+Checking overlaps for volume phys_tracker_THGEM1 ... OK! 
+Checking overlaps for volume phys_THGEM0_without_holes ... OK! 
+Checking overlaps for volume phys_THGEM1_without_holes ... OK! 
+PhysicsList::SetCuts:CutLength : 10 um 
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+ASCIITree (ATree)
+DAWNFILE (DAWNFILE)
+G4HepRep (HepRepXML)
+G4HepRepFile (HepRepFile)
+RayTracer (RayTracer)
+VRML1FILE (VRML1FILE)
+VRML2FILE (VRML2FILE)
+gMocrenFile (gMocrenFile)
+OpenGLImmediateWin32 (OGLIWin32)
+OpenGLStoredWin32 (OGLSWin32)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+run = 0 (100 %)
+Visualization verbosity changed to quiet (0)
+Visualization verbosity changed to errors (2)
+/tracking/storeTrajectory 2
+Attributes available for modeling and filtering with
+  "/vis/modeling/trajectories/create/drawByAttribute" and
+  "/vis/filtering/trajectories/create/attributeFilter" commands:
+G4TrajectoriesModel:
+  Event ID (EventID): G4int
+  Run ID (RunID): G4int
+G4SmoothTrajectory:
+  Charge (Ch): unit: e+ (G4double)
+  Track ID (ID): G4int
+  Initial kinetic energy (IKE): G4BestUnit (G4double)
+  Initial momentum magnitude (IMag): G4BestUnit (G4double)
+  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
+  No. of points (NTP): G4int
+  PDG Encoding (PDG): G4int
+  Parent ID (PID): G4int
+  Particle Name (PN): G4String
+G4SmoothTrajectoryPoint:
+  Auxiliary Point Position (Aux): G4BestUnit (G4ThreeVector)
+  Step Position (Pos): G4BestUnit (G4ThreeVector)
+Current time used as seed: 1517226541
+
+--------- Ranecu engine status ---------
+ Initial seed (index) = 136
+ Current couple of seeds = 1203886969, 1282395759
+----------------------------------------
+
+*************************************************************
+ Geant4 version Name: geant4-10-02-patch-01    (26-February-2016)
+                      Copyright : Geant4 Collaboration
+                      Reference : NIM A 506 (2003), 250-303
+                            WWW : http://cern.ch/geant4
+*************************************************************
+
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTeflon.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/PolishedTiO.dat read in! 
+LUT - data file: D:\Geant4\geant4_10_02_p01_install\share\Geant4-10.2.1\data\RealSurface1.0/GroundTiO.dat read in! 
+z_SiPM_bottom = 80.3
+Checking overlaps for volume phys_LAr_inner ... OK! 
+Checking overlaps for volume phys_FieldTHGEM_1 ... OK! 
+Checking overlaps for volume phys_FieldTHGEM_2 ... OK! 
+Checking overlaps for volume phys_bCathode ... OK! 
+Checking overlaps for volume phys_LArInactive ... OK! 
+Checking overlaps for volume phys_PMMA_bottom ... OK! 
+Checking overlaps for volume phys_Al_window_top ... OK! 
+Checking overlaps for volume phys_Al_window_bottom ... OK! 
+G4Material::GetMaterial() WARNING: The material: Fe does not exist in the table. Return NULL pointer.
+Checking overlaps for volume phys_ExternalColl ... OK! 
+Checking overlaps for volume phys_tracker_anode_grid ... OK! 
+Checking overlaps for parameterised volume phys_wire ... OK! 
+Checking overlaps for volume Tracker ... OK! 
+Checking overlaps for parameterised volume phys_SiPM ... OK! 
+Checking overlaps for volume phys_PMMA_plate ... OK! 
+Checking overlaps for volume phys_tracker_THGEM0 ... OK! 
+Checking overlaps for volume phys_tracker_THGEM1 ... OK! 
+Checking overlaps for volume phys_THGEM0_without_holes ... OK! 
+Checking overlaps for volume phys_THGEM1_without_holes ... OK! 
+PhysicsList::SetCuts:CutLength : 10 um 
+Visualization Manager instantiating with verbosity "warnings (3)"...
+Visualization Manager initialising...
+Registering graphics systems...
+
+You have successfully registered the following graphics systems.
+Current available graphics systems are:
+ASCIITree (ATree)
+DAWNFILE (DAWNFILE)
+G4HepRep (HepRepXML)
+G4HepRepFile (HepRepFile)
+RayTracer (RayTracer)
+VRML1FILE (VRML1FILE)
+VRML2FILE (VRML2FILE)
+gMocrenFile (gMocrenFile)
+OpenGLImmediateWin32 (OGLIWin32)
+OpenGLStoredWin32 (OGLSWin32)
+
+Registering model factories...
+
+You have successfully registered the following model factories.
+Registered model factories:
+  generic
+  drawByCharge
+  drawByParticleID
+  drawByOriginVolume
+  drawByAttribute
+
+Registered filter factories:
+  chargeFilter
+  particleFilter
+  originVolumeFilter
+  attributeFilter
+
+You have successfully registered the following user vis actions.
+Run Duration User Vis Actions: none
+End of Event User Vis Actions: none
+End of Run User Vis Actions: none
+
+Some /vis commands (optionally) take a string to specify colour.
+Available colours:
+  black, blue, brown, cyan, gray, green, grey, magenta, red, white, yellow
+
+run = 0 (100 %)
+Visualization verbosity changed to quiet (0)
+Visualization verbosity changed to errors (2)
+/tracking/storeTrajectory 2
+Attributes available for modeling and filtering with
+  "/vis/modeling/trajectories/create/drawByAttribute" and
+  "/vis/filtering/trajectories/create/attributeFilter" commands:
+G4TrajectoriesModel:
+  Event ID (EventID): G4int
+  Run ID (RunID): G4int
+G4SmoothTrajectory:
+  Charge (Ch): unit: e+ (G4double)
+  Track ID (ID): G4int
+  Initial kinetic energy (IKE): G4BestUnit (G4double)
+  Initial momentum magnitude (IMag): G4BestUnit (G4double)
+  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
+  No. of points (NTP): G4int
+  PDG Encoding (PDG): G4int
+  Parent ID (PID): G4int
+  Particle Name (PN): G4String
+G4SmoothTrajectoryPoint:
+  Auxiliary Point Position (Aux): G4BestUnit (G4ThreeVector)
+  Step Position (Pos): G4BestUnit (G4ThreeVector)

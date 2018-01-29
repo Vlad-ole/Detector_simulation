@@ -84,7 +84,7 @@ int main(int argc, char** argv)
 
 
 	//for
-	const int N_runs = 41 /*10000*/ /*1*/;
+	const int N_runs = /*41*/ /*10000*/ 1;
 	for (int i = 0; i < N_runs; i++)
 	{
 		if (i % 1 == 0 || i == (N_runs - 1))
@@ -101,8 +101,8 @@ int main(int argc, char** argv)
 		double val_to = 20;
 		double step = 1/*(N_runs > 1) ? (val_to - val_from) / (N_runs - 1) : 0*/;
 
-		g()->x_source = val_from + step*(i) /*0*/;
-		g()->y_source = /*val_from + step*(i)*/ 30;
+		g()->x_source = /*val_from + step*(i)*/ 0;
+		g()->y_source = /*val_from + step*(i)*/ 0;
 		//g()->z_source = 54.7;
 
 		if (argc == 1)
