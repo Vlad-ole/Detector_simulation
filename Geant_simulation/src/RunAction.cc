@@ -78,9 +78,12 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 
 	for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
 	{
+		//
+		
 		// condition to choose 5x5 matrix
-		if (g()->SiPM_hits->xpos_v[i] > -2.5*step && g()->SiPM_hits->xpos_v[i] < 2.5*step && 
-			g()->SiPM_hits->ypos_v[i] > -2.5*step && g()->SiPM_hits->ypos_v[i] < 2.5*step)
+		/*if (g()->SiPM_hits->xpos_v[i] > -2.5*step && g()->SiPM_hits->xpos_v[i] < 2.5*step && 
+			g()->SiPM_hits->ypos_v[i] > -2.5*step && g()->SiPM_hits->ypos_v[i] < 2.5*step)*/
+		if (i == 60)
 		{
 			if(i != 40)
 			{ 

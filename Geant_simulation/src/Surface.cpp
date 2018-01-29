@@ -212,11 +212,11 @@ void DetectorConstruction::defineSurfaces()
 
 
 	//silicaCathodeMaterialProperty->AddProperty("REFLECTIVITY", Cathode_REFLECTIVITY->get_x_array(), Cathode_REFLECTIVITY->get_y_array(), Cathode_REFLECTIVITY->get_array_size());
-	SiPM_MaterialProperty->AddProperty("EFFICIENCY", SiPM_EFFICIENCY->get_x_array(), SiPM_EFFICIENCY->get_y_array(), SiPM_EFFICIENCY->get_array_size());
+	//SiPM_MaterialProperty->AddProperty("EFFICIENCY", SiPM_EFFICIENCY->get_x_array(), SiPM_EFFICIENCY->get_y_array(), SiPM_EFFICIENCY->get_array_size());
 
 
 	SiPM_MaterialProperty->AddProperty("REFLECTIVITY", ener, SiPM_refl, 2);
-	//SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);
+	SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);
 
 	SiPM_OpticalSurface->SetMaterialPropertiesTable(SiPM_MaterialProperty);
 	//--------------------------------------------------------------------------------

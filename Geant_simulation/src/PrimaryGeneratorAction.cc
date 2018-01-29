@@ -21,7 +21,8 @@ using namespace std;
 //set (x,y,z) position
 //#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-#define EL_GAP 
+//#define EL_GAP 
+#define CIRCLE_EL_GAP
 
 
 void PrimaryGeneratorAction::CommonPart()
@@ -265,6 +266,25 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 		z = 77.7;
 	} while (pow(x - x_shift, 2.0) + pow(y - y_shift, 2.0) > pow(radius, 2.0)*mm2);
 #endif //GEM_HOLE
+
+
+#ifdef CIRCLE_EL_GAP
+	//circle
+	const double angle = G4UniformRand() * 3.1415926 * 2;
+	const double radius = 4;
+	while (true)
+	{
+		double x_tmp = (G4UniformRand() - 0.5) * 2 * radius;
+		double y_tmp = (G4UniformRand() - 0.5) * 2 * radius;
+		if (x_tmp*x_tmp + y_tmp*y_tmp < radius*radius)
+		{
+			x = x_tmp;
+			y = y_tmp;
+			z = 54.7 + (72.7 - 54.7)*G4UniformRand();
+			break;
+		}
+	}
+#endif // CIRCLE
 
 
 #ifdef EL_GAP

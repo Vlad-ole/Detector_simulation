@@ -75,7 +75,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #define bSiPM
 #define bPMMA_plate
-#define bAnode_grid
+//#define bAnode_grid
 //#define bInsulator_box
 //#define bPMTs
 //#define bTHGEM2
@@ -104,7 +104,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double thickness_anode_grid = 0.5 * mm;
 	const double size_anode_grid = 124 * mm;
 	const double size_anode_grid_hole = length_wire /*future case*/;  //60 * mm /*real case*/;
-	const double z_anode_grid_bottom = 78.2 /*78.2 in case of one THGEM*/ /*82.7*mm in case of two THGEM*/;
+	const double z_anode_grid_bottom = 78.2 * mm /*78.2 in case of one THGEM*/ /*82.7*mm in case of two THGEM*/;
 	const double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
 
 	//PMMA plate
@@ -119,7 +119,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double thickness_SiPM = 1 * nm;
 	const double size_SiPM = 6 * mm;
 	const double chamberSpacing = 10 * mm;
-	const double z_SiPM_bottom = z_anode_grid_bottom + thickness_anode_grid + z_size_PMMA_plate /* 85.7*mm in case of two THGEM*/;
+	const double z_SiPM_bottom = z_anode_grid_bottom + thickness_anode_grid + z_size_PMMA_plate + (0.1*mm /*small gap between PMMA and SiPM*/) /* 85.7*mm in case of two THGEM*/;
 	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
 
 	cout << "z_SiPM_bottom = " << z_SiPM_bottom << endl;
