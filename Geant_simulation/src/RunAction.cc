@@ -3,6 +3,8 @@ using namespace std;
 
 // Make this appear first!
 #include "G4Timer.hh"
+//#include "G4INCLRandom.hh"
+#include "TRandom3.h"
 
 #include "RunAction.hh"
 #include "G4Run.hh"
@@ -75,6 +77,27 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 	double x_mean = 0;
 	double y_mean = 0;
 	double q_mean = 0;
+
+
+	////add gauss noise
+	//const double sigma_part = 3.5;
+	//TRandom3 rnd3;
+	//for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
+	//{
+	//	if (g()->SiPM_hits->N_reg_v[i] > 0)
+	//	{
+	//		double Npe_old = g()->SiPM_hits->N_reg_v[i];
+	//		double dNpe = rnd3.Gaus(0, (g()->SiPM_hits->N_reg_v[i] * sigma_part));
+	//		g()->SiPM_hits->N_reg_v[i] += dNpe;
+	//		if (g()->SiPM_hits->N_reg_v[i] < 0)
+	//			g()->SiPM_hits->N_reg_v[i] = 0;
+
+	//		//show values
+	//		//double Npe_new = g()->SiPM_hits->N_reg_v[i];
+	//		//cout << "i = " << i << "; Npe_old = " << Npe_old << "; dNpe = " << dNpe << "; Npe_new = " << Npe_new << endl;
+	//	}
+	//}
+
 
 	for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
 	{

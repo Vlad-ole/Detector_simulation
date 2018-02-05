@@ -45,6 +45,7 @@
 #include "AnodeGridParametrisation.h"
 #include "THGEMParametrisation.h"
 #include "PMTSD.h"
+#include "Singleton.h"
 
 using namespace std;
 
@@ -242,11 +243,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #endif // bExternalColl2mm
 	const double ExternalColl_center = Al_window_bottom_center - z_size_Al_window / 2.0 - z_size_ExternalColl / 2.0;
 	const double ExternalColl_bottom = ExternalColl_center - z_size_ExternalColl / 2.0;
+	cout << "ExternalColl_bottom = " << ExternalColl_bottom << endl;
 
 	//Cd109ExternalBox
 	const double z_size_Cd109ExternalBox_top_hole = 13 * mm;
 	const double z_size_Cd109ExternalBox_middle_hole = 54 * mm;
 	const double Cd109ExternalBox_bottom = ExternalColl_bottom - z_size_Cd109ExternalBox_top_hole - z_size_Cd109ExternalBox_middle_hole;
+	cout << "Cd109ExternalBox_bottom = " << Cd109ExternalBox_bottom << endl;
 
 	//Cd109IsotopBoxHolder
 	const double z_size_Cd109IsotopBoxHolder_top_hole = 2 * mm;
@@ -262,6 +265,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double diameter_size_Cd109 = 3 * mm;
 	const double z_size_Cd109 = 0.1 * mm;
 	const double Cd109_center = Cd109IsotopBoxHolder_top_hole_bottom - z_size_Cd109/2.0;
+	g()->z_source_gamma = Cd109_center;
+	g()->radius_source_gamma = diameter_size_Cd109/2.0;
+	cout << "Cd109_center" << Cd109_center << endl;
 	
 	//Cd109InternalColl
 	const double diameter_size_internal_Cd109InternalColl = 2 * mm;
@@ -1067,6 +1073,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #ifdef bCd109
 	logic_Cd109->SetVisAttributes(tracker_THGEM2_VisAtt);
+#endif // bCd109
+
+#ifdef bCd109InternalColl
+	logic_Cd109InternalColl->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 1.0, 0.5, 0.8)));
 #endif // bCd109
 	
 

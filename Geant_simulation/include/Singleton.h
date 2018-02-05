@@ -22,6 +22,7 @@ public:
 	ofstream file_num_of_photons;
 	ofstream file_num_of_photons_SiPM;
 	ofstream file_coord_from_SiPM;
+	ofstream file_real_position_of_source;
 	ofstream file_total_num_of_reg_photons_SiPM;
 	ofstream file_num_of_photons_PMT;
 	ofstream file_num_of_reg_photons;
@@ -108,4 +109,10 @@ public:
 	double x_source;
 	double y_source;
 	double z_source;
+	double x_source_gamma;
+	double y_source_gamma;
+	double z_source_gamma;
+	double radius_source_gamma;
+
+	bool is_optical_gamma;
 };

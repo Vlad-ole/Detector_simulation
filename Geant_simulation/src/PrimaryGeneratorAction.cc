@@ -23,6 +23,7 @@ using namespace std;
 //#define GEM_HOLE
 #define EL_GAP 
 //#define CIRCLE_EL_GAP
+//#define CIRCLE_Cd
 
 
 void PrimaryGeneratorAction::CommonPart()
@@ -33,7 +34,12 @@ void PrimaryGeneratorAction::CommonPart()
 	// default particle kinematic
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 	G4String particleName;
-	G4ParticleDefinition* particle = particleTable->FindParticle(particleName = /*"gamma"*/ "opticalphoton");
+
+	G4ParticleDefinition* particle;
+	if(g()->is_optical_gamma)
+		particle = particleTable->FindParticle(particleName = /*"gamma"*/ "opticalphoton");
+	else
+		particle = particleTable->FindParticle(particleName = "gamma" /*"opticalphoton"*/);
 
 	particleGun->SetParticleDefinition(particle);
 }
@@ -142,7 +148,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	{
 	case MONO:
 		//energy = 59.5; //original value [keV]
-		energy = 1.38E-3; // optical photon [keV]
+		//energy = 1.38E-3; // optical photon [keV]
+		energy = 35; // gamma [keV]
+
+		//Cd 88.03 [keV]
+		//X-ray tube 
 
 		break;
 
@@ -271,7 +281,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef CIRCLE_EL_GAP
 	//circle
 	const double angle = G4UniformRand() * 3.1415926 * 2;
-	const double radius = 4;
+	const double radius = 2.35/2.0;
 	while (true)
 	{
 		double x_tmp = (G4UniformRand() - 0.5) * 2 * radius;
@@ -293,6 +303,24 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	z = 54.7 + (72.7 - 54.7)*G4UniformRand();
 #endif //EL_GAP
 
+
+#ifdef	CIRCLE_Cd
+	//circle
+	const double angle = G4UniformRand() * 3.1415926 * 2;
+	const double radius = g()->radius_source_gamma;
+	while (true)
+	{
+		double x_tmp = (G4UniformRand() - 0.5) * 2 * radius;
+		double y_tmp = (G4UniformRand() - 0.5) * 2 * radius;
+		if (x_tmp*x_tmp + y_tmp*y_tmp < radius*radius)
+		{
+			x = x_tmp;
+			y = y_tmp;			
+			break;
+		}
+	}
+	z = g()->z_source_gamma;
+#endif //CIRCLE_Cd
 
 	particleGun->SetParticlePosition(G4ThreeVector(x, y, z));
 	//------------------------------------

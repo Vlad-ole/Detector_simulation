@@ -23,6 +23,9 @@
 #include "Singleton.h"
 #include "PMTHits.h"
 
+//root cern
+#include "TRandom3.h"
+
 //#include <time.h>
 
 using namespace std;
@@ -37,6 +40,8 @@ int  nUsefulEvents = 0;
 int main(int argc, char** argv)
 {
 	long t1 = clock();
+
+	g()->is_optical_gamma = true;
 
 	// Choose the Random engine
 	CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
@@ -63,7 +68,15 @@ int main(int argc, char** argv)
 	runManager->SetUserAction(new RunAction);
 
 	string temp_string = g()->path_read + "x_ray\\Analytical_model_out.dat";
-	runManager->SetUserAction(new PrimaryGeneratorAction(g()->string_GAr_86K_1atm_avalanche_scint_NIR.c_str(), 1));
+	if (g()->is_optical_gamma)
+	{
+		runManager->SetUserAction(new PrimaryGeneratorAction(g()->string_GAr_86K_1atm_avalanche_scint_NIR.c_str(), 1));
+	}
+	else
+	{
+		runManager->SetUserAction(new PrimaryGeneratorAction());
+	}
+	
 
 	EventAction* eventAction = new EventAction;
 	runManager->SetUserAction(eventAction);
@@ -83,8 +96,12 @@ int main(int argc, char** argv)
 	G4UImanager* UI = G4UImanager::GetUIpointer();
 
 
+
+	
+
 	//for
-	const int N_runs = /*41*/ /*10000*/ 1;
+	TRandom3 rnd3;
+	const int N_runs = /*41*/ 1000000 /*1*/;	
 	for (int i = 0; i < N_runs; i++)
 	{
 		if (i % 1 == 0 || i == (N_runs - 1))
@@ -101,9 +118,56 @@ int main(int argc, char** argv)
 		double val_to = 20;
 		double step = 1/*(N_runs > 1) ? (val_to - val_from) / (N_runs - 1) : 0*/;
 
-		g()->x_source = /*val_from + step*(i)*/ 0;
-		g()->y_source = /*val_from + step*(i)*/ 0;
+		//g()->x_source = /*val_from + step*(i)*/ 0;
+		//g()->y_source = /*val_from + step*(i)*/ 0;
 		//g()->z_source = 54.7;
+
+		//circle
+		//const double angle = G4UniformRand() * 3.1415926 * 2;
+		//double radius = 11.6 / 2.0;
+		//double radius;
+
+		//source-collimator geometry
+		//-------------------------------------------
+		const double h_x = 0; // диаметр источника [mm]
+		const double h_c = 2; // диаметр коллиматора [mm]
+		const double l_x = 64; // расстояние от источника до коллиматора [mm]
+
+		
+		double lambda; // глубина поглощения в LAr гамма квантов [mm]
+		while (true)
+		{
+			lambda = rnd3.Exp(33.5);
+			if (lambda < 50)
+				break;
+		}
+		
+		const double PMMA_width = 3;
+		const double LAr_dead_width = 2;
+		const double THGEM_Cathode_width = 0.5;
+		const double Al_window_width = 23;
+		const double l_L = lambda + PMMA_width + LAr_dead_width + THGEM_Cathode_width + Al_window_width; // расстояние от коллиматора до экрана [mm] 
+		//cout << "l_L = " << l_L << endl;
+
+		const double h_s = (l_L + l_x * h_c / (h_c + h_x)) / (l_x / (h_c + h_x)); //ожидаемый диаметр пятна
+		//cout << "h_s = " << h_s << endl;
+		const double radius = h_s / 2.0;
+
+		//source-collimator geometry end
+		//-------------------------------------------
+		
+		while (true)
+		{
+			double x_tmp = (G4UniformRand() - 0.5) * 2 * radius;
+			double y_tmp = (G4UniformRand() - 0.5) * 2 * radius;
+			if (x_tmp*x_tmp + y_tmp*y_tmp < radius*radius)
+			{
+				g()->x_source = x_tmp;
+				g()->y_source = y_tmp;
+				g()->file_real_position_of_source << g()->x_source << " " << g()->y_source << " " << lambda << " " << radius << endl;
+				break;
+			}
+		}
 
 		if (argc == 1)
 		{
