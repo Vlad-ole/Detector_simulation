@@ -86,8 +86,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #define bLArInactive
 #define bPMMA_bottom
 #define bAl_window
-//#define bExternalColl6mm
-#define bExternalColl2mm
+#define bExternalColl6mm
+//#define bExternalColl2mm
 #define bCd109ExternalBox
 #define bCd109InternalColl
 #define bCd109IsotopBoxHolder

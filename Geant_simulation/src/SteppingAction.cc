@@ -33,12 +33,15 @@ SteppingAction::SteppingAction(DetectorConstruction* myDC, EventAction* myEA)
 void SteppingAction::UserSteppingAction(const G4Step* theStep)
 {
 	G4Track* theTrack = theStep->GetTrack();
+	G4ParticleDefinition* particleType = theTrack->GetDefinition();
 
 	G4StepPoint* thePrePoint = theStep->GetPreStepPoint();
 	G4VPhysicalVolume* thePrePV = thePrePoint->GetPhysicalVolume();
 
 	G4StepPoint* thePostPoint = theStep->GetPostStepPoint();
 	G4VPhysicalVolume* thePostPV = thePostPoint->GetPhysicalVolume();
+	
+	//const G4String thePostPVName = thePostPV->GetName();
 
 	//---------------------
 
@@ -65,8 +68,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 	}
 
 
-	//For Optical photon only
-	G4ParticleDefinition* particleType = theTrack->GetDefinition();
+	//For Optical photon only	
 	if (particleType == G4OpticalPhoton::OpticalPhotonDefinition())
 	{
 
@@ -182,6 +184,35 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 			}
 		}//if Boundary
 	}//if opt photons
+
+	//For gamma or e-
+	if (particleType == G4Gamma::GammaDefinition() || particleType == G4Electron::ElectronDefinition())
+	{
+		if (thePostPV != NULL) //just to avoid "OutOfWorld" volume
+		{
+			G4ThreeVector position = thePostPoint->GetPosition();
+
+			////choose active LAr
+			if (thePostPV->GetName() == "phys_LAr_inner" || thePostPV->GetName() == "phys_tracker_THGEM0" ||
+				thePostPV->GetName() == "phys_FieldTHGEM_1" || thePostPV->GetName() == "phys_FieldTHGEM_2")
+			{
+				//cout << "vlad_info ******************; " << particleType->GetParticleType() << endl;
+				G4double edep = theStep->GetTotalEnergyDeposit();
+				if (edep > 0)
+				{
+					//cout << "vlad_info " << particleType->GetParticleType() << " " << 
+						//position.x() << " " << position.y() << " " << position.z() << " " <<
+						//edep <<
+						//endl;
+
+					//total energy deposit in absorber
+					eventAction->AddEdep(edep);
+				}				
+			}
+
+		}
+		
+	}
 }
 
 

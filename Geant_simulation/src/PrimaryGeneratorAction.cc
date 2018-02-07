@@ -15,15 +15,16 @@ using namespace std;
 
 //set angle distribution
 //#define DIRECT_INCIDENCE
-#define TOP_HEMISPHERE
+//#define TOP_HEMISPHERE
 //#define SPHERE_4PI
+#define ANGLE_Cd_COLL6mm
 
 //set (x,y,z) position
 //#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-#define EL_GAP 
+//#define EL_GAP 
 //#define CIRCLE_EL_GAP
-//#define CIRCLE_Cd
+#define CIRCLE_Cd
 
 
 void PrimaryGeneratorAction::CommonPart()
@@ -149,10 +150,10 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	case MONO:
 		//energy = 59.5; //original value [keV]
 		//energy = 1.38E-3; // optical photon [keV]
-		energy = 35; // gamma [keV]
+		energy = 88.03; // gamma [keV]
 
 		//Cd 88.03 [keV]
-		//X-ray tube 
+		//X-ray tube 35[keV]
 
 		break;
 
@@ -196,7 +197,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//-------------------------------------
 	//Set particle direction
 
-	const double pi = 3.1416;
+	const double pi = 3.1415926;
 
 #ifdef DIRECT_INCIDENCE
 	double phi = 0 * deg;
@@ -218,7 +219,21 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	double theta = acos( G4UniformRand() );
 #endif //TOP_HEMISPHERE
 
-	particleGun->SetParticleMomentumDirection(G4ThreeVector(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta)));
+
+#ifdef	ANGLE_Cd_COLL6mm
+	double phi = 2 * pi*G4UniformRand();
+	double theta_max = atan( (g()->h_c) / (2 * g()->l_x) );
+	//cout << "l_x =" << g()->l_x << endl;
+	//cout << "l_L =" << g()->l_L << endl;
+	//cout << "h_c =" << g()->h_c << endl;
+	//cout << "theta_max = " << theta_max << endl;
+	double cosTheta = cos(theta_max) + (1 - cos(theta_max)) * G4UniformRand();
+	double sinTheta = sqrt(1 - cosTheta*cosTheta);
+	//cout << "cosTheta = " << cosTheta << endl;
+	//system("pause");
+#endif //ANGLE_Cd_COLL6mm
+
+	particleGun->SetParticleMomentumDirection(G4ThreeVector(sinTheta*cos(phi), sinTheta*sin(phi), cosTheta));
 	//------------------------------------
 
 
@@ -306,7 +321,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 #ifdef	CIRCLE_Cd
 	//circle
-	const double angle = G4UniformRand() * 3.1415926 * 2;
+	/*const double angle = G4UniformRand() * 3.1415926 * 2;
 	const double radius = g()->radius_source_gamma;
 	while (true)
 	{
@@ -318,7 +333,9 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 			y = y_tmp;			
 			break;
 		}
-	}
+	}*/
+	x = 0;
+	y = 0;
 	z = g()->z_source_gamma;
 #endif //CIRCLE_Cd
 

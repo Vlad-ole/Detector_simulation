@@ -16,7 +16,7 @@
 #include <fstream>
 
 
-EventAction::EventAction()
+EventAction::EventAction() : fTotalEdep(0.)
 {
 }
 
@@ -35,6 +35,8 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 {
 	G4int eventNb = event->GetEventID();
 
+	//energy deposited per event
+	fTotalEdep = 0.;
 	
 	//if (eventNb < 10000)
 	//{
@@ -66,6 +68,16 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 
 void EventAction::EndOfEventAction(const G4Event* evt)
 {
-	
+	if (fTotalEdep > 0.) 
+	{
+		//example from TestEm11
+		//Run* run
+		//	= static_cast<Run*>(
+		//		G4RunManager::GetRunManager()->GetNonConstCurrentRun());
+		//run->AddEdep(fTotalEdep);
+		//G4AnalysisManager::Instance()->FillH1(2, fTotalEdep);
+
+		g()->file_gamma_event_E_depos << fTotalEdep * 1000 /*E depos in keV*/ << endl;
+	}
 }
 

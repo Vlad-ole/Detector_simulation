@@ -31,6 +31,9 @@ public:
 	ofstream file_energy;
 	ofstream file_run_lc;
 	ofstream file_boundary_process;
+	//gamma
+	ofstream file_gamma_event_E_depos;
+
 	
 	string solution_path;
 	string path_read;
@@ -115,4 +118,9 @@ public:
 	double radius_source_gamma;
 
 	bool is_optical_gamma;
+
+	double l_x;
+	double l_L;
+	double h_s;
+	double h_c;
 };

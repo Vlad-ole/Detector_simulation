@@ -19,6 +19,12 @@ class EventAction : public G4UserEventAction
 
 	void AddtotDetector(G4ThreeVector pos, G4double val);
 
+	void AddEdep(G4double edep) { fTotalEdep += edep; }
+	G4double GetEdep() const { return fTotalEdep; }
+
+private:
+	G4double  fTotalEdep;
+
 };
 
 #endif
