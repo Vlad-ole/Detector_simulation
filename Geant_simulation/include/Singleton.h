@@ -33,6 +33,7 @@ public:
 	ofstream file_boundary_process;
 	//gamma
 	ofstream file_gamma_event_E_depos;
+	ofstream file_gamma_step_E_depos;
 
 	
 	string solution_path;

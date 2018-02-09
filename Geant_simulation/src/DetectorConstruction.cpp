@@ -86,6 +86,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #define bLArInactive
 #define bPMMA_bottom
 #define bAl_window
+#define bCryogenicChamberBottom
 #define bExternalColl6mm
 //#define bExternalColl2mm
 #define bCd109ExternalBox
@@ -232,6 +233,12 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double Al_window_top_center = PMMA_bottom_center - z_size_PMMA_bottom / 2.0 - z_size_Al_window / 2.0;
 	const double Al_window_bottom_center = Al_window_top_center - z_size_Al_window/2.0 - z_space_Al_window - z_size_Al_window / 2.0;
 
+	//CryogenicChamberBottom
+	const double diameter_size_internal_CryogenicChamberBottom = diameter_size_Al_window;
+	const double diameter_size_external_CryogenicChamberBottom = x_size_LAr_inner * sqrt(2);
+	const double z_size_CryogenicChamberBottom = 10 * mm;
+	const double CryogenicChamberBottom_center = PMMA_bottom_center - z_size_PMMA_bottom / 2.0 - z_size_CryogenicChamberBottom / 2.0;
+
 	//ExternalColl
 	const double diameter_ExternalColl = diameter_size_Al_window;
 	const double z_size_ExternalColl = 12 * mm;
@@ -314,6 +321,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_PMMA_bottom = G4ThreeVector(0, 0, PMMA_bottom_center);	
 	const G4ThreeVector &position_Al_window_top = G4ThreeVector(0, 0, Al_window_top_center);
 	const G4ThreeVector &position_Al_window_bottom = G4ThreeVector(0, 0, Al_window_bottom_center);
+	const G4ThreeVector &position_CryogenicChamberBottom = G4ThreeVector(0, 0, CryogenicChamberBottom_center);	
 	const G4ThreeVector &position_ExternalColl = G4ThreeVector(0, 0, ExternalColl_center);
 
 	//Cd109
@@ -466,7 +474,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Box* solid_LArInactive
 		= new G4Box("solid_LArInactive", x_size_LArInactive / 2.0, y_size_LArInactive / 2.0, z_size_LArInactive / 2.0);
 	G4LogicalVolume* logic_LArInactive
-		= new G4LogicalVolume(solid_LArInactive, G4Material::GetMaterial("LAr"), "logic_LArInactive", 0, 0, 0);
+		= new G4LogicalVolume(solid_LArInactive, G4Material::GetMaterial(/*"LAr"*/"Air"), "logic_LArInactive", 0, 0, 0);
 	G4VPhysicalVolume* phys_LArInactive = new G4PVPlacement(0,               // no rotation
 		position_LArInactive, // at (x,y,z)
 		logic_LArInactive,       // its logical volume
@@ -516,6 +524,21 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps
 #endif // bAl_window
+
+#ifdef bCryogenicChamberBottom
+	G4Tubs* solid_CryogenicChamberBottom
+		= new G4Tubs("solid_CryogenicChamberBottom", diameter_size_internal_CryogenicChamberBottom / 2.0, diameter_size_external_CryogenicChamberBottom / 2.0, z_size_CryogenicChamberBottom / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_CryogenicChamberBottom
+		= new G4LogicalVolume(solid_CryogenicChamberBottom, G4Material::GetMaterial("Fe"), "logic_CryogenicChamberBottom", 0, 0, 0);
+	G4VPhysicalVolume* phys_CryogenicChamberBottom = new G4PVPlacement(0,               // no rotation
+		position_CryogenicChamberBottom, // at (x,y,z)
+		logic_CryogenicChamberBottom,       // its logical volume
+		"phys_CryogenicChamberBottom",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif // bCryogenicChamberBottom
 
 #if defined(bExternalColl6mm) || defined(bExternalColl2mm)
 	G4Tubs* solid_ExternalColl
@@ -1070,6 +1093,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #ifdef bAl_window
 	logic_Al_window->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 1.0, 0.0, 0.8)));
 #endif // bAl_window
+
+#ifdef bCryogenicChamberBottom
+	logic_CryogenicChamberBottom->SetVisAttributes(new G4VisAttributes(G4Colour(0.3, 0.5, 0.7, 0.8)));
+#endif // bCryogenicChamberBottom
 
 #ifdef bCd109
 	logic_Cd109->SetVisAttributes(tracker_THGEM2_VisAtt);

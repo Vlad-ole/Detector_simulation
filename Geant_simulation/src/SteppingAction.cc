@@ -207,6 +207,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 
 					//total energy deposit in absorber
 					eventAction->AddEdep(edep);
+					g()->file_gamma_step_E_depos << edep * 1000 /*E in keV*/ << endl;
 				}				
 			}
 

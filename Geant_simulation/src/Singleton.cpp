@@ -30,6 +30,7 @@ Singleton::Singleton()
 	file_run_lc.open(path_out + "run_lc.dat");
 	file_boundary_process.open(path_out + "boundary_process.dat");
 	file_gamma_event_E_depos.open(path_out + "gamma_event_E_depos.dat");
+	file_gamma_step_E_depos.open(path_out + "gamma_step_E_depos.dat");
 
 	// файлы на чтение
 	string_lyso_ce_energies = path_read + "energy_spectrum\\lyso_ce_energies_eV_1.dat";

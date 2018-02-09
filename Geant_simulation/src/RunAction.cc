@@ -105,10 +105,10 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 		//if (i == 60)
 		
 		// condition to choose 5x5 matrix
-		//if (g()->SiPM_hits->xpos_v[i] > -2.5*step && g()->SiPM_hits->xpos_v[i] < 2.5*step && 
-		//	g()->SiPM_hits->ypos_v[i] > -2.5*step && g()->SiPM_hits->ypos_v[i] < 2.5*step)		
+		if (g()->SiPM_hits->xpos_v[i] > -2.5*step && g()->SiPM_hits->xpos_v[i] < 2.5*step && 
+			g()->SiPM_hits->ypos_v[i] > -2.5*step && g()->SiPM_hits->ypos_v[i] < 2.5*step)		
 		{
-			//if(i != 40)
+			if(i != 40)
 			{ 
 				x_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->xpos_v[i];
 				y_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->ypos_v[i];
@@ -116,13 +116,13 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 				////cout << i << "\t x_pos = " << g()->SiPM_hits->xpos_v[i] << "\t y_pos = " << g()->SiPM_hits->ypos_v[i] <<"\t N_reg = " << g()->SiPM_hits->N_reg_v[i] << "\t x_mean =  " << x_mean << "\t y_mean = " << y_mean << "\t q_mean = " << q_mean << endl;
 				//g()->file_num_of_photons_SiPM << i << "\t" << g()->SiPM_hits->xpos_v[i] << "\t" << g()->SiPM_hits->ypos_v[i] << "\t" << g()->SiPM_hits->N_reg_v[i] << endl;
 			}
-			//else//right-bottom ch in 5x5 matrix is avg of adjacent SiPMs
-			//{
-			//	double N_pe = (g()->SiPM_hits->N_reg_v[39] + g()->SiPM_hits->N_reg_v[51] + g()->SiPM_hits->N_reg_v[50]/sqrt(2))/3.0;
-			//	x_mean += N_pe * g()->SiPM_hits->xpos_v[i];
-			//	y_mean += N_pe * g()->SiPM_hits->ypos_v[i];
-			//	q_mean += N_pe;
-			//}
+			else//right-bottom ch in 5x5 matrix is avg of adjacent SiPMs
+			{
+				double N_pe = (g()->SiPM_hits->N_reg_v[39] + g()->SiPM_hits->N_reg_v[51] + g()->SiPM_hits->N_reg_v[50]/sqrt(2))/3.0;
+				x_mean += N_pe * g()->SiPM_hits->xpos_v[i];
+				y_mean += N_pe * g()->SiPM_hits->ypos_v[i];
+				q_mean += N_pe;
+			}
 		}
 	}
 

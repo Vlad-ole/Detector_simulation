@@ -57,7 +57,7 @@ int main(int argc, char** argv)
 	// Construct the default run manager
 	G4RunManager * runManager = new G4RunManager;
 	MyExceptionHandler* myExepHand = new MyExceptionHandler();
-	
+
 
 	//	// set mandatory initialization classes
 	DetectorConstruction* detector = new DetectorConstruction;
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
 	{
 		runManager->SetUserAction(new PrimaryGeneratorAction());
 	}
-	
+
 
 	EventAction* eventAction = new EventAction;
 	runManager->SetUserAction(eventAction);
@@ -97,14 +97,14 @@ int main(int argc, char** argv)
 
 
 
-	
+
 
 	//for
 	TRandom3 rnd3;
-	const int N_runs = /*41*/ /*1000000*/ 1;	
+	const int N_runs = /*41*/ /*1000000*/ 1000000;
 	for (int i = 0; i < N_runs; i++)
 	{
-		if (i % 1 == 0 || i == (N_runs - 1))
+		if (i % 1000 == 0 || i == (N_runs - 1))
 		{
 			double val = N_runs > 1 ? (100 * i / (double)(N_runs - 1)) : 100;
 			cout << "run = " << i << " (" << val << " %)" << endl;
@@ -133,41 +133,45 @@ int main(int argc, char** argv)
 		g()->h_c = 6; // диаметр коллиматора [mm]
 		g()->l_x = 64; // расстояние от источника до коллиматора [mm]
 
-		
-		double lambda = 33.5; // глубина поглощения в LAr гамма квантов [mm]
-		/*while (true)
+		if (g()->is_optical_gamma)
 		{
-			lambda = rnd3.Exp(33.5);
-			if (lambda < 50)
-				break;
-		}*/
-		
-		const double PMMA_width = 3;
-		const double LAr_dead_width = 2;
-		const double THGEM_Cathode_width = 0.5;
-		const double Al_window_width = 23;
-		g()->l_L = lambda + PMMA_width + LAr_dead_width + THGEM_Cathode_width + Al_window_width; // расстояние от коллиматора до экрана [mm] 
-		//cout << "l_L = " << l_L << endl;
 
-		g()->h_s = (g()->l_L + g()->l_x * g()->h_c / (g()->h_c + h_x)) / (g()->l_x / (g()->h_c + h_x)); //ожидаемый диаметр пятна
-		//cout << "h_s = " << h_s << endl;
-		const double radius = g()->h_s / 2.0;
+			double lambda /*= 33.5*/; // глубина поглощения в LAr гамма квантов [mm]
+			while (true)
+			{
+				lambda = rnd3.Exp(33.5);
+				if (lambda < 50)
+					break;
+			}
 
-		//source-collimator geometry end
-		//-------------------------------------------
-		//
-		//while (true)
-		//{
-		//	double x_tmp = (G4UniformRand() - 0.5) * 2 * radius;
-		//	double y_tmp = (G4UniformRand() - 0.5) * 2 * radius;
-		//	if (x_tmp*x_tmp + y_tmp*y_tmp < radius*radius)
-		//	{
-		//		g()->x_source = x_tmp;
-		//		g()->y_source = y_tmp;
-		//		g()->file_real_position_of_source << g()->x_source << " " << g()->y_source << " " << lambda << " " << radius << endl;
-		//		break;
-		//	}
-		//}
+			const double PMMA_width = 3;
+			const double LAr_dead_width = 2;
+			const double THGEM_Cathode_width = 0.5;
+			const double Al_window_width = 23;
+			g()->l_L = lambda + PMMA_width + LAr_dead_width + THGEM_Cathode_width + Al_window_width; // расстояние от коллиматора до экрана [mm] 
+			//cout << "l_L = " << l_L << endl;
+
+			g()->h_s = (g()->l_L + g()->l_x * g()->h_c / (g()->h_c + h_x)) / (g()->l_x / (g()->h_c + h_x)); //ожидаемый диаметр пятна
+			//cout << "h_s = " << h_s << endl;
+			const double radius = g()->h_s / 2.0;
+			//source-collimator geometry end
+			//-------------------------------------------
+
+
+			while (true)
+			{
+				double x_tmp = (G4UniformRand() - 0.5) * 2 * radius;
+				double y_tmp = (G4UniformRand() - 0.5) * 2 * radius;
+				if (x_tmp*x_tmp + y_tmp*y_tmp < radius*radius)
+				{
+					g()->x_source = x_tmp;
+					g()->y_source = y_tmp;
+					g()->file_real_position_of_source << g()->x_source << " " << g()->y_source << " " << lambda << " " << radius << endl;
+					break;
+				}
+			}
+		}
+
 
 		if (argc == 1)
 		{
@@ -182,7 +186,7 @@ int main(int argc, char** argv)
 		}
 	}//for
 
-	
+
 
 
 

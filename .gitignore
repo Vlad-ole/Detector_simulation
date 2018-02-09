@@ -8,6 +8,8 @@
 *.wrl
 *.db
 sets.txt
+Geant_simulation/logs.txt
+Geant_simulation/experiment/
 
 # Build results
 

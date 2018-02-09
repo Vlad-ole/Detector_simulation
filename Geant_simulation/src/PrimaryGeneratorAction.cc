@@ -150,7 +150,9 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	case MONO:
 		//energy = 59.5; //original value [keV]
 		//energy = 1.38E-3; // optical photon [keV]
-		energy = 88.03; // gamma [keV]
+		//energy = 88.03; // gamma [keV]
+		energy = 59.5; // gamma [keV]
+		//energy = 25; // gamma [keV]
 
 		//Cd 88.03 [keV]
 		//X-ray tube 35[keV]
@@ -216,7 +218,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 #ifdef TOP_HEMISPHERE
 	double phi = 2 * pi*G4UniformRand();
-	double theta = acos( G4UniformRand() );
+	double cosTheta = G4UniformRand();
 #endif //TOP_HEMISPHERE
 
 
@@ -228,11 +230,12 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//cout << "h_c =" << g()->h_c << endl;
 	//cout << "theta_max = " << theta_max << endl;
 	double cosTheta = cos(theta_max) + (1 - cos(theta_max)) * G4UniformRand();
-	double sinTheta = sqrt(1 - cosTheta*cosTheta);
+	
 	//cout << "cosTheta = " << cosTheta << endl;
 	//system("pause");
 #endif //ANGLE_Cd_COLL6mm
 
+	double sinTheta = sqrt(1 - cosTheta*cosTheta);
 	particleGun->SetParticleMomentumDirection(G4ThreeVector(sinTheta*cos(phi), sinTheta*sin(phi), cosTheta));
 	//------------------------------------
 
