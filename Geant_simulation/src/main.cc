@@ -41,7 +41,8 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 
-	g()->is_optical_gamma = false;
+	g()->is_optical_gamma = true;
+	g()->is_Am_coll_14mm = true;
 
 	// Choose the Random engine
 	CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
@@ -71,6 +72,7 @@ int main(int argc, char** argv)
 	if (g()->is_optical_gamma)
 	{
 		runManager->SetUserAction(new PrimaryGeneratorAction(g()->string_GAr_86K_1atm_avalanche_scint_NIR.c_str(), 1));
+		g()->avr_N_pe.resize(25);
 	}
 	else
 	{
@@ -100,11 +102,11 @@ int main(int argc, char** argv)
 
 
 	//for
-	TRandom3 rnd3;
-	const int N_runs = /*41*/ /*1000000*/ 1000000;
+	//TRandom3 rnd3;
+	const int N_runs = /*41*/ /*1000000*/ 1000;
 	for (int i = 0; i < N_runs; i++)
 	{
-		if (i % 1000 == 0 || i == (N_runs - 1))
+		if (i % 1 == 0 || i == (N_runs - 1))
 		{
 			double val = N_runs > 1 ? (100 * i / (double)(N_runs - 1)) : 100;
 			cout << "run = " << i << " (" << val << " %)" << endl;
@@ -130,16 +132,38 @@ int main(int argc, char** argv)
 		//source-collimator geometry
 		//-------------------------------------------
 		const double h_x = 0; // диаметр источника [mm]
-		g()->h_c = 6; // диаметр коллиматора [mm]
-		g()->l_x = 64; // расстояние от источника до коллиматора [mm]
+		if (g()->is_Am_coll_14mm)
+		{
+			g()->h_c = 14.3;
+			g()->l_x = 14.8;
+		}
+		else
+		{
+			g()->h_c = 6; // диаметр коллиматора [mm]
+			g()->l_x = 64; // расстояние от источника до коллиматора [mm]
+		}
+		
 
 		if (g()->is_optical_gamma)
 		{
+			double lambda_bar;//средняя глубина поглощения в LAr гамма квантов [mm]
+			if (g()->is_Am_coll_14mm)
+			{
+				lambda_bar = 17.2;
+			}
+			else
+			{
+				lambda_bar = 33.5;
+			}
+			  
+			// lambda_bar(88 keV) = 33.5 mm
+			// lambda_bar(60 keV) = 17.2 mm
+			// lambda_bar(25 keV) = 1.7 mm
 
-			double lambda /*= 33.5*/; // глубина поглощения в LAr гамма квантов [mm]
+			double lambda; // глубина поглощения в LAr гамма квантов [mm]
 			while (true)
 			{
-				lambda = rnd3.Exp(33.5);
+				lambda = g()->rnd3.Exp(lambda_bar);
 				if (lambda < 50)
 					break;
 			}
@@ -186,7 +210,26 @@ int main(int argc, char** argv)
 		}
 	}//for
 
+	 //out
+	 {
+	 	//-----------------------
+	 	//row1
+	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[0]/N_runs /*ch32*/ << " " << g()->avr_N_pe[1] / N_runs  /*ch33*/ << " " << g()->avr_N_pe[2] / N_runs  /*ch48*/ << " " << g()->avr_N_pe[3] / N_runs  /*ch49*/ << " " << g()->avr_N_pe[4] / N_runs  /*ch34*/ << endl;
 
+	 	//row2
+	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[5] / N_runs /*ch35*/ << " " << g()->avr_N_pe[6] / N_runs  /*ch50*/ << " " << g()->avr_N_pe[7] / N_runs  /*ch51*/ << " " << g()->avr_N_pe[8] / N_runs  /*ch36*/ << " " << g()->avr_N_pe[9] / N_runs  /*ch37*/ << endl;
+
+	 	//row3
+	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[10] / N_runs /*ch52*/ << " " << g()->avr_N_pe[11] / N_runs  /*ch53*/ << " " << g()->avr_N_pe[12] / N_runs  /*ch38*/ << " " << g()->avr_N_pe[13] / N_runs  /*ch39*/ << " " << g()->avr_N_pe[14] / N_runs  /*ch54*/ << endl;
+
+	 	//row4
+	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[15] / N_runs /*ch55*/ << " " << g()->avr_N_pe[16] / N_runs  /*ch40*/ << " " << g()->avr_N_pe[17] / N_runs  /*ch41*/ << " " << g()->avr_N_pe[18] / N_runs  /*ch56*/ << " " << g()->avr_N_pe[19] / N_runs  /*ch57*/ << endl;
+
+	 	//row5
+	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[20] / N_runs /*ch42*/ << " " << g()->avr_N_pe[21] / N_runs  /*ch33*/ << " " << g()->avr_N_pe[22] / N_runs  /*ch58*/ << " " << g()->avr_N_pe[23] / N_runs  /*ch59*/ << " " << g()->avr_N_pe[24] / N_runs  /*ch44*/ << endl;
+	 	//-----------------------
+	 	g()->file_num_of_photons_in_event_SiPM << endl;
+	 }
 
 
 

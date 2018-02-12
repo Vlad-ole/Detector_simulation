@@ -15,16 +15,16 @@ using namespace std;
 
 //set angle distribution
 //#define DIRECT_INCIDENCE
-//#define TOP_HEMISPHERE
+#define TOP_HEMISPHERE
 //#define SPHERE_4PI
-#define ANGLE_Cd_COLL6mm
+//#define ANGLE_Cd_COLL6mm
 
 //set (x,y,z) position
 //#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-//#define EL_GAP 
+#define EL_GAP 
 //#define CIRCLE_EL_GAP
-#define CIRCLE_Cd
+//#define CIRCLE_Cd
 
 
 void PrimaryGeneratorAction::CommonPart()

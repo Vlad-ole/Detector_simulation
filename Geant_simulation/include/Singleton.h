@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 #include "Hits.h"
+
+#include "TRandom3.h"
+
 using namespace std;
 #define g() (Singleton::get())
 
@@ -20,7 +23,7 @@ public:
 	static Singleton* get(); 
 	
 	ofstream file_num_of_photons;
-	ofstream file_num_of_photons_SiPM;
+	ofstream file_num_of_photons_in_event_SiPM;
 	ofstream file_coord_from_SiPM;
 	ofstream file_real_position_of_source;
 	ofstream file_total_num_of_reg_photons_SiPM;
@@ -124,4 +127,8 @@ public:
 	double l_L;
 	double h_s;
 	double h_c;
+
+	TRandom3 rnd3;
+	bool is_Am_coll_14mm;
+	vector<double> avr_N_pe;
 };
