@@ -5,13 +5,13 @@
 /event/verbose 0
 
 #0-5 ("1" is enough for me)
-/tracking/verbose 0
+/tracking/verbose 1
 
-#/control/execute vis.mac
+/control/execute vis.mac
 
 #Run simulation
-/run/beamOn 35000
+/run/beamOn 100
 
 
 #Redrawing of the scene can be done as follows: 
-#vis/viewer/update
+vis/viewer/update

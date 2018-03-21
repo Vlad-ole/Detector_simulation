@@ -32,7 +32,10 @@ void DetectorConstruction::defineMaterials()
 	G4Element *Gd = man->FindOrBuildElement("Gd");
 	G4Element *Al = man->FindOrBuildElement("Al");
 	G4Element *Pr = man->FindOrBuildElement("Pr");
-	G4Element *Ar = man->FindOrBuildElement("Ar");
+	G4Element *Ar = man->FindOrBuildElement("Ar"); 
+	G4Element *W = man->FindOrBuildElement("W");
+	G4Element *Cu = man->FindOrBuildElement("Cu");
+	G4Element *Zn = man->FindOrBuildElement("Zn");
 
 	G4Element *Fe = man->FindOrBuildElement("Fe");
 
@@ -48,6 +51,15 @@ void DetectorConstruction::defineMaterials()
 	airprop->AddProperty("ABSLENGTH", energies, airabsorpti, numentries);
 	airprop->AddProperty("RINDEX", energies, vacrindices, numentries);
 	Air->SetMaterialPropertiesTable(airprop);
+	//------------------------------
+
+
+
+	//------------------------------
+	//Brass
+	G4Material* Brass = new G4Material("Brass", 8.500*g / cm3, 2);
+	Brass->AddElement(Cu, 7);
+	Brass->AddElement(Zn, 3);
 	//------------------------------
 
 
@@ -256,6 +268,14 @@ void DetectorConstruction::defineMaterials()
 	YAP_Ce->SetMaterialPropertiesTable(YAP_Ce_prop);
 	//--------------------------------------------------------------------------------------
 
+
+	//--------------------------------------------------------------------------------------
+	//YAP:Ce without scintillations
+	G4Material* YAP_Ce_no_scint = new G4Material("YAP_Ce_no_scint", 5.35*g / cm3, 3, kStateSolid);
+	YAP_Ce_no_scint->AddElement(Y, 54.25*perCent);
+	YAP_Ce_no_scint->AddElement(Al, 16.46*perCent);
+	YAP_Ce_no_scint->AddElement(O, 29.29*perCent);
+	//--------------------------------------------------------------------------------------
 
 
 	//--------------------------------------------------------------------------------------

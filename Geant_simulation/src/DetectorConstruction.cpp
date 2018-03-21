@@ -88,14 +88,15 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #define bPMMA_bottom
 #define bAl_window
 #define bCryogenicChamberBottom
-#define bExternalColl6mm
+//#define bExternalColl6mm
 //#define bExternalColl2mm
-#define bCd109ExternalBox
-#define bCd109InternalColl
+//#define bCd109ExternalBox
+//#define bCd109InternalColl
 #define bCd109IsotopBoxHolder
 #define bCd109
-
-
+#define bCd109WolframPlug
+#define bCd109CuFoil
+#define bCd109Detector
 
 	//bool bLAr_inner = false;
 	//bool bLAr_outer = false;
@@ -276,14 +277,23 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double diameter_size_Cd109IsotopBoxHolder = 14.3 * mm;
 	const double Cd109IsotopBoxHolder_top_hole_bottom = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder_bottom_hole + z_size_Cd109IsotopBoxHolder_middle_hole;
 	const double Cd109IsotopBoxHolder_top_hole_center = Cd109IsotopBoxHolder_top_hole_bottom + z_size_Cd109IsotopBoxHolder_top_hole/2.0;
+	const double Cd109IsotopBoxHolder_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder/2.0;
+	
 
 	//Cd109
-	const double diameter_size_Cd109 = 3 * mm;
+	const double diameter_size_Cd109 = 1 * mm;
 	const double z_size_Cd109 = 0.1 * mm;
 	const double Cd109_center = Cd109IsotopBoxHolder_top_hole_bottom - z_size_Cd109/2.0;
 	g()->z_source_gamma = Cd109_center;
 	g()->radius_source_gamma = diameter_size_Cd109/2.0;
 	cout << "Cd109_center" << Cd109_center << endl;
+
+	const double Cd109IsotopBoxHolder_plug_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder_bottom_hole / 2.0 - z_size_Cd109;
+
+	//Cd109WolframPlug
+	const double diameter_size_Cd109WolframPlug = 3 * mm;
+	const double z_size_Cd109WolframPlug = 3 * mm;
+	const double Cd109WolframPlug_center = Cd109_center - z_size_Cd109 / 2.0 - z_size_Cd109WolframPlug / 2.0;
 	
 	//Cd109InternalColl
 	const double diameter_size_internal_Cd109InternalColl = 2 * mm;
@@ -291,7 +301,17 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double z_size_Cd109InternalColl = 10 * mm;
 	const double Cd109InternalColl_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder + z_size_Cd109InternalColl/2.0;
 
-	
+	//Cd109CuFoil
+	const double x_size_Cd109CuFoil = 16 * mm;
+	const double y_size_Cd109CuFoil = x_size_Cd109CuFoil;
+	const double z_size_Cd109CuFoil = 0.1 * mm;
+	const double Cd109CuFoil_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder + z_size_Cd109CuFoil/2.0;
+
+	//bCd109Detector
+	const double x_size_Cd109Detector = 2 * mm;
+	const double y_size_Cd109Detector = 10 * mm;
+	const double z_size_Cd109Detector = 2 * mm;
+	const double Cd109Detector_center = Cd109CuFoil_center + z_size_Cd109CuFoil/2.0 + z_size_Cd109Detector /2.0;
 
 	if (thickness_anode_grid < 2 * radius_wire)
 	{
@@ -336,9 +356,21 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//Cd109
 	const G4ThreeVector &position_Cd109 = G4ThreeVector(0, 0, Cd109_center);
 	const G4ThreeVector &position_Cd109IsotopBoxHolder_top_hole = G4ThreeVector(0, 0, Cd109IsotopBoxHolder_top_hole_center);
+	const G4ThreeVector &position_Cd109IsotopBoxHolder = G4ThreeVector(0, 0, Cd109IsotopBoxHolder_center);	
+	const G4ThreeVector &position_Cd109IsotopBoxHolder_plug = G4ThreeVector(0, 0, Cd109IsotopBoxHolder_plug_center);
 	const G4ThreeVector &position_Cd109InternalColl = G4ThreeVector(0, 0, Cd109InternalColl_center);
+	
+	//Cd109Detector
+	const G4ThreeVector &position_Cd109Detector = G4ThreeVector(0, 0, Cd109Detector_center);
 
+	//Cd109CuFoil
+	const G4ThreeVector &position_Cd109CuFoil = G4ThreeVector(0, 0, Cd109CuFoil_center);
+	
+	
+	//Cd109WolframPlug
+	const G4ThreeVector &position_Cd109WolframPlug = G4ThreeVector(0, 0, Cd109WolframPlug_center);
 
+	//PMT
 	const G4ThreeVector &position_PMT_0 = G4ThreeVector(-x_pos_PMT, 0, z_pos_PMT);
 	const G4ThreeVector &position_PMT_1 = G4ThreeVector(x_pos_PMT, 0, z_pos_PMT);
 	const G4ThreeVector &position_PMT_2 = G4ThreeVector(0, -y_pos_PMT, z_pos_PMT);
@@ -361,8 +393,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4double density;
 	G4Material* fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
 	G4Material* fFe = new G4Material("Fe", z = 26., a = 55.85*g / mole, density = 7.874 *g / cm3);
-
-
+	G4Material* fW = new G4Material("W", z = 74., a = 183.84*g / mole, density = 19.35 *g / cm3);
+	G4Material* fCu = new G4Material("Cu", z = 29., a = 63.5*g / mole, density = 8.92 *g / cm3);
 
 	//----------------------------------------------------------------------------------
 	// создание мира
@@ -582,25 +614,82 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #endif //bCd109
 
 
+#ifdef	bCd109WolframPlug
+	G4Tubs* solid_Cd109WolframPlug
+		= new G4Tubs("solid_Cd109WolframPlug", 0, diameter_size_Cd109WolframPlug / 2.0, z_size_Cd109WolframPlug / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_Cd109WolframPlug
+		= new G4LogicalVolume(solid_Cd109WolframPlug, G4Material::GetMaterial("W"), "logic_Cd109WolframPlug", 0, 0, 0);
+	G4VPhysicalVolume* phys_Cd109WolframPlug = new G4PVPlacement(0,               // no rotation
+		position_Cd109WolframPlug, // at (x,y,z)
+		logic_Cd109WolframPlug,       // its logical volume
+		"phys_Cd109WolframPlug",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif //bCd109WolframPlug
+
 
 #ifdef	bCd109IsotopBoxHolder
-
-	G4Tubs* solid_Cd109IsotopBoxHolder_top_hole
-		= new G4Tubs("solid_Cd109IsotopBoxHolder_top_hole", diameter_size_Cd109IsotopBoxHolder_top_hole / 2.0, diameter_size_Cd109IsotopBoxHolder/2.0, z_size_Cd109IsotopBoxHolder_top_hole / 2.0, 0. *deg, 360.*deg);
-	G4LogicalVolume* logic_Cd109IsotopBoxHolder_top_hole
-		= new G4LogicalVolume(solid_Cd109IsotopBoxHolder_top_hole, G4Material::GetMaterial("Fe"), "logic_Cd109IsotopBoxHolder_top_hole", 0, 0, 0);
-	G4VPhysicalVolume* phys_Cd109IsotopBoxHolder_top_hole = new G4PVPlacement(0,               // no rotation
-		position_Cd109IsotopBoxHolder_top_hole, // at (x,y,z)
-		logic_Cd109IsotopBoxHolder_top_hole,       // its logical volume
-		"phys_Cd109IsotopBoxHolder_top_hole",       // its name
+	G4Tubs* solid_Cd109IsotopBoxHolder
+		= new G4Tubs("solid_Cd109IsotopBoxHolder", diameter_size_Cd109IsotopBoxHolder_top_hole / 2.0, diameter_size_Cd109IsotopBoxHolder/2.0, z_size_Cd109IsotopBoxHolder / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_Cd109IsotopBoxHolder
+		= new G4LogicalVolume(solid_Cd109IsotopBoxHolder, G4Material::GetMaterial("Brass"), "logic_Cd109IsotopBoxHolder", 0, 0, 0);
+	G4VPhysicalVolume* phys_Cd109IsotopBoxHolder = new G4PVPlacement(0,               // no rotation
+		position_Cd109IsotopBoxHolder, // at (x,y,z)
+		logic_Cd109IsotopBoxHolder,       // its logical volume
+		"phys_Cd109IsotopBoxHolder",       // its name
 		logicWorld,         // its mother  volume
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps
 
+	G4Tubs* solid_Cd109IsotopBoxHolder_plug
+		= new G4Tubs("solid_Cd109IsotopBoxHolder_plug", 0, diameter_size_Cd109IsotopBoxHolder_top_hole / 2.0, (z_size_Cd109IsotopBoxHolder_bottom_hole - z_size_Cd109) / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_Cd109IsotopBoxHolder_plug
+		= new G4LogicalVolume(solid_Cd109IsotopBoxHolder_plug, G4Material::GetMaterial("Brass"), "logic_Cd109IsotopBoxHolder_plug", 0, 0, 0);
+	G4VPhysicalVolume* phys_Cd109IsotopBoxHolder_plug = new G4PVPlacement(0,               // no rotation
+		position_Cd109IsotopBoxHolder_plug, // at (x,y,z)
+		logic_Cd109IsotopBoxHolder_plug,       // its logical volume
+		"phys_Cd109IsotopBoxHolder_plug",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
 
 #endif //bCd109IsotopBoxHolder
 
+	
+#ifdef	bCd109CuFoil
+	G4Box* solid_Cd109CuFoil
+		= new G4Box("solid_Cd109CuFoil", x_size_Cd109CuFoil / 2.0, y_size_Cd109CuFoil / 2.0, z_size_Cd109CuFoil / 2.0);
+	G4LogicalVolume* logic_Cd109CuFoil
+		= new G4LogicalVolume(solid_Cd109CuFoil, G4Material::GetMaterial("Cu"), "logic_Cd109CuFoil", 0, 0, 0);
+	G4VPhysicalVolume* phys_Cd109CuFoil = new G4PVPlacement(0,               // no rotation
+		position_Cd109CuFoil, // at (x,y,z)
+		logic_Cd109CuFoil,       // its logical volume
+		"phys_Cd109CuFoil",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif //bCd109CuFoil
+
+
+#ifdef	bCd109Detector
+	G4Box* solid_Cd109Detector
+		= new G4Box("solid_Cd109Detector", x_size_Cd109Detector / 2.0, y_size_Cd109Detector / 2.0, z_size_Cd109Detector / 2.0);
+	G4LogicalVolume* logic_Cd109Detector
+		= new G4LogicalVolume(solid_Cd109Detector, G4Material::GetMaterial("YAP_Ce_no_scint"), "logic_Cd109Detector", 0, 0, 0);
+	G4VPhysicalVolume* phys_Cd109Detector = new G4PVPlacement(0,               // no rotation
+		position_Cd109Detector, // at (x,y,z)
+		logic_Cd109Detector,       // its logical volume
+		"phys_Cd109Detector",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif //bCd109Detector
 
 
 #ifdef bCd109InternalColl
@@ -1114,7 +1203,19 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #ifdef bCd109InternalColl
 	logic_Cd109InternalColl->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 1.0, 0.5, 0.8)));
 #endif // bCd109
+
+#ifdef bCd109WolframPlug
+	logic_Cd109WolframPlug->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 0.6, 0.5, 0.8)));
+#endif // bCd109
 	
+#ifdef bCd109CuFoil
+	logic_Cd109CuFoil->SetVisAttributes(new G4VisAttributes(G4Colour(218/255.0, 138/255.0, 103/255.0, 0.8)));
+#endif // bCd109
+
+#ifdef bCd109Detector
+	logic_Cd109Detector->SetVisAttributes(new G4VisAttributes(G4Colour(0 / 255.0, 0 / 255.0, 128 / 255.0, 0.8)));
+#endif // bCd109Detector
+
 
 	//FieldTHGEM
 	G4VisAttributes* FieldTHGEM_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.7, 0.3, 0.8));

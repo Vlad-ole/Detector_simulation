@@ -192,9 +192,10 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 		{
 			G4ThreeVector position = thePostPoint->GetPosition();
 
-			////choose active LAr
-			if (thePostPV->GetName() == "phys_LAr_inner" || thePostPV->GetName() == "phys_tracker_THGEM0" ||
-				thePostPV->GetName() == "phys_FieldTHGEM_1" || thePostPV->GetName() == "phys_FieldTHGEM_2")
+			//////choose active LAr
+			//if (thePostPV->GetName() == "phys_LAr_inner" || thePostPV->GetName() == "phys_tracker_THGEM0" ||
+			//	thePostPV->GetName() == "phys_FieldTHGEM_1" || thePostPV->GetName() == "phys_FieldTHGEM_2")
+			if (thePostPV->GetName() == "phys_Cd109Detector" )
 			{
 				//cout << "vlad_info ******************; " << particleType->GetParticleType() << endl;
 				G4double edep = theStep->GetTotalEnergyDeposit();
@@ -207,7 +208,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 
 					//total energy deposit in absorber
 					eventAction->AddEdep(edep);
-					g()->file_gamma_step_E_depos << edep * 1000 /*E in keV*/ << endl;
+					//g()->file_gamma_step_E_depos << edep * 1000 /*E in keV*/ << endl;
 				}				
 			}
 

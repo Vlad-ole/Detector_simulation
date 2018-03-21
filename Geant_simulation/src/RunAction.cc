@@ -192,23 +192,23 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 	//	g()->file_num_of_photons_in_event_SiPM << endl;
 	//}
 
-	/*cacl summ N_pe*/
-	{
-		//row1
-		g()->avr_N_pe[0] += g()->SiPM_hits->N_reg_v[80]; /**/ g()->avr_N_pe[1] += g()->SiPM_hits->N_reg_v[81]; /**/ g()->avr_N_pe[2] += g()->SiPM_hits->N_reg_v[82]; /**/ g()->avr_N_pe[3] += g()->SiPM_hits->N_reg_v[83]; /**/ g()->avr_N_pe[4] += g()->SiPM_hits->N_reg_v[84];
+	///*cacl summ N_pe*/
+	//{
+	//	//row1
+	//	g()->avr_N_pe[0] += g()->SiPM_hits->N_reg_v[80]; /**/ g()->avr_N_pe[1] += g()->SiPM_hits->N_reg_v[81]; /**/ g()->avr_N_pe[2] += g()->SiPM_hits->N_reg_v[82]; /**/ g()->avr_N_pe[3] += g()->SiPM_hits->N_reg_v[83]; /**/ g()->avr_N_pe[4] += g()->SiPM_hits->N_reg_v[84];
 
-		//row2
-		g()->avr_N_pe[5] += g()->SiPM_hits->N_reg_v[69]; /**/ g()->avr_N_pe[6] += g()->SiPM_hits->N_reg_v[70]; /**/ g()->avr_N_pe[7] += g()->SiPM_hits->N_reg_v[71]; /**/ g()->avr_N_pe[8] += g()->SiPM_hits->N_reg_v[72]; /**/ g()->avr_N_pe[9] += g()->SiPM_hits->N_reg_v[73];
+	//	//row2
+	//	g()->avr_N_pe[5] += g()->SiPM_hits->N_reg_v[69]; /**/ g()->avr_N_pe[6] += g()->SiPM_hits->N_reg_v[70]; /**/ g()->avr_N_pe[7] += g()->SiPM_hits->N_reg_v[71]; /**/ g()->avr_N_pe[8] += g()->SiPM_hits->N_reg_v[72]; /**/ g()->avr_N_pe[9] += g()->SiPM_hits->N_reg_v[73];
 
-		//row3
-		g()->avr_N_pe[10] += g()->SiPM_hits->N_reg_v[58]; /**/ g()->avr_N_pe[11] += g()->SiPM_hits->N_reg_v[59]; /**/ g()->avr_N_pe[12] += g()->SiPM_hits->N_reg_v[60]; /**/ g()->avr_N_pe[13] += g()->SiPM_hits->N_reg_v[61]; /**/ g()->avr_N_pe[14] += g()->SiPM_hits->N_reg_v[62];
+	//	//row3
+	//	g()->avr_N_pe[10] += g()->SiPM_hits->N_reg_v[58]; /**/ g()->avr_N_pe[11] += g()->SiPM_hits->N_reg_v[59]; /**/ g()->avr_N_pe[12] += g()->SiPM_hits->N_reg_v[60]; /**/ g()->avr_N_pe[13] += g()->SiPM_hits->N_reg_v[61]; /**/ g()->avr_N_pe[14] += g()->SiPM_hits->N_reg_v[62];
 
-		//row4
-		g()->avr_N_pe[15] += g()->SiPM_hits->N_reg_v[47]; /**/ g()->avr_N_pe[16] += g()->SiPM_hits->N_reg_v[48]; /**/ g()->avr_N_pe[17] += g()->SiPM_hits->N_reg_v[49]; /**/ g()->avr_N_pe[18] += g()->SiPM_hits->N_reg_v[50]; /**/ g()->avr_N_pe[19] += g()->SiPM_hits->N_reg_v[51];
+	//	//row4
+	//	g()->avr_N_pe[15] += g()->SiPM_hits->N_reg_v[47]; /**/ g()->avr_N_pe[16] += g()->SiPM_hits->N_reg_v[48]; /**/ g()->avr_N_pe[17] += g()->SiPM_hits->N_reg_v[49]; /**/ g()->avr_N_pe[18] += g()->SiPM_hits->N_reg_v[50]; /**/ g()->avr_N_pe[19] += g()->SiPM_hits->N_reg_v[51];
 
-		//row5
-		g()->avr_N_pe[20] += g()->SiPM_hits->N_reg_v[36]; /**/ g()->avr_N_pe[21] += g()->SiPM_hits->N_reg_v[37]; /**/ g()->avr_N_pe[22] += g()->SiPM_hits->N_reg_v[38]; /**/ g()->avr_N_pe[23] += g()->SiPM_hits->N_reg_v[39]; /**/ g()->avr_N_pe[24] += g()->SiPM_hits->N_reg_v[40];
-	}
+	//	//row5
+	//	g()->avr_N_pe[20] += g()->SiPM_hits->N_reg_v[36]; /**/ g()->avr_N_pe[21] += g()->SiPM_hits->N_reg_v[37]; /**/ g()->avr_N_pe[22] += g()->SiPM_hits->N_reg_v[38]; /**/ g()->avr_N_pe[23] += g()->SiPM_hits->N_reg_v[39]; /**/ g()->avr_N_pe[24] += g()->SiPM_hits->N_reg_v[40];
+	//}
 
 
 
