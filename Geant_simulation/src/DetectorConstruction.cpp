@@ -79,6 +79,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #define bAnode_grid
 //#define bInsulator_box
 //#define bPMTs
+//#define bWLS
 //#define bTHGEM2
 #define bTHGEM1
 //#define	bLArOuter
@@ -101,10 +102,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//--------------------------------------------------------------------------------
 	//выставление размеров объектов
-	const G4double HalfWorldLength = 13 * cm;
+	const G4double HalfWorldLength = 17 * cm;
 
 	//anode wire
-	const double radius_wire = 100 * um;
+	const double radius_wire = 100 * um;//you can understand this from photo
 	const double length_wire = 60 * mm /* 108*mm future case*/;  //60*mm /*real case*/;
 	const double step_wire = 1 * mm;
 	const int N_wire = length_wire/step_wire - 1 /* 107 future case*/;
@@ -121,6 +122,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double y_size_PMMA_plate = size_anode_grid;
 	const double z_size_PMMA_plate = 1.5 * mm;
 	const double z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
+
 
 	//SiPMs
 	const int Nx_SiPMs = 11;
@@ -189,6 +191,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double x_pos_PMT = 152 * mm / 2.0 + z_size_PMT / 2;
 	const double y_pos_PMT = x_pos_PMT;
 	const double z_pos_PMT = 27.2 * mm + 63 * mm / 2.0;
+
+	//WLS
+	/*const double radius_WLS = 70 * mm / 2.0;
+	const double z_size_WLS = 100 * um;
+	const double x_pos_WLS = 152 * mm / 2.0 + z_size_PMT / 2;
+	const double y_pos_WLS = x_pos_WLS;
+	const double z_pos_WLS = z_pos_PMT;*/
 
 	//LAr_inner
 	const double x_size_LAr_inner = x_size_Insulator_box_inner;

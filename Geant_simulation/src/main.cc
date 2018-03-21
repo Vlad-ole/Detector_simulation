@@ -41,8 +41,8 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 
-	g()->is_optical_gamma = true;
-	g()->is_Am_coll_14mm = true;
+	g()->is_optical_gamma = false;
+	g()->is_Am_coll_14mm = false;
 
 	// Choose the Random engine
 	CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
@@ -103,7 +103,7 @@ int main(int argc, char** argv)
 
 	//for
 	//TRandom3 rnd3;
-	const int N_runs = /*41*/ /*1000000*/ 1000;
+	const int N_runs = /*41*/ 100 /*1*/;
 	for (int i = 0; i < N_runs; i++)
 	{
 		if (i % 1 == 0 || i == (N_runs - 1))
@@ -134,7 +134,7 @@ int main(int argc, char** argv)
 		const double h_x = 0; // диаметр источника [mm]
 		if (g()->is_Am_coll_14mm)
 		{
-			g()->h_c = 14.3;
+			g()->h_c = 6;//14.3 or 6 
 			g()->l_x = 14.8;
 		}
 		else
@@ -160,11 +160,11 @@ int main(int argc, char** argv)
 			// lambda_bar(60 keV) = 17.2 mm
 			// lambda_bar(25 keV) = 1.7 mm
 
-			double lambda; // глубина поглощени€ в LAr гамма квантов [mm]
+			// глубина поглощени€ в LAr гамма квантов [mm]
 			while (true)
 			{
-				lambda = g()->rnd3.Exp(lambda_bar);
-				if (lambda < 50)
+				g()->lambda = g()->rnd3.Exp(lambda_bar);
+				if (g()->lambda < 50)
 					break;
 			}
 
@@ -172,25 +172,24 @@ int main(int argc, char** argv)
 			const double LAr_dead_width = 2;
 			const double THGEM_Cathode_width = 0.5;
 			const double Al_window_width = 23;
-			g()->l_L = lambda + PMMA_width + LAr_dead_width + THGEM_Cathode_width + Al_window_width; // рассто€ние от коллиматора до экрана [mm] 
+			g()->l_L = g()->lambda + PMMA_width + LAr_dead_width + THGEM_Cathode_width + Al_window_width; // рассто€ние от коллиматора до экрана [mm] 
 			//cout << "l_L = " << l_L << endl;
 
 			g()->h_s = (g()->l_L + g()->l_x * g()->h_c / (g()->h_c + h_x)) / (g()->l_x / (g()->h_c + h_x)); //ожидаемый диаметр п€тна
 			//cout << "h_s = " << h_s << endl;
-			const double radius = g()->h_s / 2.0;
+			g()->radius = g()->h_s / 2.0;
 			//source-collimator geometry end
 			//-------------------------------------------
 
 
 			while (true)
 			{
-				double x_tmp = (G4UniformRand() - 0.5) * 2 * radius;
-				double y_tmp = (G4UniformRand() - 0.5) * 2 * radius;
-				if (x_tmp*x_tmp + y_tmp*y_tmp < radius*radius)
+				double x_tmp = (G4UniformRand() - 0.5) * 2 * g()->radius;
+				double y_tmp = (G4UniformRand() - 0.5) * 2 * g()->radius;
+				if ( x_tmp*x_tmp + y_tmp*y_tmp < (g()->radius)*(g()->radius) )
 				{
 					g()->x_source = x_tmp;
-					g()->y_source = y_tmp;
-					g()->file_real_position_of_source << g()->x_source << " " << g()->y_source << " " << lambda << " " << radius << endl;
+					g()->y_source = y_tmp;					
 					break;
 				}
 			}
@@ -210,21 +209,21 @@ int main(int argc, char** argv)
 		}
 	}//for
 
-	 //out
+	 /*out*/
 	 {
 	 	//-----------------------
 	 	//row1
 	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[0]/N_runs /*ch32*/ << " " << g()->avr_N_pe[1] / N_runs  /*ch33*/ << " " << g()->avr_N_pe[2] / N_runs  /*ch48*/ << " " << g()->avr_N_pe[3] / N_runs  /*ch49*/ << " " << g()->avr_N_pe[4] / N_runs  /*ch34*/ << endl;
-
+	 
 	 	//row2
 	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[5] / N_runs /*ch35*/ << " " << g()->avr_N_pe[6] / N_runs  /*ch50*/ << " " << g()->avr_N_pe[7] / N_runs  /*ch51*/ << " " << g()->avr_N_pe[8] / N_runs  /*ch36*/ << " " << g()->avr_N_pe[9] / N_runs  /*ch37*/ << endl;
-
+	 
 	 	//row3
 	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[10] / N_runs /*ch52*/ << " " << g()->avr_N_pe[11] / N_runs  /*ch53*/ << " " << g()->avr_N_pe[12] / N_runs  /*ch38*/ << " " << g()->avr_N_pe[13] / N_runs  /*ch39*/ << " " << g()->avr_N_pe[14] / N_runs  /*ch54*/ << endl;
-
+	 
 	 	//row4
 	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[15] / N_runs /*ch55*/ << " " << g()->avr_N_pe[16] / N_runs  /*ch40*/ << " " << g()->avr_N_pe[17] / N_runs  /*ch41*/ << " " << g()->avr_N_pe[18] / N_runs  /*ch56*/ << " " << g()->avr_N_pe[19] / N_runs  /*ch57*/ << endl;
-
+	 
 	 	//row5
 	 	g()->file_num_of_photons_in_event_SiPM << g()->avr_N_pe[20] / N_runs /*ch42*/ << " " << g()->avr_N_pe[21] / N_runs  /*ch33*/ << " " << g()->avr_N_pe[22] / N_runs  /*ch58*/ << " " << g()->avr_N_pe[23] / N_runs  /*ch59*/ << " " << g()->avr_N_pe[24] / N_runs  /*ch44*/ << endl;
 	 	//-----------------------

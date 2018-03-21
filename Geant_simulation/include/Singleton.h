@@ -127,8 +127,12 @@ public:
 	double l_L;
 	double h_s;
 	double h_c;
+	double lambda;
+	double radius;
 
 	TRandom3 rnd3;
 	bool is_Am_coll_14mm;
 	vector<double> avr_N_pe;
+
+
 };

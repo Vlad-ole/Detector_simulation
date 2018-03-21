@@ -212,7 +212,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//uniform distribution
 	double phi = 2 * pi*G4UniformRand();
 	//double theta = pi/2*G4UniformRand();
-	double theta = acos((G4UniformRand() - 0.5) * 2);
+	//double theta = acos((G4UniformRand() - 0.5) * 2);
+	double cosTheta = (G4UniformRand() - 0.5) * 2;
 #endif //SPHERE_4PI	
 
 

@@ -99,83 +99,119 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 	//	}
 	//}
 
-
-	for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
+	bool is_cog = false;
+	if (is_cog)
 	{
-		//central SiPM
-		//if (i == 60)
-		
-		// condition to choose 5x5 matrix
-		if (g()->SiPM_hits->xpos_v[i] > -2.5*step && g()->SiPM_hits->xpos_v[i] < 2.5*step && 
-			g()->SiPM_hits->ypos_v[i] > -2.5*step && g()->SiPM_hits->ypos_v[i] < 2.5*step)		
+		for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
 		{
-			if(i != 40)
-			{ 
-				x_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->xpos_v[i];
-				y_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->ypos_v[i];
-				q_mean += g()->SiPM_hits->N_reg_v[i];
-				////cout << i << "\t x_pos = " << g()->SiPM_hits->xpos_v[i] << "\t y_pos = " << g()->SiPM_hits->ypos_v[i] <<"\t N_reg = " << g()->SiPM_hits->N_reg_v[i] << "\t x_mean =  " << x_mean << "\t y_mean = " << y_mean << "\t q_mean = " << q_mean << endl;
-				//g()->file_num_of_photons_SiPM << i << "\t" << g()->SiPM_hits->xpos_v[i] << "\t" << g()->SiPM_hits->ypos_v[i] << "\t" << g()->SiPM_hits->N_reg_v[i] << endl;
-			}
-			else//right-bottom ch in 5x5 matrix is avg of adjacent SiPMs
+			//central SiPM
+			//if (i == 60)
+
+			// condition to choose 5x5 matrix
+			if (g()->SiPM_hits->xpos_v[i] > -2.5*step && g()->SiPM_hits->xpos_v[i] < 2.5*step &&
+				g()->SiPM_hits->ypos_v[i] > -2.5*step && g()->SiPM_hits->ypos_v[i] < 2.5*step)
 			{
-				double N_pe = (g()->SiPM_hits->N_reg_v[39] + g()->SiPM_hits->N_reg_v[51] + g()->SiPM_hits->N_reg_v[50]/sqrt(2))/3.0;
-				g()->SiPM_hits->N_reg_v[40] = N_pe;
-				x_mean += N_pe * g()->SiPM_hits->xpos_v[i];
-				y_mean += N_pe * g()->SiPM_hits->ypos_v[i];
-				q_mean += N_pe;
+				if (i != 40)
+				{
+					x_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->xpos_v[i];
+					y_mean += g()->SiPM_hits->N_reg_v[i] * g()->SiPM_hits->ypos_v[i];
+					q_mean += g()->SiPM_hits->N_reg_v[i];
+					////cout << i << "\t x_pos = " << g()->SiPM_hits->xpos_v[i] << "\t y_pos = " << g()->SiPM_hits->ypos_v[i] <<"\t N_reg = " << g()->SiPM_hits->N_reg_v[i] << "\t x_mean =  " << x_mean << "\t y_mean = " << y_mean << "\t q_mean = " << q_mean << endl;
+					//g()->file_num_of_photons_SiPM << i << "\t" << g()->SiPM_hits->xpos_v[i] << "\t" << g()->SiPM_hits->ypos_v[i] << "\t" << g()->SiPM_hits->N_reg_v[i] << endl;
+				}
+				else//right-bottom ch in 5x5 matrix is avg of adjacent SiPMs
+				{
+					double N_pe = (g()->SiPM_hits->N_reg_v[39] + g()->SiPM_hits->N_reg_v[51] + g()->SiPM_hits->N_reg_v[50] / sqrt(2)) / 3.0;
+					g()->SiPM_hits->N_reg_v[40] = N_pe;
+					x_mean += N_pe * g()->SiPM_hits->xpos_v[i];
+					y_mean += N_pe * g()->SiPM_hits->ypos_v[i];
+					q_mean += N_pe;
+				}
+				//g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[i] << " ";			
 			}
-			//g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[i] << " ";			
 		}
+		if (q_mean != 0)
+		{
+			x_mean /= q_mean;
+			y_mean /= q_mean;
+
+			//cout << "x_mean = " << x_mean << " \t y_mean = " << y_mean << endl;
+			g()->file_coord_from_SiPM << x_mean << "\t" << y_mean << endl;
+			g()->file_total_num_of_reg_photons_SiPM << q_mean << endl;
+			g()->file_real_position_of_source << g()->x_source << " " << g()->y_source << " " << g()->lambda << " " << g()->radius << endl;
+		}
+	}
+	else
+	{ 
+		g()->SiPM_hits->N_reg_v[40] = (g()->SiPM_hits->N_reg_v[39] + g()->SiPM_hits->N_reg_v[51] + g()->SiPM_hits->N_reg_v[50] / sqrt(2)) / 3.0;
+		int array_index_of_max = -1;
+		int max_val = 0;
+
+		for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
+		{			
+			// condition to choose 5x5 matrix
+			if (g()->SiPM_hits->xpos_v[i] > -2.5*step && g()->SiPM_hits->xpos_v[i] < 2.5*step &&
+				g()->SiPM_hits->ypos_v[i] > -2.5*step && g()->SiPM_hits->ypos_v[i] < 2.5*step)
+			{
+				q_mean += g()->SiPM_hits->N_reg_v[i];
+				if (g()->SiPM_hits->N_reg_v[i] > max_val)
+				{
+					max_val = g()->SiPM_hits->N_reg_v[i];
+					array_index_of_max = i;
+				}
+			}
+		}
+
+		if (array_index_of_max >= 0)
+		{
+			g()->file_coord_from_SiPM << g()->SiPM_hits->xpos_v[array_index_of_max] << "\t" << g()->SiPM_hits->ypos_v[array_index_of_max] << endl;
+			g()->file_total_num_of_reg_photons_SiPM << q_mean << endl;
+		}		
+
 	}
 
 
-	////out
+	/*out*/
 	//{
 	//	//-----------------------
 	//	//row1
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[80] /*ch32*/ << " " << g()->SiPM_hits->N_reg_v[81]  /*ch33*/ << " " << g()->SiPM_hits->N_reg_v[82]  /*ch48*/ << " " << g()->SiPM_hits->N_reg_v[83]  /*ch49*/ << " " << g()->SiPM_hits->N_reg_v[84]  /*ch34*/ << endl;
-
+	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[80] /*ch32*/ << "\t" << g()->SiPM_hits->N_reg_v[81]  /*ch33*/ << "\t" << g()->SiPM_hits->N_reg_v[82]  /*ch48*/ << "\t" << g()->SiPM_hits->N_reg_v[83]  /*ch49*/ << "\t" << g()->SiPM_hits->N_reg_v[84]  /*ch34*/ << endl;
+	//
 	//	//row2
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[69] /*ch35*/ << " " << g()->SiPM_hits->N_reg_v[70]  /*ch50*/ << " " << g()->SiPM_hits->N_reg_v[71]  /*ch51*/ << " " << g()->SiPM_hits->N_reg_v[72]  /*ch36*/ << " " << g()->SiPM_hits->N_reg_v[73]  /*ch37*/ << endl;
-
+	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[69] /*ch35*/ << "\t" << g()->SiPM_hits->N_reg_v[70]  /*ch50*/ << "\t" << g()->SiPM_hits->N_reg_v[71]  /*ch51*/ << "\t" << g()->SiPM_hits->N_reg_v[72]  /*ch36*/ << "\t" << g()->SiPM_hits->N_reg_v[73]  /*ch37*/ << endl;
+	//
 	//	//row3
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[58] /*ch52*/ << " " << g()->SiPM_hits->N_reg_v[59]  /*ch53*/ << " " << g()->SiPM_hits->N_reg_v[60]  /*ch38*/ << " " << g()->SiPM_hits->N_reg_v[61]  /*ch39*/ << " " << g()->SiPM_hits->N_reg_v[62]  /*ch54*/ << endl;
-
+	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[58] /*ch52*/ << "\t" << g()->SiPM_hits->N_reg_v[59]  /*ch53*/ << "\t" << g()->SiPM_hits->N_reg_v[60]  /*ch38*/ << "\t" << g()->SiPM_hits->N_reg_v[61]  /*ch39*/ << "\t" << g()->SiPM_hits->N_reg_v[62]  /*ch54*/ << endl;
+	//
 	//	//row4
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[47] /*ch55*/ << " " << g()->SiPM_hits->N_reg_v[48]  /*ch40*/ << " " << g()->SiPM_hits->N_reg_v[49]  /*ch41*/ << " " << g()->SiPM_hits->N_reg_v[50]  /*ch56*/ << " " << g()->SiPM_hits->N_reg_v[51]  /*ch57*/ << endl;
-
+	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[47] /*ch55*/ << "\t" << g()->SiPM_hits->N_reg_v[48]  /*ch40*/ << "\t" << g()->SiPM_hits->N_reg_v[49]  /*ch41*/ << "\t" << g()->SiPM_hits->N_reg_v[50]  /*ch56*/ << "\t" << g()->SiPM_hits->N_reg_v[51]  /*ch57*/ << endl;
+	//
 	//	//row5
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[36] /*ch42*/ << " " << g()->SiPM_hits->N_reg_v[37]  /*ch33*/ << " " << g()->SiPM_hits->N_reg_v[38]  /*ch58*/ << " " << g()->SiPM_hits->N_reg_v[39]  /*ch59*/ << " " << g()->SiPM_hits->N_reg_v[40]  /*ch44*/ << endl;
+	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[36] /*ch42*/ << "\t" << g()->SiPM_hits->N_reg_v[37]  /*ch33*/ << "\t" << g()->SiPM_hits->N_reg_v[38]  /*ch58*/ << "\t" << g()->SiPM_hits->N_reg_v[39]  /*ch59*/ << "\t" << g()->SiPM_hits->N_reg_v[40]  /*ch44*/ << endl;
 	//	//-----------------------
 	//	g()->file_num_of_photons_in_event_SiPM << endl;
 	//}
 
-	//row1
-	g()->avr_N_pe[0] += g()->SiPM_hits->N_reg_v[80]; /**/ g()->avr_N_pe[1] += g()->SiPM_hits->N_reg_v[81]; /**/ g()->avr_N_pe[2] += g()->SiPM_hits->N_reg_v[82]; /**/ g()->avr_N_pe[3] += g()->SiPM_hits->N_reg_v[83]; /**/ g()->avr_N_pe[4] += g()->SiPM_hits->N_reg_v[84];
-	
-	//row2
-	g()->avr_N_pe[5] += g()->SiPM_hits->N_reg_v[69]; /**/ g()->avr_N_pe[6] += g()->SiPM_hits->N_reg_v[70]; /**/ g()->avr_N_pe[7] += g()->SiPM_hits->N_reg_v[71]; /**/ g()->avr_N_pe[8] += g()->SiPM_hits->N_reg_v[72]; /**/ g()->avr_N_pe[9] += g()->SiPM_hits->N_reg_v[73];
-
-	//row3
-	g()->avr_N_pe[10] += g()->SiPM_hits->N_reg_v[58]; /**/ g()->avr_N_pe[11] += g()->SiPM_hits->N_reg_v[59]; /**/ g()->avr_N_pe[12] += g()->SiPM_hits->N_reg_v[60]; /**/ g()->avr_N_pe[13] += g()->SiPM_hits->N_reg_v[61]; /**/ g()->avr_N_pe[14] += g()->SiPM_hits->N_reg_v[62];
-
-	//row4
-	g()->avr_N_pe[15] += g()->SiPM_hits->N_reg_v[47]; /**/ g()->avr_N_pe[16] += g()->SiPM_hits->N_reg_v[48]; /**/ g()->avr_N_pe[17] += g()->SiPM_hits->N_reg_v[49]; /**/ g()->avr_N_pe[18] += g()->SiPM_hits->N_reg_v[50]; /**/ g()->avr_N_pe[19] += g()->SiPM_hits->N_reg_v[51];
-
-	//row5
-	g()->avr_N_pe[20] += g()->SiPM_hits->N_reg_v[36]; /**/ g()->avr_N_pe[21] += g()->SiPM_hits->N_reg_v[37]; /**/ g()->avr_N_pe[22] += g()->SiPM_hits->N_reg_v[38]; /**/ g()->avr_N_pe[23] += g()->SiPM_hits->N_reg_v[39]; /**/ g()->avr_N_pe[24] += g()->SiPM_hits->N_reg_v[40];
-
-
-	if (q_mean != 0 )
+	/*cacl summ N_pe*/
 	{
-		x_mean /= q_mean;
-		y_mean /= q_mean;
+		//row1
+		g()->avr_N_pe[0] += g()->SiPM_hits->N_reg_v[80]; /**/ g()->avr_N_pe[1] += g()->SiPM_hits->N_reg_v[81]; /**/ g()->avr_N_pe[2] += g()->SiPM_hits->N_reg_v[82]; /**/ g()->avr_N_pe[3] += g()->SiPM_hits->N_reg_v[83]; /**/ g()->avr_N_pe[4] += g()->SiPM_hits->N_reg_v[84];
 
-		//cout << "x_mean = " << x_mean << " \t y_mean = " << y_mean << endl;
-		g()->file_coord_from_SiPM << x_mean << "\t" << y_mean << endl;
-		g()->file_total_num_of_reg_photons_SiPM << q_mean << endl;
+		//row2
+		g()->avr_N_pe[5] += g()->SiPM_hits->N_reg_v[69]; /**/ g()->avr_N_pe[6] += g()->SiPM_hits->N_reg_v[70]; /**/ g()->avr_N_pe[7] += g()->SiPM_hits->N_reg_v[71]; /**/ g()->avr_N_pe[8] += g()->SiPM_hits->N_reg_v[72]; /**/ g()->avr_N_pe[9] += g()->SiPM_hits->N_reg_v[73];
+
+		//row3
+		g()->avr_N_pe[10] += g()->SiPM_hits->N_reg_v[58]; /**/ g()->avr_N_pe[11] += g()->SiPM_hits->N_reg_v[59]; /**/ g()->avr_N_pe[12] += g()->SiPM_hits->N_reg_v[60]; /**/ g()->avr_N_pe[13] += g()->SiPM_hits->N_reg_v[61]; /**/ g()->avr_N_pe[14] += g()->SiPM_hits->N_reg_v[62];
+
+		//row4
+		g()->avr_N_pe[15] += g()->SiPM_hits->N_reg_v[47]; /**/ g()->avr_N_pe[16] += g()->SiPM_hits->N_reg_v[48]; /**/ g()->avr_N_pe[17] += g()->SiPM_hits->N_reg_v[49]; /**/ g()->avr_N_pe[18] += g()->SiPM_hits->N_reg_v[50]; /**/ g()->avr_N_pe[19] += g()->SiPM_hits->N_reg_v[51];
+
+		//row5
+		g()->avr_N_pe[20] += g()->SiPM_hits->N_reg_v[36]; /**/ g()->avr_N_pe[21] += g()->SiPM_hits->N_reg_v[37]; /**/ g()->avr_N_pe[22] += g()->SiPM_hits->N_reg_v[38]; /**/ g()->avr_N_pe[23] += g()->SiPM_hits->N_reg_v[39]; /**/ g()->avr_N_pe[24] += g()->SiPM_hits->N_reg_v[40];
 	}
+
+
+
 
 
 		
