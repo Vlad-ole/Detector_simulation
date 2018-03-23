@@ -35,6 +35,11 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 {
 	G4int eventNb = event->GetEventID();
 
+	if (eventNb % 1000 == 0)
+	{
+		cout << "event = " << eventNb << endl;
+	}
+
 	//energy deposited per event
 	fTotalEdep = 0.;
 	

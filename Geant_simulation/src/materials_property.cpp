@@ -272,9 +272,12 @@ void DetectorConstruction::defineMaterials()
 	//--------------------------------------------------------------------------------------
 	//YAP:Ce without scintillations
 	G4Material* YAP_Ce_no_scint = new G4Material("YAP_Ce_no_scint", 5.35*g / cm3, 3, kStateSolid);
-	YAP_Ce_no_scint->AddElement(Y, 54.25*perCent);
+	/*YAP_Ce_no_scint->AddElement(Y, 54.25*perCent);
 	YAP_Ce_no_scint->AddElement(Al, 16.46*perCent);
-	YAP_Ce_no_scint->AddElement(O, 29.29*perCent);
+	YAP_Ce_no_scint->AddElement(O, 29.29*perCent);*/
+	YAP_Ce_no_scint->AddElement(Y, 1);
+	YAP_Ce_no_scint->AddElement(Al, 1);
+	YAP_Ce_no_scint->AddElement(O, 3);
 	//--------------------------------------------------------------------------------------
 
 

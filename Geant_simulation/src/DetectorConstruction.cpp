@@ -94,6 +94,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 //#define bCd109InternalColl
 #define bCd109IsotopBoxHolder
 #define bCd109
+#define bCd109BeFoil
 #define bCd109WolframPlug
 #define bCd109CuFoil
 #define bCd109Detector
@@ -290,6 +291,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	const double Cd109IsotopBoxHolder_plug_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder_bottom_hole / 2.0 - z_size_Cd109;
 
+	//Cd109BeFoil
+	const double diameter_size_Cd109BeFoil = 3 * mm;
+	const double z_size_Cd109BeFoil = 0.1 * mm;
+	const double Cd109BeFoil_center = Cd109_center + z_size_Cd109/2.0 + z_size_Cd109BeFoil/2.0;
+
 	//Cd109WolframPlug
 	const double diameter_size_Cd109WolframPlug = 3 * mm;
 	const double z_size_Cd109WolframPlug = 3 * mm;
@@ -304,7 +310,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//Cd109CuFoil
 	const double x_size_Cd109CuFoil = 16 * mm;
 	const double y_size_Cd109CuFoil = x_size_Cd109CuFoil;
-	const double z_size_Cd109CuFoil = 0.1 * mm;
+	const double z_size_Cd109CuFoil = 0.165 * mm;
 	const double Cd109CuFoil_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder + z_size_Cd109CuFoil/2.0;
 
 	//bCd109Detector
@@ -359,6 +365,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_Cd109IsotopBoxHolder = G4ThreeVector(0, 0, Cd109IsotopBoxHolder_center);	
 	const G4ThreeVector &position_Cd109IsotopBoxHolder_plug = G4ThreeVector(0, 0, Cd109IsotopBoxHolder_plug_center);
 	const G4ThreeVector &position_Cd109InternalColl = G4ThreeVector(0, 0, Cd109InternalColl_center);
+	const G4ThreeVector &position_Cd109BeFoil = G4ThreeVector(0, 0, Cd109BeFoil_center);
+	
 	
 	//Cd109Detector
 	const G4ThreeVector &position_Cd109Detector = G4ThreeVector(0, 0, Cd109Detector_center);
@@ -395,6 +403,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Material* fFe = new G4Material("Fe", z = 26., a = 55.85*g / mole, density = 7.874 *g / cm3);
 	G4Material* fW = new G4Material("W", z = 74., a = 183.84*g / mole, density = 19.35 *g / cm3);
 	G4Material* fCu = new G4Material("Cu", z = 29., a = 63.5*g / mole, density = 8.92 *g / cm3);
+	G4Material* fBe = new G4Material("Be", z = 4., a = 9.01*g / mole, density = 1.85 *g / cm3);
 
 	//----------------------------------------------------------------------------------
 	// создание мира
@@ -613,6 +622,21 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		fCheckOverlaps); // checking overlaps
 #endif //bCd109
 
+
+#ifdef	bCd109BeFoil
+	G4Tubs* solid_Cd109BeFoil
+		= new G4Tubs("solid_Cd109BeFoil", 0, diameter_size_Cd109BeFoil / 2.0, z_size_Cd109BeFoil / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_Cd109BeFoil
+		= new G4LogicalVolume(solid_Cd109BeFoil, G4Material::GetMaterial("Be"), "logic_Cd109BeFoil", 0, 0, 0);
+	G4VPhysicalVolume* phys_Cd109BeFoil = new G4PVPlacement(0,               // no rotation
+		position_Cd109BeFoil, // at (x,y,z)
+		logic_Cd109BeFoil,       // its logical volume
+		"phys_Cd109BeFoil",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif //bCd109BeFoil
 
 #ifdef	bCd109WolframPlug
 	G4Tubs* solid_Cd109WolframPlug
@@ -1200,6 +1224,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	logic_Cd109->SetVisAttributes(tracker_THGEM2_VisAtt);
 #endif // bCd109
 
+#ifdef bCd109BeFoil
+	logic_Cd109BeFoil->SetVisAttributes(new G4VisAttributes(G4Colour(238 / 255.0, 197 / 255.0, 145 / 255.0, 0.8)));
+#endif // Cd109BeFoil
+	
 #ifdef bCd109InternalColl
 	logic_Cd109InternalColl->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 1.0, 0.5, 0.8)));
 #endif // bCd109
