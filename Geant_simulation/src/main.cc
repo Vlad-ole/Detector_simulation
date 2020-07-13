@@ -41,7 +41,7 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 
-	g()->is_optical_gamma = false;
+	g()->is_optical_gamma = true;
 	g()->is_Am_coll_14mm = false;
 
 	// Choose the Random engine

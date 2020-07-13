@@ -77,12 +77,12 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #define bSiPM
 #define bPMMA_plate
 #define bAnode_grid
-//#define bInsulator_box
+#define bInsulator_box
 //#define bPMTs
 //#define bWLS
 //#define bTHGEM2
 #define bTHGEM1
-//#define	bLArOuter
+#define	bLArOuter //there some problems: I do not see  
 #define bCathode
 #define bLArInactive
 #define bPMMA_bottom
@@ -92,12 +92,12 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 //#define bExternalColl2mm
 //#define bCd109ExternalBox
 //#define bCd109InternalColl
-#define bCd109IsotopBoxHolder
-#define bCd109
-#define bCd109BeFoil
-#define bCd109WolframPlug
-#define bCd109CuFoil
-#define bCd109Detector
+//#define bCd109IsotopBoxHolder
+//#define bCd109
+//#define bCd109BeFoil
+//#define bCd109WolframPlug
+//#define bCd109CuFoil
+//#define bCd109Detector
 
 	//bool bLAr_inner = false;
 	//bool bLAr_outer = false;
