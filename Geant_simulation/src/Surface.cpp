@@ -174,7 +174,8 @@ void DetectorConstruction::defineSurfaces()
 
 	silicaCathodeMaterialProperty = new G4MaterialPropertiesTable();
 	G4double cathoderefl[2] = {0, 0};
-	G4double cathodeeff[2] = {1, 1};
+	//G4double cathodeeff[2] = {1, 1};
+	G4double SiPMEeff[2] = { 1, 1 };
 
 	//ReadConstants *silicaCathodeMaterial_EFFICIENCY = new ReadConstants(g()->string_silicaCathodeMaterial_EFFICIENCY, 1*eV, 1);
 	//ReadConstants *Cathode_REFLECTIVITY = new ReadConstants(g()->string_Cathode_REFLECTIVITY, 1*eV, 1);
@@ -185,7 +186,7 @@ void DetectorConstruction::defineSurfaces()
 	
 
 	silicaCathodeMaterialProperty->AddProperty("REFLECTIVITY", ener, cathoderefl, 2);
-	silicaCathodeMaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);
+	silicaCathodeMaterialProperty->AddProperty("EFFICIENCY", ener, SiPMEeff, 2);
 
 	silicaCathodeMaterial->SetMaterialPropertiesTable(silicaCathodeMaterialProperty);
 	//--------------------------------------------------------------------------------
@@ -205,18 +206,18 @@ void DetectorConstruction::defineSurfaces()
 
 	G4MaterialPropertiesTable* SiPM_MaterialProperty = new G4MaterialPropertiesTable();
 	G4double SiPM_refl[2] = { 0, 0 };
-	//G4double cathodeeff[2] = { 1, 1 };
+	G4double cathodeeff[2] = { 1, 1 };
 
 	ReadConstants *SiPM_EFFICIENCY = new ReadConstants(g()->string_SiPM_EFFICIENCY, 1*eV, 1);
 	//ReadConstants *Cathode_REFLECTIVITY = new ReadConstants(g()->string_Cathode_REFLECTIVITY, 1*eV, 1);
 
 
 	//silicaCathodeMaterialProperty->AddProperty("REFLECTIVITY", Cathode_REFLECTIVITY->get_x_array(), Cathode_REFLECTIVITY->get_y_array(), Cathode_REFLECTIVITY->get_array_size());
-	SiPM_MaterialProperty->AddProperty("EFFICIENCY", SiPM_EFFICIENCY->get_x_array(), SiPM_EFFICIENCY->get_y_array(), SiPM_EFFICIENCY->get_array_size());
+	//SiPM_MaterialProperty->AddProperty("EFFICIENCY", SiPM_EFFICIENCY->get_x_array(), SiPM_EFFICIENCY->get_y_array(), SiPM_EFFICIENCY->get_array_size());
 
 
 	SiPM_MaterialProperty->AddProperty("REFLECTIVITY", ener, SiPM_refl, 2);
-	//SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);
+	SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);//dummy
 
 	SiPM_OpticalSurface->SetMaterialPropertiesTable(SiPM_MaterialProperty);
 	//--------------------------------------------------------------------------------

@@ -172,25 +172,25 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 
 
 	/*out*/
-	//{
-	//	//-----------------------
-	//	//row1
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[80] /*ch32*/ << "\t" << g()->SiPM_hits->N_reg_v[81]  /*ch33*/ << "\t" << g()->SiPM_hits->N_reg_v[82]  /*ch48*/ << "\t" << g()->SiPM_hits->N_reg_v[83]  /*ch49*/ << "\t" << g()->SiPM_hits->N_reg_v[84]  /*ch34*/ << endl;
-	//
-	//	//row2
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[69] /*ch35*/ << "\t" << g()->SiPM_hits->N_reg_v[70]  /*ch50*/ << "\t" << g()->SiPM_hits->N_reg_v[71]  /*ch51*/ << "\t" << g()->SiPM_hits->N_reg_v[72]  /*ch36*/ << "\t" << g()->SiPM_hits->N_reg_v[73]  /*ch37*/ << endl;
-	//
-	//	//row3
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[58] /*ch52*/ << "\t" << g()->SiPM_hits->N_reg_v[59]  /*ch53*/ << "\t" << g()->SiPM_hits->N_reg_v[60]  /*ch38*/ << "\t" << g()->SiPM_hits->N_reg_v[61]  /*ch39*/ << "\t" << g()->SiPM_hits->N_reg_v[62]  /*ch54*/ << endl;
-	//
-	//	//row4
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[47] /*ch55*/ << "\t" << g()->SiPM_hits->N_reg_v[48]  /*ch40*/ << "\t" << g()->SiPM_hits->N_reg_v[49]  /*ch41*/ << "\t" << g()->SiPM_hits->N_reg_v[50]  /*ch56*/ << "\t" << g()->SiPM_hits->N_reg_v[51]  /*ch57*/ << endl;
-	//
-	//	//row5
-	//	g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[36] /*ch42*/ << "\t" << g()->SiPM_hits->N_reg_v[37]  /*ch33*/ << "\t" << g()->SiPM_hits->N_reg_v[38]  /*ch58*/ << "\t" << g()->SiPM_hits->N_reg_v[39]  /*ch59*/ << "\t" << g()->SiPM_hits->N_reg_v[40]  /*ch44*/ << endl;
-	//	//-----------------------
-	//	g()->file_num_of_photons_in_event_SiPM << endl;
-	//}
+	{
+		//-----------------------
+		//row1
+		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[80] /*ch32*/ << "\t" << g()->SiPM_hits->N_reg_v[81]  /*ch33*/ << "\t" << g()->SiPM_hits->N_reg_v[82]  /*ch48*/ << "\t" << g()->SiPM_hits->N_reg_v[83]  /*ch49*/ << "\t" << g()->SiPM_hits->N_reg_v[84]  /*ch34*/ << endl;
+	
+		//row2
+		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[69] /*ch35*/ << "\t" << g()->SiPM_hits->N_reg_v[70]  /*ch50*/ << "\t" << g()->SiPM_hits->N_reg_v[71]  /*ch51*/ << "\t" << g()->SiPM_hits->N_reg_v[72]  /*ch36*/ << "\t" << g()->SiPM_hits->N_reg_v[73]  /*ch37*/ << endl;
+	
+		//row3
+		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[58] /*ch52*/ << "\t" << g()->SiPM_hits->N_reg_v[59]  /*ch53*/ << "\t" << g()->SiPM_hits->N_reg_v[60]  /*ch38*/ << "\t" << g()->SiPM_hits->N_reg_v[61]  /*ch39*/ << "\t" << g()->SiPM_hits->N_reg_v[62]  /*ch54*/ << endl;
+	
+		//row4
+		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[47] /*ch55*/ << "\t" << g()->SiPM_hits->N_reg_v[48]  /*ch40*/ << "\t" << g()->SiPM_hits->N_reg_v[49]  /*ch41*/ << "\t" << g()->SiPM_hits->N_reg_v[50]  /*ch56*/ << "\t" << g()->SiPM_hits->N_reg_v[51]  /*ch57*/ << endl;
+	
+		//row5
+		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[36] /*ch42*/ << "\t" << g()->SiPM_hits->N_reg_v[37]  /*ch33*/ << "\t" << g()->SiPM_hits->N_reg_v[38]  /*ch58*/ << "\t" << g()->SiPM_hits->N_reg_v[39]  /*ch59*/ << "\t" << g()->SiPM_hits->N_reg_v[40]  /*ch44*/ << endl;
+		//-----------------------
+		g()->file_num_of_photons_in_event_SiPM << endl;
+	}
 
 	///*cacl summ N_pe*/
 	//{

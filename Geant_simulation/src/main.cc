@@ -71,7 +71,8 @@ int main(int argc, char** argv)
 	string temp_string = g()->path_read + "x_ray\\Analytical_model_out.dat";
 	if (g()->is_optical_gamma)
 	{
-		runManager->SetUserAction(new PrimaryGeneratorAction(g()->string_GAr_86K_1atm_avalanche_scint_NIR.c_str(), 1));
+		//runManager->SetUserAction(new PrimaryGeneratorAction(g()->string_GAr_86K_1atm_avalanche_scint_NIR.c_str(), 1));
+		runManager->SetUserAction(new PrimaryGeneratorAction());
 		g()->avr_N_pe.resize(25);
 	}
 	else
@@ -241,7 +242,7 @@ int main(int argc, char** argv)
 
 
 
-	cout << "\a \a \a \a";
+	//cout << "\a \a \a \a";
 	long t2 = clock();
 
 	cout << endl;

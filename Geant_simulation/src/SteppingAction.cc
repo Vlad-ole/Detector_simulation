@@ -22,7 +22,8 @@
 #include "G4SystemOfUnits.hh"
 
 //#define bTHGEM2
-#define bTHGEM1
+//#define bTHGEM1
+//#define bTHGEM0
 
 SteppingAction::SteppingAction(DetectorConstruction* myDC, EventAction* myEA)
 	:myDetector(myDC), eventAction(myEA)
@@ -122,6 +123,8 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 #endif // bTHGEM1
 
 
+#ifdef bTHGEM0
+
 				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM0")
 				{
 						const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
@@ -136,6 +139,8 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 							PassThroughGEM(theStep, z_bottom * mm, width);
 						}					
 				}
+
+#endif // bTHGEM0
 
 				switch (boundaryStatus)
 				{

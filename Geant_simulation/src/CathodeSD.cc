@@ -17,7 +17,7 @@
 #include <iostream>
 #include <fstream>
 
-#define DEBAG_MODE
+//#define DEBAG_MODE
 
 CathodeSD::CathodeSD(G4String name, G4VPhysicalVolume *cathode, int N_SiPMs) : G4VSensitiveDetector(name), _cathode(cathode)
 {
@@ -57,7 +57,8 @@ G4bool CathodeSD::ProcessHits_Optical(const G4Step* aStep, G4TouchableHistory* )
 
 	//N_reg_number[aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0)]++;
 	g()->SiPM_hits->N_reg_v[aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0)]++;
-
+	
+	//cout << "There is a hit:" << aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0) << endl;
 
 	/*G4StepPoint * thePrePoint  = aStep->GetPostStepPoint();
 	G4ThreeVector pos    = thePrePoint->GetPosition();
@@ -90,12 +91,12 @@ void CathodeSD::EndOfEvent(G4HCofThisEvent*)
 		//cout << "ph_coll =\t" << _nHits/g()->summ_number_of_photons << endl;
 		#endif
 		
-		(g()->LightCollection).push_back(_nHits/g()->summ_number_of_photons);
+		//(g()->LightCollection).push_back(_nHits/g()->summ_number_of_photons);
 	}
 
-	g()->NumberOfRegPhotons += _nHits;
-	g()->NumberOfBornPhotons += g()->summ_number_of_photons;
-	g()->summ_number_of_photons=0;
+	//g()->NumberOfRegPhotons += _nHits;
+	//g()->NumberOfBornPhotons += g()->summ_number_of_photons;
+	//g()->summ_number_of_photons=0;
 
 }
 

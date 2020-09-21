@@ -14,15 +14,15 @@ using namespace std;
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 
 //set angle distribution
-//#define DIRECT_INCIDENCE
+#define DIRECT_INCIDENCE
 //#define TOP_HEMISPHERE
-#define SPHERE_4PI
+//#define SPHERE_4PI
 //#define ANGLE_Cd_COLL6mm
 
 //set (x,y,z) position
-//#define CENTRAL_INCIDENCE
+#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-#define EL_GAP 
+//#define EL_GAP 
 //#define CIRCLE_EL_GAP
 //#define CIRCLE_Cd
 
@@ -138,53 +138,65 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-	
+	//optical photon
+
 	G4ParticleDefinition* particle;
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 	G4String particleName;
+	particle = particleTable->FindParticle(particleName = "opticalphoton");
+	particleGun->SetParticleDefinition(particle);
+	
 
-	//gamma
-	double p_gamma_22_10 = 0.377851477;
-	double p_gamma_24_94 = 0.068345807;
-	double p_gamma_25_64 = 0.011876485;
-	double p_gamma_88_03 = 0.016402994;
-	//e-
-	double p_e_18_50 = 0.0932192;
-	double p_e_62_52 = 0.187334738;
-	double p_e_84_23 = 0.198090799;
-	double p_e_87_31 = 0.040559315;
-	double p_e_87_93 = 0.006319186;
+	//Cd source
+	//-------------------------------------------------------------
+	//G4ParticleDefinition* particle;
+	//G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+	//G4String particleName;
 
-	vector<double> E_values = {22.10, 24.94, 25.64, 88.03, 18.50, 62.52, 84.23, 87.31, 87.93};
-	vector<double> p_values = {0.377851477, 0.068345807, 0.011876485, 0.016402994, 0.0932192, 0.187334738, 0.198090799, 0.040559315, 0.006319186};
-	vector<double> p_values_summ = {0.377851477, 0.446197284, 0.458073769, 0.474476762, 0.567695962, 0.7550307, 0.953121499, 0.993680814, 1};
-	vector<G4String> type_values = { "gamma", "gamma", "gamma", "gamma", "e-", "e-", "e-", "e-", "e-"};
+	////gamma
+	//double p_gamma_22_10 = 0.377851477;
+	//double p_gamma_24_94 = 0.068345807;
+	//double p_gamma_25_64 = 0.011876485;
+	//double p_gamma_88_03 = 0.016402994;
+	////e-
+	//double p_e_18_50 = 0.0932192;
+	//double p_e_62_52 = 0.187334738;
+	//double p_e_84_23 = 0.198090799;
+	//double p_e_87_31 = 0.040559315;
+	//double p_e_87_93 = 0.006319186;
 
-	//test
-	//particle = particleTable->FindParticle(type_values[0]);
-	//particleGun->SetParticleDefinition(particle);
-	//particleGun->SetParticleEnergy(E_values[0]*keV);
+	//vector<double> E_values = {22.10, 24.94, 25.64, 88.03, 18.50, 62.52, 84.23, 87.31, 87.93};
+	//vector<double> p_values = {0.377851477, 0.068345807, 0.011876485, 0.016402994, 0.0932192, 0.187334738, 0.198090799, 0.040559315, 0.006319186};
+	//vector<double> p_values_summ = {0.377851477, 0.446197284, 0.458073769, 0.474476762, 0.567695962, 0.7550307, 0.953121499, 0.993680814, 1};
+	//vector<G4String> type_values = { "gamma", "gamma", "gamma", "gamma", "e-", "e-", "e-", "e-", "e-"};
 
-	double rnd = G4UniformRand();
-	for (int i = 0; i < p_values_summ.size(); i++)
-	{
-		if (rnd < p_values_summ[0])
-		{
-			particle = particleTable->FindParticle(type_values[0]);
-			particleGun->SetParticleDefinition(particle);
-			particleGun->SetParticleEnergy(E_values[0] * keV);
-			break;
-			//cout << "rnd < pv_edge[0]" << endl;
-		}
-		else if (rnd < p_values_summ[i] && rnd > p_values_summ[i - 1])
-		{
-			particle = particleTable->FindParticle(type_values[i]);
-			particleGun->SetParticleDefinition(particle);
-			particleGun->SetParticleEnergy(E_values[i] * keV);
-			break;
-			//cout << "rnd < pv_edge[i] && rnd > pv_edge[i-1]" << endl;
-		}
-	}
+	////test
+	////particle = particleTable->FindParticle(type_values[0]);
+	////particleGun->SetParticleDefinition(particle);
+	////particleGun->SetParticleEnergy(E_values[0]*keV);
+
+	//double rnd = G4UniformRand();
+	//for (int i = 0; i < p_values_summ.size(); i++)
+	//{
+	//	if (rnd < p_values_summ[0])
+	//	{
+	//		particle = particleTable->FindParticle(type_values[0]);
+	//		particleGun->SetParticleDefinition(particle);
+	//		particleGun->SetParticleEnergy(E_values[0] * keV);
+	//		break;
+	//		//cout << "rnd < pv_edge[0]" << endl;
+	//	}
+	//	else if (rnd < p_values_summ[i] && rnd > p_values_summ[i - 1])
+	//	{
+	//		particle = particleTable->FindParticle(type_values[i]);
+	//		particleGun->SetParticleDefinition(particle);
+	//		particleGun->SetParticleEnergy(E_values[i] * keV);
+	//		break;
+	//		//cout << "rnd < pv_edge[i] && rnd > pv_edge[i-1]" << endl;
+	//	}
+	//}
+	//Cd source; end
+	//-------------------------------------------------------------
 
 	
 	//while (true)
@@ -232,58 +244,58 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	////--------------------------------------
 	////SetParticleEnergy
 
-	//double energy;
-	//double weight;
+	double energy;
+	double weight;
 
-	//switch (xrType)
-	//{
-	//case MONO:
-	//	//energy = 59.5; //original value [keV]
-	//	//energy = 1.38E-3; // optical photon [keV]
-	//	//energy = 88.03; // gamma [keV]
-	//	energy = 59.5; // gamma [keV]
-	//	//energy = 25; // gamma [keV]
+	switch (xrType)
+	{
+	case MONO:
+		//energy = 59.5; //original value [keV]
+		energy = 1.38E-3; // optical photon [keV]
+		//energy = 88.03; // gamma [keV]
+		//energy = 59.5; // gamma [keV]
+		//energy = 25; // gamma [keV]
 
-	//	//Cd 88.03 [keV]
-	//	//X-ray tube 35[keV]
+		//Cd 88.03 [keV]
+		//X-ray tube 35[keV]
 
-	//	break;
+		break;
 
-	//case SPECTER_continuous:
-	//	do
-	//	{
-	//		energy = nMaxDataLines*G4UniformRand();
-	//		weight = dMaxWeight*G4UniformRand();
-	//	} while (weight > dWeight[(int)energy]);
+	case SPECTER_continuous:
+		do
+		{
+			energy = nMaxDataLines*G4UniformRand();
+			weight = dMaxWeight*G4UniformRand();
+		} while (weight > dWeight[(int)energy]);
 
-	//	break;
+		break;
 
-	//case SPECTER_discrete:
-	//{
-	//	double rnd = G4UniformRand();
-	//	for (int i = 0; i < Ev.size(); i++)
-	//	{
-	//		if (rnd < pv_edge[0])
-	//		{
-	//			energy = Ev[0] * 1E-3;
-	//			//cout << "rnd < pv_edge[0]" << endl;
-	//		}
-	//		else if(rnd < pv_edge[i] && rnd > pv_edge[i-1])
-	//		{
-	//			energy = Ev[i] * 1E-3;
-	//			//cout << "rnd < pv_edge[i] && rnd > pv_edge[i-1]" << endl;
-	//		}			
-	//	}
-
-
-	//	break;
-	//}
+	case SPECTER_discrete:
+	{
+		double rnd = G4UniformRand();
+		for (int i = 0; i < Ev.size(); i++)
+		{
+			if (rnd < pv_edge[0])
+			{
+				energy = Ev[0] * 1E-3;
+				//cout << "rnd < pv_edge[0]" << endl;
+			}
+			else if(rnd < pv_edge[i] && rnd > pv_edge[i-1])
+			{
+				energy = Ev[i] * 1E-3;
+				//cout << "rnd < pv_edge[i] && rnd > pv_edge[i-1]" << endl;
+			}			
+		}
 
 
-	//}
+		break;
+	}
 
 
-	//particleGun->SetParticleEnergy(energy*keV);
+	}//switch (xrType) end
+
+
+	particleGun->SetParticleEnergy(energy*keV);
 	////--------------------------------------
 
 
@@ -351,9 +363,10 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef CENTRAL_INCIDENCE
 	//x = 1.1 * mm * 1.5  ;
 	//y = 1.1 * mm * sqrt(3) / 2 * 2;
-	x = g()->x_source;
-	y = g()->y_source;
-	g()->z_source = 54.7;
+	x = /*g()->x_source*/ 3*(G4UniformRand() - 0.5);
+	y = /*g()->y_source*/ 3*(G4UniformRand() - 0.5);
+	//g()->z_source = 54.7;//S2
+	g()->z_source = 0;//S1
 	z = g()->z_source;
 #endif //CENTRAL_INCIDENCE
 

@@ -75,19 +75,22 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
 
 #define bSiPM
-#define bPMMA_plate
-#define bAnode_grid
-#define bInsulator_box
+//#define bPMMA_plate
+//#define bAnode_grid
+//#define bInsulator_box
 //#define bPMTs
 //#define bWLS
 //#define bTHGEM2
-#define bTHGEM1
-#define	bLArOuter //there some problems: I do not see  
+//#define bTHGEM1
+//#define bTHGEM0
+//#define bFieldTHGEM
+//#define	bLArOuter //there some problems: I do not see  
 #define bCathode
-#define bLArInactive
-#define bPMMA_bottom
-#define bAl_window
-#define bCryogenicChamberBottom
+//#define bLArInactive
+#define bLArInner
+//#define bPMMA_bottom
+//#define bAl_window
+//#define bCryogenicChamberBottom
 //#define bExternalColl6mm
 //#define bExternalColl2mm
 //#define bCd109ExternalBox
@@ -433,6 +436,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		= new G4Box("solid_LAr_inner", x_size_LAr_inner / 2.0, y_size_LAr_inner / 2.0, z_size_LAr_inner / 2.0);
 	G4LogicalVolume* logic_LAr_inner
 		= new G4LogicalVolume(solid_LAr_inner, G4Material::GetMaterial("LAr"), "logic_LAr_inner", 0, 0, 0);
+#ifdef bLArInner
 	G4VPhysicalVolume* phys_LAr_inner = new G4PVPlacement(0,               // no rotation
 		position_LAr_inner, // at (x,y,z)
 		logic_LAr_inner,       // its logical volume
@@ -442,7 +446,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps
 	//-------------------------------------------------------------------------------
-
+#endif //bLArInner
 
 
 
@@ -472,6 +476,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//--------------------------------------------------------------------------------
 	//create FieldTHGEM
+#ifdef bFieldTHGEM
 	G4Box* solid_FieldTHGEM_out = new G4Box("solid_FieldTHGEM_out", x_size_FieldTHGEM / 2.0, y_size_FieldTHGEM / 2.0, z_size_FieldTHGEM / 2.0);
 	G4Box* solid_FieldTHGEM_in = new G4Box("solid_FieldTHGEM_in", hole_size_FieldTHGEM / 2.0, hole_size_FieldTHGEM / 2.0, z_size_FieldTHGEM / 2.0);
 	G4SubtractionSolid* solid_FieldTHGEM = new G4SubtractionSolid("solid_FieldTHGEM", solid_FieldTHGEM_out, solid_FieldTHGEM_in);
@@ -496,6 +501,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
+#endif
 	 //--------------------------------------------------------------------------------
 
 
@@ -875,6 +881,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalVolume* logic_tracker_THGEM0_LAr
 		= new G4LogicalVolume(solid_tracker_THGEM2, G4Material::GetMaterial("LAr"), "logic_tracker_THGEM0_LAr", 0, 0, 0);
 
+#ifdef bTHGEM0
 	G4VPhysicalVolume* phys_tracker_THGEM0 = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM0, // at (x,y,z)
 		logic_tracker_THGEM0_LAr,       // its logical volume
@@ -883,6 +890,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
+#endif //bTHGEM0
+
 
 #ifdef	bTHGEM1
 	G4VPhysicalVolume* phys_tracker_THGEM1 = new G4PVPlacement(0,               // no rotation
@@ -924,7 +933,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalVolume* logic_THGEM_without_holes
 		= new G4LogicalVolume(solid_THGEM_without_holes, G4Material::GetMaterial("FR4"), "logic_THGEM_without_holes", 0, 0, 0);
 
-
+#ifdef bTHGEM0
 	G4VPhysicalVolume* phys_THGEM0_without_holes = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM0, // at (x,y,z)
 		logic_THGEM_without_holes,       // its logical volume
@@ -933,6 +942,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
+#endif //bTHGEM0
 
 #ifdef	bTHGEM1
 	G4VPhysicalVolume* phys_THGEM1_without_holes = new G4PVPlacement(0,               // no rotation
@@ -1153,13 +1163,15 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* World2THGEM1_without_hole = new G4LogicalBorderSurface("World2THGEM1_without_hole", physiWorld, phys_THGEM1_without_holes, AbsorberMaterial);
 #endif //bTHGEM1
 
+#ifdef bTHGEM0
 	G4LogicalBorderSurface* phys_LAr_inner2THGEM0_without_hole = new G4LogicalBorderSurface("phys_LAr_inner2THGEM0_without_hole", phys_LAr_inner, phys_THGEM0_without_holes, AbsorberMaterial);
-
+#endif //bTHGEM0
 
 	//FieldTHGEMs
+#ifdef bFieldTHGEM
 	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldTHGEM_1 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldTHGEM_1", phys_LAr_inner, phys_FieldTHGEM_1, AbsorberMaterial);
 	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldTHGEM_2 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldTHGEM_2", phys_LAr_inner, phys_FieldTHGEM_2, AbsorberMaterial);
-
+#endif
 	//---------------------------------------------------------------------------
 
 
@@ -1246,8 +1258,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 	//FieldTHGEM
+#ifdef bFieldTHGEM
 	G4VisAttributes* FieldTHGEM_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.7, 0.3, 0.8));
 	logic_FieldTHGEM->SetVisAttributes(FieldTHGEM_VisAtt);
+#endif
 
 
 	//logicWorld->SetVisAttributes(G4VisAttributes::Invisible);
