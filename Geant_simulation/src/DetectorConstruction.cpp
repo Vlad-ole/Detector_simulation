@@ -75,14 +75,14 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
 
 #define bSiPM
-//#define bPMMA_plate
-//#define bAnode_grid
+#define bPMMA_plate
+#define bAnode_grid
 //#define bInsulator_box
 //#define bPMTs
 //#define bWLS
 //#define bTHGEM2
-//#define bTHGEM1
-//#define bTHGEM0
+#define bTHGEM1
+#define bTHGEM0
 //#define bFieldTHGEM
 //#define	bLArOuter //there some problems: I do not see  
 #define bCathode
@@ -110,7 +110,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4double HalfWorldLength = 17 * cm;
 
 	//anode wire
-	const double radius_wire = 100 * um;//you can understand this from photo
+	const double radius_wire = 100/2.0 * um;//you can understand this from photo
 	const double length_wire = 60 * mm /* 108*mm future case*/;  //60*mm /*real case*/;
 	const double step_wire = 1 * mm;
 	const int N_wire = length_wire/step_wire - 1 /* 107 future case*/;

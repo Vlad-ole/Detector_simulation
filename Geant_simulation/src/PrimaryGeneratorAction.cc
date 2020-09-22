@@ -14,8 +14,8 @@ using namespace std;
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 
 //set angle distribution
-#define DIRECT_INCIDENCE
-//#define TOP_HEMISPHERE
+//#define DIRECT_INCIDENCE
+#define TOP_HEMISPHERE
 //#define SPHERE_4PI
 //#define ANGLE_Cd_COLL6mm
 
@@ -363,11 +363,36 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef CENTRAL_INCIDENCE
 	//x = 1.1 * mm * 1.5  ;
 	//y = 1.1 * mm * sqrt(3) / 2 * 2;
-	x = /*g()->x_source*/ 3*(G4UniformRand() - 0.5);
-	y = /*g()->y_source*/ 3*(G4UniformRand() - 0.5);
-	//g()->z_source = 54.7;//S2
-	g()->z_source = 0;//S1
+
+	////v1
+	//x = 0;
+	//y = 0;
+	//z = 0;
+	//g()->z_source = z;
+
+	//v2 (x,y,z are constant within the Run)
+	x = g()->x_source;
+	y = g()->y_source;
 	z = g()->z_source;
+
+	
+	//x = /*g()->x_source*/ 6*(G4UniformRand() - 0.5);
+	//y = /*g()->y_source*/ 6*(G4UniformRand() - 0.5);
+	////g()->z_source = 54.7;//S2
+	//g()->z_source = 0;//S1
+	//z = g()->z_source;
+
+	////alpha source, S1
+	//do
+	//{
+	//	x = 2 * 5*(G4UniformRand() - 0.5)*mm;
+	//	y = 2 * 5*(G4UniformRand() - 0.5)*mm;
+	//	//z = 0;
+	//} while (pow(x, 2.0) + pow(y, 2.0) > pow(5, 2.0));
+	//g()->z_source = 2 * mm + 0;//2mm is alpha-source substrate, alpha range in LAr is ~100um
+	//z = g()->z_source;
+
+	
 #endif //CENTRAL_INCIDENCE
 
 #ifdef GEM_HOLE

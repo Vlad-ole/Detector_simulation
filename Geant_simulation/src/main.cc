@@ -42,7 +42,23 @@ int main(int argc, char** argv)
 	long t1 = clock();
 
 	g()->is_optical_gamma = true;
+
+	//choose source
 	g()->is_Am_coll_14mm = false;
+	g()->is_Cd_standard_box = false;
+	g()->is_X_ray_coll_35mm_no_alpha = true;
+	g()->is_X_ray_coll_35mm_with_alpha = false;
+	g()->is_alpha = false;
+	g()->is_point_source = false;
+
+	if ( (g()->is_Am_coll_14mm + g()->is_Cd_standard_box +
+		g()->is_X_ray_coll_35mm_no_alpha + g()->is_X_ray_coll_35mm_with_alpha + 
+		g()->is_alpha + g()->is_point_source) > 1 )
+	{
+		cerr << "Error: choose only one source" << endl;
+		std::system("pause");
+		exit(1);
+	}
 
 	// Choose the Random engine
 	CLHEP::HepRandom::setTheEngine(new CLHEP::RanecuEngine);
@@ -104,13 +120,14 @@ int main(int argc, char** argv)
 
 	//for
 	//TRandom3 rnd3;
-	const int N_runs = /*41*/ 1 /*1*/;
+	const int N_runs = /*41*/ 500 /*1*/;
 	for (int i = 0; i < N_runs; i++)
 	{
 		if (i % 1 == 0 || i == (N_runs - 1))
 		{
 			double val = N_runs > 1 ? (100 * i / (double)(N_runs - 1)) : 100;
 			cout << "run = " << i << " (" << val << " %)" << endl;
+			cerr << "run = " << i << " (" << val << " %)" << endl;
 		}
 
 
@@ -132,35 +149,48 @@ int main(int argc, char** argv)
 
 		//source-collimator geometry
 		//-------------------------------------------
-		const double h_x = 0; // диаметр источника [mm]
+		double h_x = 0; // диаметр источника [mm]
+		double lambda_bar;//средняя глубина поглощения в LAr гамма квантов [mm]
+		// lambda_bar(88 keV) = 33.5 mm
+		// lambda_bar(60 keV) = 17.2 mm
+		// lambda_bar(25 keV) = 1.7 mm
 		if (g()->is_Am_coll_14mm)
 		{
 			g()->h_c = 6;//14.3 or 6 
 			g()->l_x = 14.8;
+			h_x = 0;
+			lambda_bar = 17.2;
 		}
-		else
+		else if (g()->is_Cd_standard_box)
 		{
 			g()->h_c = 6; // диаметр коллиматора [mm]
 			g()->l_x = 64; // расстояние от источника до коллиматора [mm]
+			h_x = 1;
 		}
+		else if (g()->is_X_ray_coll_35mm_no_alpha)
+		{
+			g()->h_c = 35;
+			g()->l_x = 112;
+			h_x = 2;
+			lambda_bar = 1.7;
+		}
+		else if (g()->is_point_source)
+		{
+			g()->x_source = 0;
+			g()->y_source = 0;
+			g()->z_source = 0;
+		}
+		else
+		{
+			cerr << "This case has not yet been implemented" << endl;
+			std::system("pause");
+			exit(1);
+		}
+
 		
 
-		if (g()->is_optical_gamma)
+		if (g()->is_optical_gamma && !g()->is_point_source)
 		{
-			double lambda_bar;//средняя глубина поглощения в LAr гамма квантов [mm]
-			if (g()->is_Am_coll_14mm)
-			{
-				lambda_bar = 17.2;
-			}
-			else
-			{
-				lambda_bar = 33.5;
-			}
-			  
-			// lambda_bar(88 keV) = 33.5 mm
-			// lambda_bar(60 keV) = 17.2 mm
-			// lambda_bar(25 keV) = 1.7 mm
-
 			// глубина поглощения в LAr гамма квантов [mm]
 			while (true)
 			{
@@ -168,7 +198,8 @@ int main(int argc, char** argv)
 				if (g()->lambda < 50)
 					break;
 			}
-
+			g()->z_source = g()->lambda;
+			
 			const double PMMA_width = 3;
 			const double LAr_dead_width = 2;
 			const double THGEM_Cathode_width = 0.5;
@@ -179,8 +210,13 @@ int main(int argc, char** argv)
 			g()->h_s = (g()->l_L + g()->l_x * g()->h_c / (g()->h_c + h_x)) / (g()->l_x / (g()->h_c + h_x)); //ожидаемый диаметр пятна
 			//cout << "h_s = " << h_s << endl;
 			g()->radius = g()->h_s / 2.0;
-			//source-collimator geometry end
-			//-------------------------------------------
+
+			if (g()->is_alpha)
+			{
+				g()->radius = 5;
+				g()->z_source = 2;
+			}
+
 
 
 			while (true)
@@ -196,6 +232,7 @@ int main(int argc, char** argv)
 			}
 		}
 
+		g()->file_xyz_source << g()->x_source << "\t" << g()->y_source << "\t" << g()->z_source << endl;
 
 		if (argc == 1)
 		{

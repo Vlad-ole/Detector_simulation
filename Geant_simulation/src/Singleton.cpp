@@ -29,6 +29,7 @@ Singleton::Singleton()
 	file_energy.open(path_out + "energy.dat");
 	file_run_lc.open(path_out + "run_lc.dat");
 	file_boundary_process.open(path_out + "boundary_process.dat");
+	file_xyz_source.open(path_out + "xyz_source.dat");
 	file_gamma_event_E_depos.open(path_out + "gamma_event_E_depos.dat");
 	file_gamma_step_E_depos.open(path_out + "gamma_step_E_depos.dat");
 

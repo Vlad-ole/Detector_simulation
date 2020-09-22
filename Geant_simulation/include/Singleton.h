@@ -34,9 +34,11 @@ public:
 	ofstream file_energy;
 	ofstream file_run_lc;
 	ofstream file_boundary_process;
+	ofstream file_xyz_source;
 	//gamma
 	ofstream file_gamma_event_E_depos;
 	ofstream file_gamma_step_E_depos;
+
 
 	
 	string solution_path;
@@ -132,6 +134,11 @@ public:
 
 	TRandom3 rnd3;
 	bool is_Am_coll_14mm;
+	bool is_Cd_standard_box;
+	bool is_X_ray_coll_35mm_with_alpha;
+	bool is_X_ray_coll_35mm_no_alpha;
+	bool is_alpha;
+	bool is_point_source;
 	vector<double> avr_N_pe;
 
 
