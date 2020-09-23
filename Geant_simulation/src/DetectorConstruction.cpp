@@ -74,20 +74,23 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	defineMaterials(); // внешн€€ функци€. «десь определ€ютс€ различные материалы.
 	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
 
+//z >= 0
 #define bSiPM
 #define bPMMA_plate
 #define bAnode_grid
-//#define bInsulator_box
+#define bInsulator_box
 //#define bPMTs
 //#define bWLS
 //#define bTHGEM2
 #define bTHGEM1
 #define bTHGEM0
 //#define bFieldTHGEM
-//#define	bLArOuter //there some problems: I do not see  
-#define bCathode
-//#define bLArInactive
+#define	bLArOuter 
 #define bLArInner
+#define bCathode
+
+//z < 0
+//#define bLArInactive
 //#define bPMMA_bottom
 //#define bAl_window
 //#define bCryogenicChamberBottom
