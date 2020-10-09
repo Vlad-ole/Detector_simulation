@@ -42,14 +42,15 @@ int main(int argc, char** argv)
 	long t1 = clock();
 
 	g()->is_optical_gamma = true;
+	g()->is_gamma = false;
 
 	//choose source
 	g()->is_Am_coll_14mm = false;
 	g()->is_Cd_standard_box = false;
-	g()->is_X_ray_coll_35mm_no_alpha = true;
+	g()->is_X_ray_coll_35mm_no_alpha = false;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
 	g()->is_alpha = false;
-	g()->is_point_source = false;
+	g()->is_point_source = true;
 
 	if ( (g()->is_Am_coll_14mm + g()->is_Cd_standard_box +
 		g()->is_X_ray_coll_35mm_no_alpha + g()->is_X_ray_coll_35mm_with_alpha + 

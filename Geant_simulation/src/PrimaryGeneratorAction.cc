@@ -138,13 +138,19 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-	//optical photon
-
+	
 	G4ParticleDefinition* particle;
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
 	G4String particleName;
-	particle = particleTable->FindParticle(particleName = "opticalphoton");
+
+	if (g()->is_optical_gamma) particleName = "opticalphoton";
+	if (g()->is_gamma) particleName = "gamma";
+
+
+	particle = particleTable->FindParticle(particleName);	
 	particleGun->SetParticleDefinition(particle);
+
+	//x-ray
 	
 
 	//Cd source
@@ -251,10 +257,12 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	{
 	case MONO:
 		//energy = 59.5; //original value [keV]
-		energy = 1.38E-3; // optical photon [keV]
+		//energy = 1.38E-3; // optical photon [keV]
 		//energy = 88.03; // gamma [keV]
 		//energy = 59.5; // gamma [keV]
 		//energy = 25; // gamma [keV]
+		energy = 40;
+
 
 		//Cd 88.03 [keV]
 		//X-ray tube 35[keV]
@@ -326,6 +334,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef TOP_HEMISPHERE
 	double phi = 2 * pi*G4UniformRand();
 	double cosTheta = G4UniformRand();
+	//double phi = 1.5 * pi;
+	//double cosTheta = 0.5;
 #endif //TOP_HEMISPHERE
 
 
@@ -370,10 +380,15 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//z = 0;
 	//g()->z_source = z;
 
-	//v2 (x,y,z are constant within the Run)
+	////v2 (x,y,z are constant within the Run)
 	x = g()->x_source;
 	y = g()->y_source;
 	z = g()->z_source;
+
+	////tmp
+	//x = G4UniformRand()*10;
+	//y = g()->y_source;
+	//z = g()->z_source;
 
 	
 	//x = /*g()->x_source*/ 6*(G4UniformRand() - 0.5);

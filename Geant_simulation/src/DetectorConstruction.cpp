@@ -79,12 +79,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #define bPMMA_plate
 #define bAnode_grid
 #define bInsulator_box
-//#define bPMTs
+#define bPMTs
 //#define bWLS
 //#define bTHGEM2
 #define bTHGEM1
 #define bTHGEM0
 //#define bFieldTHGEM
+#define bFieldWires
 #define	bLArOuter 
 #define bLArInner
 #define bCathode
@@ -200,7 +201,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double y_pos_PMT = x_pos_PMT;
 	const double z_pos_PMT = 27.2 * mm + 63 * mm / 2.0;
 
-	//WLS
+		//WLS
 	/*const double radius_WLS = 70 * mm / 2.0;
 	const double z_size_WLS = 100 * um;
 	const double x_pos_WLS = 152 * mm / 2.0 + z_size_PMT / 2;
@@ -226,6 +227,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double z_center_FieldTHGEM_1 = 18.2*mm + z_size_FieldTHGEM / 2;
 	const double z_center_FieldTHGEM_2 = 34.2*mm + z_size_FieldTHGEM / 2;
 	const double hole_size_FieldTHGEM = 88 * mm;
+
+	//FieldWire
+	const double radius_FieldWire = 2 * mm / 2.0;
+	const double length_FieldWire = 95 * mm;
+	const double x_pos_FieldWire = x_size_tracker_THGEM2 / 2.0;
+	const double z_pos_FieldWire_bottom = 18.2*mm - radius_FieldWire;
+	const double z_pos_FieldWire_top = 34.2*mm + radius_FieldWire;
 
 	//Cathode
 	const double x_size_Cathode = x_size_LAr_outer_out;
@@ -357,6 +365,17 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_LAr_inner = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
 	const G4ThreeVector &position_LAr_outer = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
 
+	//FieldWires
+	const G4ThreeVector &position_FieldWire_bottom1 = G4ThreeVector(x_pos_FieldWire, 0, z_pos_FieldWire_bottom - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_FieldWire_bottom2 = G4ThreeVector(-x_pos_FieldWire, 0, z_pos_FieldWire_bottom - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_FieldWire_bottom3 = G4ThreeVector(0, x_pos_FieldWire, z_pos_FieldWire_bottom - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_FieldWire_bottom4 = G4ThreeVector(0, -x_pos_FieldWire, z_pos_FieldWire_bottom - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_FieldWire_top1 = G4ThreeVector(x_pos_FieldWire, 0, z_pos_FieldWire_top - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_FieldWire_top2 = G4ThreeVector(-x_pos_FieldWire, 0, z_pos_FieldWire_top - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_FieldWire_top3 = G4ThreeVector(0, x_pos_FieldWire, z_pos_FieldWire_top - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_FieldWire_top4 = G4ThreeVector(0, -x_pos_FieldWire, z_pos_FieldWire_top - z_size_LAr_inner / 2.0);
+
+
 	const G4ThreeVector &position_Cathode = G4ThreeVector(0, 0, -z_size_Cathode / 2.0);
 	const G4ThreeVector &position_LArInactive = G4ThreeVector(0, 0, -z_size_Cathode - z_size_LArInactive / 2.0);
 	const G4ThreeVector &position_PMMA_bottom = G4ThreeVector(0, 0, PMMA_bottom_center);	
@@ -475,6 +494,89 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//--------------------------------------------------------------------------------
 #endif // bLArOuter
 
+
+
+	//--------------------------------------------------------------------------------
+	//create FieldWires
+#ifdef	bFieldWires
+	G4Tubs* solid_FieldWire = new G4Tubs("solid_FieldWire", 0, radius_FieldWire, length_FieldWire / 2.0, 0.*deg, 360.*deg);
+	G4LogicalVolume* logic_FieldWire = new G4LogicalVolume(solid_FieldWire, G4Material::GetMaterial("Al"), "logic_FieldWire", 0, 0, 0);
+	
+	G4VPhysicalVolume* phys_FieldWire_bottom1 = new G4PVPlacement(rotX,               // no rotation
+		position_FieldWire_bottom1, // at (x,y,z)
+		logic_FieldWire,       // its logical volume
+		"phys__FieldWire_bottom1",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+	G4VPhysicalVolume* phys_FieldWire_bottom2 = new G4PVPlacement(rotX,               // no rotation
+		position_FieldWire_bottom2, // at (x,y,z)
+		logic_FieldWire,       // its logical volume
+		"phys__FieldWire_bottom2",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+	G4VPhysicalVolume* phys_FieldWire_bottom3 = new G4PVPlacement(rotY,               // no rotation
+		position_FieldWire_bottom3, // at (x,y,z)
+		logic_FieldWire,       // its logical volume
+		"phys__FieldWire_bottom3",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+	G4VPhysicalVolume* phys_FieldWire_bottom4 = new G4PVPlacement(rotY,               // no rotation
+		position_FieldWire_bottom4, // at (x,y,z)
+		logic_FieldWire,       // its logical volume
+		"phys__FieldWire_bottom4",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+	G4VPhysicalVolume* phys_FieldWire_top1 = new G4PVPlacement(rotX,               // no rotation
+		position_FieldWire_top1, // at (x,y,z)
+		logic_FieldWire,       // its logical volume
+		"phys__FieldWire_top1",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+	G4VPhysicalVolume* phys_FieldWire_top2 = new G4PVPlacement(rotX,               // no rotation
+		position_FieldWire_top2, // at (x,y,z)
+		logic_FieldWire,       // its logical volume
+		"phys__FieldWire_top2",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+	G4VPhysicalVolume* phys_FieldWire_top3 = new G4PVPlacement(rotY,               // no rotation
+		position_FieldWire_top3, // at (x,y,z)
+		logic_FieldWire,       // its logical volume
+		"phys__FieldWire_top3",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+	G4VPhysicalVolume* phys_FieldWire_top4 = new G4PVPlacement(rotY,               // no rotation
+		position_FieldWire_top4, // at (x,y,z)
+		logic_FieldWire,       // its logical volume
+		"phys__FieldWire_top4",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+
+#endif //bFieldWires
+	//--------------------------------------------------------------------------------
 
 
 	//--------------------------------------------------------------------------------
@@ -1177,7 +1279,18 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #endif
 	//---------------------------------------------------------------------------
 
+	//FieldWires
+#ifdef	bFieldWires
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_bottom1 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_bottom1", phys_LAr_inner, phys_FieldWire_bottom1, AbsorberMaterial);
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_bottom2 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_bottom2", phys_LAr_inner, phys_FieldWire_bottom2, AbsorberMaterial);
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_bottom3 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_bottom3", phys_LAr_inner, phys_FieldWire_bottom3, AbsorberMaterial);
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_bottom4 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_bottom4", phys_LAr_inner, phys_FieldWire_bottom4, AbsorberMaterial);
 
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_top1 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_top1", phys_LAr_inner, phys_FieldWire_top1, AbsorberMaterial);
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_top2 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_top2", phys_LAr_inner, phys_FieldWire_top2, AbsorberMaterial);
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_top3 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_top3", phys_LAr_inner, phys_FieldWire_top3, AbsorberMaterial);
+	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_top4 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_top4", phys_LAr_inner, phys_FieldWire_top4, AbsorberMaterial);
+#endif
 
 
 	//------------------------------------------------------------------------------
@@ -1264,6 +1377,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #ifdef bFieldTHGEM
 	G4VisAttributes* FieldTHGEM_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.7, 0.3, 0.8));
 	logic_FieldTHGEM->SetVisAttributes(FieldTHGEM_VisAtt);
+#endif
+
+#ifdef	bFieldWires
+	G4VisAttributes* FieldWires_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.8));
+	logic_FieldWire->SetVisAttributes(FieldWires_VisAtt);
 #endif
 
 

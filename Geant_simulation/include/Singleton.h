@@ -124,6 +124,7 @@ public:
 	double radius_source_gamma;
 
 	bool is_optical_gamma;
+	bool is_gamma;
 
 	double l_x;
 	double l_L;
