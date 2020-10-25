@@ -163,32 +163,34 @@ void DetectorConstruction::defineSurfaces()
 
 	
 	//-----------------------------------------------------------------------------
-	// описание поверхности фотокатода
-	silicaCathodeMaterial = new G4OpticalSurface("silicaCathodeMaterial", unified);
-	silicaCathodeMaterial->SetType(dielectric_metal);
-	silicaCathodeMaterial->SetModel(unified);
-	silicaCathodeMaterial->SetFinish(polished);
-	silicaCathodeMaterial->SetSigmaAlpha(0.);
+	// PMT cathode
+	PMT_cathode = new G4OpticalSurface("PMT_cathode", unified);
+	PMT_cathode->SetType(dielectric_metal);
+	PMT_cathode->SetModel(unified);
+	PMT_cathode->SetFinish(polished);
+	PMT_cathode->SetSigmaAlpha(0.);
 
 	
 
-	silicaCathodeMaterialProperty = new G4MaterialPropertiesTable();
+	PMT_cathodeMaterialProperty = new G4MaterialPropertiesTable();
 	G4double cathoderefl[2] = {0, 0};
 	//G4double cathodeeff[2] = {1, 1};
 	G4double SiPMEeff[2] = { 1, 1 };
 
-	//ReadConstants *silicaCathodeMaterial_EFFICIENCY = new ReadConstants(g()->string_silicaCathodeMaterial_EFFICIENCY, 1*eV, 1);
+	ReadConstants *PMT_cathode_EFFICIENCY = new ReadConstants(g()->string_PMT_R6041_506MOD_EFFICIENCY, 1*eV, 1);
 	//ReadConstants *Cathode_REFLECTIVITY = new ReadConstants(g()->string_Cathode_REFLECTIVITY, 1*eV, 1);
 
 	
+
+	
 	//silicaCathodeMaterialProperty->AddProperty("REFLECTIVITY", Cathode_REFLECTIVITY->get_x_array(), Cathode_REFLECTIVITY->get_y_array(), Cathode_REFLECTIVITY->get_array_size());
-	//silicaCathodeMaterialProperty->AddProperty("EFFICIENCY", silicaCathodeMaterial_EFFICIENCY->get_x_array(), silicaCathodeMaterial_EFFICIENCY->get_y_array(), silicaCathodeMaterial_EFFICIENCY->get_array_size());
+	PMT_cathodeMaterialProperty->AddProperty("EFFICIENCY", PMT_cathode_EFFICIENCY->get_x_array(), PMT_cathode_EFFICIENCY->get_y_array(), PMT_cathode_EFFICIENCY->get_array_size());
 	
 
-	silicaCathodeMaterialProperty->AddProperty("REFLECTIVITY", ener, cathoderefl, 2);
-	silicaCathodeMaterialProperty->AddProperty("EFFICIENCY", ener, SiPMEeff, 2);
+	PMT_cathodeMaterialProperty->AddProperty("REFLECTIVITY", ener, cathoderefl, 2);
+	//silicaCathodeMaterialProperty->AddProperty("EFFICIENCY", ener, SiPMEeff, 2);
 
-	silicaCathodeMaterial->SetMaterialPropertiesTable(silicaCathodeMaterialProperty);
+	PMT_cathode->SetMaterialPropertiesTable(PMT_cathodeMaterialProperty);
 	//--------------------------------------------------------------------------------
 
 
@@ -208,7 +210,7 @@ void DetectorConstruction::defineSurfaces()
 	G4double SiPM_refl[2] = { 0, 0 };
 	G4double cathodeeff[2] = { 1, 1 };
 
-	ReadConstants *SiPM_EFFICIENCY = new ReadConstants(g()->string_SiPM_EFFICIENCY, 1*eV, 1);
+	ReadConstants *SiPM_EFFICIENCY = new ReadConstants(g()->string_SiPM_13360_6050pe_46V_EFFICIENCY, 1*eV, 1);
 	//ReadConstants *Cathode_REFLECTIVITY = new ReadConstants(g()->string_Cathode_REFLECTIVITY, 1*eV, 1);
 
 
@@ -217,7 +219,8 @@ void DetectorConstruction::defineSurfaces()
 
 
 	SiPM_MaterialProperty->AddProperty("REFLECTIVITY", ener, SiPM_refl, 2);
-	SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);//dummy
+	//SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);//dummy
+	SiPM_MaterialProperty->AddProperty("EFFICIENCY", SiPM_EFFICIENCY->get_x_array(), SiPM_EFFICIENCY->get_y_array(), SiPM_EFFICIENCY->get_array_size());
 
 	SiPM_OpticalSurface->SetMaterialPropertiesTable(SiPM_MaterialProperty);
 	//--------------------------------------------------------------------------------
@@ -242,7 +245,7 @@ void DetectorConstruction::defineSurfaces()
 	G4MaterialPropertiesTable *AbsorberMaterialProperty = new G4MaterialPropertiesTable();
 	G4double AbsorberMaterialrefl[2] = { 0.0, 0.0 };
 	G4double AbsorberMaterialeff[2] = { 0, 0 };
-		
+	
 	AbsorberMaterialProperty->AddProperty("REFLECTIVITY", ener, AbsorberMaterialrefl, 2);
 	AbsorberMaterialProperty->AddProperty("EFFICIENCY", ener, AbsorberMaterialeff, 2);
 
@@ -267,6 +270,6 @@ void DetectorConstruction::ChangeCathRefl()
 	G4double factory_eff = 0.25;
 	G4double cathodeeff[2] = { factory_eff / (1 - g()->CathRefl_index), factory_eff / (1 - g()->CathRefl_index) };
 	
-	silicaCathodeMaterialProperty->AddProperty("REFLECTIVITY", ener, cathoderefl, 2);
-	silicaCathodeMaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);
+	PMT_cathodeMaterialProperty->AddProperty("REFLECTIVITY", ener, cathoderefl, 2);
+	PMT_cathodeMaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);
 }

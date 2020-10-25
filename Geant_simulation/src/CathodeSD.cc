@@ -60,10 +60,10 @@ G4bool CathodeSD::ProcessHits_Optical(const G4Step* aStep, G4TouchableHistory* )
 	
 	//cout << "There is a hit:" << aStep->GetPostStepPoint()->GetTouchable()->GetCopyNumber(0) << endl;
 
-	/*G4StepPoint * thePrePoint  = aStep->GetPostStepPoint();
+	G4StepPoint * thePrePoint  = aStep->GetPostStepPoint();
 	G4ThreeVector pos    = thePrePoint->GetPosition();
 	G4double energy = thePrePoint->GetTotalEnergy();
-	g()->file_energy << energy << endl;*/
+	g()->file_energy << energy << endl;
 
 	return true;
 }

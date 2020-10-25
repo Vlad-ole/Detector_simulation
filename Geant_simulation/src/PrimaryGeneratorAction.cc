@@ -13,6 +13,8 @@ using namespace std;
 
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 
+
+
 //set angle distribution
 //#define DIRECT_INCIDENCE
 #define TOP_HEMISPHERE
@@ -64,24 +66,28 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(const char* fname, bool IsDiscret
 		char   buffer[256];
 		char   seps[] = " \t;";	  //separatoren
 
-		nMaxDataLines = 0;
+		//nMaxDataLines = 0;
 		dMaxWeight = 0; //!!! // dMaxWeight  = 1;
 
 
 		cout << "Read Specter: " << fname << endl;
-		FILE* in = fopen(fname, "r");
-		if (in == NULL)
+		//FILE* in = fopen(fname, "r");
+		ifstream f_energy_spectrum(fname);
+		
+		if (/*in == NULL*/ !f_energy_spectrum.is_open() )
 		{
-			cout << "Specter of X-Tube not loaded!!! " << fname << endl;
+			cout << "Error: energy spectrum was not loaded!!! " << fname << endl;
 			return;
 		}
 
-		while (!feof(in) && (nMaxDataLines < MAX_SPECTER_DATALINES))
+		std::string line;
+		while (/*!feof(in) && (nMaxDataLines < MAX_SPECTER_DATALINES)*/ std::getline(f_energy_spectrum, line))
 		{
-			fgets(buffer, sizeof(buffer) - 1, in);
-			cout << "Read of " << nMaxDataLines << " line: " << buffer << endl;
+			//old version
+			//fgets(buffer, sizeof(buffer) - 1, in);
+			//cout << "Read of " << nMaxDataLines << " line: " << buffer << endl;			
 
-			if (strlen(buffer) > 2)
+			/*if (strlen(buffer) > 2)
 			{
 				if (!strstr(buffer, "//"))
 				{
@@ -93,11 +99,24 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(const char* fname, bool IsDiscret
 
 					nMaxDataLines++;
 				}
-			}
-		}
-		cout << "Specter " << fname << "loaded! There are " << nMaxDataLines << " datalines." << endl;
+			}*/
 
-		fclose(in);
+			std::istringstream iss(line);
+			double energy;
+			double weight;
+			iss >> energy >> weight;
+			dEnergy.push_back(energy);
+			dWeight.push_back(weight);
+		}
+		dMaxWeight = *max_element(dWeight.begin(), dWeight.end());
+		Energy_max = *max_element(dEnergy.begin(), dEnergy.end());
+		Energy_min = *min_element(dEnergy.begin(), dEnergy.end());
+		cout << "Specter " << fname << " was loaded! There are " << dEnergy.size() << " datalines." << endl;
+
+		gr_energy_weight = new TGraph(dEnergy.size(), &dEnergy[0], &dWeight[0]);
+
+		//fclose(in);
+		f_energy_spectrum.close();
 
 	}
 	else
@@ -256,12 +275,12 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	switch (xrType)
 	{
 	case MONO:
-		//energy = 59.5; //original value [keV]
-		//energy = 1.38E-3; // optical photon [keV]
+		//energy = 59.5; //original value [eV]
+		energy = 1.29; // optical photon [eV]
 		//energy = 88.03; // gamma [keV]
 		//energy = 59.5; // gamma [keV]
 		//energy = 25; // gamma [keV]
-		energy = 40;
+		//energy = 40;//gamma, max X-ray energy [keV]
 
 
 		//Cd 88.03 [keV]
@@ -272,10 +291,10 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	case SPECTER_continuous:
 		do
 		{
-			energy = nMaxDataLines*G4UniformRand();
+			energy = Energy_min + G4UniformRand()*(Energy_max - Energy_min);
 			weight = dMaxWeight*G4UniformRand();
-		} while (weight > dWeight[(int)energy]);
-
+		} while (weight > /*dWeight[(int)energy]*/ gr_energy_weight->Eval(energy) );
+		
 		break;
 
 	case SPECTER_discrete:
@@ -302,8 +321,10 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 	}//switch (xrType) end
 
-
-	particleGun->SetParticleEnergy(energy*keV);
+	//cout << (energy) << endl;
+	energy *= eV;
+	particleGun->SetParticleEnergy(energy);
+	g()->file_emitted_energy << energy << endl;
 	////--------------------------------------
 
 

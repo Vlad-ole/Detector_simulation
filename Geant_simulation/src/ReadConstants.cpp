@@ -30,7 +30,7 @@ ReadConstants::ReadConstants(string file_name, G4double x_dimension, G4double y_
 	}
 	else 
 	{  
-		cout << "Unable to open file"; 
+		cout << "Error: unable to open file"; 
 	}
 
 

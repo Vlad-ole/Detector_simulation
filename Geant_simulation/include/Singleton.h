@@ -31,6 +31,7 @@ public:
 	ofstream file_num_of_reg_photons;
 	ofstream file_ph_coll;
 	ofstream file_xy;
+	ofstream file_emitted_energy;
 	ofstream file_energy;
 	ofstream file_run_lc;
 	ofstream file_boundary_process;
@@ -43,6 +44,16 @@ public:
 	
 	string solution_path;
 	string path_read;
+
+	//PMMA_UV
+	string string_pmma_uv_energies;
+	string string_pmma_uv_rindex;
+	string string_pmma_uv_absorption_length;
+
+	//PMMA
+	string string_pmma_energies;
+	string string_pmma_rindex;
+	string string_pmma_absorption_length;
 
 	//LYSO:Ce
 	string string_lyso_ce_energies;
@@ -79,7 +90,14 @@ public:
 	string string_BorosilicateGlass_ABSLENGTH;
 
 	//cathode
-	string string_silicaCathodeMaterial_EFFICIENCY;
+	//string string_silicaCathodeMaterial_EFFICIENCY;
+
+	//PMT
+	string string_PMT_R6041_506MOD_EFFICIENCY;
+
+	//SiPM
+	string string_SiPM_13360_6050pe_46V_EFFICIENCY;
+	string string_SiPM_13360_6050pe_48V_EFFICIENCY;
 
 	//MgO
 	string string_MgO_REFLECTIVITY;
@@ -93,9 +111,11 @@ public:
 	string string_Cathode_REFLECTIVITY;
 
 	//SiPM
-	string string_SiPM_EFFICIENCY;
+	//string string_SiPM_EFFICIENCY;
 
+	//Emission spectra
 	string string_GAr_86K_1atm_avalanche_scint_NIR;
+	string string_LAr_T_Heindl_2011;
 	
 	//
 	double summ_number_of_photons;

@@ -106,22 +106,49 @@ void DetectorConstruction::defineMaterials()
 	//------------------------------
 	// PMMA
 
-	G4Material* PMMA = new G4Material("PMMA", 1.000*g / cm3, 3);
+	G4Material* PMMA = new G4Material("PMMA", 1.18*g / cm3, 3);
 	PMMA->AddElement(C, 5);
 	PMMA->AddElement(O, 2);
 	PMMA->AddElement(H, 8);
-	const G4int numentries_PMMA = 2;
-	G4double energies_PMMA[numentries_PMMA] = { 0.1*eV, 10.0*eV };
-	G4double rindices_PMMA[numentries_PMMA] = { 1.5, 1.5 };//good approximation from 400 to 1000 nm (in real n = (1.5, 1.48) ) 
-	G4double absorpti_PMMA[numentries_PMMA] = { 10 * m, 10 * m }; // avoid infinite light-paths
+	ReadConstants *PMMA_ABSLENGTH = new ReadConstants(g()->string_pmma_absorption_length, 1 * eV, 1 * mm);
+	ReadConstants *PMMA_RINDEX = new ReadConstants(g()->string_pmma_rindex, 1 * eV, 1);
+
+	const G4int numentries_PMMA = 3;
+	//G4double energies_PMMA[numentries_PMMA] = { 1.24*eV, 3.64*eV, 6.2*eV };
+	//G4double rindices_PMMA[numentries_PMMA] = { 1.5, 1.5, 1.5 };//good approximation from 400 to 1000 nm (in real n = (1.5, 1.48) ) 
+	//G4double absorpti_PMMA[numentries_PMMA] = { 10 * m, 1*mm , 0 * mm }; // avoid infinite light-paths
+	
 	G4MaterialPropertiesTable* prop_PMMA = new G4MaterialPropertiesTable();
-	prop_PMMA->AddProperty("ABSLENGTH", energies_PMMA, absorpti_PMMA, numentries_PMMA);
-	prop_PMMA->AddProperty("RINDEX", energies_PMMA, rindices_PMMA, numentries_PMMA);
+	prop_PMMA->AddProperty("ABSLENGTH", PMMA_ABSLENGTH->get_x_array(), PMMA_ABSLENGTH->get_y_array(), PMMA_ABSLENGTH->get_array_size());
+	prop_PMMA->AddProperty("RINDEX", PMMA_RINDEX->get_x_array(), PMMA_RINDEX->get_y_array(), PMMA_RINDEX->get_array_size() );
+	//prop_PMMA->AddProperty("ABSLENGTH", energies_PMMA, absorpti_PMMA, numentries_PMMA);
+	//prop_PMMA->AddProperty("RINDEX", energies_PMMA, rindices_PMMA, numentries_PMMA);
+	//
 	PMMA->SetMaterialPropertiesTable(prop_PMMA);
+	prop_PMMA->DumpTable();
 	//------------------------------
 
 
 
+	//------------------------------
+	// PMMA_UV
+
+	G4Material* PMMA_UV = new G4Material("PMMA_UV", 1.18*g / cm3, 3);
+	PMMA_UV->AddElement(C, 5);
+	PMMA_UV->AddElement(O, 2);
+	PMMA_UV->AddElement(H, 8);
+	ReadConstants *PMMA_UV_ABSLENGTH = new ReadConstants(g()->string_pmma_uv_absorption_length, 1 * eV, 1 * mm);
+	
+	const G4int numentries_PMMA_UV = 2;
+	G4double energies_PMMA_UV[numentries_PMMA_UV] = { 0.1*eV, 10.0*eV };
+	G4double rindices_PMMA_UV[numentries_PMMA_UV] = { 1.5, 1.5 };
+
+	G4MaterialPropertiesTable* prop_PMMA_UV = new G4MaterialPropertiesTable();
+	prop_PMMA_UV->AddProperty("ABSLENGTH", PMMA_UV_ABSLENGTH->get_x_array(), PMMA_UV_ABSLENGTH->get_y_array(), PMMA_UV_ABSLENGTH->get_array_size());
+	prop_PMMA_UV->AddProperty("RINDEX", energies_PMMA_UV, rindices_PMMA_UV, numentries_PMMA_UV);
+	PMMA_UV->SetMaterialPropertiesTable(prop_PMMA_UV);
+
+	//------------------------------
 
 
 

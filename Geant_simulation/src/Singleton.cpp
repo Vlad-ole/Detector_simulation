@@ -26,6 +26,7 @@ Singleton::Singleton()
 	file_num_of_reg_photons.open(path_out + "num_of_reg_photons.dat");
 	file_ph_coll.open(path_out + "ph_coll.dat");
 	file_xy.open(path_out + "xy.dat");
+	file_emitted_energy.open(path_out + "emitted_energy.dat");
 	file_energy.open(path_out + "energy.dat");
 	file_run_lc.open(path_out + "run_lc.dat");
 	file_boundary_process.open(path_out + "boundary_process.dat");
@@ -34,6 +35,11 @@ Singleton::Singleton()
 	file_gamma_step_E_depos.open(path_out + "gamma_step_E_depos.dat");
 
 	// файлы на чтение
+	string_pmma_absorption_length = path_read + "absorption_length\\PMMA_absorption_length_eV_mm.dat";
+	string_pmma_rindex = path_read + "refractive_index\\PMMA_rindex_eV_1.dat";
+
+	string_pmma_uv_absorption_length = path_read + "absorption_length\\PMMA_VU_absorption_length_eV_mm.dat";
+
 	string_lyso_ce_energies = path_read + "energy_spectrum\\lyso_ce_energies_eV_1.dat";
 	string_lyso_ce_rindex = path_read + "refractive_index\\lyso_ce_rindex_eV_1.dat";	
 	string_lyso_ce_absorption_length = path_read + "absorption_length\\lyso_ce_absorption_length_eV_mm.dat";
@@ -60,7 +66,10 @@ Singleton::Singleton()
 	string_BorosilicateGlass_RINDEX = path_read + "refractive_index\\Borosilicate_N-BK7_RINDEX_eV_1.dat";
 	string_BorosilicateGlass_ABSLENGTH = path_read + "absorption_length\\BorosilicateGlass_AbsorptionLength_eV_mm.dat";
 
-	string_silicaCathodeMaterial_EFFICIENCY = path_read + "detector_efficiency\\pmt_r10233(big).dat";
+	//string_silicaCathodeMaterial_EFFICIENCY = path_read + "detector_efficiency\\pmt_r10233(big).dat";
+	string_PMT_R6041_506MOD_EFFICIENCY = path_read + "detector_efficiency\\PMT_R6041_506MOD.dat";
+	string_SiPM_13360_6050pe_46V_EFFICIENCY = path_read + "detector_efficiency\\SiPM_s13360-6050pe_46V.dat";
+	string_SiPM_13360_6050pe_48V_EFFICIENCY = path_read + "detector_efficiency\\SiPM_s13360-6050pe_48V.dat";
 
 	string_MgO_REFLECTIVITY = path_read + "reflectivity\\MgO_REFLECTIVITY_eV_1.dat";
 	string_MgO_RINDEX = path_read + "refractive_index\\MgO_RINDEX_eV_1.dat";
@@ -71,9 +80,9 @@ Singleton::Singleton()
 	//
 	string_Cathode_REFLECTIVITY = path_read + "reflectivity\\Cathode_Motta_REFLECTIVITY_eV_1.dat";
 
-	string_SiPM_EFFICIENCY = path_read + "detector_efficiency\\s13360-6050pe.dat";
 
 	string_GAr_86K_1atm_avalanche_scint_NIR = path_read + "energy_spectrum\\GAr_86K_1atm_avalanche_scint_NIR.dat";
+	string_LAr_T_Heindl_2011 = path_read + "energy_spectrum\\T_Heindl_2011.dat";
 	
 }
 

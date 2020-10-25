@@ -188,7 +188,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//Insulator_box
 	const double x_size_Insulator_box_inner = 143 * mm;
 	const double y_size_Insulator_box_inner = x_size_Insulator_box_inner;
-	const double thickness_Insulator_box = 2 * mm;
+	const double thickness_Insulator_box = 4 * mm;
 	const double x_size_Insulator_box_outer = x_size_Insulator_box_inner + thickness_Insulator_box * 2;
 	const double y_size_Insulator_box_outer = x_size_Insulator_box_outer;
 	const double z_size_Insulator_box = 150 * mm;
@@ -229,7 +229,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double hole_size_FieldTHGEM = 88 * mm;
 
 	//FieldWire
-	const double radius_FieldWire = 2 * mm / 2.0;
+	const double radius_FieldWire = 1.5 * mm / 2.0;
 	const double length_FieldWire = 95 * mm;
 	const double x_pos_FieldWire = x_size_tracker_THGEM2 / 2.0;
 	const double z_pos_FieldWire_bottom = 18.2*mm - radius_FieldWire;
@@ -1111,7 +1111,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Box* solid_Insulator_box_outer = new G4Box("solid_Insulator_box_outer", x_size_Insulator_box_outer / 2.0, y_size_Insulator_box_outer / 2.0, z_size_Insulator_box / 2.0);
 	G4SubtractionSolid* solid_Insulator_box_subtraction = new G4SubtractionSolid("solid_Insulator_box_subtraction", solid_Insulator_box_outer, solid_Insulator_box_inner);
 
-	G4LogicalVolume* logic_Insulator_box = new G4LogicalVolume(solid_Insulator_box_subtraction, G4Material::GetMaterial("PMMA"), "logic_Insulator_box", 0, 0, 0);
+	G4LogicalVolume* logic_Insulator_box = new G4LogicalVolume(solid_Insulator_box_subtraction, G4Material::GetMaterial("PMMA_UV"), "logic_Insulator_box", 0, 0, 0);
 	G4VPhysicalVolume* phys_Insulator_box = new G4PVPlacement(0,               // no rotation
 		position_Insulator_box, // at (x,y,z)
 		logic_Insulator_box,       // its logical volume
@@ -1228,16 +1228,16 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #ifdef bPMTs
 	//________________________________________________
 	//PMT
-	G4LogicalBorderSurface* world2PMT0 = new G4LogicalBorderSurface("world2PMT0", physiWorld, phys_PMT0, silicaCathodeMaterial);
-	G4LogicalBorderSurface* world2PMT1 = new G4LogicalBorderSurface("world2PMT1", physiWorld, phys_PMT1, silicaCathodeMaterial);
-	G4LogicalBorderSurface* world2PMT2 = new G4LogicalBorderSurface("world2PMT2", physiWorld, phys_PMT2, silicaCathodeMaterial);
-	G4LogicalBorderSurface* world2PMT3 = new G4LogicalBorderSurface("world2PMT3", physiWorld, phys_PMT3, silicaCathodeMaterial);
+	G4LogicalBorderSurface* world2PMT0 = new G4LogicalBorderSurface("world2PMT0", physiWorld, phys_PMT0, PMT_cathode);
+	G4LogicalBorderSurface* world2PMT1 = new G4LogicalBorderSurface("world2PMT1", physiWorld, phys_PMT1, PMT_cathode);
+	G4LogicalBorderSurface* world2PMT2 = new G4LogicalBorderSurface("world2PMT2", physiWorld, phys_PMT2, PMT_cathode);
+	G4LogicalBorderSurface* world2PMT3 = new G4LogicalBorderSurface("world2PMT3", physiWorld, phys_PMT3, PMT_cathode);
 
 #ifdef bLArOuter
-	G4LogicalBorderSurface* LAr_outer2PMT0 = new G4LogicalBorderSurface("LAr_outer2PMT0", phys_LAr_outer, phys_PMT0, silicaCathodeMaterial);
-	G4LogicalBorderSurface* LAr_outer2PMT1 = new G4LogicalBorderSurface("LAr_outer2PMT1", phys_LAr_outer, phys_PMT1, silicaCathodeMaterial);
-	G4LogicalBorderSurface* LAr_outer2PMT2 = new G4LogicalBorderSurface("LAr_outer2PMT2", phys_LAr_outer, phys_PMT2, silicaCathodeMaterial);
-	G4LogicalBorderSurface* LAr_outer2PMT3 = new G4LogicalBorderSurface("LAr_outer2PMT3", phys_LAr_outer, phys_PMT3, silicaCathodeMaterial);
+	G4LogicalBorderSurface* LAr_outer2PMT0 = new G4LogicalBorderSurface("LAr_outer2PMT0", phys_LAr_outer, phys_PMT0, PMT_cathode);
+	G4LogicalBorderSurface* LAr_outer2PMT1 = new G4LogicalBorderSurface("LAr_outer2PMT1", phys_LAr_outer, phys_PMT1, PMT_cathode);
+	G4LogicalBorderSurface* LAr_outer2PMT2 = new G4LogicalBorderSurface("LAr_outer2PMT2", phys_LAr_outer, phys_PMT2, PMT_cathode);
+	G4LogicalBorderSurface* LAr_outer2PMT3 = new G4LogicalBorderSurface("LAr_outer2PMT3", phys_LAr_outer, phys_PMT3, PMT_cathode);
 #endif // bLArOuter
 
 	//________________________________________________

@@ -4,6 +4,9 @@
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include <vector>
 
+//root cern
+#include "TGraph.h"
+
 #define  MAX_SPECTER_DATALINES  150
 
 enum XRAY_TYPE
@@ -33,10 +36,15 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     G4ParticleGun* particleGun;
 	
 	XRAY_TYPE xrType;
-    int       nMaxDataLines;
-    double    dEnergy[MAX_SPECTER_DATALINES];
-    double    dWeight[MAX_SPECTER_DATALINES];
-    double    dMaxWeight;
+    //int       nMaxDataLines;
+    //double    dEnergy[MAX_SPECTER_DATALINES];
+    //double    dWeight[MAX_SPECTER_DATALINES];
+	vector<double> dEnergy;
+	vector<double> dWeight;
+	double Energy_min;
+	double Energy_max;
+    double dMaxWeight;
+	TGraph *gr_energy_weight;
 	vector<double> Ev;
 	vector<double> pv;
 	vector<double> pv_edge;//right edge

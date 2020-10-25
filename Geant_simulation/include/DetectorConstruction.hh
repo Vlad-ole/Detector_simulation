@@ -153,7 +153,8 @@ private:
 	G4OpticalSurface *Polished_Air_TiO2;
 	G4OpticalSurface *Ground_Air_TiO2;
 	G4OpticalSurface *airGroundAluminum; // ground aluminm surface
-	G4OpticalSurface *silicaCathodeMaterial; // surface between window and cathode
+	//G4OpticalSurface *silicaCathodeMaterial; // surface between window and cathode
+	G4OpticalSurface *PMT_cathode;
 	G4OpticalSurface *SiPM_OpticalSurface;
 	G4OpticalSurface *AbsorberMaterial;
 
@@ -170,7 +171,7 @@ private:
 	void defineMaterials();
 	void defineSurfaces();
 
-	G4MaterialPropertiesTable *silicaCathodeMaterialProperty;
+	G4MaterialPropertiesTable *PMT_cathodeMaterialProperty;
 
 
 	G4bool  fCheckOverlaps; // option to activate checking of volumes overlaps
