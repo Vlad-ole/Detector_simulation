@@ -17,14 +17,14 @@ using namespace std;
 
 //set angle distribution
 //#define DIRECT_INCIDENCE
-#define TOP_HEMISPHERE
-//#define SPHERE_4PI
+//#define TOP_HEMISPHERE
+#define SPHERE_4PI
 //#define ANGLE_Cd_COLL6mm
 
 //set (x,y,z) position
-#define CENTRAL_INCIDENCE
+//#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-//#define EL_GAP 
+#define EL_GAP 
 //#define CIRCLE_EL_GAP
 //#define CIRCLE_Cd
 
@@ -276,7 +276,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	{
 	case MONO:
 		//energy = 59.5; //original value [eV]
-		energy = 1.29; // optical photon [eV]
+		energy = 1240.0/400.0; // optical photon [eV]
 		//energy = 88.03; // gamma [keV]
 		//energy = 59.5; // gamma [keV]
 		//energy = 25; // gamma [keV]
@@ -346,9 +346,9 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef	SPHERE_4PI
 	//uniform distribution
 	double phi = 2 * pi*G4UniformRand();
-	//double theta = pi/2*G4UniformRand();
-	//double theta = acos((G4UniformRand() - 0.5) * 2);
 	double cosTheta = (G4UniformRand() - 0.5) * 2;
+	//double cosTheta = -0.5;//test
+	//double cosTheta = G4UniformRand() - 1; //bottom hemisphere
 #endif //SPHERE_4PI	
 
 

@@ -236,13 +236,13 @@ void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4dou
 		const G4ThreeVector& MomentumDirection_i = theStep->GetTrack()->GetMomentumDirection();
 		const G4ThreeVector& Position_i = theStep->GetTrack()->GetPosition();
 
-		////THGEM CERN 28%
-		//const double step = 0.9 * mm;
-		//const double radius = 0.25 * mm;
+		//THGEM CERN 28%
+		const double step = 0.9 * mm;
+		const double radius = 0.25 * mm;
 
-		//THGEM ELECROCONNECT 75%
-		const double step = 1.1 * mm;
-		const double radius = 0.5 * mm;
+		////THGEM ELECROCONNECT 75%
+		//const double step = 1.1 * mm;
+		//const double radius = 0.5 * mm;
 
 		const double step_y = step * sqrt(3) / 2;
 		double y_center;

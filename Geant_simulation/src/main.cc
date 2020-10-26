@@ -40,8 +40,7 @@ int  nUsefulEvents = 0;
 int main(int argc, char** argv)
 {
 	long t1 = clock();
-
-	
+		
 
 	g()->is_optical_gamma = true;
 	g()->is_gamma = false;
@@ -51,8 +50,8 @@ int main(int argc, char** argv)
 	g()->is_Cd_standard_box = false;
 	g()->is_X_ray_coll_35mm_no_alpha = false;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
-	g()->is_alpha = true;
-	g()->is_point_source = false;
+	g()->is_alpha = false;
+	g()->is_point_source = true;
 
 	if ( (g()->is_Am_coll_14mm + g()->is_Cd_standard_box +
 		g()->is_X_ray_coll_35mm_no_alpha + g()->is_X_ray_coll_35mm_with_alpha + 
@@ -90,9 +89,9 @@ int main(int argc, char** argv)
 	string temp_string = g()->path_read + "x_ray\\Analytical_model_out.dat";
 	if (g()->is_optical_gamma)
 	{
-		runManager->SetUserAction(new PrimaryGeneratorAction(g()->string_LAr_T_Heindl_2011.c_str(), 0));
+		//runManager->SetUserAction(new PrimaryGeneratorAction(g()->string_LAr_T_Heindl_2011.c_str(), 0));
 		//runManager->SetUserAction(new PrimaryGeneratorAction(g()->string_GAr_86K_1atm_avalanche_scint_NIR.c_str(), 1));
-		//runManager->SetUserAction(new PrimaryGeneratorAction());
+		runManager->SetUserAction(new PrimaryGeneratorAction());
 		g()->avr_N_pe.resize(25);
 	}
 	else
@@ -124,7 +123,7 @@ int main(int argc, char** argv)
 
 	//for
 	//TRandom3 rnd3;
-	const int N_runs = /*41*/ 10000 /*1*/;
+	const int N_runs = /*41*/ 1 /*1*/;
 	for (int i = 0; i < N_runs; i++)
 	{
 		if (i % 1 == 0 || i == (N_runs - 1))

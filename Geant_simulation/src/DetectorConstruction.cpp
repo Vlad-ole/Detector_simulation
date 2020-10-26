@@ -84,8 +84,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 //#define bTHGEM2
 #define bTHGEM1
 #define bTHGEM0
-//#define bFieldTHGEM
-#define bFieldWires
+#define bFieldTHGEM
+//#define bFieldWires
 #define	bLArOuter 
 #define bLArInner
 #define bCathode
@@ -188,7 +188,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//Insulator_box
 	const double x_size_Insulator_box_inner = 143 * mm;
 	const double y_size_Insulator_box_inner = x_size_Insulator_box_inner;
-	const double thickness_Insulator_box = 4 * mm;
+	const double thickness_Insulator_box = 2 * mm;
 	const double x_size_Insulator_box_outer = x_size_Insulator_box_inner + thickness_Insulator_box * 2;
 	const double y_size_Insulator_box_outer = x_size_Insulator_box_outer;
 	const double z_size_Insulator_box = 150 * mm;
@@ -1111,7 +1111,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Box* solid_Insulator_box_outer = new G4Box("solid_Insulator_box_outer", x_size_Insulator_box_outer / 2.0, y_size_Insulator_box_outer / 2.0, z_size_Insulator_box / 2.0);
 	G4SubtractionSolid* solid_Insulator_box_subtraction = new G4SubtractionSolid("solid_Insulator_box_subtraction", solid_Insulator_box_outer, solid_Insulator_box_inner);
 
-	G4LogicalVolume* logic_Insulator_box = new G4LogicalVolume(solid_Insulator_box_subtraction, G4Material::GetMaterial("PMMA_UV"), "logic_Insulator_box", 0, 0, 0);
+	G4LogicalVolume* logic_Insulator_box = new G4LogicalVolume(solid_Insulator_box_subtraction, G4Material::GetMaterial("PMMA"), "logic_Insulator_box", 0, 0, 0);
 	G4VPhysicalVolume* phys_Insulator_box = new G4PVPlacement(0,               // no rotation
 		position_Insulator_box, // at (x,y,z)
 		logic_Insulator_box,       // its logical volume
