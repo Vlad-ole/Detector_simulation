@@ -51,8 +51,8 @@ int main(int argc, char** argv)
 	g()->is_Cd_standard_box = false;
 	g()->is_X_ray_coll_35mm_no_alpha = false;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
-	g()->is_alpha = false;
-	g()->is_point_source = true;
+	g()->is_alpha = true;
+	g()->is_point_source = false;
 
 	if ( (g()->is_Am_coll_14mm + g()->is_Cd_standard_box +
 		g()->is_X_ray_coll_35mm_no_alpha + g()->is_X_ray_coll_35mm_with_alpha + 
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 
 	//for
 	//TRandom3 rnd3;
-	const int N_runs = /*41*/ 1 /*1*/;
+	const int N_runs = /*41*/ 10000 /*1*/;
 	for (int i = 0; i < N_runs; i++)
 	{
 		if (i % 1 == 0 || i == (N_runs - 1))
@@ -184,9 +184,13 @@ int main(int argc, char** argv)
 			g()->y_source = 0;
 			g()->z_source = 0;
 		}
+		else if (g()->is_alpha)
+		{
+	
+		}
 		else
 		{
-			cerr << "This case has not yet been implemented" << endl;
+			cerr << "Error: this case has not yet been implemented" << endl;
 			std::system("pause");
 			exit(1);
 		}
@@ -217,7 +221,7 @@ int main(int argc, char** argv)
 
 			if (g()->is_alpha)
 			{
-				g()->radius = 5;
+				g()->radius = 11.5 / 2.0;
 				g()->z_source = 2;
 			}
 
