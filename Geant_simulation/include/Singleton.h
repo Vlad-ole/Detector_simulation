@@ -162,5 +162,10 @@ public:
 	bool is_point_source;
 	vector<double> avr_N_pe;
 
+	double radius_THGEM_hole;
+	double width_THGEM1;
+	double width_THGEM0;
+	double xyz_position_SingleTHGEMHole;
+
 
 };

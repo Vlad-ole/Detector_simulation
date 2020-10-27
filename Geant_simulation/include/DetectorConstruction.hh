@@ -157,6 +157,7 @@ private:
 	G4OpticalSurface *PMT_cathode;
 	G4OpticalSurface *SiPM_OpticalSurface;
 	G4OpticalSurface *AbsorberMaterial;
+	G4OpticalSurface *SingleTHGEMHole_optical_surface;
 
 	G4OpticalSurface *teflon_unified;
 	G4OpticalSurface *MgO_unified;

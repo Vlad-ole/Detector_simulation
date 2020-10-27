@@ -41,6 +41,11 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 		
+	g()->radius_THGEM_hole = 0.25;//THGEM CERN 28%
+	//g()->radius_THGEM_hole = 0.5;//THGEM CERN 75%
+	g()->width_THGEM1 = 0.5;
+	g()->width_THGEM0 = 0.5;
+	g()->xyz_position_SingleTHGEMHole = 150;
 
 	g()->is_optical_gamma = true;
 	g()->is_gamma = false;

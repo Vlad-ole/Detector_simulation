@@ -84,6 +84,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 //#define bTHGEM2
 #define bTHGEM1
 #define bTHGEM0
+#define bSingleTHGEMHole
 #define bFieldTHGEM
 //#define bFieldWires
 #define	bLArOuter 
@@ -112,6 +113,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//--------------------------------------------------------------------------------
 	//выставление размеров объектов
 	const G4double HalfWorldLength = 17 * cm;
+
 
 	//anode wire
 	const double radius_wire = 100/2.0 * um;//you can understand this from photo
@@ -350,6 +352,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//--------------------------------------------------------------------------------
 	//определение взаимного расположения объектов
+
+	const G4ThreeVector &position_SingleTHGEMHole = G4ThreeVector(g()->xyz_position_SingleTHGEMHole, g()->xyz_position_SingleTHGEMHole, g()->xyz_position_SingleTHGEMHole);
 
 	const G4ThreeVector &position_SiPM = G4ThreeVector(0, 0, 0);
 	const G4ThreeVector &position_anode_grid = G4ThreeVector(0, 0, z_anode_grid_center);
@@ -610,6 +614,22 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	 //--------------------------------------------------------------------------------
 
 
+	 //-------------------------------------------------------------------------------
+#ifdef	bSingleTHGEMHole
+	G4Tubs* solid_SingleTHGEMHole
+		= new G4Tubs("solid_SingleTHGEMHole", g()->radius_THGEM_hole, g()->radius_THGEM_hole*2, g()->width_THGEM1 / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_SingleTHGEMHole
+		= new G4LogicalVolume(solid_SingleTHGEMHole, G4Material::GetMaterial("FR4"), "logic_SingleTHGEMHole", 0, 0, 0);
+	G4VPhysicalVolume* phys_SingleTHGEMHole = new G4PVPlacement(0,               // no rotation
+		position_SingleTHGEMHole, // at (x,y,z)
+		logic_SingleTHGEMHole,       // its logical volume
+		"phys_SingleTHGEMHole",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif
+	 //--------------------------------------------------------------------------------
 
 
 	//-------------------------------------------------------------------------------
@@ -1257,7 +1277,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* PMMA_plate2anode_grid = new G4LogicalBorderSurface("PMMA_plate2anode_grid", phys_PMMA_plate, phys_anode_grid, AbsorberMaterial);
 #endif // bPMMA_plate
 
-
+#ifdef	bSingleTHGEMHole
+	G4LogicalBorderSurface* World_SingleTHGEMHole_surface = new G4LogicalBorderSurface("World_SingleTHGEMHole_surface", physiWorld, phys_SingleTHGEMHole, /*SingleTHGEMHole_optical_surface*/AbsorberMaterial);
+#endif
 
 	//THGEMs
 #ifdef bTHGEM2
