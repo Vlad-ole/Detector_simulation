@@ -616,18 +616,33 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	 //-------------------------------------------------------------------------------
 #ifdef	bSingleTHGEMHole
-	G4Tubs* solid_SingleTHGEMHole
-		= new G4Tubs("solid_SingleTHGEMHole", g()->radius_THGEM_hole, g()->radius_THGEM_hole*2, g()->width_THGEM1 / 2.0, 0. *deg, 360.*deg);
-	G4LogicalVolume* logic_SingleTHGEMHole
-		= new G4LogicalVolume(solid_SingleTHGEMHole, G4Material::GetMaterial("FR4"), "logic_SingleTHGEMHole", 0, 0, 0);
-	G4VPhysicalVolume* phys_SingleTHGEMHole = new G4PVPlacement(0,               // no rotation
+	G4Tubs* solid_SingleTHGEMHole_out
+		= new G4Tubs("solid_SingleTHGEMHole_out", g()->radius_THGEM_hole, g()->radius_THGEM_hole*2, g()->width_THGEM1 / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_SingleTHGEMHole_out
+		= new G4LogicalVolume(solid_SingleTHGEMHole_out, G4Material::GetMaterial("FR4"), "logic_SingleTHGEMHole_out", 0, 0, 0);
+	G4VPhysicalVolume* phys_SingleTHGEMHole_out = new G4PVPlacement(0,               // no rotation
 		position_SingleTHGEMHole, // at (x,y,z)
-		logic_SingleTHGEMHole,       // its logical volume
-		"phys_SingleTHGEMHole",       // its name
+		logic_SingleTHGEMHole_out,       // its logical volume
+		"phys_SingleTHGEMHole_out",       // its name
 		logicWorld,         // its mother  volume
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps
+
+	G4Tubs* solid_SingleTHGEMHole_in
+		= new G4Tubs("solid_SingleTHGEMHole_in", 0, g()->radius_THGEM_hole, g()->width_THGEM1 / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_SingleTHGEMHole_in
+		= new G4LogicalVolume(solid_SingleTHGEMHole_in, G4Material::GetMaterial("Air"), "logic_SingleTHGEMHole_in", 0, 0, 0);
+	G4VPhysicalVolume* phys_SingleTHGEMHole_in = new G4PVPlacement(0,               // no rotation
+		position_SingleTHGEMHole, // at (x,y,z)
+		logic_SingleTHGEMHole_in,       // its logical volume
+		"phys_SingleTHGEMHole_in",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+
 #endif
 	 //--------------------------------------------------------------------------------
 
@@ -1278,7 +1293,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #endif // bPMMA_plate
 
 #ifdef	bSingleTHGEMHole
-	G4LogicalBorderSurface* World_SingleTHGEMHole_surface = new G4LogicalBorderSurface("World_SingleTHGEMHole_surface", physiWorld, phys_SingleTHGEMHole, /*SingleTHGEMHole_optical_surface*/AbsorberMaterial);
+	G4LogicalBorderSurface* World_SingleTHGEMHole_out_surface = new G4LogicalBorderSurface("World_SingleTHGEMHole_out_surface", physiWorld, phys_SingleTHGEMHole_out, /*SingleTHGEMHole_optical_surface*/AbsorberMaterial);
+	G4LogicalBorderSurface* SingleTHGEMHole_in_SingleTHGEMHole_out_surface = new G4LogicalBorderSurface("SingleTHGEMHole_in_SingleTHGEMHole_out_surface", phys_SingleTHGEMHole_in, phys_SingleTHGEMHole_out, /*SingleTHGEMHole_optical_surface*/AbsorberMaterial);
+	
 #endif
 
 	//THGEMs
@@ -1326,6 +1343,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	logic_anode_grid->SetVisAttributes(AnodeGridVisAtt);
 #endif // bAnode_grid
 
+#ifdef	bSingleTHGEMHole
+	G4VisAttributes* VisAtt_SingleTHGEMHoleIn = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.8));
+	logic_SingleTHGEMHole_in->SetVisAttributes(VisAtt_SingleTHGEMHoleIn);
+#endif 
 
 #ifdef	bPMTs
 	//PMT

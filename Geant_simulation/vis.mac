@@ -11,8 +11,8 @@
 #
 /vis/sceneHandler/create VRML2FILE
 
-/vis/viewer/set/viewpointThetaPhi 0 45
-/vis/viewer/zoom 1.5
+/vis/viewer/set/viewpointThetaPhi 90 45
+/vis/viewer/zoom 1.0
 
 #
 # Disable auto refresh and quieten vis messages whilst scene and

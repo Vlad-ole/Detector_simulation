@@ -14,7 +14,7 @@ using namespace std;
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 
 
-
+//#define TEST_POSITION_DIRECTION
 //set angle distribution
 //#define DIRECT_INCIDENCE
 //#define TOP_HEMISPHERE
@@ -355,8 +355,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef TOP_HEMISPHERE
 	double phi = 2 * pi*G4UniformRand();
 	double cosTheta = G4UniformRand();
-	//double phi = 1.5 * pi;
-	//double cosTheta = 0.5;
 #endif //TOP_HEMISPHERE
 
 
@@ -372,6 +370,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//cout << "cosTheta = " << cosTheta << endl;
 	//system("pause");
 #endif //ANGLE_Cd_COLL6mm
+
+#ifdef	TEST_POSITION_DIRECTION
+	double phi = 0 * pi;
+	double cosTheta = /*0.9085*/ /*0.9075*//* -0.90*/ 0.98;
+#endif
 
 	double sinTheta = sqrt(1 - cosTheta*cosTheta);
 	particleGun->SetParticleMomentumDirection(G4ThreeVector(sinTheta*cos(phi), sinTheta*sin(phi), cosTheta));
@@ -390,6 +393,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 	double x, y, z;
 
+#ifdef	TEST_POSITION_DIRECTION
+	x = g()->x_source;
+	y = g()->y_source;
+	z = /*60*/ /*78*/ 40;
+#endif
 
 #ifdef CENTRAL_INCIDENCE
 	//x = 1.1 * mm * 1.5  ;
