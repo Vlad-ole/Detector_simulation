@@ -347,8 +347,6 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//uniform distribution
 	double phi = 2 * pi*G4UniformRand();
 	double cosTheta = (G4UniformRand() - 0.5) * 2;
-	//double cosTheta = -0.5;//test
-	//double cosTheta = G4UniformRand() - 1; //bottom hemisphere
 #endif //SPHERE_4PI	
 
 

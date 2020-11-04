@@ -1283,7 +1283,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #ifdef	bAnode_grid
 	//anode_grid
 	G4LogicalBorderSurface* physiWorld2anode_grid = new G4LogicalBorderSurface("physiWorld2anode_grid", physiWorld, phys_anode_grid, AbsorberMaterial);
-	G4LogicalBorderSurface* tracker_anode_grid2wire = new G4LogicalBorderSurface("tracker_anode_grid2wire", phys_tracker_anode_grid, phys_wire, AbsorberMaterial);
+	G4LogicalBorderSurface* tracker_anode_grid2wire = new G4LogicalBorderSurface("tracker_anode_grid2wire", phys_tracker_anode_grid, phys_wire, /*AbsorberMaterial*/ Anode_wire_unified);
 	G4LogicalBorderSurface* tracker_anode_grid2anode_grid = new G4LogicalBorderSurface("tracker_anode_grid2anode_grid", phys_tracker_anode_grid, phys_anode_grid, AbsorberMaterial);
 #endif //bAnode_grid
 
@@ -1294,7 +1294,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #ifdef	bSingleTHGEMHole
 	G4LogicalBorderSurface* World_SingleTHGEMHole_out_surface = new G4LogicalBorderSurface("World_SingleTHGEMHole_out_surface", physiWorld, phys_SingleTHGEMHole_out, /*SingleTHGEMHole_optical_surface*/AbsorberMaterial);
-	G4LogicalBorderSurface* SingleTHGEMHole_in_SingleTHGEMHole_out_surface = new G4LogicalBorderSurface("SingleTHGEMHole_in_SingleTHGEMHole_out_surface", phys_SingleTHGEMHole_in, phys_SingleTHGEMHole_out, /*SingleTHGEMHole_optical_surface*/AbsorberMaterial);
+	G4LogicalBorderSurface* SingleTHGEMHole_in_SingleTHGEMHole_out_surface = new G4LogicalBorderSurface("SingleTHGEMHole_in_SingleTHGEMHole_out_surface", phys_SingleTHGEMHole_in, phys_SingleTHGEMHole_out, /*SingleTHGEMHole_optical_surface*/FR4_unified);
 	
 #endif
 

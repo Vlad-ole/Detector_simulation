@@ -163,6 +163,7 @@ private:
 	G4OpticalSurface *MgO_unified;
 	G4OpticalSurface *TiO2_unified;
 	G4OpticalSurface *FR4_unified;
+	G4OpticalSurface *Anode_wire_unified;
 
 	G4OpticalSurface *Glass_surface;
 

@@ -61,22 +61,43 @@ void DetectorConstruction::defineSurfaces()
 
 	//-------------------------------------------------------------------------------
 	//FR4_unified
-	FR4_unified = new G4OpticalSurface("FR4_unified", unified);
+	FR4_unified = new G4OpticalSurface("FR4_unified");
 	FR4_unified->SetType(dielectric_metal);
 	FR4_unified->SetModel(unified);
-	FR4_unified->SetFinish(polished);
-	FR4_unified->SetSigmaAlpha(0.);
+	FR4_unified->SetFinish(groundair);
+	FR4_unified->SetSigmaAlpha(10);//alpha in degrees, from 0 to 90.
+
 
 	G4MaterialPropertiesTable *FR4_MaterialProperty = new G4MaterialPropertiesTable();
-	G4double FR4_Materialrefl[2] = { 1.0, 1.0 };
+	//G4double FR4_Materialrefl[2] = { 0.05, 0.05 };//https://www.cetem.gov.br/images/congressos/2008/CAC00560008.pdf Specular Reflectance Data for Quartz and Some Epoxy Resins –	Implications for Digital Image Analysis Based on Reflected Light Optical Microscopy
+	G4double FR4_Materialrefl[2] = { 0.3, 0.3 };
 	G4double FR4_Materialeff[2] = { 0, 0 };
-
+	 
 	FR4_MaterialProperty->AddProperty("REFLECTIVITY", ener, FR4_Materialrefl, 2);
 	FR4_MaterialProperty->AddProperty("EFFICIENCY", ener, FR4_Materialeff, 2);
 
 	FR4_unified->SetMaterialPropertiesTable(FR4_MaterialProperty);
 	//-------------------------------------------------------------------------------
 		
+
+	//-------------------------------------------------------------------------------
+	//Anode_Wire ()
+	Anode_wire_unified = new G4OpticalSurface("Anode_wire_unified");
+	Anode_wire_unified->SetType(dielectric_metal);
+	Anode_wire_unified->SetModel(unified);
+	Anode_wire_unified->SetFinish(polished);
+	Anode_wire_unified->SetSigmaAlpha(1);//alpha in degrees, from 0 to 90.
+	G4MaterialPropertiesTable *Anode_wire_MaterialProperty = new G4MaterialPropertiesTable();
+	G4double Anode_wire_Materialrefl[2] = { 0.5, 0.5 };//https://nvlpubs.nist.gov/nistpubs/bulletin/07/nbsbulletinv7n2p197_A2b.pdf The Reflecting Power of Various Metals
+	G4double Anode_wire_Materialeff[2] = { 0, 0 };
+	Anode_wire_MaterialProperty->AddProperty("REFLECTIVITY", ener, Anode_wire_Materialrefl, 2);
+	Anode_wire_MaterialProperty->AddProperty("EFFICIENCY", ener, Anode_wire_Materialeff, 2);
+
+	Anode_wire_unified->SetMaterialPropertiesTable(Anode_wire_MaterialProperty);
+
+	//-------------------------------------------------------------------------------
+
+
 	
 	
 	//---------------------------------------------------------------------------
