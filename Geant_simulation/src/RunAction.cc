@@ -17,7 +17,7 @@ using namespace std;
 RunAction::RunAction()
 {
 	timer = new G4Timer;
-
+	SiPM_hits_all_runs = new Hits(11 * 11);
 }
 
 RunAction::~RunAction()
@@ -26,6 +26,8 @@ RunAction::~RunAction()
 	//g()->SiPM_hits->N_reg_v.clear();
 	//g()->SiPM_hits->xpos_v.clear();
 	//g()->SiPM_hits->ypos_v.clear();
+	//cout << "RunAction::~RunAction()" << endl;
+	Print(SiPM_hits_all_runs, g()->file_PE_map_SiPM);
 }
 
 void RunAction::BeginOfRunAction(const G4Run* aRun)
@@ -169,6 +171,8 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 					max_val = g()->SiPM_hits->N_reg_v[i];
 					array_index_of_max = i;
 				}
+
+				SiPM_hits_all_runs->N_reg_v[i] += g()->SiPM_hits->N_reg_v[i];
 			}
 		}
 
@@ -182,27 +186,8 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 
 	}
 
+	Print(g()->SiPM_hits, g()->file_num_of_photons_in_event_SiPM);
 
-	/*out*/
-	{
-		//-----------------------
-		//row1
-		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[80] /*ch32*/ << "\t" << g()->SiPM_hits->N_reg_v[81]  /*ch33*/ << "\t" << g()->SiPM_hits->N_reg_v[82]  /*ch48*/ << "\t" << g()->SiPM_hits->N_reg_v[83]  /*ch49*/ << "\t" << g()->SiPM_hits->N_reg_v[84]  /*ch34*/ << endl;
-	
-		//row2
-		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[69] /*ch35*/ << "\t" << g()->SiPM_hits->N_reg_v[70]  /*ch50*/ << "\t" << g()->SiPM_hits->N_reg_v[71]  /*ch51*/ << "\t" << g()->SiPM_hits->N_reg_v[72]  /*ch36*/ << "\t" << g()->SiPM_hits->N_reg_v[73]  /*ch37*/ << endl;
-	
-		//row3
-		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[58] /*ch52*/ << "\t" << g()->SiPM_hits->N_reg_v[59]  /*ch53*/ << "\t" << g()->SiPM_hits->N_reg_v[60]  /*ch38*/ << "\t" << g()->SiPM_hits->N_reg_v[61]  /*ch39*/ << "\t" << g()->SiPM_hits->N_reg_v[62]  /*ch54*/ << endl;
-	
-		//row4
-		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[47] /*ch55*/ << "\t" << g()->SiPM_hits->N_reg_v[48]  /*ch40*/ << "\t" << g()->SiPM_hits->N_reg_v[49]  /*ch41*/ << "\t" << g()->SiPM_hits->N_reg_v[50]  /*ch56*/ << "\t" << g()->SiPM_hits->N_reg_v[51]  /*ch57*/ << endl;
-	
-		//row5
-		g()->file_num_of_photons_in_event_SiPM << g()->SiPM_hits->N_reg_v[36] /*ch42*/ << "\t" << g()->SiPM_hits->N_reg_v[37]  /*ch43*/ << "\t" << g()->SiPM_hits->N_reg_v[38]  /*ch58*/ << "\t" << g()->SiPM_hits->N_reg_v[39]  /*ch59*/ << "\t" << g()->SiPM_hits->N_reg_v[40]  /*ch44*/ << endl;
-		//-----------------------
-		g()->file_num_of_photons_in_event_SiPM << endl;
-	}
 
 	///*cacl summ N_pe*/
 	//{
@@ -231,3 +216,27 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 	//cout << " " << *timer << endl;
 }
 
+
+void RunAction::Print(Hits* hits, std::ofstream& file)
+{
+	/*out*/
+	{
+		//-----------------------
+		//row1
+		file << hits->N_reg_v[80] /*ch32*/ << "\t" << hits->N_reg_v[81]  /*ch33*/ << "\t" << hits->N_reg_v[82]  /*ch48*/ << "\t" << hits->N_reg_v[83]  /*ch49*/ << "\t" << hits->N_reg_v[84]  /*ch34*/ << endl;
+
+		//row2
+		file << hits->N_reg_v[69] /*ch35*/ << "\t" << hits->N_reg_v[70]  /*ch50*/ << "\t" << hits->N_reg_v[71]  /*ch51*/ << "\t" << hits->N_reg_v[72]  /*ch36*/ << "\t" << hits->N_reg_v[73]  /*ch37*/ << endl;
+
+		//row3
+		file << hits->N_reg_v[58] /*ch52*/ << "\t" << hits->N_reg_v[59]  /*ch53*/ << "\t" << hits->N_reg_v[60]  /*ch38*/ << "\t" << hits->N_reg_v[61]  /*ch39*/ << "\t" << hits->N_reg_v[62]  /*ch54*/ << endl;
+
+		//row4
+		file << hits->N_reg_v[47] /*ch55*/ << "\t" << hits->N_reg_v[48]  /*ch40*/ << "\t" << hits->N_reg_v[49]  /*ch41*/ << "\t" << hits->N_reg_v[50]  /*ch56*/ << "\t" << hits->N_reg_v[51]  /*ch57*/ << endl;
+
+		//row5
+		file << hits->N_reg_v[36] /*ch42*/ << "\t" << hits->N_reg_v[37]  /*ch43*/ << "\t" << hits->N_reg_v[38]  /*ch58*/ << "\t" << hits->N_reg_v[39]  /*ch59*/ << "\t" << hits->N_reg_v[40]  /*ch44*/ << endl;
+		//-----------------------
+		file << endl;
+	}
+}

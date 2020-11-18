@@ -81,14 +81,14 @@ void DetectorConstruction::defineSurfaces()
 		
 
 	//-------------------------------------------------------------------------------
-	//Anode_Wire ()
+	//Anode_Wire (Bronze-Berillium)
 	Anode_wire_unified = new G4OpticalSurface("Anode_wire_unified");
 	Anode_wire_unified->SetType(dielectric_metal);
 	Anode_wire_unified->SetModel(unified);
 	Anode_wire_unified->SetFinish(polished);
 	Anode_wire_unified->SetSigmaAlpha(1);//alpha in degrees, from 0 to 90.
 	G4MaterialPropertiesTable *Anode_wire_MaterialProperty = new G4MaterialPropertiesTable();
-	G4double Anode_wire_Materialrefl[2] = { 0.5, 0.5 };//https://nvlpubs.nist.gov/nistpubs/bulletin/07/nbsbulletinv7n2p197_A2b.pdf The Reflecting Power of Various Metals
+	G4double Anode_wire_Materialrefl[2] = { 0.5, 0.5 };//approximatly https://nvlpubs.nist.gov/nistpubs/bulletin/07/nbsbulletinv7n2p197_A2b.pdf The Reflecting Power of Various Metals
 	G4double Anode_wire_Materialeff[2] = { 0, 0 };
 	Anode_wire_MaterialProperty->AddProperty("REFLECTIVITY", ener, Anode_wire_Materialrefl, 2);
 	Anode_wire_MaterialProperty->AddProperty("EFFICIENCY", ener, Anode_wire_Materialeff, 2);

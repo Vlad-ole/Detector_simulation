@@ -54,13 +54,14 @@ int main(int argc, char** argv)
 	g()->is_Am_coll_14mm = false;
 	g()->is_Cd_standard_box = false;
 	g()->is_X_ray_coll_35mm_no_alpha = false;
+	g()->is_X_ray_coll_2mm_no_alpha = true;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
 	g()->is_alpha = false;
-	g()->is_point_source = true;
+	g()->is_point_source = false;
 
 	if ( (g()->is_Am_coll_14mm + g()->is_Cd_standard_box +
 		g()->is_X_ray_coll_35mm_no_alpha + g()->is_X_ray_coll_35mm_with_alpha + 
-		g()->is_alpha + g()->is_point_source) > 1 )
+		g()->is_alpha + g()->is_point_source + g()->is_X_ray_coll_2mm_no_alpha) > 1 )
 	{
 		cerr << "Error: choose only one source" << endl;
 		std::system("pause");
@@ -128,7 +129,7 @@ int main(int argc, char** argv)
 
 	//for
 	//TRandom3 rnd3;
-	const int N_runs = /*41*/ 1 /*1*/;
+	const int N_runs = 1000;
 	for (int i = 0; i < N_runs; i++)
 	{
 		if (i % 1 == 0 || i == (N_runs - 1))
@@ -182,6 +183,14 @@ int main(int argc, char** argv)
 			h_x = 2;
 			lambda_bar = 1.7;
 		}
+		else if (g()->is_X_ray_coll_2mm_no_alpha)
+		{
+			g()->h_c = 2;
+			g()->l_x = 112;
+			h_x = 2;
+			lambda_bar = 1.7;//25keV
+			//lambda_bar = 6.4;//40keV
+		}
 		else if (g()->is_point_source)
 		{
 			g()->x_source = 0;
@@ -220,7 +229,7 @@ int main(int argc, char** argv)
 			//cout << "l_L = " << l_L << endl;
 
 			g()->h_s = (g()->l_L + g()->l_x * g()->h_c / (g()->h_c + h_x)) / (g()->l_x / (g()->h_c + h_x)); //ожидаемый диаметр пятна
-			//cout << "h_s = " << h_s << endl;
+			cout << "h_s = " << g()->h_s << endl;
 			g()->radius = g()->h_s / 2.0;
 
 			if (g()->is_alpha)

@@ -24,6 +24,7 @@ public:
 	
 	ofstream file_num_of_photons;
 	ofstream file_num_of_photons_in_event_SiPM;
+	ofstream file_PE_map_SiPM;
 	ofstream file_coord_from_SiPM;
 	ofstream file_real_position_of_source;
 	ofstream file_total_num_of_reg_photons_SiPM;
@@ -158,6 +159,7 @@ public:
 	bool is_Cd_standard_box;
 	bool is_X_ray_coll_35mm_with_alpha;
 	bool is_X_ray_coll_35mm_no_alpha;
+	bool is_X_ray_coll_2mm_no_alpha;
 	bool is_alpha;
 	bool is_point_source;
 	vector<double> avr_N_pe;
