@@ -84,9 +84,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 //#define bTHGEM2
 #define bTHGEM1
 #define bTHGEM0
+#define bCuReflector
 #define bSingleTHGEMHole
-#define bFieldTHGEM
-//#define bFieldWires
+//#define bFieldTHGEM
+#define bFieldWires
 #define	bLArOuter 
 #define bLArInner
 #define bCathode
@@ -167,6 +168,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const double z_size_tracker_THGEM2 = 500 * um;
 	const double z_tracker_THGEM2_center = 77.2 * mm + z_size_tracker_THGEM2 / 2.0;
 
+	//solid_tracker_THGEM_Cu_reflector
+	const double z_size_tracker_THGEM_Cu_reflector = z_size_tracker_THGEM2/10.0;
+
 	//THGEM0
 	const double z_THGEM0_bottom = 50.2 * mm;
 
@@ -213,7 +217,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//LAr_inner
 	const double x_size_LAr_inner = x_size_Insulator_box_inner;
 	const double y_size_LAr_inner = y_size_Insulator_box_inner;
-	const double z_size_LAr_inner = z_THGEM0_bottom + z_size_tracker_THGEM2 + 4 * mm;
+	const double z_size_LAr_inner = z_THGEM0_bottom + z_size_tracker_THGEM2 + /*4 * mm*/ (22 - g()->EL_gap_thickness);
 
 	//LArOuter
 	const double x_size_LAr_outer_in = x_size_Insulator_box_outer;
@@ -364,6 +368,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_tracker_THGEM1 = G4ThreeVector(0, 0, 72.7 * mm + z_size_tracker_THGEM2 / 2.0);
 	const G4ThreeVector &position_tracker_THGEM0 = G4ThreeVector(0, 0, z_THGEM0_bottom + z_size_tracker_THGEM2 / 2.0 - z_size_LAr_inner / 2.0);
 
+	const G4ThreeVector &position_tracker_THGEM0_Cu_reflector = G4ThreeVector(0, 0, 0);
+	const G4ThreeVector &position_tracker_THGEM1_Cu_reflector = G4ThreeVector(0, 0, 0);
+	
 	const G4ThreeVector &position_Insulator_box = G4ThreeVector(0, 0, z_Insulator_box_center);
 
 	const G4ThreeVector &position_LAr_inner = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
@@ -1021,6 +1028,32 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalVolume* logic_tracker_THGEM0_LAr
 		= new G4LogicalVolume(solid_tracker_THGEM2, G4Material::GetMaterial("LAr"), "logic_tracker_THGEM0_LAr", 0, 0, 0);
 
+#ifdef bCuReflector
+	G4Box* solid_tracker_THGEM_Cu_reflector
+		= new G4Box("solid_tracker_THGEM_Cu_reflector", x_size_tracker_THGEM2 / 2.0, y_size_tracker_THGEM2 / 2.0, z_size_tracker_THGEM_Cu_reflector / 2.0);
+	G4LogicalVolume* logic_tracker_THGEM_Cu_reflector
+		= new G4LogicalVolume(solid_tracker_THGEM_Cu_reflector, G4Material::GetMaterial("FR4"), "logic_tracker_THGEM_Cu_reflector", 0, 0, 0);
+	
+	G4VPhysicalVolume* phys_tracker_THGEM0_Cu_reflector = new G4PVPlacement(0,               // no rotation
+		position_tracker_THGEM0_Cu_reflector, // at (x,y,z)
+		logic_tracker_THGEM_Cu_reflector,       // its logical volume
+		"phys_tracker_THGEM0_Cu_reflector",       // its name
+		logic_tracker_THGEM0_LAr,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+	G4VPhysicalVolume* phys_tracker_THGEM1_Cu_reflector = new G4PVPlacement(0,               // no rotation
+		position_tracker_THGEM1_Cu_reflector, // at (x,y,z)
+		logic_tracker_THGEM_Cu_reflector,       // its logical volume
+		"phys_tracker_THGEM1_Cu_reflector",       // its name
+		logic_tracker_THGEM2,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+#endif //bCuReflector
+	
 #ifdef bTHGEM0
 	G4VPhysicalVolume* phys_tracker_THGEM0 = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM0, // at (x,y,z)
@@ -1073,6 +1106,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalVolume* logic_THGEM_without_holes
 		= new G4LogicalVolume(solid_THGEM_without_holes, G4Material::GetMaterial("FR4"), "logic_THGEM_without_holes", 0, 0, 0);
 
+	
 #ifdef bTHGEM0
 	G4VPhysicalVolume* phys_THGEM0_without_holes = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM0, // at (x,y,z)
@@ -1259,6 +1293,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* Insulator_box2bCathode = new G4LogicalBorderSurface("Insulator_box2bCathode", phys_Insulator_box, phys_bCathode, AbsorberMaterial);
 #endif //bInsulator_box
 
+#ifdef bCuReflector
+	G4LogicalSkinSurface* CuReflector_THGEM0_surface = new G4LogicalSkinSurface("CuReflector_THGEM0_surface", logic_tracker_THGEM_Cu_reflector, Cu_THGEM);
+#endif
+
 
 #ifdef bPMTs
 	//________________________________________________
@@ -1343,6 +1381,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	logic_anode_grid->SetVisAttributes(AnodeGridVisAtt);
 #endif // bAnode_grid
 
+#ifdef bCuReflector
+	G4VisAttributes* CuReflector_VisAtt = new G4VisAttributes(G4Colour(0.0, 1.0, 1.0, 0.8));
+	logic_tracker_THGEM_Cu_reflector->SetVisAttributes(CuReflector_VisAtt);
+#endif
+
 #ifdef	bSingleTHGEMHole
 	G4VisAttributes* VisAtt_SingleTHGEMHoleIn = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.8));
 	logic_SingleTHGEMHole_in->SetVisAttributes(VisAtt_SingleTHGEMHoleIn);
@@ -1357,19 +1400,25 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	logic_PMT3->SetVisAttributes(PMT_VisAtt);
 #endif //bPMTs
 
+#ifdef bSiPM
+	trackerLV->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 0.5, 0.5, 0.8)));
+#endif //bSiPM
 
 
 	////THGEM
-	G4VisAttributes* tracker_THGEM2_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.8));
+	G4VisAttributes* tracker_THGEM2_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, /*0.8*/0.1));
 	logic_tracker_THGEM2->SetVisAttributes(tracker_THGEM2_VisAtt);
 	logic_tracker_THGEM0_LAr->SetVisAttributes(tracker_THGEM2_VisAtt);
+	//logic_tracker_THGEM0_LAr->SetVisAttributes(G4VisAttributes::GetInvisible());
+	
 	G4VisAttributes* THGEM_without_holes_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.5, 0.0, 0.8));
 	logic_THGEM_without_holes->SetVisAttributes(THGEM_without_holes_VisAtt);
-
+	//logic_THGEM_without_holes->SetVisAttributes(G4VisAttributes::GetInvisible());
 
 	//LAr
 	G4VisAttributes* LAr_inside_VisAtt = new G4VisAttributes(G4Colour(0.0, 0.0, 1.0, 0.3));
 	logic_LAr_inner->SetVisAttributes(LAr_inside_VisAtt);
+	//logic_LAr_inner->SetVisAttributes(G4VisAttributes::GetInvisible());
 
 #ifdef bLArOuter
 	logic_LAr_outer->SetVisAttributes(LAr_inside_VisAtt);

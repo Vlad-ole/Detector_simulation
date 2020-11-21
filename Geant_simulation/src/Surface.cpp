@@ -70,7 +70,7 @@ void DetectorConstruction::defineSurfaces()
 
 	G4MaterialPropertiesTable *FR4_MaterialProperty = new G4MaterialPropertiesTable();
 	//G4double FR4_Materialrefl[2] = { 0.05, 0.05 };//https://www.cetem.gov.br/images/congressos/2008/CAC00560008.pdf Specular Reflectance Data for Quartz and Some Epoxy Resins –	Implications for Digital Image Analysis Based on Reflected Light Optical Microscopy
-	G4double FR4_Materialrefl[2] = { 0.3, 0.3 };
+	G4double FR4_Materialrefl[2] = { 0.1, 0.1 };
 	G4double FR4_Materialeff[2] = { 0, 0 };
 	 
 	FR4_MaterialProperty->AddProperty("REFLECTIVITY", ener, FR4_Materialrefl, 2);
@@ -97,7 +97,21 @@ void DetectorConstruction::defineSurfaces()
 
 	//-------------------------------------------------------------------------------
 
+	//-------------------------------------------------------------------------------
+	//Cu_THGEM
+	Cu_THGEM = new G4OpticalSurface("Anode_wire_unified");
+	Cu_THGEM->SetType(dielectric_metal);
+	Cu_THGEM->SetModel(unified);
+	Cu_THGEM->SetFinish(polished);
+	Cu_THGEM->SetSigmaAlpha(0.1);//alpha in degrees, from 0 to 90.
+	G4MaterialPropertiesTable *Cu_THGEM_MaterialProperty = new G4MaterialPropertiesTable();
+	G4double Cu_THGEM_Materialrefl[2] = { 0.5, 0.5 };//
+	G4double Cu_THGEM_Materialeff[2] = { 0, 0 };
+	Cu_THGEM_MaterialProperty->AddProperty("REFLECTIVITY", ener, Cu_THGEM_Materialrefl, 2);
+	Cu_THGEM_MaterialProperty->AddProperty("EFFICIENCY", ener, Cu_THGEM_Materialeff, 2);
 
+	Cu_THGEM->SetMaterialPropertiesTable(Anode_wire_MaterialProperty);
+	//-------------------------------------------------------------------------------
 	
 	
 	//---------------------------------------------------------------------------
@@ -240,8 +254,8 @@ void DetectorConstruction::defineSurfaces()
 
 
 	SiPM_MaterialProperty->AddProperty("REFLECTIVITY", ener, SiPM_refl, 2);
-	//SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);//dummy
-	SiPM_MaterialProperty->AddProperty("EFFICIENCY", SiPM_EFFICIENCY->get_x_array(), SiPM_EFFICIENCY->get_y_array(), SiPM_EFFICIENCY->get_array_size());
+	SiPM_MaterialProperty->AddProperty("EFFICIENCY", ener, cathodeeff, 2);//dummy
+	//SiPM_MaterialProperty->AddProperty("EFFICIENCY", SiPM_EFFICIENCY->get_x_array(), SiPM_EFFICIENCY->get_y_array(), SiPM_EFFICIENCY->get_array_size());
 
 	SiPM_OpticalSurface->SetMaterialPropertiesTable(SiPM_MaterialProperty);
 	//--------------------------------------------------------------------------------

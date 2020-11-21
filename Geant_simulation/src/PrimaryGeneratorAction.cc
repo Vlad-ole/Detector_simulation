@@ -353,6 +353,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef TOP_HEMISPHERE
 	double phi = 2 * pi*G4UniformRand();
 	double cosTheta = G4UniformRand();
+	//double phi = 0;
+	//double cosTheta = -0.90;
 #endif //TOP_HEMISPHERE
 
 
@@ -491,9 +493,16 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 
 #ifdef EL_GAP
-	x = g()->x_source;
-	y = g()->y_source;
-	z = 54.7 + (72.7 - 54.7)*G4UniformRand();
+	//x = g()->x_source;
+	//y = g()->y_source;
+	z = (72.7 - g()->EL_gap_thickness) + g()->EL_gap_thickness*G4UniformRand();
+	//z = 54.7 + (72.7 - 54.7)*G4UniformRand();
+	//double EL_gap_thickness = 10;
+
+	x =0 /*(G4UniformRand() - 0.5) * 2 * 3*/;
+	y =0 /*(G4UniformRand() - 0.5) * 2 * 3*/ ;
+	//z = /*30*/ /*53.0*/ /*54.7*/ /*74.0*/ 80.25;
+	
 #endif //EL_GAP
 
 

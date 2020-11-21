@@ -24,7 +24,8 @@
 //#define bTHGEM2
 #define bTHGEM1
 #define bTHGEM0
-
+#define Cu_REFLECTION
+//#define bPASSTHROUGHTHGEMsREFLECTION
 
 SteppingAction::SteppingAction(DetectorConstruction* myDC, EventAction* myEA)
 	:myDetector(myDC), eventAction(myEA)
@@ -161,7 +162,9 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 
 #endif // bTHGEM0
 
+				#ifdef bPASSTHROUGHTHGEMsREFLECTION
 				ReturnFromSingleTHGEMHole(theStep);
+				#endif //bPASSTHROUGHTHGEMsREFLECTION
 				
 
 				switch (boundaryStatus)
@@ -398,7 +401,8 @@ void SteppingAction::ReturnFromSingleTHGEMHole(const G4Step* theStep)
 //
 //}
 
-//v2
+//#ifndef bPASSTHROUGHTHGEMsREFLECTION
+////v2
 //void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4double z_size)
 //{
 //	//change MomentumDirection and position for optical photon incidents on THGEM
@@ -511,7 +515,137 @@ void SteppingAction::ReturnFromSingleTHGEMHole(const G4Step* theStep)
 //	}
 //
 //}
+//#endif //!bPASSTHROUGHTHGEMsREFLECTION
 
+#ifndef bPASSTHROUGHTHGEMsREFLECTION
+//v2.2
+void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4double z_size)
+{
+	//change MomentumDirection and position for optical photon incidents on THGEM
+
+	const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
+	if (pos_i.z() > (z_pos - delta_z) && pos_i.z() < (z_pos + delta_z))
+	{
+		//get
+		const G4ThreeVector& MomentumDirection_i = theStep->GetTrack()->GetMomentumDirection();
+		const G4ThreeVector& Position_i = theStep->GetTrack()->GetPosition();
+
+		//THGEM CERN 28%
+		const double step = 0.9 * mm;
+		//const double radius = 0.25 * mm;
+
+		////THGEM ELECROCONNECT 75%
+		//const double step = 1.1 * mm;
+		//const double radius = 0.5 * mm;
+
+		const double step_y = step * sqrt(3) / 2;
+		double y_center;
+		double x_center;
+
+		double x = Position_i.x();
+		double y = Position_i.y();
+		double x_abs = fabs(Position_i.x());
+		double y_abs = fabs(Position_i.y());
+
+		// the nearest y_center
+		if (y_abs < step_y / 2)
+		{
+			y_center = 0;
+		}
+		else
+		{
+			y_center = ((int)((y_abs - step_y / 2) / step_y) + 1) * step_y * y / y_abs;
+		}
+
+		//the nearest x_center
+		if (y_abs < step_y / 2)
+		{
+			int n_x = (int)(x / step);
+			int sign = x > 0 ? 1 : -1;
+			x_center = (n_x + sign * 0.5) * step;
+		}
+		else
+		{
+			if (((int)((y_abs - (step_y / 2)) / (step_y)) + 1) % 2 == 1 /*if y row is odd*/)
+			{
+				if (x_abs < step / 2.0)
+				{
+					x_center = 0;
+				}
+				else
+				{
+					int n_x = (x_abs - step / 2) / step;
+					int sign = x > 0 ? 1 : -1;
+					x_center = (n_x + 1) * step * sign;
+				}
+			}
+			else
+			{
+				int n_x = (int)(x / step);
+				int sign = x > 0 ? 1 : -1;
+				x_center = (n_x + sign * 0.5) * step;
+			}
+		}
+
+		//kill or allow photon to pass
+		double distance = sqrt(pow(x - x_center, 2.0) + pow(y - y_center, 2.0));
+		if (distance < g()->radius_THGEM_hole)
+		{
+			//set
+			//const G4ThreeVector& MomentumDirection_f = G4ThreeVector(0, 1, 0);
+			double xm = MomentumDirection_i.x();
+			double ym = MomentumDirection_i.y();
+			double zm = MomentumDirection_i.z();
+
+			/*const double dx = xm * 0.5*mm / sqrt(xm * xm + zm * zm);//probably, incorrect
+			const double dy = ym * 0.5*mm / sqrt(ym * ym + zm * zm);*/
+
+			const double sign = zm > 0 ? 1 : -1;
+			const double dx = z_size * xm / (zm*sign);//it should be correct
+			const double dy = z_size * ym / (zm*sign);
+			
+			const G4ThreeVector& Position_f = G4ThreeVector(x + dx, y + dy, (z_pos + z_size*sign));
+
+			distance = sqrt(pow(Position_f.x() - x_center, 2.0) + pow(Position_f.y() - y_center, 2.0));
+
+			cout << "center: " << x_center << "\t" << y_center << "\t" << endl;
+			cout << "dxy: " << dx << "\t" << dy << endl;
+			cout << "Position_f: " << Position_f.x() << "\t" << Position_f.y() << endl;
+			cout << "distance: " << distance << endl;
+			if (distance < g()->radius_THGEM_hole)
+			{
+				theStep->GetTrack()->SetPosition(Position_f);
+				//theStep->GetTrack()->SetMomentumDirection(MomentumDirection_i); // I see strange result and don't know why
+				//cout << "InHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
+				cout << "InHole !" << endl;
+				//cout << "InHole !" << "Position_f.x() = " << Position_f.x() << " \t Position_f.y()  = " << Position_f.y() <<
+					//" \t Position_f.z()  = " << Position_f.z() << endl;
+			}
+			else
+			{
+				theStep->GetTrack()->SetTrackStatus(fStopAndKill);
+				//system("pause");
+			}
+
+		}
+		else
+		{
+			cout << "OutHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
+			cout << "distance: " << distance << endl;
+			#ifndef Cu_REFLECTION
+			theStep->GetTrack()->SetTrackStatus(fStopAndKill);
+			#endif //Cu_REFLECTION
+		}
+
+
+
+	}
+
+}
+#endif //!bPASSTHROUGHTHGEMsREFLECTION
+
+
+#ifdef bPASSTHROUGHTHGEMsREFLECTION
 //v3 
 void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4double z_size)
 {
@@ -630,3 +764,4 @@ void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4dou
 	}
 
 }
+#endif // bPASSTHROUGHTHGEMsREFLECTION

@@ -87,7 +87,7 @@ void DetectorConstruction::defineMaterials()
 	//FR4
 
 	//I don't know a real chemical composition. So it's dummy
-	G4Material* FR4 = new G4Material("FR4", 1.850*g / cm3 * (1 - 0.28) /*THGEM transparence*/, 3);	
+	G4Material* FR4 = new G4Material("FR4", 1.850*g / cm3 /* * (1 - 0.28)*/ /*THGEM transparence*/, 3);	
 	FR4->AddElement(C, 5);
 	FR4->AddElement(O, 2);
 	FR4->AddElement(H, 8);

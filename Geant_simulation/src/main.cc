@@ -47,6 +47,8 @@ int main(int argc, char** argv)
 	g()->width_THGEM0 = 0.5;
 	g()->xyz_position_SingleTHGEMHole = 150;
 
+	g()->EL_gap_thickness = 18;
+
 	g()->is_optical_gamma = true;
 	g()->is_gamma = false;
 
@@ -160,6 +162,7 @@ int main(int argc, char** argv)
 		//-------------------------------------------
 		double h_x = 0; // диаметр источника [mm]
 		double lambda_bar;//средн€€ глубина поглощени€ в LAr гамма квантов [mm]
+		
 		// lambda_bar(88 keV) = 33.5 mm
 		// lambda_bar(60 keV) = 17.2 mm
 		// lambda_bar(25 keV) = 1.7 mm
@@ -238,16 +241,16 @@ int main(int argc, char** argv)
 				g()->z_source = 2;
 			}
 
-
-
+			double x_offset = 0;
+			double y_offset = 0;
 			while (true)
 			{
 				double x_tmp = (G4UniformRand() - 0.5) * 2 * g()->radius;
 				double y_tmp = (G4UniformRand() - 0.5) * 2 * g()->radius;
 				if ( x_tmp*x_tmp + y_tmp*y_tmp < (g()->radius)*(g()->radius) )
 				{
-					g()->x_source = x_tmp;
-					g()->y_source = y_tmp;					
+					g()->x_source = x_tmp + x_offset;
+					g()->y_source = y_tmp + y_offset;
 					break;
 				}
 			}

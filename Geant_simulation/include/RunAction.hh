@@ -22,6 +22,8 @@ class RunAction : public G4UserRunAction
   private:
     G4Timer* timer;
 	Hits* SiPM_hits_all_runs;
+	Hits* SiPM_hits_all_runs_LRF;
+	int N_runs_used_for_LRF;
 };
 
 #endif

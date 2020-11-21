@@ -18,6 +18,8 @@ RunAction::RunAction()
 {
 	timer = new G4Timer;
 	SiPM_hits_all_runs = new Hits(11 * 11);
+	SiPM_hits_all_runs_LRF = new Hits(11 * 11);
+	N_runs_used_for_LRF = 0;
 }
 
 RunAction::~RunAction()
@@ -28,6 +30,8 @@ RunAction::~RunAction()
 	//g()->SiPM_hits->ypos_v.clear();
 	//cout << "RunAction::~RunAction()" << endl;
 	Print(SiPM_hits_all_runs, g()->file_PE_map_SiPM);
+	Print(SiPM_hits_all_runs_LRF, g()->file_LRF_SiPM);	
+	g()->file_LRF_SiPM << "\n N_runs_used_for_LRF = " << N_runs_used_for_LRF << endl;
 }
 
 void RunAction::BeginOfRunAction(const G4Run* aRun)
@@ -173,8 +177,21 @@ void RunAction::EndOfRunAction(const G4Run* aRun)
 				}
 
 				SiPM_hits_all_runs->N_reg_v[i] += g()->SiPM_hits->N_reg_v[i];
+
+				
 			}
 		}
+
+		//find "experimental" LRF
+		if (array_index_of_max == 60 /*if the maximum number of PE was detected by cental SiPM(ch38)*/)
+		{
+			N_runs_used_for_LRF++;
+			for (int i = 0; i < g()->SiPM_hits->N_reg_v.size(); i++)
+			{
+				SiPM_hits_all_runs_LRF->N_reg_v[i] += g()->SiPM_hits->N_reg_v[i];
+			}
+		}
+
 
 		if (array_index_of_max >= 0)
 		{
