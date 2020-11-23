@@ -74,9 +74,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	defineMaterials(); // внешн€€ функци€. «десь определ€ютс€ различные материалы.
 	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
 
+
 //z >= 0
 #define bSiPM
-#define bPMMA_plate
+#define bPMMA_plate 
 #define bAnode_grid
 #define bInsulator_box
 #define bPMTs
@@ -165,14 +166,14 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//tracker THGEM2 (active region with holes)
 	const double x_size_tracker_THGEM2 = 100 * mm;
 	const double y_size_tracker_THGEM2 = 100 * mm;
-	const double z_size_tracker_THGEM2 = 500 * um;
+	const double z_size_tracker_THGEM2 = g()->width_THGEM1 /*0.4*/ /*500 * um*/;
 	const double z_tracker_THGEM2_center = 77.2 * mm + z_size_tracker_THGEM2 / 2.0;
 
 	//solid_tracker_THGEM_Cu_reflector
 	const double z_size_tracker_THGEM_Cu_reflector = z_size_tracker_THGEM2/10.0;
 
 	//THGEM0
-	const double z_THGEM0_bottom = 50.2 * mm;
+	//const double z_THGEM0_bottom = 50.2 * mm;
 
 	//THGEM_without_holes
 	const double x_size_THGEM_without_holes = size_anode_grid;
@@ -217,7 +218,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//LAr_inner
 	const double x_size_LAr_inner = x_size_Insulator_box_inner;
 	const double y_size_LAr_inner = y_size_Insulator_box_inner;
-	const double z_size_LAr_inner = z_THGEM0_bottom + z_size_tracker_THGEM2 + /*4 * mm*/ (22 - g()->EL_gap_thickness);
+	const double z_size_LAr_inner = g()->z_bottom_THGEM0 + z_size_tracker_THGEM2 + /*4 * mm*/ (22 - g()->EL_gap_thickness);
 
 	//LArOuter
 	const double x_size_LAr_outer_in = x_size_Insulator_box_outer;
@@ -365,8 +366,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const G4ThreeVector &position_PMMA_plate = G4ThreeVector(0, 0, z_PMMA_plate_center);
 
 	const G4ThreeVector &position_tracker_THGEM2 = G4ThreeVector(0, 0, z_tracker_THGEM2_center);
-	const G4ThreeVector &position_tracker_THGEM1 = G4ThreeVector(0, 0, 72.7 * mm + z_size_tracker_THGEM2 / 2.0);
-	const G4ThreeVector &position_tracker_THGEM0 = G4ThreeVector(0, 0, z_THGEM0_bottom + z_size_tracker_THGEM2 / 2.0 - z_size_LAr_inner / 2.0);
+	const G4ThreeVector &position_tracker_THGEM1 = G4ThreeVector(0, 0, g()->z_bottom_THGEM1 + z_size_tracker_THGEM2 / 2.0);
+	const G4ThreeVector &position_tracker_THGEM0 = G4ThreeVector(0, 0, g()->z_bottom_THGEM0 + z_size_tracker_THGEM2 / 2.0 - z_size_LAr_inner / 2.0);
 
 	const G4ThreeVector &position_tracker_THGEM0_Cu_reflector = G4ThreeVector(0, 0, 0);
 	const G4ThreeVector &position_tracker_THGEM1_Cu_reflector = G4ThreeVector(0, 0, 0);

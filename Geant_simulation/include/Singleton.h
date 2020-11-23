@@ -170,6 +170,7 @@ public:
 	double width_THGEM0;
 	double xyz_position_SingleTHGEMHole;
 	double EL_gap_thickness;
-
+	double z_bottom_THGEM0;
+	double z_bottom_THGEM1;
 
 };

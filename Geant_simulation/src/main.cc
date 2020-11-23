@@ -43,11 +43,13 @@ int main(int argc, char** argv)
 		
 	g()->radius_THGEM_hole = 0.25;//THGEM CERN 28%
 	//g()->radius_THGEM_hole = 0.5;//THGEM CERN 75%
-	g()->width_THGEM1 = 0.5;
-	g()->width_THGEM0 = 0.5;
+	g()->width_THGEM1 = 0.4;
+	g()->width_THGEM0 = g()->width_THGEM1;
 	g()->xyz_position_SingleTHGEMHole = 150;
 
 	g()->EL_gap_thickness = 18;
+	g()->z_bottom_THGEM0 = 50.2 + (0.5 - g()->width_THGEM1);
+	g()->z_bottom_THGEM1 = /*72.7*/ g()->z_bottom_THGEM0 + g()->width_THGEM0 + 22;
 
 	g()->is_optical_gamma = true;
 	g()->is_gamma = false;
@@ -232,7 +234,7 @@ int main(int argc, char** argv)
 			//cout << "l_L = " << l_L << endl;
 
 			g()->h_s = (g()->l_L + g()->l_x * g()->h_c / (g()->h_c + h_x)) / (g()->l_x / (g()->h_c + h_x)); //ожидаемый диаметр пятна
-			cout << "h_s = " << g()->h_s << endl;
+			//cout << "h_s = " << g()->h_s << endl;
 			g()->radius = g()->h_s / 2.0;
 
 			if (g()->is_alpha)

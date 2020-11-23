@@ -102,7 +102,7 @@ void DetectorConstruction::defineSurfaces()
 	Cu_THGEM = new G4OpticalSurface("Anode_wire_unified");
 	Cu_THGEM->SetType(dielectric_metal);
 	Cu_THGEM->SetModel(unified);
-	Cu_THGEM->SetFinish(polished);
+	Cu_THGEM->SetFinish(ground);
 	Cu_THGEM->SetSigmaAlpha(0.1);//alpha in degrees, from 0 to 90.
 	G4MaterialPropertiesTable *Cu_THGEM_MaterialProperty = new G4MaterialPropertiesTable();
 	G4double Cu_THGEM_Materialrefl[2] = { 0.5, 0.5 };//

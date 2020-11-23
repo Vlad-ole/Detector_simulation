@@ -25,7 +25,7 @@
 #define bTHGEM1
 #define bTHGEM0
 #define Cu_REFLECTION
-//#define bPASSTHROUGHTHGEMsREFLECTION
+#define bPASSTHROUGHTHGEMsREFLECTION
 
 SteppingAction::SteppingAction(DetectorConstruction* myDC, EventAction* myEA)
 	:myDetector(myDC), eventAction(myEA)
@@ -123,7 +123,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM1")
 				{
 					const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
-					const double z_bottom = 72.7;
+					const double z_bottom = g()->z_bottom_THGEM1 /*72.7*/;
 					const double z_top = z_bottom + g()->width_THGEM1;
 					if ( pos_i.z() < (z_top + delta_z)*mm &&  pos_i.z() > (z_top - delta_z)*mm )
 					{
@@ -146,7 +146,7 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 				if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_tracker_THGEM0")
 				{
 						const G4ThreeVector& pos_i = theStep->GetPostStepPoint()->GetPosition();
-						const double z_bottom = 50.2;
+						const double z_bottom = g()->z_bottom_THGEM0 /*50.2*/;
 						const double z_top = z_bottom + g()->width_THGEM0;
 						if ( pos_i.z() < (z_top + delta_z)*mm &&  pos_i.z() > (z_top - delta_z)*mm )
 						{
@@ -608,16 +608,16 @@ void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4dou
 
 			distance = sqrt(pow(Position_f.x() - x_center, 2.0) + pow(Position_f.y() - y_center, 2.0));
 
-			cout << "center: " << x_center << "\t" << y_center << "\t" << endl;
-			cout << "dxy: " << dx << "\t" << dy << endl;
-			cout << "Position_f: " << Position_f.x() << "\t" << Position_f.y() << endl;
-			cout << "distance: " << distance << endl;
+			//cout << "center: " << x_center << "\t" << y_center << "\t" << endl;
+			//cout << "dxy: " << dx << "\t" << dy << endl;
+			//cout << "Position_f: " << Position_f.x() << "\t" << Position_f.y() << endl;
+			//cout << "distance: " << distance << endl;
 			if (distance < g()->radius_THGEM_hole)
 			{
 				theStep->GetTrack()->SetPosition(Position_f);
 				//theStep->GetTrack()->SetMomentumDirection(MomentumDirection_i); // I see strange result and don't know why
 				//cout << "InHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
-				cout << "InHole !" << endl;
+				//cout << "InHole !" << endl;
 				//cout << "InHole !" << "Position_f.x() = " << Position_f.x() << " \t Position_f.y()  = " << Position_f.y() <<
 					//" \t Position_f.z()  = " << Position_f.z() << endl;
 			}
@@ -630,8 +630,8 @@ void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4dou
 		}
 		else
 		{
-			cout << "OutHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
-			cout << "distance: " << distance << endl;
+			//cout << "OutHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
+			//cout << "distance: " << distance << endl;
 			#ifndef Cu_REFLECTION
 			theStep->GetTrack()->SetTrackStatus(fStopAndKill);
 			#endif //Cu_REFLECTION
@@ -756,7 +756,11 @@ void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4dou
 		else
 		{
 			//cout << "OutHole !" << "x_center = " << x_center << " \t y_center = " << y_center << endl;
+			//theStep->GetTrack()->SetTrackStatus(fStopAndKill);
+
+		#ifndef Cu_REFLECTION
 			theStep->GetTrack()->SetTrackStatus(fStopAndKill);
+		#endif //Cu_REFLECTION
 		}
 
 
