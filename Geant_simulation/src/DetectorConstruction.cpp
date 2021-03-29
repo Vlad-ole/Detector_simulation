@@ -77,21 +77,21 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 //z >= 0
 #define bSiPM
-#define bPMMA_plate 
-#define bAnode_grid
-#define bInsulator_box
-#define bPMTs
+//#define bPMMA_plate 
+//#define bAnode_grid
+//#define bInsulator_box
+//#define bPMTs
 //#define bWLS
 //#define bTHGEM2
 #define bTHGEM1
-#define bTHGEM0
-#define bCuReflector
-#define bSingleTHGEMHole
+//#define bTHGEM0
+//#define bCuReflector
+//#define bSingleTHGEMHole
 //#define bFieldTHGEM
-#define bFieldWires
-#define	bLArOuter 
+//#define bFieldWires
+//#define	bLArOuter 
 #define bLArInner
-#define bCathode
+//#define bCathode
 
 //z < 0
 //#define bLArInactive
@@ -141,7 +141,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	const int Nx_SiPMs = 11;
 	const int Ny_SiPMs = 11;
 	const double thickness_SiPM = 1 * nm;
-	const double size_SiPM = 6 * mm;
+	const double size_SiPM = 6.0 * mm;
 	const double chamberSpacing = 10 * mm;
 	const double z_SiPM_bottom = z_anode_grid_bottom + thickness_anode_grid + z_size_PMMA_plate + (0.1*mm /*small gap between PMMA and SiPM*/) /* 85.7*mm in case of two THGEM*/;
 	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
@@ -1273,6 +1273,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//---------------------------------------------------------------------------
 	//установка поверхностей
 
+	G4LogicalBorderSurface* LAr_inner2physiWorld = new G4LogicalBorderSurface("LAr_inner2physiWorld", phys_LAr_inner, physiWorld, LAr_OpticalSurface);
+	G4LogicalBorderSurface* physiWorld2LAr_inner = new G4LogicalBorderSurface("physiWorld2LAr_inner", physiWorld, phys_LAr_inner, LAr_OpticalSurface);
+
 #ifdef bSiPM
 	//SiPM
 	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("tracker2SiPM", phys_tracker, phys_SiPM, SiPM_OpticalSurface /*silicaCathodeMaterial*/);
@@ -1321,7 +1324,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #ifdef	bAnode_grid
 	//anode_grid
-	G4LogicalBorderSurface* physiWorld2anode_grid = new G4LogicalBorderSurface("physiWorld2anode_grid", physiWorld, phys_anode_grid, AbsorberMaterial);
+	G4LogicalBorderSurface* physiWorld2anode_grid = new G4LogicalBorderSurface("physiWorld2anode_grid", physiWorld, phys_anode_grid, /*AbsorberMaterial*/ FR4_unified);
 	G4LogicalBorderSurface* tracker_anode_grid2wire = new G4LogicalBorderSurface("tracker_anode_grid2wire", phys_tracker_anode_grid, phys_wire, /*AbsorberMaterial*/ Anode_wire_unified);
 	G4LogicalBorderSurface* tracker_anode_grid2anode_grid = new G4LogicalBorderSurface("tracker_anode_grid2anode_grid", phys_tracker_anode_grid, phys_anode_grid, AbsorberMaterial);
 #endif //bAnode_grid
@@ -1369,6 +1372,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_top3 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_top3", phys_LAr_inner, phys_FieldWire_top3, AbsorberMaterial);
 	G4LogicalBorderSurface* phys_LAr_inner2phys_FieldWire_top4 = new G4LogicalBorderSurface("phys_LAr_inner2phys_FieldWire_top4", phys_LAr_inner, phys_FieldWire_top4, AbsorberMaterial);
 #endif
+
+
 
 
 	//------------------------------------------------------------------------------

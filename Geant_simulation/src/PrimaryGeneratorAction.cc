@@ -345,11 +345,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	
 #ifdef	SPHERE_4PI
 	//uniform distribution
-	double phi = 2 * pi*G4UniformRand();
-	double cosTheta = (G4UniformRand() - 0.5) * 2;
+	//double phi = 2 * pi*G4UniformRand();
+	//double cosTheta = (G4UniformRand() - 0.5) * 2;
 	
-	//double phi = 0;
-	//double cosTheta = 1.0;
+	double phi = 0;
+	double cosTheta = 0.75;
 #endif //SPHERE_4PI	
 
 
@@ -496,13 +496,13 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 
 #ifdef EL_GAP
-	x = g()->x_source;
-	y = g()->y_source;
-	z = (g()->z_bottom_THGEM1 - g()->EL_gap_thickness) + g()->EL_gap_thickness*G4UniformRand();
+	//x = g()->x_source;
+	//y = g()->y_source;
+	//z = (g()->z_bottom_THGEM1 - g()->EL_gap_thickness) + g()->EL_gap_thickness*G4UniformRand();
 	
-	//x = /*0.25*/ (G4UniformRand() - 0.5) * 2 * 3;
-	//y = /*0*/ (G4UniformRand() - 0.5) * 2 * 3;
-	//z = 30 /*53.0*/ /*54.7*/ /*74.0*/ /*80.25*/;
+	x = /*0.25*/ (G4UniformRand() - 0.5) * 2 * 3 - 15;
+	y = /*0*/ (G4UniformRand() - 0.5) * 2 * 3;
+	z = /*30*/ /*53.0*/ /*54.7*/ /*56*/ 63.2 /*74.0*/ /*80.25*/;
 	
 #endif //EL_GAP
 

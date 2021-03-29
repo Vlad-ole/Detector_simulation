@@ -133,7 +133,7 @@ int main(int argc, char** argv)
 
 	//for
 	//TRandom3 rnd3;
-	const int N_runs = 1000;
+	const int N_runs = 1;
 	for (int i = 0; i < N_runs; i++)
 	{
 		if (i % 1 == 0 || i == (N_runs - 1))
@@ -193,8 +193,8 @@ int main(int argc, char** argv)
 			g()->h_c = 2;
 			g()->l_x = 112;
 			h_x = 2;
-			lambda_bar = 1.7;//25keV
-			//lambda_bar = 6.4;//40keV
+			//lambda_bar = 1.7;//25keV
+			lambda_bar = 6.4;//40keV
 		}
 		else if (g()->is_point_source)
 		{

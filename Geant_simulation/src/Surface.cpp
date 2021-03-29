@@ -56,7 +56,22 @@ void DetectorConstruction::defineSurfaces()
 	//-------------------------------------------------------------------------------
 
 
+	//-------------------------------------------------------------------------------
+	LAr_OpticalSurface = new G4OpticalSurface("LAr_OpticalSurface");
+	LAr_OpticalSurface->SetType(dielectric_dielectric);
+	LAr_OpticalSurface->SetModel(unified);
+	LAr_OpticalSurface->SetFinish(polished);
+	LAr_OpticalSurface->SetSigmaAlpha(0);//alpha in degrees, from 0 to 90.
 
+	G4MaterialPropertiesTable *LAr_MaterialProperty = new G4MaterialPropertiesTable();
+	//G4double LAr_Materialrefl[2] = { 0.1, 0.1 };
+	G4double LAr_Materialeff[2] = { 0, 0 };
+
+	//LAr_MaterialProperty->AddProperty("REFLECTIVITY", ener, LAr_Materialrefl, 2);
+	LAr_MaterialProperty->AddProperty("EFFICIENCY", ener, LAr_Materialeff, 2);
+
+	LAr_OpticalSurface->SetMaterialPropertiesTable(LAr_MaterialProperty);
+	//-------------------------------------------------------------------------------
 
 
 	//-------------------------------------------------------------------------------
@@ -70,15 +85,15 @@ void DetectorConstruction::defineSurfaces()
 
 	G4MaterialPropertiesTable *FR4_MaterialProperty = new G4MaterialPropertiesTable();
 	//G4double FR4_Materialrefl[2] = { 0.05, 0.05 };//https://www.cetem.gov.br/images/congressos/2008/CAC00560008.pdf Specular Reflectance Data for Quartz and Some Epoxy Resins –	Implications for Digital Image Analysis Based on Reflected Light Optical Microscopy
-	G4double FR4_Materialrefl[2] = { 0.1, 0.1 };
+	G4double FR4_Materialrefl[2] = { 0.2, 0.2 };
 	G4double FR4_Materialeff[2] = { 0, 0 };
-	 
+	
 	FR4_MaterialProperty->AddProperty("REFLECTIVITY", ener, FR4_Materialrefl, 2);
 	FR4_MaterialProperty->AddProperty("EFFICIENCY", ener, FR4_Materialeff, 2);
 
 	FR4_unified->SetMaterialPropertiesTable(FR4_MaterialProperty);
 	//-------------------------------------------------------------------------------
-		
+	
 
 	//-------------------------------------------------------------------------------
 	//Anode_Wire (Bronze-Berillium)
@@ -103,7 +118,7 @@ void DetectorConstruction::defineSurfaces()
 	Cu_THGEM->SetType(dielectric_metal);
 	Cu_THGEM->SetModel(unified);
 	Cu_THGEM->SetFinish(ground);
-	Cu_THGEM->SetSigmaAlpha(0.1);//alpha in degrees, from 0 to 90.
+	Cu_THGEM->SetSigmaAlpha(50);//alpha in degrees, from 0 to 90.
 	G4MaterialPropertiesTable *Cu_THGEM_MaterialProperty = new G4MaterialPropertiesTable();
 	G4double Cu_THGEM_Materialrefl[2] = { 0.5, 0.5 };//
 	G4double Cu_THGEM_Materialeff[2] = { 0, 0 };
