@@ -41,9 +41,13 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 
-	bool isLowStaticticsAndView = 0;
-	const int N_runs = 200000 /*200000*/;
-	int N_events_per_run = 100 /*100*/;
+	bool isLowStaticticsAndView = 1;
+
+	int N_runs;
+	int N_events_per_run;
+	if (isLowStaticticsAndView) { N_runs = 10; N_events_per_run = 10; }
+	else { N_runs = 200000; N_events_per_run = 100; }
+
 		
 	//g()->radius_THGEM_hole = 0.25; g()->step_THGEM_hole = 0.9; g()->width_THGEM1 = 0.4; //[mm] //THGEM CERN 28%
 	g()->radius_THGEM_hole = 0.5; g()->step_THGEM_hole = 1.1; g()->width_THGEM1 = 1.0;//[mm] //THGEM Electroconnect 75%

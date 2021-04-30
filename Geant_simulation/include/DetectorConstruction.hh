@@ -45,6 +45,16 @@ public:
 
 private:
 
+	void defineMaterials();
+	void defineSurfaces();
+	void SetSizeAndPosition();
+
+	G4Material* fAl;
+	G4Material* fFe;
+	G4Material* fW;
+	G4Material* fCu;
+	G4Material* fBe;
+	
 	G4Box*             solidWorld;    // pointer to the solid envelope 
 	G4LogicalVolume*   logicWorld;    // pointer to the logical envelope
 	G4VPhysicalVolume* physiWorld;    // pointer to the physical envelope
@@ -106,13 +116,6 @@ private:
 	G4String sScintillatorLateralSurface;
 
 
-
-
-
-
-
-
-
 	G4Box*            solid_SiPM;   // pointer to the box solid SiPM
 	G4LogicalVolume*   logic_SiPM;   // pointer to the logical Scintillator
 	G4VPhysicalVolume* physi_SiPM;   // pointer to the physical Scintillator
@@ -132,12 +135,12 @@ private:
 
 
 	// arbitraryly valued variables (not changeable by user)
-	G4double fWorldLength;            // Full length of the world volume
-	G4double fPMTLength;
-	G4double fCathodeThickness;
+	//G4double fWorldLength;            // Full length of the world volume
+	//G4double fPMTLength;
+	//G4double fCathodeThickness;
 
-	G4double fScint_x;
-	G4double fScint_y;
+	//G4double fScint_x;
+	//G4double fScint_y;
 
 	CathodeSD* theCathodeSD;
 	G4Region*  fRegion;
@@ -145,8 +148,7 @@ private:
 	G4OpticalSurface *BGOPolishedAirTeflon; // polished BGO surface wrapped with teflon
 	G4OpticalSurface *BGOGroundAirTeflon;   // ground BGO surface wrapped with teflon
 	G4OpticalSurface *polishedAir;          // polished crystal surface, not wrapped
-	G4OpticalSurface *groundAir;            // ground crystal surface, not wrapped
-	 
+	G4OpticalSurface *groundAir;            // ground crystal surface, not wrapped	 
 	G4OpticalSurface *groundWhitePainted;   // ground crystal surface painted white
 	G4OpticalSurface *polishedBlackPainted; // polished crystal surface painted black
 	G4OpticalSurface *groundBlackPainted;   // ground crystal surface painted black
@@ -158,7 +160,6 @@ private:
 	G4OpticalSurface *SiPM_OpticalSurface;
 	G4OpticalSurface *AbsorberMaterial;
 	G4OpticalSurface *SingleTHGEMHole_optical_surface;
-
 	G4OpticalSurface *teflon_unified;
 	G4OpticalSurface *MgO_unified;
 	G4OpticalSurface *TiO2_unified;
@@ -167,19 +168,268 @@ private:
 	G4OpticalSurface *Cu_THGEM;
 	G4OpticalSurface *LAr_OpticalSurface;
 	G4OpticalSurface *Cu_Cathode;
-
 	G4OpticalSurface *Glass_surface;
 
 	G4MaterialPropertiesTable* luyag_pr;
-
-
-	void defineMaterials();
-	void defineSurfaces();
-
 	G4MaterialPropertiesTable *PMT_cathodeMaterialProperty;
 
 
 	G4bool  fCheckOverlaps; // option to activate checking of volumes overlaps
+
+
+
+
+	//consts
+	G4double HalfWorldLength;
+
+	//anode wire
+	double radius_wire;
+	double length_wire;
+	double step_wire;
+	int N_wire; 
+
+	//Anode_grid
+	double thickness_anode_grid;
+	double size_anode_grid;
+	double size_anode_grid_hole;
+	double z_anode_grid_bottom;
+	double z_anode_grid_center;
+
+	//PMTGridWire
+	double PMTGridWireRadius;
+	double PMTGridWirePitch;
+
+	//PMTAnodeGridTracker
+	double PMTAnodeGridTrackerThickness;
+	double PMTAnodeGridTrackerXYsize;
+	double PMTAnodeGridTrackerZbottom;
+	double PMTAnodeGridTrackerZCenter;
+	int PMTAnodeGridNCells;
+
+	//PMMA plate
+	double x_size_PMMA_plate;
+	double y_size_PMMA_plate;
+	double z_size_PMMA_plate;
+	double z_PMMA_plate_center;
+
+	//SiPMs
+	int Nx_SiPMs;
+	int Ny_SiPMs;
+	double thickness_SiPM;
+	double size_SiPM;
+	double chamberSpacing;
+	double z_SiPM_bottom;
+	double z_SiPM_center;
+
+	//tracker SiPM
+	double x_size_tracker;
+	double y_size_tracker;
+	double z_size_tracker;
+
+	//tracker Anode_grid
+	double x_size_tracker_anode_grid;
+	double y_size_tracker_anode_grid;
+	double z_size_tracker_anode_grid;
+
+	//tracker THGEM2 (active region with holes)
+	double x_size_tracker_THGEM2;
+	double y_size_tracker_THGEM2;
+	double z_size_tracker_THGEM2;
+	double z_tracker_THGEM2_center;
+
+	//solid_tracker_THGEM_Cu_reflector
+	double z_size_tracker_THGEM_Cu_reflector = z_size_tracker_THGEM2 / 10.0;
+
+	//THGEM_without_holes
+	double x_size_THGEM_without_holes;
+	double y_size_THGEM_without_holes;
+	double z_size_THGEM_without_holes;
+
+	//Insulator_box
+	double x_size_Insulator_box_inner;
+	double y_size_Insulator_box_inner;
+	double thickness_Insulator_box;
+	double x_size_Insulator_box_outer;
+	double y_size_Insulator_box_outer;
+	double z_size_Insulator_box;
+	double z_Insulator_box_center;
+
+	//PMTs
+	double radius_PMT;
+	double z_size_PMT;
+	double x_pos_PMT;
+	double y_pos_PMT;
+	double z_pos_PMT;
+
+	//LAr_inner
+	double x_size_LAr_inner;
+	double y_size_LAr_inner;
+	double z_size_LAr_inner;
+
+	//LArOuter
+	double x_size_LAr_outer_in;
+	double y_size_LAr_outer_in;
+	double x_size_LAr_outer_out;
+	double y_size_LAr_outer_out;
+	double z_size_LAr_outer;
+
+	//FieldTHGEM
+	double x_size_FieldTHGEM;
+	double y_size_FieldTHGEM;
+	double z_size_FieldTHGEM;
+	double z_center_FieldTHGEM_1;
+	double z_center_FieldTHGEM_2;
+	double hole_size_FieldTHGEM;
+
+	//FieldWire
+	double radius_FieldWire;
+	double length_FieldWire;
+	double x_pos_FieldWire;
+	double z_pos_FieldWire_bottom;
+	double z_pos_FieldWire_top;
+
+	//Cathode
+	double x_size_Cathode;
+	double y_size_Cathode;
+	double z_size_Cathode;
+
+	//LArInactive
+	double x_size_LArInactive;
+	double y_size_LArInactive; 
+	double z_size_LArInactive;
+
+	//PMMA_bottom
+	double x_size_PMMA_bottom;
+	double y_size_PMMA_bottom;
+	double z_size_PMMA_bottom;
+	double PMMA_bottom_center;
+
+	//Al_window
+	double diameter_size_Al_window;
+	double z_size_Al_window;
+	double z_space_Al_window;
+	double Al_window_top_center;
+	double Al_window_bottom_center;
+
+	//CryogenicChamberBottom
+	double diameter_size_internal_CryogenicChamberBottom;
+	double diameter_size_external_CryogenicChamberBottom;
+	double z_size_CryogenicChamberBottom;
+	double CryogenicChamberBottom_center;
+
+	//ExternalColl
+	double diameter_ExternalColl;
+	double z_size_ExternalColl;
+	double ExternalColl_center;
+	double ExternalColl_bottom;
+
+	//Cd109ExternalBox
+	double z_size_Cd109ExternalBox_top_hole;
+	double z_size_Cd109ExternalBox_middle_hole;
+	double Cd109ExternalBox_bottom;
+	
+	//Cd109IsotopBoxHolder
+	double z_size_Cd109IsotopBoxHolder_top_hole;
+	double z_size_Cd109IsotopBoxHolder_middle_hole;
+	double z_size_Cd109IsotopBoxHolder_bottom_hole;
+	double z_size_Cd109IsotopBoxHolder;
+	double diameter_size_Cd109IsotopBoxHolder_top_hole;
+	double diameter_size_Cd109IsotopBoxHolder;
+	double Cd109IsotopBoxHolder_top_hole_bottom;
+	double Cd109IsotopBoxHolder_top_hole_center;
+	double Cd109IsotopBoxHolder_center;
+
+	//Cd109
+	double diameter_size_Cd109;
+	double z_size_Cd109;
+	double Cd109_center;
+	double Cd109IsotopBoxHolder_plug_center;
+
+	//Cd109BeFoil
+	double diameter_size_Cd109BeFoil;
+	double z_size_Cd109BeFoil;
+	double Cd109BeFoil_center;
+
+	//Cd109WolframPlug
+	double diameter_size_Cd109WolframPlug;
+	double z_size_Cd109WolframPlug;
+	double Cd109WolframPlug_center;
+
+	//Cd109InternalColl
+	double diameter_size_internal_Cd109InternalColl;
+	double diameter_size_external_Cd109InternalColl;
+	double z_size_Cd109InternalColl;
+	double Cd109InternalColl_center;
+
+	//Cd109CuFoil
+	double x_size_Cd109CuFoil;
+	double y_size_Cd109CuFoil;
+	double z_size_Cd109CuFoil;
+	double Cd109CuFoil_center;
+
+	//bCd109Detector
+	double x_size_Cd109Detector;
+	double y_size_Cd109Detector;
+	double z_size_Cd109Detector;
+	double Cd109Detector_center;
+
+
+	G4ThreeVector position_SingleTHGEMHole;
+	G4ThreeVector position_anode_grid;
+	G4ThreeVector positionTracker;
+	G4ThreeVector position_PMMA_plate;
+	G4ThreeVector position_tracker_THGEM2;
+	G4ThreeVector position_tracker_THGEM1;
+	G4ThreeVector position_tracker_THGEM0;
+	G4ThreeVector position_tracker_THGEM0_Cu_reflector;
+	G4ThreeVector position_tracker_THGEM1_Cu_reflector;
+	G4ThreeVector position_Insulator_box;
+	G4ThreeVector position_LAr_inner;
+	G4ThreeVector position_LAr_outer;
+
+	//FieldWires
+	G4ThreeVector position_FieldWire_bottom1;
+	G4ThreeVector position_FieldWire_bottom2;
+	G4ThreeVector position_FieldWire_bottom3;
+	G4ThreeVector position_FieldWire_bottom4;
+	G4ThreeVector position_FieldWire_top1;
+	G4ThreeVector position_FieldWire_top2;
+	G4ThreeVector position_FieldWire_top3;
+	G4ThreeVector position_FieldWire_top4;
+	G4ThreeVector position_Cathode;
+	G4ThreeVector position_LArInactive;
+	G4ThreeVector position_PMMA_bottom;
+	G4ThreeVector position_Al_window_top;
+	G4ThreeVector position_Al_window_bottom;
+	G4ThreeVector position_CryogenicChamberBottom;
+	G4ThreeVector position_ExternalColl;
+
+	//Cd109
+	G4ThreeVector position_Cd109;
+	G4ThreeVector position_Cd109IsotopBoxHolder_top_hole;
+	G4ThreeVector position_Cd109IsotopBoxHolder;
+	G4ThreeVector position_Cd109IsotopBoxHolder_plug;
+	G4ThreeVector position_Cd109InternalColl;
+	G4ThreeVector position_Cd109BeFoil;
+
+	//Cd109Detector
+	G4ThreeVector position_Cd109Detector;
+
+	//Cd109CuFoil
+	G4ThreeVector position_Cd109CuFoil;
+
+	//Cd109WolframPlug
+	G4ThreeVector position_Cd109WolframPlug;
+
+	//PMT
+	G4ThreeVector position_PMT_0;
+	G4ThreeVector position_PMT_1;
+	G4ThreeVector position_PMT_2;
+	G4ThreeVector position_PMT_3;
+
+	G4ThreeVector position_FieldTHGEM_1;
+	G4ThreeVector position_FieldTHGEM_2;
+
 
 };
 

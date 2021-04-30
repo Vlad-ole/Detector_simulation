@@ -275,6 +275,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SetSizeAndPosition.cpp" />
     <ClCompile Include="src\AnodeGridParametrisation.cpp" />
     <ClCompile Include="src\CathodeSD.cc" />
     <ClCompile Include="src\DetectorConstruction.cpp">

@@ -39,6 +39,16 @@ void DetectorConstruction::defineMaterials()
 
 	G4Element *Fe = man->FindOrBuildElement("Fe");
 
+	
+	G4double a;  // atomic mass
+	G4double z;  // atomic number
+	G4double density;
+	fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
+	fFe = new G4Material("Fe", z = 26., a = 55.85*g / mole, density = 7.874 *g / cm3);
+	fW = new G4Material("W", z = 74., a = 183.84*g / mole, density = 19.35 *g / cm3);
+	fCu = new G4Material("Cu", z = 29., a = 63.5*g / mole, density = 8.92 *g / cm3);
+	fBe = new G4Material("Be", z = 4., a = 9.01*g / mole, density = 1.85 *g / cm3);
+
 	//------------------------------
 	// Air
 	G4Material* Air = man->FindOrBuildMaterial("G4_AIR");

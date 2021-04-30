@@ -55,25 +55,12 @@ using namespace std;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-DetectorConstruction::DetectorConstruction()
-{
-	messenger = new Messenger(this);
-}
-
-DetectorConstruction::~DetectorConstruction()
-{
-	delete messenger;
-}
-
-
 // это основной метод
 G4VPhysicalVolume * DetectorConstruction::Construct()
 {
 	//G4UImanager* UI = G4UImanager::GetUIpointer();
 
-	defineMaterials(); // внешн€€ функци€. «десь определ€ютс€ различные материалы.
-	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
-
+	
 //#define SETUP1 //(TPB, w/o alpha, THGEM 28%)
 //#define SETUP2 // (w/o TPB, alpha, THGEM 75%, UV acrylic 4mm)
 #define SETUP3 // (w/o TPB, w/o alpha, THGEM 75%, UV acrylic 4mm)
@@ -93,7 +80,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	#define bCathode
 #endif
 
-
+	
 
 //z >= 0
 //#define bSiPM
@@ -132,330 +119,18 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//bool bLAr_inner = false;
 	//bool bLAr_outer = false;
 
-	//--------------------------------------------------------------------------------
-	//выставление размеров объектов
-	const G4double HalfWorldLength = 17 * cm;
 
+	defineMaterials();
+	defineSurfaces(); 
+	SetSizeAndPosition();		
 
-	//anode wire
-	const double radius_wire = 100/2.0 * um;//you can understand this from photo
-	const double length_wire = 60 * mm /* 108*mm future case*/;  //60*mm /*real case*/;
-	const double step_wire = 1 * mm;
-	const int N_wire = length_wire/step_wire - 1 /* 107 future case*/;
-
-	//Anode_grid
-	const double thickness_anode_grid = 0.5 * mm;
-	const double size_anode_grid = /*130 (from Ekaterina)*/ 124 * mm;
-	const double size_anode_grid_hole = length_wire /*future case*/;  //60 * mm /*real case*/;
-	const double z_anode_grid_bottom = 78.2 * mm /*78.2 in case of one THGEM*/ /*82.7*mm in case of two THGEM*/;
-	const double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
-
-	//PMTGridWire
-	const double PMTGridWireRadius = 150 / 2.0 * um;
-	const double PMTGridWirePitch = 1.2 * mm;
-	
-	//PMTAnodeGridTracker
-	const double PMTAnodeGridTrackerThickness = PMTGridWireRadius *2;
-	const double PMTAnodeGridTrackerXYsize = 50 * mm;
-	const double PMTAnodeGridTrackerZbottom = 100 * mm;
-	const double PMTAnodeGridTrackerZCenter = PMTAnodeGridTrackerZbottom + PMTAnodeGridTrackerThickness / 2.0;
-	const int PMTAnodeGridNCells = PMTAnodeGridTrackerXYsize / PMTGridWirePitch ;
-
-	//PMMA plate
-	const double x_size_PMMA_plate = size_anode_grid;
-	const double y_size_PMMA_plate = size_anode_grid;
-	const double z_size_PMMA_plate = 1.5 * mm;
-	const double z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
-
-
-	//SiPMs
-	const int Nx_SiPMs = 11;
-	const int Ny_SiPMs = 11;
-	const double thickness_SiPM = 1 * nm;
-	const double size_SiPM = 6.0 * mm;
-	const double chamberSpacing = 10 * mm;
-	const double z_SiPM_bottom = z_anode_grid_bottom + thickness_anode_grid + z_size_PMMA_plate + (0.1*mm /*small gap between PMMA and SiPM*/) /* 85.7*mm in case of two THGEM*/;
-	const double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
-
-	cout << "z_SiPM_bottom = " << z_SiPM_bottom << endl;
-
-	//tracker SiPM
-	const double x_size_tracker = Nx_SiPMs * chamberSpacing + size_SiPM / 2.0;
-	const double y_size_tracker = Ny_SiPMs * chamberSpacing + size_SiPM / 2.0;
-	const double z_size_tracker = 0.1 * mm;
-
-	//tracker Anode_grid
-	const double x_size_tracker_anode_grid = length_wire;
-	const double y_size_tracker_anode_grid = x_size_tracker_anode_grid;
-	const double z_size_tracker_anode_grid = thickness_anode_grid;
-
-	
-
-
-
-
-	//tracker THGEM2 (active region with holes)
-	const double x_size_tracker_THGEM2 = 100 * mm;
-	const double y_size_tracker_THGEM2 = 100 * mm;
-	const double z_size_tracker_THGEM2 = g()->width_THGEM1 /*0.4*/ /*500 * um*/;
-	const double z_tracker_THGEM2_center = 77.2 * mm + z_size_tracker_THGEM2 / 2.0;
-
-	//solid_tracker_THGEM_Cu_reflector
-	const double z_size_tracker_THGEM_Cu_reflector = z_size_tracker_THGEM2/10.0;
-
-	//THGEM0
-	//const double z_THGEM0_bottom = 50.2 * mm;
-
-	//THGEM_without_holes
-	const double x_size_THGEM_without_holes = size_anode_grid;
-	const double y_size_THGEM_without_holes = size_anode_grid;
-	const double z_size_THGEM_without_holes = z_size_tracker_THGEM2;
-
-	//THGEM sizes
-	//const double hole_diameter_THGEM = 500 * um;
-	//const double rim_diameter_THGEM = 700 * um;
-	//const double step_THGEM = 0.9 * mm;
-	//const double x_size_THGEM_cell = step_THGEM;
-	//const double y_size_THGEM_cell = step_THGEM * sqrt(3) / 2;
-	//const double z_size_total_THGEM = 500 * um;
-	//const double z_size_foil_THGEM = 35 * um;
-	//const double z_size_cell_THGEM = z_size_total_THGEM - z_size_foil_THGEM * 2;
-	//const unsigned int Nx_cells_THGEM2 = 5;
-	//const unsigned int Ny_cells_THGEM2 = Nx_cells_THGEM2;
-
-	//Insulator_box
-	const double x_size_Insulator_box_inner = 143 * mm;
-	const double y_size_Insulator_box_inner = x_size_Insulator_box_inner;
-	const double thickness_Insulator_box = 2 * mm;
-	const double x_size_Insulator_box_outer = x_size_Insulator_box_inner + thickness_Insulator_box * 2;
-	const double y_size_Insulator_box_outer = x_size_Insulator_box_outer;
-	const double z_size_Insulator_box = 150 * mm;
-	const double z_Insulator_box_center = z_size_Insulator_box / 2.0;
-
-	//PMTs
-	const double radius_PMT = 45 * mm / 2.0;
-	const double z_size_PMT = 5*mm /*1 * um*/;
-	const double x_pos_PMT = 152 * mm / 2.0 + z_size_PMT / 2;
-	const double y_pos_PMT = x_pos_PMT;
-	const double z_pos_PMT = 27.2 * mm + 63 * mm / 2.0;
-
-		//WLS
-	/*const double radius_WLS = 70 * mm / 2.0;
-	const double z_size_WLS = 100 * um;
-	const double x_pos_WLS = 152 * mm / 2.0 + z_size_PMT / 2;
-	const double y_pos_WLS = x_pos_WLS;
-	const double z_pos_WLS = z_pos_PMT;*/
-
-	//LAr_inner
-	const double x_size_LAr_inner = x_size_Insulator_box_inner;
-	const double y_size_LAr_inner = y_size_Insulator_box_inner;
-	const double z_size_LAr_inner = g()->z_bottom_THGEM0 + z_size_tracker_THGEM2 + /*4 * mm*/ (22 - g()->EL_gap_thickness);
-
-	//LArOuter
-	const double x_size_LAr_outer_in = x_size_Insulator_box_outer;
-	const double y_size_LAr_outer_in = y_size_Insulator_box_outer;
-	const double x_size_LAr_outer_out = 152 * mm;
-	const double y_size_LAr_outer_out = x_size_LAr_outer_out;
-	const double z_size_LAr_outer = z_size_LAr_inner;
-
-	//FieldTHGEM
-	const double x_size_FieldTHGEM = size_anode_grid;
-	const double y_size_FieldTHGEM = size_anode_grid;
-	const double z_size_FieldTHGEM = z_size_tracker_THGEM2;
-	const double z_center_FieldTHGEM_1 = 18.2*mm + z_size_FieldTHGEM / 2;
-	const double z_center_FieldTHGEM_2 = 34.2*mm + z_size_FieldTHGEM / 2;
-	const double hole_size_FieldTHGEM = 88 * mm;
-
-	//FieldWire
-	const double radius_FieldWire = 1.5 * mm / 2.0;
-	const double length_FieldWire = 95 * mm;
-	const double x_pos_FieldWire = x_size_tracker_THGEM2 / 2.0;
-	const double z_pos_FieldWire_bottom = 18.2*mm - radius_FieldWire;
-	const double z_pos_FieldWire_top = 34.2*mm + radius_FieldWire;
-
-	//Cathode
-	const double x_size_Cathode = x_size_LAr_outer_out;
-	const double y_size_Cathode = y_size_LAr_outer_out;
-	const double z_size_Cathode = 0.5 * mm;
-	
-	//LArInactive
-	const double x_size_LArInactive = x_size_LAr_outer_out;
-	const double y_size_LArInactive = y_size_LAr_outer_out;
-	const double z_size_LArInactive = 2 * mm;
-
-	//PMMA_bottom
-	const double x_size_PMMA_bottom = x_size_LAr_outer_out;
-	const double y_size_PMMA_bottom = y_size_LAr_outer_out;
-	const double z_size_PMMA_bottom = 3 * mm;
-	const double PMMA_bottom_center = -z_size_Cathode - z_size_LArInactive - z_size_PMMA_bottom / 2.0;
-
-	//Al_window
-	const double diameter_size_Al_window = 50 * mm;
-	const double z_size_Al_window = 1.0 * mm;
-	const double z_space_Al_window = 21 * mm;
-	const double Al_window_top_center = PMMA_bottom_center - z_size_PMMA_bottom / 2.0 - z_size_Al_window / 2.0;
-	const double Al_window_bottom_center = Al_window_top_center - z_size_Al_window/2.0 - z_space_Al_window - z_size_Al_window / 2.0;
-
-	//CryogenicChamberBottom
-	const double diameter_size_internal_CryogenicChamberBottom = diameter_size_Al_window;
-	const double diameter_size_external_CryogenicChamberBottom = x_size_LAr_inner * sqrt(2);
-	const double z_size_CryogenicChamberBottom = 10 * mm;
-	const double CryogenicChamberBottom_center = PMMA_bottom_center - z_size_PMMA_bottom / 2.0 - z_size_CryogenicChamberBottom / 2.0;
-
-	//ExternalColl
-	const double diameter_ExternalColl = diameter_size_Al_window;
-	const double z_size_ExternalColl = 12 * mm;
 #ifdef bExternalColl6mm
 	const double diameter_inter_ExternalColl = 6 * mm;
 #endif // bExternalColl6mm
 #ifdef bExternalColl2mm
 	const double diameter_inter_ExternalColl = 2 * mm;
 #endif // bExternalColl2mm
-	const double ExternalColl_center = Al_window_bottom_center - z_size_Al_window / 2.0 - z_size_ExternalColl / 2.0;
-	const double ExternalColl_bottom = ExternalColl_center - z_size_ExternalColl / 2.0;
-	cout << "ExternalColl_bottom = " << ExternalColl_bottom << endl;
-
-	//Cd109ExternalBox
-	const double z_size_Cd109ExternalBox_top_hole = 13 * mm;
-	const double z_size_Cd109ExternalBox_middle_hole = 54 * mm;
-	const double Cd109ExternalBox_bottom = ExternalColl_bottom - z_size_Cd109ExternalBox_top_hole - z_size_Cd109ExternalBox_middle_hole;
-	cout << "Cd109ExternalBox_bottom = " << Cd109ExternalBox_bottom << endl;
-
-	//Cd109IsotopBoxHolder
-	const double z_size_Cd109IsotopBoxHolder_top_hole = 2 * mm;
-	const double z_size_Cd109IsotopBoxHolder_middle_hole = 3 * mm;
-	const double z_size_Cd109IsotopBoxHolder_bottom_hole = 12 * mm;
-	const double z_size_Cd109IsotopBoxHolder = z_size_Cd109IsotopBoxHolder_top_hole + z_size_Cd109IsotopBoxHolder_middle_hole + z_size_Cd109IsotopBoxHolder_bottom_hole;//summ = 17*mm
-	const double diameter_size_Cd109IsotopBoxHolder_top_hole = 7 * mm;
-	const double diameter_size_Cd109IsotopBoxHolder = 14.3 * mm;
-	const double Cd109IsotopBoxHolder_top_hole_bottom = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder_bottom_hole + z_size_Cd109IsotopBoxHolder_middle_hole;
-	const double Cd109IsotopBoxHolder_top_hole_center = Cd109IsotopBoxHolder_top_hole_bottom + z_size_Cd109IsotopBoxHolder_top_hole/2.0;
-	const double Cd109IsotopBoxHolder_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder/2.0;
 	
-
-	//Cd109
-	const double diameter_size_Cd109 = 1 * mm;
-	const double z_size_Cd109 = 0.1 * mm;
-	const double Cd109_center = Cd109IsotopBoxHolder_top_hole_bottom - z_size_Cd109/2.0;
-	g()->z_source_gamma = Cd109_center;
-	g()->radius_source_gamma = diameter_size_Cd109/2.0;
-	cout << "Cd109_center" << Cd109_center << endl;
-
-	const double Cd109IsotopBoxHolder_plug_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder_bottom_hole / 2.0 - z_size_Cd109;
-
-	//Cd109BeFoil
-	const double diameter_size_Cd109BeFoil = 3 * mm;
-	const double z_size_Cd109BeFoil = 0.1 * mm;
-	const double Cd109BeFoil_center = Cd109_center + z_size_Cd109/2.0 + z_size_Cd109BeFoil/2.0;
-
-	//Cd109WolframPlug
-	const double diameter_size_Cd109WolframPlug = 3 * mm;
-	const double z_size_Cd109WolframPlug = 3 * mm;
-	const double Cd109WolframPlug_center = Cd109_center - z_size_Cd109 / 2.0 - z_size_Cd109WolframPlug / 2.0;
-	
-	//Cd109InternalColl
-	const double diameter_size_internal_Cd109InternalColl = 2 * mm;
-	const double diameter_size_external_Cd109InternalColl = 14.5 * mm;
-	const double z_size_Cd109InternalColl = 10 * mm;
-	const double Cd109InternalColl_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder + z_size_Cd109InternalColl/2.0;
-
-	//Cd109CuFoil
-	const double x_size_Cd109CuFoil = 16 * mm;
-	const double y_size_Cd109CuFoil = x_size_Cd109CuFoil;
-	const double z_size_Cd109CuFoil = 0.165 * mm;
-	const double Cd109CuFoil_center = Cd109ExternalBox_bottom + z_size_Cd109IsotopBoxHolder + z_size_Cd109CuFoil/2.0;
-
-	//bCd109Detector
-	const double x_size_Cd109Detector = 2 * mm;
-	const double y_size_Cd109Detector = 10 * mm;
-	const double z_size_Cd109Detector = 2 * mm;
-	const double Cd109Detector_center = Cd109CuFoil_center + z_size_Cd109CuFoil/2.0 + z_size_Cd109Detector /2.0;
-
-	if (thickness_anode_grid < 2 * radius_wire)
-	{
-		cout << "error: thickness_anode_grid < 2*radius_wire" << endl;
-		system("pause");
-	}
-
-
-
-	//--------------------------------------------------------------------------------
-
-
-
-
-
-
-	//--------------------------------------------------------------------------------
-	//определение взаимного расположени€ объектов
-
-	const G4ThreeVector &position_SingleTHGEMHole = G4ThreeVector(g()->xyz_position_SingleTHGEMHole, g()->xyz_position_SingleTHGEMHole, g()->xyz_position_SingleTHGEMHole);
-
-	const G4ThreeVector &position_SiPM = G4ThreeVector(0, 0, 0);
-	const G4ThreeVector &position_anode_grid = G4ThreeVector(0, 0, z_anode_grid_center);
-	const G4ThreeVector &positionTracker = G4ThreeVector(0, 0, z_SiPM_center);
-	const G4ThreeVector &position_PMMA_plate = G4ThreeVector(0, 0, z_PMMA_plate_center);
-
-	const G4ThreeVector &position_tracker_THGEM2 = G4ThreeVector(0, 0, z_tracker_THGEM2_center);
-	const G4ThreeVector &position_tracker_THGEM1 = G4ThreeVector(0, 0, g()->z_bottom_THGEM1 + z_size_tracker_THGEM2 / 2.0);
-	const G4ThreeVector &position_tracker_THGEM0 = G4ThreeVector(0, 0, g()->z_bottom_THGEM0 + z_size_tracker_THGEM2 / 2.0 - z_size_LAr_inner / 2.0);
-
-	const G4ThreeVector &position_tracker_THGEM0_Cu_reflector = G4ThreeVector(0, 0, 0);
-	const G4ThreeVector &position_tracker_THGEM1_Cu_reflector = G4ThreeVector(0, 0, 0);
-	
-	const G4ThreeVector &position_Insulator_box = G4ThreeVector(0, 0, z_Insulator_box_center);
-
-	const G4ThreeVector &position_LAr_inner = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_LAr_outer = G4ThreeVector(0, 0, z_size_LAr_inner / 2.0);
-
-	//FieldWires
-	const G4ThreeVector &position_FieldWire_bottom1 = G4ThreeVector(x_pos_FieldWire, 0, z_pos_FieldWire_bottom - z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_FieldWire_bottom2 = G4ThreeVector(-x_pos_FieldWire, 0, z_pos_FieldWire_bottom - z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_FieldWire_bottom3 = G4ThreeVector(0, x_pos_FieldWire, z_pos_FieldWire_bottom - z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_FieldWire_bottom4 = G4ThreeVector(0, -x_pos_FieldWire, z_pos_FieldWire_bottom - z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_FieldWire_top1 = G4ThreeVector(x_pos_FieldWire, 0, z_pos_FieldWire_top - z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_FieldWire_top2 = G4ThreeVector(-x_pos_FieldWire, 0, z_pos_FieldWire_top - z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_FieldWire_top3 = G4ThreeVector(0, x_pos_FieldWire, z_pos_FieldWire_top - z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_FieldWire_top4 = G4ThreeVector(0, -x_pos_FieldWire, z_pos_FieldWire_top - z_size_LAr_inner / 2.0);
-
-
-	const G4ThreeVector &position_Cathode = G4ThreeVector(0, 0, -z_size_Cathode / 2.0);
-	const G4ThreeVector &position_LArInactive = G4ThreeVector(0, 0, -z_size_Cathode - z_size_LArInactive / 2.0);
-	const G4ThreeVector &position_PMMA_bottom = G4ThreeVector(0, 0, PMMA_bottom_center);	
-	const G4ThreeVector &position_Al_window_top = G4ThreeVector(0, 0, Al_window_top_center);
-	const G4ThreeVector &position_Al_window_bottom = G4ThreeVector(0, 0, Al_window_bottom_center);
-	const G4ThreeVector &position_CryogenicChamberBottom = G4ThreeVector(0, 0, CryogenicChamberBottom_center);	
-	const G4ThreeVector &position_ExternalColl = G4ThreeVector(0, 0, ExternalColl_center);
-
-	//Cd109
-	const G4ThreeVector &position_Cd109 = G4ThreeVector(0, 0, Cd109_center);
-	const G4ThreeVector &position_Cd109IsotopBoxHolder_top_hole = G4ThreeVector(0, 0, Cd109IsotopBoxHolder_top_hole_center);
-	const G4ThreeVector &position_Cd109IsotopBoxHolder = G4ThreeVector(0, 0, Cd109IsotopBoxHolder_center);	
-	const G4ThreeVector &position_Cd109IsotopBoxHolder_plug = G4ThreeVector(0, 0, Cd109IsotopBoxHolder_plug_center);
-	const G4ThreeVector &position_Cd109InternalColl = G4ThreeVector(0, 0, Cd109InternalColl_center);
-	const G4ThreeVector &position_Cd109BeFoil = G4ThreeVector(0, 0, Cd109BeFoil_center);
-	
-	
-	//Cd109Detector
-	const G4ThreeVector &position_Cd109Detector = G4ThreeVector(0, 0, Cd109Detector_center);
-
-	//Cd109CuFoil
-	const G4ThreeVector &position_Cd109CuFoil = G4ThreeVector(0, 0, Cd109CuFoil_center);
-	
-	
-	//Cd109WolframPlug
-	const G4ThreeVector &position_Cd109WolframPlug = G4ThreeVector(0, 0, Cd109WolframPlug_center);
-
-	//PMT
-	const G4ThreeVector &position_PMT_0 = G4ThreeVector(-x_pos_PMT, 0, z_pos_PMT);
-	const G4ThreeVector &position_PMT_1 = G4ThreeVector(x_pos_PMT, 0, z_pos_PMT);
-	const G4ThreeVector &position_PMT_2 = G4ThreeVector(0, -y_pos_PMT, z_pos_PMT);
-	const G4ThreeVector &position_PMT_3 = G4ThreeVector(0, y_pos_PMT, z_pos_PMT);
-
-
-	const G4ThreeVector &position_FieldTHGEM_1 = G4ThreeVector(0, 0, z_center_FieldTHGEM_1 - z_size_LAr_inner / 2.0);
-	const G4ThreeVector &position_FieldTHGEM_2 = G4ThreeVector(0, 0, z_center_FieldTHGEM_2 - z_size_LAr_inner / 2.0);
-
 	G4RotationMatrix* rotX = new G4RotationMatrix();
 	rotX->rotateX(90 * deg);
 
@@ -463,15 +138,6 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	rotY->rotateY(90 * deg);
 	//-------------------------------------------------------------------------------
 
-
-	G4double a;  // atomic mass
-	G4double z;  // atomic number
-	G4double density;
-	G4Material* fAl = new G4Material("Al", z = 13., a = 26.98*g / mole, density = 2.7*g / cm3);
-	G4Material* fFe = new G4Material("Fe", z = 26., a = 55.85*g / mole, density = 7.874 *g / cm3);
-	G4Material* fW = new G4Material("W", z = 74., a = 183.84*g / mole, density = 19.35 *g / cm3);
-	G4Material* fCu = new G4Material("Cu", z = 29., a = 63.5*g / mole, density = 8.92 *g / cm3);
-	G4Material* fBe = new G4Material("Be", z = 4., a = 9.01*g / mole, density = 1.85 *g / cm3);
 
 	//----------------------------------------------------------------------------------
 	// создание мира
@@ -986,9 +652,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Box* solid_PMTAnodeGridTracker = new G4Box("solid_PMTAnodeGridTracker", PMTAnodeGridTrackerXYsize / 2.0, PMTAnodeGridTrackerXYsize / 2.0, PMTAnodeGridTrackerThickness / 2.0);
 	G4LogicalVolume* logic_PMTAnodeGridTracker = new G4LogicalVolume(solid_PMTAnodeGridTracker, G4Material::GetMaterial("LAr"), "logic_PMTAnodeGridTracker", 0, 0, 0);
 	G4VPhysicalVolume* phys_PMTAnodeGridTracker = new G4PVPlacement(0,               // no rotation
-		position_anode_grid, // at (x,y,z)
-		logic_tracker_anode_grid,       // its logical volume
-		"phys_tracker_anode_grid",       // its name
+		position_PMTAnodeGridTracker, // at (x,y,z)
+		logic_PMTAnodeGridTracker,       // its logical volume
+		"phys_PMTAnodeGridTracker",       // its name
 		logicWorld,         // its mother  volume
 		false,           // no boolean operations
 		0,               // copy number
@@ -1603,4 +1269,17 @@ void DetectorConstruction::ChangeDetectorConstruction(double parametr)
 	ChangeSurface(parametr);
 	//ChangeMaterials();	
 }
+
+
+
+DetectorConstruction::DetectorConstruction()
+{
+	messenger = new Messenger(this);
+}
+
+DetectorConstruction::~DetectorConstruction()
+{
+	delete messenger;
+}
+
 
