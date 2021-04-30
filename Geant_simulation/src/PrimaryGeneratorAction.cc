@@ -14,17 +14,18 @@ using namespace std;
 #include <G4SystemOfUnits.hh> // this has appeared in GEANT4_10
 
 
-//#define TEST_POSITION_DIRECTION
 //set angle distribution
+//#define TEST_POSITION_DIRECTION
 //#define DIRECT_INCIDENCE
 //#define TOP_HEMISPHERE
 #define SPHERE_4PI
 //#define ANGLE_Cd_COLL6mm
 
 //set (x,y,z) position
+#define POSITION_FROM_MAIN
 //#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
-#define EL_GAP 
+//#define EL_GAP 
 //#define CIRCLE_EL_GAP
 //#define CIRCLE_Cd
 
@@ -345,11 +346,11 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	
 #ifdef	SPHERE_4PI
 	//uniform distribution
-	//double phi = 2 * pi*G4UniformRand();
-	//double cosTheta = (G4UniformRand() - 0.5) * 2;
+	double phi = 2 * pi*G4UniformRand();
+	double cosTheta = (G4UniformRand() - 0.5) * 2;
 	
-	double phi = 0;
-	double cosTheta = 0.75;
+	//double phi = 0;
+	//double cosTheta = 0.75;
 #endif //SPHERE_4PI	
 
 
@@ -376,7 +377,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 #ifdef	TEST_POSITION_DIRECTION
 	double phi = 0 * pi;
-	double cosTheta = /*0.9085*/ /*0.9075*//* -0.90*/ 0.98;
+	double cosTheta = /*0.9085*/ /*0.9075*/ -0.90 /*0.98*/;
 #endif
 
 	double sinTheta = sqrt(1 - cosTheta*cosTheta);
@@ -402,6 +403,13 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	z = /*60*/ /*78*/ 40;
 #endif
 
+#ifdef	POSITION_FROM_MAIN
+	////v2 (x,y,z are constant within the Run)
+	x = g()->x_source;
+	y = g()->y_source;
+	z = g()->z_source;
+#endif
+
 #ifdef CENTRAL_INCIDENCE
 	//x = 1.1 * mm * 1.5  ;
 	//y = 1.1 * mm * sqrt(3) / 2 * 2;
@@ -412,10 +420,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//z = 0;
 	//g()->z_source = z;
 
-	////v2 (x,y,z are constant within the Run)
-	x = g()->x_source;
-	y = g()->y_source;
-	z = g()->z_source;
+	
 
 	////tmp
 	//x = G4UniformRand()*10;

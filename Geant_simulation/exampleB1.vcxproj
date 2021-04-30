@@ -299,6 +299,7 @@
     <ClCompile Include="src\PhysListEmStandard.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\PMTGridParametrisation.cpp" />
     <ClCompile Include="src\PMTHits.cpp" />
     <ClCompile Include="src\PrimaryGeneratorAction.cc" />
     <ClCompile Include="src\ReadConstants.cpp" />
@@ -332,6 +333,7 @@
     <ClInclude Include="include\DetectorParametrisation.h" />
     <ClInclude Include="include\Hits.h" />
     <ClInclude Include="include\MyExceptionHandler.hh" />
+    <ClInclude Include="include\PMTGridParametrisation.h" />
     <ClInclude Include="include\PMTHits.h" />
     <ClInclude Include="include\ReadConstants.h" />
     <ClInclude Include="include\Singleton.h" />

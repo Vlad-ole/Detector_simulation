@@ -160,11 +160,13 @@ public:
 	bool is_Cd_standard_box;
 	bool is_X_ray_coll_35mm_with_alpha;
 	bool is_X_ray_coll_35mm_no_alpha;
+	bool is_X_ray_coll_14mm_no_alpha;
 	bool is_X_ray_coll_2mm_no_alpha;
 	bool is_alpha;
 	bool is_point_source;
 	vector<double> avr_N_pe;
 
+	double step_THGEM_hole;
 	double radius_THGEM_hole;
 	double width_THGEM1;
 	double width_THGEM0;

@@ -1,0 +1,22 @@
+#0-2
+/run/verbose 0
+
+#0-3
+/event/verbose 0
+
+#0-5 ("1" is enough for me)
+#/tracking/verbose 1
+
+#comment the next line to turn off visualization
+#/control/execute vis.mac
+
+#Run simulation
+#/run/beamOn 100
+
+#10M
+/run/beamOn 10000000
+
+
+#Redrawing of the scene can be done as follows: 
+#comment the next line to turn off visualization
+#vis/viewer/update

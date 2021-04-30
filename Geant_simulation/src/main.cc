@@ -40,14 +40,18 @@ int  nUsefulEvents = 0;
 int main(int argc, char** argv)
 {
 	long t1 = clock();
+
+	bool isLowStaticticsAndView = 0;
+	const int N_runs = 200000 /*200000*/;
+	int N_events_per_run = 100 /*100*/;
 		
-	g()->radius_THGEM_hole = 0.25;//THGEM CERN 28%
-	//g()->radius_THGEM_hole = 0.5;//THGEM CERN 75%
-	g()->width_THGEM1 = 0.4;
+	//g()->radius_THGEM_hole = 0.25; g()->step_THGEM_hole = 0.9; g()->width_THGEM1 = 0.4; //[mm] //THGEM CERN 28%
+	g()->radius_THGEM_hole = 0.5; g()->step_THGEM_hole = 1.1; g()->width_THGEM1 = 1.0;//[mm] //THGEM Electroconnect 75%
 	g()->width_THGEM0 = g()->width_THGEM1;
 	g()->xyz_position_SingleTHGEMHole = 150;
 
-	g()->EL_gap_thickness = 18;
+	//g()->EL_gap_thickness = 13;//double phase
+	g()->EL_gap_thickness = 0;//single phase
 	g()->z_bottom_THGEM0 = 50.2 + (0.5 - g()->width_THGEM1);
 	g()->z_bottom_THGEM1 = /*72.7*/ g()->z_bottom_THGEM0 + g()->width_THGEM0 + 22;
 
@@ -58,14 +62,15 @@ int main(int argc, char** argv)
 	g()->is_Am_coll_14mm = false;
 	g()->is_Cd_standard_box = false;
 	g()->is_X_ray_coll_35mm_no_alpha = false;
-	g()->is_X_ray_coll_2mm_no_alpha = true;
+	g()->is_X_ray_coll_14mm_no_alpha = true;
+	g()->is_X_ray_coll_2mm_no_alpha = false;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
 	g()->is_alpha = false;
 	g()->is_point_source = false;
 
 	if ( (g()->is_Am_coll_14mm + g()->is_Cd_standard_box +
 		g()->is_X_ray_coll_35mm_no_alpha + g()->is_X_ray_coll_35mm_with_alpha + 
-		g()->is_alpha + g()->is_point_source + g()->is_X_ray_coll_2mm_no_alpha) > 1 )
+		g()->is_alpha + g()->is_point_source + g()->is_X_ray_coll_2mm_no_alpha + g()->is_X_ray_coll_14mm_no_alpha) > 1 )
 	{
 		cerr << "Error: choose only one source" << endl;
 		std::system("pause");
@@ -133,10 +138,15 @@ int main(int argc, char** argv)
 
 	//for
 	//TRandom3 rnd3;
-	const int N_runs = 1;
+	UI->ApplyCommand("/run/verbose 0");
+	UI->ApplyCommand("/event/verbose 0");	
+	//UI->ApplyCommand("/tracking/verbose 1"); 
+	if (isLowStaticticsAndView) UI->ApplyCommand("/control/execute vis.mac");
+	
 	for (int i = 0; i < N_runs; i++)
 	{
-		if (i % 1 == 0 || i == (N_runs - 1))
+				
+		if (i % 100 == 0 || i == (N_runs - 1))
 		{
 			double val = N_runs > 1 ? (100 * i / (double)(N_runs - 1)) : 100;
 			cout << "run = " << i << " (" << val << " %)" << endl;
@@ -184,6 +194,13 @@ int main(int argc, char** argv)
 		else if (g()->is_X_ray_coll_35mm_no_alpha)
 		{
 			g()->h_c = 35;
+			g()->l_x = 112;
+			h_x = 2;
+			lambda_bar = 1.7;
+		}
+		else if (g()->is_X_ray_coll_14mm_no_alpha)
+		{
+			g()->h_c = 14;
 			g()->l_x = 112;
 			h_x = 2;
 			lambda_bar = 1.7;
@@ -260,19 +277,26 @@ int main(int argc, char** argv)
 
 		g()->file_xyz_source << g()->x_source << "\t" << g()->y_source << "\t" << g()->z_source << endl;
 
-		if (argc == 1)
-		{
-			UI->ApplyCommand("/control/execute slava.mac");
-		}
-		else
-		{
-			// Batch mode
-			G4String command = "/control/execute ";
-			G4String fileName = argv[1];
-			UI->ApplyCommand(command + fileName);
-		}
+		//UI->ApplyCommand("/run/beamOn 1");
+		ostringstream osst;
+		osst << "/run/beamOn " << N_events_per_run;
+		UI->ApplyCommand(osst.str());
+		
+		//if (argc == 1)
+		//{
+		//	//if(isLowStaticticsAndView) UI->ApplyCommand("/control/execute run_view.mac");
+		//	//else UI->ApplyCommand("/control/execute run_statictics.mac");
+		//}
+		//else
+		//{
+		//	// Batch mode
+		//	G4String command = "/control/execute ";
+		//	G4String fileName = argv[1];
+		//	UI->ApplyCommand(command + fileName);
+		//}
 	}//for
 
+	if(isLowStaticticsAndView) UI->ApplyCommand("vis/viewer/update");
 	 ///*out*/
 	 //{
 	 //	//-----------------------

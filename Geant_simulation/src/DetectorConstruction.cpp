@@ -69,28 +69,48 @@ DetectorConstruction::~DetectorConstruction()
 // это основной метод
 G4VPhysicalVolume * DetectorConstruction::Construct()
 {
-	G4UImanager* UI = G4UImanager::GetUIpointer();
+	//G4UImanager* UI = G4UImanager::GetUIpointer();
 
 	defineMaterials(); // внешн€€ функци€. «десь определ€ютс€ различные материалы.
 	defineSurfaces(); // внешн€€ функци€. «десь определ€ютс€ различные типы поверхностей.
 
+//#define SETUP1 //(TPB, w/o alpha, THGEM 28%)
+//#define SETUP2 // (w/o TPB, alpha, THGEM 75%, UV acrylic 4mm)
+#define SETUP3 // (w/o TPB, w/o alpha, THGEM 75%, UV acrylic 4mm)
+
+#ifdef SETUP3
+	#define bSiPM
+	#define bPMMA_plate 
+	#define bAnode_grid
+	#define bInsulator_box
+	#define bPMTs
+	//#define bPMTAnodeGrid
+	#define bTHGEM1
+	#define bTHGEM0
+	//#define bFieldWires
+	#define bLArOuter 
+	#define bLArInner
+	#define bCathode
+#endif
+
+
 
 //z >= 0
-#define bSiPM
+//#define bSiPM
 //#define bPMMA_plate 
 //#define bAnode_grid
 //#define bInsulator_box
 //#define bPMTs
-//#define bWLS
-//#define bTHGEM2
-#define bTHGEM1
+////#define bWLS
+////#define bTHGEM2
+//#define bTHGEM1
 //#define bTHGEM0
-//#define bCuReflector
-//#define bSingleTHGEMHole
-//#define bFieldTHGEM
+////#define bCuReflector
+////#define bSingleTHGEMHole
+////#define bFieldTHGEM
 //#define bFieldWires
 //#define	bLArOuter 
-#define bLArInner
+//#define bLArInner
 //#define bCathode
 
 //z < 0
@@ -125,10 +145,21 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//Anode_grid
 	const double thickness_anode_grid = 0.5 * mm;
-	const double size_anode_grid = 124 * mm;
+	const double size_anode_grid = /*130 (from Ekaterina)*/ 124 * mm;
 	const double size_anode_grid_hole = length_wire /*future case*/;  //60 * mm /*real case*/;
 	const double z_anode_grid_bottom = 78.2 * mm /*78.2 in case of one THGEM*/ /*82.7*mm in case of two THGEM*/;
 	const double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
+
+	//PMTGridWire
+	const double PMTGridWireRadius = 150 / 2.0 * um;
+	const double PMTGridWirePitch = 1.2 * mm;
+	
+	//PMTAnodeGridTracker
+	const double PMTAnodeGridTrackerThickness = PMTGridWireRadius *2;
+	const double PMTAnodeGridTrackerXYsize = 50 * mm;
+	const double PMTAnodeGridTrackerZbottom = 100 * mm;
+	const double PMTAnodeGridTrackerZCenter = PMTAnodeGridTrackerZbottom + PMTAnodeGridTrackerThickness / 2.0;
+	const int PMTAnodeGridNCells = PMTAnodeGridTrackerXYsize / PMTGridWirePitch ;
 
 	//PMMA plate
 	const double x_size_PMMA_plate = size_anode_grid;
@@ -203,7 +234,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	//PMTs
 	const double radius_PMT = 45 * mm / 2.0;
-	const double z_size_PMT = 1 * um;
+	const double z_size_PMT = 5*mm /*1 * um*/;
 	const double x_pos_PMT = 152 * mm / 2.0 + z_size_PMT / 2;
 	const double y_pos_PMT = x_pos_PMT;
 	const double z_pos_PMT = 27.2 * mm + 63 * mm / 2.0;
@@ -948,6 +979,67 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 
+#ifdef bPMTAnodeGrid
+	//--------------------------------------------------------------------------------
+	// create tracker_anode_grid (this need for anode_grid parametrising)
+	
+	G4Box* solid_PMTAnodeGridTracker = new G4Box("solid_PMTAnodeGridTracker", PMTAnodeGridTrackerXYsize / 2.0, PMTAnodeGridTrackerXYsize / 2.0, PMTAnodeGridTrackerThickness / 2.0);
+	G4LogicalVolume* logic_PMTAnodeGridTracker = new G4LogicalVolume(solid_PMTAnodeGridTracker, G4Material::GetMaterial("LAr"), "logic_PMTAnodeGridTracker", 0, 0, 0);
+	G4VPhysicalVolume* phys_PMTAnodeGridTracker = new G4PVPlacement(0,               // no rotation
+		position_anode_grid, // at (x,y,z)
+		logic_tracker_anode_grid,       // its logical volume
+		"phys_tracker_anode_grid",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps 
+
+						 //--------------------------------------------------------------------------------
+
+
+						 //--------------------------------------------------------------------------------
+						 //create anode grid
+	G4Box* solid_anode_grid_substrate = new G4Box("anode_grid_substrate", size_anode_grid / 2.0, size_anode_grid / 2.0, thickness_anode_grid / 2.0);
+	G4Box* solid_anode_grid_hole = new G4Box("anode_grid_hole", size_anode_grid_hole / 2.0, size_anode_grid_hole / 2.0, thickness_anode_grid * 0.52);
+
+	G4SubtractionSolid* solid_anode_grid_subtraction = new G4SubtractionSolid("anode_grid__substrate-hole", solid_anode_grid_substrate, solid_anode_grid_hole);
+
+	logic_anode_grid = new G4LogicalVolume(solid_anode_grid_subtraction, fAl, "l_anode_grid", 0, 0, 0);
+	phys_anode_grid = new G4PVPlacement(0,
+		position_anode_grid,  // at (x,y,z)
+		logic_anode_grid,     // its logical volume
+		"p_anode_grid",        // its name
+		logicWorld,      // its mother  volume
+		false,           // no boolean operations
+		0);
+
+	//--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+	//--------------------------------------------------------------------------------
+	//create anode wire
+	G4Tubs* solid_wire = new G4Tubs("solid_wire", 0, radius_wire, length_wire / 2.0, 0.*deg, 360.*deg);
+	G4LogicalVolume* logic_wire = new G4LogicalVolume(solid_wire, fAl, "lwire", 0, 0, 0);
+	G4VPVParameterisation* param_wire = new AnodeGridParametrisation(N_wire, 0, 0, 0, step_wire, radius_wire, length_wire);
+
+	G4VPhysicalVolume* phys_wire = new G4PVParameterised("phys_wire",       // their name
+		logic_wire,   // their logical volume
+		logic_tracker_anode_grid,       // Mother logical volume
+		kXAxis,          // Are placed along this axis 
+		N_wire,    // Number of chambers
+		param_wire,    // The parametrisation
+		fCheckOverlaps); // checking overlaps 
+
+
+	//--------------------------------------------------------------------------------
+#endif // bPMTAnodeGrid
+
+
 
 #ifdef bSiPM
 		//--------------------------------------------------------------------------------
@@ -1273,8 +1365,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//---------------------------------------------------------------------------
 	//установка поверхностей
 
+#ifdef bLArInner
 	G4LogicalBorderSurface* LAr_inner2physiWorld = new G4LogicalBorderSurface("LAr_inner2physiWorld", phys_LAr_inner, physiWorld, LAr_OpticalSurface);
 	G4LogicalBorderSurface* physiWorld2LAr_inner = new G4LogicalBorderSurface("physiWorld2LAr_inner", physiWorld, phys_LAr_inner, LAr_OpticalSurface);
+#endif
 
 #ifdef bSiPM
 	//SiPM
@@ -1284,18 +1378,22 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #ifdef bCathode
 	//bCathode
-	G4LogicalBorderSurface* LAr_inner2bCathode = new G4LogicalBorderSurface("LAr_inner2bCathode", phys_LAr_inner, phys_bCathode, AbsorberMaterial);
+	G4LogicalBorderSurface* LAr_inner2bCathode = new G4LogicalBorderSurface("LAr_inner2bCathode", phys_LAr_inner, phys_bCathode, Cu_Cathode /*AbsorberMaterial*/);
+	G4LogicalBorderSurface* bCathodeLAr_inner2 = new G4LogicalBorderSurface("bCathodeLAr_inner2", phys_bCathode, phys_LAr_inner, Cu_Cathode /*AbsorberMaterial*/);
 #endif // bCathode
 
 
 #ifdef bLArOuter
-	G4LogicalBorderSurface* LAr_outer2bCathode = new G4LogicalBorderSurface("LAr_outer2bCathode", phys_LAr_outer, phys_bCathode, AbsorberMaterial);
+	G4LogicalBorderSurface* LAr_outer2bCathode = new G4LogicalBorderSurface("LAr_outer2bCathode", phys_LAr_outer, phys_bCathode, Cu_Cathode/*AbsorberMaterial*/);
 #endif // bLArOuter
 	
 
 #ifdef bInsulator_box
-	G4LogicalBorderSurface* Insulator_box2bCathode = new G4LogicalBorderSurface("Insulator_box2bCathode", phys_Insulator_box, phys_bCathode, AbsorberMaterial);
+	G4LogicalBorderSurface* Insulator_box2bCathode = new G4LogicalBorderSurface("Insulator_box2bCathode", phys_Insulator_box, phys_bCathode, Cu_Cathode/*AbsorberMaterial*/);
 #endif //bInsulator_box
+
+
+	
 
 #ifdef bCuReflector
 	G4LogicalSkinSurface* CuReflector_THGEM0_surface = new G4LogicalSkinSurface("CuReflector_THGEM0_surface", logic_tracker_THGEM_Cu_reflector, Cu_THGEM);

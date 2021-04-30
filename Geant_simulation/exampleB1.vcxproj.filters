@@ -99,6 +99,9 @@
     <ClCompile Include="src\MyExceptionHandler.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PMTGridParametrisation.cpp">
+      <Filter>Source Files\DetectorConstruction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Messenger.hh">
@@ -165,6 +168,9 @@
     </ClInclude>
     <ClInclude Include="include\MyExceptionHandler.hh">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PMTGridParametrisation.h">
+      <Filter>Header Files\DetectorConstruction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

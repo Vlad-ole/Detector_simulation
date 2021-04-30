@@ -23,7 +23,7 @@
 
 //#define bTHGEM2
 #define bTHGEM1
-//#define bTHGEM0
+#define bTHGEM0
 //#define Cu_REFLECTION
 //#define bPASSTHROUGHTHGEMsREFLECTION
 
@@ -531,12 +531,14 @@ void SteppingAction::PassThroughGEM(const G4Step* theStep, G4double z_pos, G4dou
 		const G4ThreeVector& Position_i = theStep->GetTrack()->GetPosition();
 
 		//THGEM CERN 28%
-		const double step = 0.9 * mm;
+		//const double step = 0.9 * mm;
 		//const double radius = 0.25 * mm;
 
 		////THGEM ELECROCONNECT 75%
 		//const double step = 1.1 * mm;
 		//const double radius = 0.5 * mm;
+
+		double step = g()->step_THGEM_hole;
 
 		const double step_y = step * sqrt(3) / 2;
 		double y_center;

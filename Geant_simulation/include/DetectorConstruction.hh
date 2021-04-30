@@ -166,6 +166,7 @@ private:
 	G4OpticalSurface *Anode_wire_unified;
 	G4OpticalSurface *Cu_THGEM;
 	G4OpticalSurface *LAr_OpticalSurface;
+	G4OpticalSurface *Cu_Cathode;
 
 	G4OpticalSurface *Glass_surface;
 
