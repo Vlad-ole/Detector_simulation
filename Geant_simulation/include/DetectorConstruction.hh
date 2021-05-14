@@ -193,7 +193,6 @@ private:
 	double size_anode_grid;
 	double size_anode_grid_hole;
 	double z_anode_grid_bottom;
-	double z_anode_grid_center;
 
 	//PMTGridWire
 	double PMTGridWireRadius;
@@ -201,25 +200,28 @@ private:
 
 	//PMTAnodeGridTracker
 	double PMTAnodeGridTrackerThickness;
-	double PMTAnodeGridTrackerXYsize;
-	double PMTAnodeGridTrackerZbottom;
-	double PMTAnodeGridTrackerZCenter;
-	int PMTAnodeGridNCells;
+	double PMTAnodeGridTrackerGasXSize;
+	double PMTAnodeGridTrackerGasYSize;
+	double PMTAnodeGridTrackerZbottom;	
+	int PMTAnodeGridNCellsGas;
+	int PMTAnodeGridNCellsGasInner;
+	int PMTAnodeGridNCellsLiquid;
+	int PMTAnodeGridNCellsLiquidInner;
+	double PMTAnodeGridTrackerLiquidXSize;
+	double PMTAnodeGridTrackerLiquidYSize;
 
 	//PMMA plate
 	double x_size_PMMA_plate;
 	double y_size_PMMA_plate;
 	double z_size_PMMA_plate;
-	double z_PMMA_plate_center;
+	
 
 	//SiPMs
 	int Nx_SiPMs;
 	int Ny_SiPMs;
 	double thickness_SiPM;
 	double size_SiPM;
-	double chamberSpacing;
-	double z_SiPM_bottom;
-	double z_SiPM_center;
+	double chamberSpacing;	
 
 	//tracker SiPM
 	double x_size_tracker;
@@ -235,7 +237,7 @@ private:
 	double x_size_tracker_THGEM2;
 	double y_size_tracker_THGEM2;
 	double z_size_tracker_THGEM2;
-	double z_tracker_THGEM2_center;
+	
 
 	//solid_tracker_THGEM_Cu_reflector
 	double z_size_tracker_THGEM_Cu_reflector = z_size_tracker_THGEM2 / 10.0;
@@ -375,7 +377,7 @@ private:
 
 
 	G4ThreeVector position_SingleTHGEMHole;
-	G4ThreeVector position_anode_grid;
+	
 	G4ThreeVector positionTracker;
 	G4ThreeVector position_PMMA_plate;
 	G4ThreeVector position_tracker_THGEM2;
@@ -427,10 +429,22 @@ private:
 	G4ThreeVector position_PMT_2;
 	G4ThreeVector position_PMT_3;
 
+	//anode_grid
+	G4ThreeVector position_anode_grid;
+
+
+	//PMTAnodeGridTracker
+	G4ThreeVector position_PMTAnodeGridTrackerGas_1;
+	G4ThreeVector position_PMTAnodeGridTrackerGasInner_1;
+	G4ThreeVector position_PMTAnodeGridTracker_1;
+	G4ThreeVector position_PMTAnodeGridTracker_2;
+	G4ThreeVector position_PMTAnodeGridTracker_3;
+	G4ThreeVector position_PMTAnodeGridTrackerLiquid_1;
+	G4ThreeVector position_PMTAnodeGridTrackerLiquidInner_1;
+
+	//
 	G4ThreeVector position_FieldTHGEM_1;
 	G4ThreeVector position_FieldTHGEM_2;
-
-
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

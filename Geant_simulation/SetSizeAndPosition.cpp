@@ -8,35 +8,36 @@ void DetectorConstruction::SetSizeAndPosition()
 {
 	HalfWorldLength = 17 * cm;
 
+	//PMTs
+	radius_PMT = 45 * mm / 2.0;
+	z_size_PMT = 5 * mm /*1 * um*/;
+	x_pos_PMT = 152 * mm / 2.0 + z_size_PMT / 2;
+	y_pos_PMT = x_pos_PMT;
+	z_pos_PMT = 27.2 * mm + 63 * mm / 2.0;
+
 	//anode wire
 	radius_wire = 100 / 2.0 * um;//you can understand this from photo
 	length_wire = 60 * mm /* 108*mm future case*/;  //60*mm /*real case*/;
 	step_wire = 1 * mm;
 	N_wire = length_wire / step_wire - 1 /* 107 future case*/;
 
+	
+
 	//Anode_grid
 	thickness_anode_grid = 0.5 * mm;
 	size_anode_grid = /*130 (from Ekaterina)*/ 124 * mm;
 	size_anode_grid_hole = length_wire /*future case*/;  //60 * mm /*real case*/;
 	z_anode_grid_bottom = 78.2 * mm /*78.2 in case of one THGEM*/ /*82.7*mm in case of two THGEM*/;
-	z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
+	double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
 
-	//PMTGridWire
-	PMTGridWireRadius = 150 / 2.0 * um;
-	PMTGridWirePitch = 1.2 * mm;
+	
 
-	//PMTAnodeGridTracker
-	PMTAnodeGridTrackerThickness = PMTGridWireRadius * 2;
-	PMTAnodeGridTrackerXYsize = 50 * mm;
-	PMTAnodeGridTrackerZbottom = 100 * mm;
-	PMTAnodeGridTrackerZCenter = PMTAnodeGridTrackerZbottom + PMTAnodeGridTrackerThickness / 2.0;
-	PMTAnodeGridNCells = PMTAnodeGridTrackerXYsize / PMTGridWirePitch;
 
 	//PMMA plate
 	x_size_PMMA_plate = size_anode_grid;
 	y_size_PMMA_plate = size_anode_grid;
 	z_size_PMMA_plate = 1.5 * mm;
-	z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
+	double z_PMMA_plate_center = z_anode_grid_center + thickness_anode_grid / 2.0 + z_size_PMMA_plate / 2.0;
 
 	//SiPMs
 	Nx_SiPMs = 11;
@@ -44,8 +45,8 @@ void DetectorConstruction::SetSizeAndPosition()
 	thickness_SiPM = 1 * nm;
 	size_SiPM = 6.0 * mm;
 	chamberSpacing = 10 * mm;
-	z_SiPM_bottom = z_anode_grid_bottom + thickness_anode_grid + z_size_PMMA_plate + (0.1*mm /*small gap between PMMA and SiPM*/) /* 85.7*mm in case of two THGEM*/;
-	z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
+	double z_SiPM_bottom = z_anode_grid_bottom + thickness_anode_grid + z_size_PMMA_plate + (0.1*mm /*small gap between PMMA and SiPM*/) /* 85.7*mm in case of two THGEM*/;
+	double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
 
 	cout << "z_SiPM_bottom = " << z_SiPM_bottom << endl;
 
@@ -63,7 +64,7 @@ void DetectorConstruction::SetSizeAndPosition()
 	x_size_tracker_THGEM2 = 100 * mm;
 	y_size_tracker_THGEM2 = 100 * mm;
 	z_size_tracker_THGEM2 = g()->width_THGEM1 /*0.4*/ /*500 * um*/;
-	z_tracker_THGEM2_center = 77.2 * mm + z_size_tracker_THGEM2 / 2.0;
+	double z_tracker_THGEM2_center = 77.2 * mm + z_size_tracker_THGEM2 / 2.0;
 
 	//solid_tracker_THGEM_Cu_reflector
 	z_size_tracker_THGEM_Cu_reflector = z_size_tracker_THGEM2 / 10.0;
@@ -97,12 +98,7 @@ void DetectorConstruction::SetSizeAndPosition()
 	z_size_Insulator_box = 150 * mm;
 	z_Insulator_box_center = z_size_Insulator_box / 2.0;
 
-	//PMTs
-	radius_PMT = 45 * mm / 2.0;
-	z_size_PMT = 5 * mm /*1 * um*/;
-	x_pos_PMT = 152 * mm / 2.0 + z_size_PMT / 2;
-	y_pos_PMT = x_pos_PMT;
-	z_pos_PMT = 27.2 * mm + 63 * mm / 2.0;
+	
 
 	//WLS
 	/*const double radius_WLS = 70 * mm / 2.0;
@@ -228,7 +224,25 @@ void DetectorConstruction::SetSizeAndPosition()
 		system("pause");
 	}
 
+	//PMTGridWire
+	PMTGridWireRadius = /*1500 test_value*/ 150 / 2.0 * um;
+	PMTGridWirePitch = /*5 test_value*/ 1.2 * mm;
 
+	//PMTAnodeGridTracker
+	PMTAnodeGridTrackerThickness = PMTGridWireRadius * 2;
+	PMTAnodeGridTrackerGasYSize = 50 * mm;
+	PMTAnodeGridTrackerGasXSize = radius_PMT - (z_size_LAr_inner - z_pos_PMT);
+	cout << "z_size_LAr_inner = " << z_size_LAr_inner << endl;
+	cout << "z_pos_PMT = " << z_pos_PMT << endl;
+	cout << "PMTAnodeGridTrackerGasXSize = " << PMTAnodeGridTrackerGasXSize << endl;
+	PMTAnodeGridTrackerZbottom = /*150*mm*/ z_pos_PMT;
+	PMTAnodeGridNCellsGas = PMTAnodeGridTrackerGasXSize / PMTGridWirePitch;
+	PMTAnodeGridNCellsGasInner = PMTAnodeGridTrackerGasYSize / PMTGridWirePitch;
+
+	PMTAnodeGridTrackerLiquidXSize = 2*radius_PMT - PMTAnodeGridTrackerGasXSize;
+	PMTAnodeGridTrackerLiquidYSize = PMTAnodeGridTrackerGasYSize;
+	PMTAnodeGridNCellsLiquid = PMTAnodeGridTrackerLiquidXSize / PMTGridWirePitch;
+	PMTAnodeGridNCellsLiquidInner = PMTAnodeGridTrackerLiquidYSize / PMTGridWirePitch;
 
 	//--------------------------------------------------------------------------------
 	//определение взаимного расположения объектов
@@ -291,6 +305,22 @@ void DetectorConstruction::SetSizeAndPosition()
 	position_PMT_1 = G4ThreeVector(x_pos_PMT, 0, z_pos_PMT);
 	position_PMT_2 = G4ThreeVector(0, -y_pos_PMT, z_pos_PMT);
 	position_PMT_3 = G4ThreeVector(0, y_pos_PMT, z_pos_PMT);
+
+	//anode_grid
+	position_anode_grid = G4ThreeVector(0, 0, z_anode_grid_center);
+	
+	//PMTAnodeGridTracker
+	const double x_pos_PMTAnodeGridTracker = (x_pos_PMT - z_size_PMT / 2.0 - PMTAnodeGridTrackerThickness / 2.0);
+	const double y_pos_PMTAnodeGridTracker = 0;
+	const double z_pos_PMTAnodeGridTracker = PMTAnodeGridTrackerGasXSize /2.0 + z_size_LAr_inner;
+	position_PMTAnodeGridTrackerGas_1 = G4ThreeVector(x_pos_PMTAnodeGridTracker, y_pos_PMTAnodeGridTracker, z_pos_PMTAnodeGridTracker);
+	position_PMTAnodeGridTrackerGasInner_1 = G4ThreeVector(x_pos_PMTAnodeGridTracker - PMTAnodeGridTrackerThickness, y_pos_PMTAnodeGridTracker, z_pos_PMTAnodeGridTracker);
+	
+	const double x_pos_PMTAnodeGridTrackerLiquid = x_pos_PMTAnodeGridTracker;
+	const double y_pos_PMTAnodeGridTrackerLiquid = 0;
+	const double z_pos_PMTAnodeGridTrackerLiquid = z_size_LAr_inner - PMTAnodeGridTrackerLiquidXSize/2.0 - z_size_LAr_inner / 2.0;
+	position_PMTAnodeGridTrackerLiquid_1 = G4ThreeVector(x_pos_PMTAnodeGridTrackerLiquid, y_pos_PMTAnodeGridTrackerLiquid, z_pos_PMTAnodeGridTrackerLiquid);
+	position_PMTAnodeGridTrackerLiquidInner_1 = G4ThreeVector(x_pos_PMTAnodeGridTrackerLiquid - PMTAnodeGridTrackerThickness, y_pos_PMTAnodeGridTrackerLiquid, z_pos_PMTAnodeGridTrackerLiquid);
 
 	position_FieldTHGEM_1 = G4ThreeVector(0, 0, z_center_FieldTHGEM_1 - z_size_LAr_inner / 2.0);
 	position_FieldTHGEM_2 = G4ThreeVector(0, 0, z_center_FieldTHGEM_2 - z_size_LAr_inner / 2.0);

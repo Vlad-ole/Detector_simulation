@@ -43,6 +43,7 @@
 #include <string>
 
 #include "AnodeGridParametrisation.h"
+#include "PMTGridParametrisation.h"
 #include "THGEMParametrisation.h"
 #include "PMTSD.h"
 #include "Singleton.h"
@@ -71,7 +72,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	#define bAnode_grid
 	#define bInsulator_box
 	#define bPMTs
-	//#define bPMTAnodeGrid
+	#define bPMTAnodeGrid
 	#define bTHGEM1
 	#define bTHGEM0
 	//#define bFieldWires
@@ -182,7 +183,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 
-#ifdef bLArOuter
+
 	//--------------------------------------------------------------------------------
 	//create LAr box contaned outside the PMMA insulator
 	cout << x_size_LAr_outer_out / 2.0 << "\t" << y_size_LAr_outer_out / 2.0 << endl;
@@ -190,7 +191,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Box* solid_LAr_outer_in = new G4Box("solid_LAr_outer_in", x_size_LAr_outer_in / 2.0, y_size_LAr_outer_in / 2.0, z_size_LAr_outer / 2.0);
 	G4SubtractionSolid* solid_LAr_outer = new G4SubtractionSolid("solid_LAr_outer", solid_LAr_outer_out, solid_LAr_outer_in);
 
-	G4LogicalVolume* logic_LAr_outer = new G4LogicalVolume(solid_LAr_outer, G4Material::GetMaterial("LAr"), "logic_LAr_outer", 0, 0, 0);
+	G4LogicalVolume* logic_LAr_outer;
+#ifdef bLArOuter
+	logic_LAr_outer = new G4LogicalVolume(solid_LAr_outer, G4Material::GetMaterial("LAr"), "logic_LAr_outer", 0, 0, 0);
+#else
+	logic_LAr_outer = new G4LogicalVolume(solid_LAr_outer, G4Material::GetMaterial("Air"), "logic_LAr_outer", 0, 0, 0);
+#endif // bLArOuter
+	
 	G4VPhysicalVolume* phys_LAr_outer = new G4PVPlacement(0,               // no rotation
 		position_LAr_outer, // at (x,y,z)
 		logic_LAr_outer,       // its logical volume
@@ -201,7 +208,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		fCheckOverlaps); // checking overlaps 
 
 	//--------------------------------------------------------------------------------
-#endif // bLArOuter
+
+
 
 
 
@@ -640,7 +648,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 		fCheckOverlaps); // checking overlaps 
 
 
-						 //--------------------------------------------------------------------------------
+						 //--------------------------------------------------------------------------------position_PMTAnodeGridTracker_0
 #endif // bAnode_grid
 
 
@@ -649,36 +657,51 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//--------------------------------------------------------------------------------
 	// create tracker_anode_grid (this need for anode_grid parametrising)
 	
-	G4Box* solid_PMTAnodeGridTracker = new G4Box("solid_PMTAnodeGridTracker", PMTAnodeGridTrackerXYsize / 2.0, PMTAnodeGridTrackerXYsize / 2.0, PMTAnodeGridTrackerThickness / 2.0);
-	G4LogicalVolume* logic_PMTAnodeGridTracker = new G4LogicalVolume(solid_PMTAnodeGridTracker, G4Material::GetMaterial("LAr"), "logic_PMTAnodeGridTracker", 0, 0, 0);
-	G4VPhysicalVolume* phys_PMTAnodeGridTracker = new G4PVPlacement(0,               // no rotation
-		position_PMTAnodeGridTracker, // at (x,y,z)
-		logic_PMTAnodeGridTracker,       // its logical volume
-		"phys_PMTAnodeGridTracker",       // its name
-		logicWorld,         // its mother  volume
+	//Gas
+	G4Box* solid_PMTAnodeGridTrackerGas = new G4Box("solid_PMTAnodeGridTrackerGas", PMTAnodeGridTrackerGasXSize / 2.0, PMTAnodeGridTrackerGasYSize / 2.0, PMTAnodeGridTrackerThickness / 2.0);
+	G4LogicalVolume* logic_PMTAnodeGridTrackerGas = new G4LogicalVolume(solid_PMTAnodeGridTrackerGas, G4Material::GetMaterial("Air"), "logic_PMTAnodeGridTrackerGas", 0, 0, 0);
+	G4LogicalVolume* logic_PMTAnodeGridTrackerGasInner = new G4LogicalVolume(solid_PMTAnodeGridTrackerGas, G4Material::GetMaterial("Air"), "logic_PMTAnodeGridTrackerGasInner", 0, 0, 0);
+	
+	G4VPhysicalVolume* phys_PMTAnodeGridTrackerGas_1 = new G4PVPlacement(rotY,               // no rotation
+		position_PMTAnodeGridTrackerGas_1, // at (x,y,z)
+		logic_PMTAnodeGridTrackerGas,       // its logical volume
+		"phys_PMTAnodeGridTrackerGas_1",       // its name
+		logicWorld /*logic_LAr_outer*/,         // its mother  volume
 		false,           // no boolean operations
 		0,               // copy number
 		fCheckOverlaps); // checking overlaps 
 
-						 //--------------------------------------------------------------------------------
-
-
-						 //--------------------------------------------------------------------------------
-						 //create anode grid
-	G4Box* solid_anode_grid_substrate = new G4Box("anode_grid_substrate", size_anode_grid / 2.0, size_anode_grid / 2.0, thickness_anode_grid / 2.0);
-	G4Box* solid_anode_grid_hole = new G4Box("anode_grid_hole", size_anode_grid_hole / 2.0, size_anode_grid_hole / 2.0, thickness_anode_grid * 0.52);
-
-	G4SubtractionSolid* solid_anode_grid_subtraction = new G4SubtractionSolid("anode_grid__substrate-hole", solid_anode_grid_substrate, solid_anode_grid_hole);
-
-	logic_anode_grid = new G4LogicalVolume(solid_anode_grid_subtraction, fAl, "l_anode_grid", 0, 0, 0);
-	phys_anode_grid = new G4PVPlacement(0,
-		position_anode_grid,  // at (x,y,z)
-		logic_anode_grid,     // its logical volume
-		"p_anode_grid",        // its name
-		logicWorld,      // its mother  volume
+	G4VPhysicalVolume* phys_PMTAnodeGridTrackerGasInner_1 = new G4PVPlacement(rotY,               // no rotation
+		position_PMTAnodeGridTrackerGasInner_1, // at (x,y,z)
+		logic_PMTAnodeGridTrackerGasInner,       // its logical volume
+		"phys_PMTAnodeGridTrackerGasInner_1",       // its name
+		logicWorld /*logic_LAr_outer*/,         // its mother  volume
 		false,           // no boolean operations
-		0);
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
 
+	//Liquid
+	G4Box* solid_PMTAnodeGridTrackerLiquid = new G4Box("solid_PMTAnodeGridTrackerLiquid", PMTAnodeGridTrackerLiquidXSize / 2.0, PMTAnodeGridTrackerLiquidYSize / 2.0, PMTAnodeGridTrackerThickness / 2.0);
+	G4LogicalVolume* logic_PMTAnodeGridTrackerLiquid = new G4LogicalVolume(solid_PMTAnodeGridTrackerLiquid, G4Material::GetMaterial("LAr"), "logic_PMTAnodeGridTrackerLiquid", 0, 0, 0);
+	G4LogicalVolume* logic_PMTAnodeGridTrackerLiquidInner = new G4LogicalVolume(solid_PMTAnodeGridTrackerLiquid, G4Material::GetMaterial("LAr"), "logic_PMTAnodeGridTrackerLiquidInner", 0, 0, 0);
+	G4VPhysicalVolume* phys_PMTAnodeGridTrackerLiquid_1 = new G4PVPlacement(rotY,               // no rotation
+		position_PMTAnodeGridTrackerLiquid_1, // at (x,y,z)
+		logic_PMTAnodeGridTrackerLiquid,       // its logical volume
+		"phys_PMTAnodeGridTrackerLiquid_1",       // its name
+		/*logicWorld*/ logic_LAr_outer,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps	
+
+	G4VPhysicalVolume* phys_PMTAnodeGridTrackerLiquidInner_1 = new G4PVPlacement(rotY,               // no rotation
+		position_PMTAnodeGridTrackerLiquidInner_1, // at (x,y,z)
+		logic_PMTAnodeGridTrackerLiquidInner,       // its logical volume
+		"phys_PMTAnodeGridTrackerLiquidInner_1",       // its name
+		/*logicWorld*/ logic_LAr_outer,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+						 
 	//--------------------------------------------------------------------------------
 
 
@@ -688,19 +711,48 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 	//--------------------------------------------------------------------------------
-	//create anode wire
-	G4Tubs* solid_wire = new G4Tubs("solid_wire", 0, radius_wire, length_wire / 2.0, 0.*deg, 360.*deg);
-	G4LogicalVolume* logic_wire = new G4LogicalVolume(solid_wire, fAl, "lwire", 0, 0, 0);
-	G4VPVParameterisation* param_wire = new AnodeGridParametrisation(N_wire, 0, 0, 0, step_wire, radius_wire, length_wire);
-
-	G4VPhysicalVolume* phys_wire = new G4PVParameterised("phys_wire",       // their name
-		logic_wire,   // their logical volume
-		logic_tracker_anode_grid,       // Mother logical volume
+	//create PMTGridWire
+	G4Tubs* solid_PMTGridWire = new G4Tubs("solid_PMTGridWire", 0, PMTGridWireRadius, PMTAnodeGridTrackerGasYSize / 2.0, 0.*deg, 360.*deg);
+	G4LogicalVolume* logic_PMTGridWire = new G4LogicalVolume(solid_PMTGridWire, fAl, "lwire", 0, 0, 0);
+	G4VPVParameterisation* param_PMTGridWireGas = new PMTGridParametrisation(PMTAnodeGridNCellsGas, 0, 0, 0, PMTGridWirePitch, PMTGridWireRadius, false);
+	G4VPhysicalVolume* phys_PMTGridWireGas_0 = new G4PVParameterised("phys_PMTGridWireGas_0",       // their name
+		logic_PMTGridWire,   // their logical volume
+		logic_PMTAnodeGridTrackerGas,       // Mother logical volume
 		kXAxis,          // Are placed along this axis 
-		N_wire,    // Number of chambers
-		param_wire,    // The parametrisation
-		fCheckOverlaps); // checking overlaps 
+		PMTAnodeGridNCellsGas,    // Number of chambers
+		param_PMTGridWireGas,    // The parametrisation
+		fCheckOverlaps); // checking overlaps	
 
+	G4Tubs* solid_PMTGridWireGasInner = new G4Tubs("solid_PMTGridWireGasInner", 0, PMTGridWireRadius, PMTAnodeGridTrackerGasXSize/2.0, 0.*deg, 360.*deg);
+	G4LogicalVolume* logic_PMTGridWireGasInner = new G4LogicalVolume(solid_PMTGridWireGasInner, fAl, "lwire", 0, 0, 0);
+	G4VPVParameterisation* param_PMTGridWireGasInner = new PMTGridParametrisation(PMTAnodeGridNCellsGasInner, 0, 0, 0, PMTGridWirePitch, PMTGridWireRadius, true);
+	G4VPhysicalVolume* phys_PMTGridWireGasInner_0 = new G4PVParameterised("phys_PMTGridWireGasInner_0",       // their name
+		logic_PMTGridWireGasInner,   // their logical volume
+		logic_PMTAnodeGridTrackerGasInner,       // Mother logical volume
+		kXAxis,          // Are placed along this axis 
+		PMTAnodeGridNCellsGasInner,    // Number of chambers
+		param_PMTGridWireGasInner,    // The parametrisation
+		fCheckOverlaps); // checking overlaps
+	
+	G4VPVParameterisation* param_PMTGridWireLiquid = new PMTGridParametrisation(PMTAnodeGridNCellsLiquid, 0, 0, 0, PMTGridWirePitch, PMTGridWireRadius, false);
+	G4VPhysicalVolume* phys_PMTGridWireLiquid_0 = new G4PVParameterised("phys_PMTGridWireLiquid_0",       // their name
+		logic_PMTGridWire,   // their logical volume
+		logic_PMTAnodeGridTrackerLiquid,       // Mother logical volume
+		kXAxis,          // Are placed along this axis 
+		PMTAnodeGridNCellsLiquid,    // Number of chambers
+		param_PMTGridWireLiquid,    // The parametrisation
+		fCheckOverlaps); // checking overlaps
+
+	G4Tubs* solid_PMTGridWireLiquidInner = new G4Tubs("solid_PMTGridWireLiquidInner", 0, PMTGridWireRadius, PMTAnodeGridTrackerLiquidXSize/2.0, 0.*deg, 360.*deg);
+	G4LogicalVolume* logic_PMTGridWireLiquidInner = new G4LogicalVolume(solid_PMTGridWireLiquidInner, fAl, "lwire", 0, 0, 0);
+	G4VPVParameterisation* param_PMTGridWireLiquidInner = new PMTGridParametrisation(PMTAnodeGridNCellsLiquidInner, 0, 0, 0, PMTGridWirePitch, PMTGridWireRadius, true);
+	G4VPhysicalVolume* phys_PMTGridWireLiquidInner_0 = new G4PVParameterised("phys_PMTGridWireLiquidInner_0",       // their name
+		logic_PMTGridWireLiquidInner,   // their logical volume
+		logic_PMTAnodeGridTrackerLiquidInner,       // Mother logical volume
+		kXAxis,          // Are placed along this axis 
+		PMTAnodeGridNCellsLiquidInner,    // Number of chambers
+		param_PMTGridWireLiquidInner,    // The parametrisation
+		fCheckOverlaps); // checking overlaps
 
 	//--------------------------------------------------------------------------------
 #endif // bPMTAnodeGrid
@@ -1068,9 +1120,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #ifdef bPMTs
 	//________________________________________________
-	//PMT
+	//PMT	
+	
+	G4LogicalBorderSurface* PMTAnodeGridTrackerGas_PMT1 = new G4LogicalBorderSurface("PMTAnodeGridTrackerGas_PMT1", phys_PMTAnodeGridTrackerGas_1, phys_PMT1, PMT_cathode);
+	G4LogicalBorderSurface* PMTAnodeGridTrackerLiquid_PMT1 = new G4LogicalBorderSurface("PMTAnodeGridTrackerLiquid_PMT1", phys_PMTAnodeGridTrackerLiquid_1, phys_PMT1, PMT_cathode);
+	
 	G4LogicalBorderSurface* world2PMT0 = new G4LogicalBorderSurface("world2PMT0", physiWorld, phys_PMT0, PMT_cathode);
-	G4LogicalBorderSurface* world2PMT1 = new G4LogicalBorderSurface("world2PMT1", physiWorld, phys_PMT1, PMT_cathode);
+	//G4LogicalBorderSurface* world2PMT1 = new G4LogicalBorderSurface("world2PMT1", physiWorld, phys_PMT1, PMT_cathode);
 	G4LogicalBorderSurface* world2PMT2 = new G4LogicalBorderSurface("world2PMT2", physiWorld, phys_PMT2, PMT_cathode);
 	G4LogicalBorderSurface* world2PMT3 = new G4LogicalBorderSurface("world2PMT3", physiWorld, phys_PMT3, PMT_cathode);
 
@@ -1143,6 +1199,8 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//------------------------------------------------------------------------------
 	// установка атрибутов визуализации
 
+
+
 #ifdef bAnode_grid
 	//anode grid
 	G4VisAttributes* WireVisAtt = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.8));
@@ -1189,6 +1247,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4VisAttributes* LAr_inside_VisAtt = new G4VisAttributes(G4Colour(0.0, 0.0, 1.0, 0.3));
 	logic_LAr_inner->SetVisAttributes(LAr_inside_VisAtt);
 	//logic_LAr_inner->SetVisAttributes(G4VisAttributes::GetInvisible());
+
+#ifdef bPMTAnodeGrid
+	//logic_PMTAnodeGridTrackerGas->SetVisAttributes(G4Colour(0.0, 0.0, 0.0, 0.0));
+	//logic_PMTAnodeGridTrackerGasInner->SetVisAttributes(G4Colour(0.0, 0.0, 0.0, 0.0));
+	logic_PMTAnodeGridTrackerLiquid->SetVisAttributes(LAr_inside_VisAtt);
+	logic_PMTAnodeGridTrackerLiquidInner->SetVisAttributes(LAr_inside_VisAtt);
+#endif bPMTAnodeGrid
 
 #ifdef bLArOuter
 	logic_LAr_outer->SetVisAttributes(LAr_inside_VisAtt);

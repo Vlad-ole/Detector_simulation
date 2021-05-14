@@ -30,7 +30,7 @@ class PMTGridParametrisation : public G4VPVParameterisation
 {
 public:
 
-	PMTGridParametrisation(G4int  noChambersX, G4double startX, G4double startY, G4double startZ, G4double spacing, G4double radius, G4double length);
+	PMTGridParametrisation(G4int  noChambersX, G4double startX, G4double startY, G4double startZ, G4double spacing, G4double radius, bool isRotY);
 
 	virtual ~PMTGridParametrisation();
 
@@ -74,9 +74,11 @@ private:
 	G4double fStartZ;
 	G4double fSpacing;
 	G4double fRadius;
-	G4double fLength;
+	//G4double fLength;
+	bool fisRotY;
 
 	G4RotationMatrix *rotX;
+	G4RotationMatrix *rotY;
 	double *example;
 };
 

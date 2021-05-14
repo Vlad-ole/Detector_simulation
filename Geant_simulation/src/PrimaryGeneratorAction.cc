@@ -339,7 +339,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef DIRECT_INCIDENCE
 	double phi = 0 * deg;
 	//double theta = 0 * deg;
-	double cosTheta = cos(0 * deg);
+	double cosTheta = cos(90 * deg);
 	//cout << "inside DIRECT_INCIDENCE" << endl;
 	//system("pause");
 #endif //DIRECT_INCIDENCE	
@@ -376,8 +376,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #endif //ANGLE_Cd_COLL6mm
 
 #ifdef	TEST_POSITION_DIRECTION
-	double phi = 0 * pi;
-	double cosTheta = /*0.9085*/ /*0.9075*/ -0.90 /*0.98*/;
+	double phi = 60*deg/*0 * pi*/;
+	double cosTheta = /*0.9085*/ /*0.9075*//* -0.90*/ /*0.98*/ cos( (90-0) * deg);
 #endif
 
 	double sinTheta = sqrt(1 - cosTheta*cosTheta);
@@ -398,9 +398,13 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	double x, y, z;
 
 #ifdef	TEST_POSITION_DIRECTION
-	x = g()->x_source;
-	y = g()->y_source;
-	z = /*60*/ /*78*/ 40;
+	//x = g()->x_source;
+	//y = g()->y_source;
+	//z = /*60*/ /*78*/ /*40*/ g()->z_source;
+
+	x = 74;
+	y = 0 + (G4UniformRand() - 0.5) * 5;
+	z = 77 + (G4UniformRand() - 0.5) * 5;
 #endif
 
 #ifdef	POSITION_FROM_MAIN

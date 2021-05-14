@@ -41,11 +41,11 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 
-	bool isLowStaticticsAndView = 1;
+	bool isLowStaticticsAndView = 0;
 
 	int N_runs;
 	int N_events_per_run;
-	if (isLowStaticticsAndView) { N_runs = 10; N_events_per_run = 10; }
+	if (isLowStaticticsAndView) { N_runs = /*1*/ 10; N_events_per_run = /*10000*/10; }
 	else { N_runs = 200000; N_events_per_run = 100; }
 
 		
@@ -66,7 +66,7 @@ int main(int argc, char** argv)
 	g()->is_Am_coll_14mm = false;
 	g()->is_Cd_standard_box = false;
 	g()->is_X_ray_coll_35mm_no_alpha = false;
-	g()->is_X_ray_coll_14mm_no_alpha = true;
+	g()->is_X_ray_coll_14mm_no_alpha = true;//
 	g()->is_X_ray_coll_2mm_no_alpha = false;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
 	g()->is_alpha = false;
