@@ -92,7 +92,6 @@ void DetectorConstruction::defineMaterials()
 	//------------------------------
 	
 
-
 	//------------------------------
 	//FR4
 

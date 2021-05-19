@@ -169,6 +169,7 @@ private:
 	G4OpticalSurface *LAr_OpticalSurface;
 	G4OpticalSurface *Cu_Cathode;
 	G4OpticalSurface *Glass_surface;
+	G4OpticalSurface *stainlessSteel;
 
 	G4MaterialPropertiesTable* luyag_pr;
 	G4MaterialPropertiesTable *PMT_cathodeMaterialProperty;
@@ -237,6 +238,11 @@ private:
 	double x_size_tracker_THGEM2;
 	double y_size_tracker_THGEM2;
 	double z_size_tracker_THGEM2;
+
+	//SteelBox
+	double xSizeSteelBox;
+	double ySizeSteelBox;
+	double zSizeSteelBox;
 	
 
 	//solid_tracker_THGEM_Cu_reflector
@@ -388,6 +394,12 @@ private:
 	G4ThreeVector position_Insulator_box;
 	G4ThreeVector position_LAr_inner;
 	G4ThreeVector position_LAr_outer;
+
+	//
+	G4ThreeVector positionSteelBox0;
+	G4ThreeVector positionSteelBox1;
+	G4ThreeVector positionSteelBox2;
+	G4ThreeVector positionSteelBox3;
 
 	//FieldWires
 	G4ThreeVector position_FieldWire_bottom1;

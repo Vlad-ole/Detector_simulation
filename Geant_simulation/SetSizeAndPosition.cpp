@@ -131,8 +131,8 @@ void DetectorConstruction::SetSizeAndPosition()
 	radius_FieldWire = 1.5 * mm / 2.0;
 	length_FieldWire = 95 * mm;
 	x_pos_FieldWire = x_size_tracker_THGEM2 / 2.0;
-	z_pos_FieldWire_bottom = 18.2*mm - radius_FieldWire;
-	z_pos_FieldWire_top = 34.2*mm + radius_FieldWire;
+	z_pos_FieldWire_bottom = 20 /*18.2*mm - radius_FieldWire*/;//see 210415 1618834738620-1618834738657 photos
+	z_pos_FieldWire_top = 33 /*34.2*mm + radius_FieldWire*/;//see 210415 1618834738620-1618834738657 photos
 
 	//Cathode
 	x_size_Cathode = x_size_LAr_outer_out;
@@ -244,6 +244,13 @@ void DetectorConstruction::SetSizeAndPosition()
 	PMTAnodeGridNCellsLiquid = PMTAnodeGridTrackerLiquidXSize / PMTGridWirePitch;
 	PMTAnodeGridNCellsLiquidInner = PMTAnodeGridTrackerLiquidYSize / PMTGridWirePitch;
 
+
+	//SteelBox
+	xSizeSteelBox = 3;
+	ySizeSteelBox = x_size_LAr_outer_out;
+	zSizeSteelBox = 70;
+
+
 	//--------------------------------------------------------------------------------
 	//определение взаимного расположения объектов
 	
@@ -324,4 +331,11 @@ void DetectorConstruction::SetSizeAndPosition()
 
 	position_FieldTHGEM_1 = G4ThreeVector(0, 0, z_center_FieldTHGEM_1 - z_size_LAr_inner / 2.0);
 	position_FieldTHGEM_2 = G4ThreeVector(0, 0, z_center_FieldTHGEM_2 - z_size_LAr_inner / 2.0);
+
+	//SteelBox0
+	const double xPosSteelBox = x_pos_PMT - z_size_PMT / 2.0 + xSizeSteelBox/2.0;
+	positionSteelBox0 = G4ThreeVector(-xPosSteelBox, 0, z_pos_PMT);
+	positionSteelBox1 = G4ThreeVector(xPosSteelBox, 0, z_pos_PMT);
+	positionSteelBox2 = G4ThreeVector(0, -xPosSteelBox, z_pos_PMT);
+	positionSteelBox3 = G4ThreeVector(0, xPosSteelBox, z_pos_PMT);
 }

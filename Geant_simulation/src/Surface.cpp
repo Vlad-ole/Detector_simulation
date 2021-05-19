@@ -148,6 +148,20 @@ void DetectorConstruction::defineSurfaces()
 	Cu_Cathode->SetMaterialPropertiesTable(Cu_Cathode_MaterialProperty);
 	//-------------------------------------------------------------------------------
 	
+	//stainlessSteel
+	stainlessSteel = new G4OpticalSurface("stainlessSteel");
+	stainlessSteel->SetType(dielectric_metal);
+	stainlessSteel->SetModel(unified);
+	stainlessSteel->SetFinish(polished);
+	G4MaterialPropertiesTable *stainlessSteelMaterialProperty = new G4MaterialPropertiesTable();
+	G4double stainlessSteelMaterialrefl[2] = { 0.5, 0.5 };
+	//DOI: 10.1063/1.2202915 Rubel20016_StainlessSteel_Mirror_test_for_International_Thermonuclear_Experi
+	G4double  stainlessSteelMaterialeff[2] = { 0, 0 };
+	stainlessSteelMaterialProperty->AddProperty("REFLECTIVITY", ener, stainlessSteelMaterialrefl, 2);
+	stainlessSteelMaterialProperty->AddProperty("EFFICIENCY", ener, stainlessSteelMaterialeff, 2);
+	stainlessSteel->SetMaterialPropertiesTable(stainlessSteelMaterialProperty);
+
+
 
 	
 	//---------------------------------------------------------------------------

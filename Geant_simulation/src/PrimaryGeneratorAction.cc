@@ -376,8 +376,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #endif //ANGLE_Cd_COLL6mm
 
 #ifdef	TEST_POSITION_DIRECTION
-	double phi = 60*deg/*0 * pi*/;
-	double cosTheta = /*0.9085*/ /*0.9075*//* -0.90*/ /*0.98*/ cos( (90-0) * deg);
+	double phi = 180*deg/*0 * pi*/;
+	double cosTheta = /*0.9085*/ /*0.9075*//* -0.90*/ /*0.98*/ cos( (70) * deg);
 #endif
 
 	double sinTheta = sqrt(1 - cosTheta*cosTheta);

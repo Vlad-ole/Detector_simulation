@@ -73,9 +73,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	#define bInsulator_box
 	#define bPMTs
 	#define bPMTAnodeGrid
+	#define bSteelBox
 	#define bTHGEM1
 	#define bTHGEM0
-	//#define bFieldWires
+	#define bFieldWires
 	#define bLArOuter 
 	#define bLArInner
 	#define bCathode
@@ -137,6 +138,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 	G4RotationMatrix* rotY = new G4RotationMatrix();
 	rotY->rotateY(90 * deg);
+
+	G4RotationMatrix* rotZ = new G4RotationMatrix();
+	rotZ->rotateZ(90 * deg);
 	//-------------------------------------------------------------------------------
 
 
@@ -758,6 +762,59 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #endif // bPMTAnodeGrid
 
 
+#ifdef	bSteelBox
+	G4Box* solidSteelBox
+		= new G4Box("solidSteelBox", xSizeSteelBox / 2.0, ySizeSteelBox / 2.0, zSizeSteelBox / 2.0);
+
+	G4Tubs* solidPMTtmp = new G4Tubs("solidPMTtmp", 0, radius_PMT, z_size_PMT / 2.0, 0.*deg, 360.*deg);
+
+	G4VSolid* solidBoxSubtractPMT
+		= new G4SubtractionSolid("solidBoxSubtractPMT", solidSteelBox, solidPMTtmp,
+			rotY, G4ThreeVector(0., 0., 0.));
+
+
+	G4LogicalVolume* logicSteelBox
+		= new G4LogicalVolume(solidBoxSubtractPMT, G4Material::GetMaterial("Air"), "logicSteelBox", 0, 0, 0);
+	
+	G4VPhysicalVolume* physSteelBox0 = new G4PVPlacement(0,               // no rotation
+		positionSteelBox0, // at (x,y,z)
+		logicSteelBox,       // its logical volume
+		"physSteelBox0",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+	
+	G4VPhysicalVolume* physSteelBox1 = new G4PVPlacement(0,               // no rotation
+		positionSteelBox1, // at (x,y,z)
+		logicSteelBox,       // its logical volume
+		"physSteelBox1",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+	G4VPhysicalVolume* physSteelBox2 = new G4PVPlacement(rotZ,               // no rotation
+		positionSteelBox2, // at (x,y,z)
+		logicSteelBox,       // its logical volume
+		"physSteelBox2",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+	G4VPhysicalVolume* physSteelBox3 = new G4PVPlacement(rotZ,               // no rotation
+		positionSteelBox3, // at (x,y,z)
+		logicSteelBox,       // its logical volume
+		"physSteelBox3",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+
+#endif
+
 
 #ifdef bSiPM
 		//--------------------------------------------------------------------------------
@@ -1141,6 +1198,22 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #endif //bPMTs
 
 
+#ifdef	bSteelBox
+	G4LogicalBorderSurface* LAr_outer2SteelBox0 = new G4LogicalBorderSurface("LAr_outer2SteelBox0", phys_LAr_outer, physSteelBox0, stainlessSteel);
+	G4LogicalBorderSurface* world2SteelBox0 = new G4LogicalBorderSurface("world2SteelBox0", physiWorld, physSteelBox0, stainlessSteel);
+	
+	G4LogicalBorderSurface* LAr_outer2SteelBox1 = new G4LogicalBorderSurface("LAr_outer2SteelBox1", phys_LAr_outer, physSteelBox1, stainlessSteel);
+	G4LogicalBorderSurface* world2SteelBox1 = new G4LogicalBorderSurface("world2SteelBox1", physiWorld, physSteelBox1, stainlessSteel);
+
+	G4LogicalBorderSurface* LAr_outer2SteelBox2 = new G4LogicalBorderSurface("LAr_outer2SteelBox2", phys_LAr_outer, physSteelBox2, stainlessSteel);
+	G4LogicalBorderSurface* world2SteelBox2 = new G4LogicalBorderSurface("world2SteelBox2", physiWorld, physSteelBox2, stainlessSteel);
+
+	G4LogicalBorderSurface* LAr_outer2SteelBox3 = new G4LogicalBorderSurface("LAr_outer2SteelBox3", phys_LAr_outer, physSteelBox3, stainlessSteel);
+	G4LogicalBorderSurface* world2SteelBox3 = new G4LogicalBorderSurface("world2SteelBox3", physiWorld, physSteelBox3, stainlessSteel);
+
+
+#endif
+
 
 #ifdef	bAnode_grid
 	//anode_grid
@@ -1234,7 +1307,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 
 	////THGEM
-	G4VisAttributes* tracker_THGEM2_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, /*0.8*/0.1));
+	G4VisAttributes* tracker_THGEM2_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, /*0.8*/0.8));
 	logic_tracker_THGEM2->SetVisAttributes(tracker_THGEM2_VisAtt);
 	logic_tracker_THGEM0_LAr->SetVisAttributes(tracker_THGEM2_VisAtt);
 	//logic_tracker_THGEM0_LAr->SetVisAttributes(G4VisAttributes::GetInvisible());
