@@ -381,6 +381,10 @@ private:
 	double z_size_Cd109Detector;
 	double Cd109Detector_center;
 
+	//
+	double radiusAlphaFull;
+	double z_size_Alpha;
+
 
 	G4ThreeVector position_SingleTHGEMHole;
 	
@@ -417,6 +421,9 @@ private:
 	G4ThreeVector position_Al_window_bottom;
 	G4ThreeVector position_CryogenicChamberBottom;
 	G4ThreeVector position_ExternalColl;
+
+	//bAlpha
+	G4ThreeVector positionbAlpha;
 
 	//Cd109
 	G4ThreeVector position_Cd109;

@@ -25,7 +25,7 @@ void DetectorConstruction::SetSizeAndPosition()
 
 	//Anode_grid
 	thickness_anode_grid = 0.5 * mm;
-	size_anode_grid = /*130 (from Ekaterina)*/ 124 * mm;
+	size_anode_grid = /*130 (from Ekaterina)*/ /*124*mm*/ 127*mm ;//see Download:\DetectorPhotos\2021\THGEM_Electroconnect
 	size_anode_grid_hole = length_wire /*future case*/;  //60 * mm /*real case*/;
 	z_anode_grid_bottom = 78.2 * mm /*78.2 in case of one THGEM*/ /*82.7*mm in case of two THGEM*/;
 	double z_anode_grid_center = z_anode_grid_bottom + thickness_anode_grid / 2.0;
@@ -250,6 +250,10 @@ void DetectorConstruction::SetSizeAndPosition()
 	ySizeSteelBox = x_size_LAr_outer_out;
 	zSizeSteelBox = 70;
 
+	//Alpha
+	radiusAlphaFull = 12;
+	z_size_Alpha = 2;
+
 
 	//--------------------------------------------------------------------------------
 	//определение взаимного расположения объектов
@@ -338,4 +342,7 @@ void DetectorConstruction::SetSizeAndPosition()
 	positionSteelBox1 = G4ThreeVector(xPosSteelBox, 0, z_pos_PMT);
 	positionSteelBox2 = G4ThreeVector(0, -xPosSteelBox, z_pos_PMT);
 	positionSteelBox3 = G4ThreeVector(0, xPosSteelBox, z_pos_PMT);
+
+	//positionbAlpha
+	positionbAlpha = G4ThreeVector(0, 0, 0 - z_size_LAr_inner/2.0 + z_size_Alpha/2.0);
 }

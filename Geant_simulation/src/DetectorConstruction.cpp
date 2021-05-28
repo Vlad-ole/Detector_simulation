@@ -64,7 +64,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	
 //#define SETUP1 //(TPB, w/o alpha, THGEM 28%)
 //#define SETUP2 // (w/o TPB, alpha, THGEM 75%, UV acrylic 4mm)
-#define SETUP3 // (w/o TPB, w/o alpha, THGEM 75%, UV acrylic 4mm)
+#define SETUP3 // (w/o TPB, with or w/o alpha, THGEM 75%, UV acrylic 4mm)
 
 #ifdef SETUP3
 	#define bSiPM
@@ -76,9 +76,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	#define bSteelBox
 	#define bTHGEM1
 	#define bTHGEM0
-	#define bFieldWires
+	#define bFieldTHGEM
+	//#define bFieldWires
 	#define bLArOuter 
 	#define bLArInner
+	//#define bAlpha
 	#define bCathode
 #endif
 
@@ -362,6 +364,27 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #endif
 	 //--------------------------------------------------------------------------------
+
+
+
+#ifdef	bAlpha
+	
+	G4Tubs* solidbAlpha
+		= new G4Tubs("solidbAlpha", 0, radiusAlphaFull, z_size_Alpha / 2.0, 0. *deg, 360.*deg);
+
+	G4LogicalVolume* logicbAlpha
+		= new G4LogicalVolume(solidbAlpha, G4Material::GetMaterial("Air"), "logicbAlpha", 0, 0, 0);
+
+	G4VPhysicalVolume* physbAlpha = new G4PVPlacement(0,               // no rotation
+		positionbAlpha, // at (x,y,z)
+		logicbAlpha,       // its logical volume
+		"physbAlpha",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+
+#endif
 
 
 	//-------------------------------------------------------------------------------
@@ -1167,7 +1190,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* Insulator_box2bCathode = new G4LogicalBorderSurface("Insulator_box2bCathode", phys_Insulator_box, phys_bCathode, Cu_Cathode/*AbsorberMaterial*/);
 #endif //bInsulator_box
 
-
+#ifdef bAlpha
+	G4LogicalBorderSurface* LAr_inner2bAlpha = new G4LogicalBorderSurface("LAr_inner2bAlpha", phys_LAr_inner, physbAlpha, stainlessSteel);
+#endif
 	
 
 #ifdef bCuReflector
@@ -1272,7 +1297,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	//------------------------------------------------------------------------------
 	// установка атрибутов визуализации
 
-
+#ifdef bAlpha
+	G4VisAttributes* VisAtt_Alpha = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.9));
+	logicbAlpha->SetVisAttributes(VisAtt_Alpha);
+#endif
 
 #ifdef bAnode_grid
 	//anode grid

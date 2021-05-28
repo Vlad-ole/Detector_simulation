@@ -41,16 +41,16 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 
-	bool isLowStaticticsAndView = 0;
+	bool isLowStaticticsAndView = 1;
 
 	int N_runs;
 	int N_events_per_run;
-	if (isLowStaticticsAndView) { N_runs = /*1*/ 100; N_events_per_run = /*10000*/1; }
+	if (isLowStaticticsAndView) { N_runs = /*1*/ 500; N_events_per_run = /*10000*/1; }
 	else { N_runs = 200000; N_events_per_run = 100; }
 
-		
-	//g()->radius_THGEM_hole = 0.25; g()->step_THGEM_hole = 0.9; g()->width_THGEM1 = 0.4; //[mm] //THGEM CERN 28%
-	g()->radius_THGEM_hole = 0.5; g()->step_THGEM_hole = 1.1; g()->width_THGEM1 = 1.0;//[mm] //THGEM Electroconnect 75%
+	
+	g()->radius_THGEM_hole = 0.25; g()->step_THGEM_hole = 0.9; g()->width_THGEM1 = 0.4; //[mm] //THGEM CERN 28%
+	//g()->radius_THGEM_hole = 0.5; g()->step_THGEM_hole = 1.1; g()->width_THGEM1 = 1.0;//[mm] //THGEM Electroconnect 75%
 	g()->width_THGEM0 = g()->width_THGEM1;
 	g()->xyz_position_SingleTHGEMHole = 150;
 
@@ -65,8 +65,8 @@ int main(int argc, char** argv)
 	//choose source
 	g()->is_Am_coll_14mm = false;
 	g()->is_Cd_standard_box = false;
-	g()->is_X_ray_coll_35mm_no_alpha = false;
-	g()->is_X_ray_coll_14mm_no_alpha = true;//
+	g()->is_X_ray_coll_35mm_no_alpha = true;
+	g()->is_X_ray_coll_14mm_no_alpha = false;//
 	g()->is_X_ray_coll_2mm_no_alpha = false;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
 	g()->is_alpha = false;
@@ -238,31 +238,38 @@ int main(int argc, char** argv)
 
 		if (g()->is_optical_gamma && !g()->is_point_source)
 		{
-			// глубина поглощени€ в LAr гамма квантов [mm]
-			while (true)
-			{
-				g()->lambda = g()->rnd3.Exp(lambda_bar);
-				if (g()->lambda < 50)
-					break;
-			}
-			g()->z_source = g()->lambda;
 			
-			const double PMMA_width = 3;
-			const double LAr_dead_width = 2;
-			const double THGEM_Cathode_width = 0.5;
-			const double Al_window_width = 23;
-			g()->l_L = g()->lambda + PMMA_width + LAr_dead_width + THGEM_Cathode_width + Al_window_width; // рассто€ние от коллиматора до экрана [mm] 
-			//cout << "l_L = " << l_L << endl;
-
-			g()->h_s = (g()->l_L + g()->l_x * g()->h_c / (g()->h_c + h_x)) / (g()->l_x / (g()->h_c + h_x)); //ожидаемый диаметр п€тна
-			//cout << "h_s = " << g()->h_s << endl;
-			g()->radius = g()->h_s / 2.0;
-
 			if (g()->is_alpha)
 			{
-				g()->radius = 11.5 / 2.0;
-				g()->z_source = 2;
+				g()->radius = 11.5 / 2.0;//radius of active part
+				g()->z_source = 2.1;
 			}
+			else
+			{
+				// глубина поглощени€ в LAr гамма квантов [mm]
+				while (true)
+				{
+					g()->lambda = g()->rnd3.Exp(lambda_bar);
+					if (g()->lambda < 50)
+						break;
+				}
+				g()->z_source = g()->lambda;
+
+				const double PMMA_width = 3;
+				const double LAr_dead_width = 2;
+				const double THGEM_Cathode_width = 0.5;
+				const double Al_window_width = 23;
+				g()->l_L = g()->lambda + PMMA_width +
+					LAr_dead_width + THGEM_Cathode_width +
+					Al_window_width; // рассто€ние от коллиматора до экрана [mm] 
+				//cout << "l_L = " << l_L << endl;
+
+				g()->h_s = (g()->l_L + g()->l_x * g()->h_c / (g()->h_c + h_x)) /
+					(g()->l_x / (g()->h_c + h_x)); //ожидаемый диаметр п€тна
+				//cout << "h_s = " << g()->h_s << endl;
+
+				g()->radius = g()->h_s / 2.0;
+			}			
 
 			double x_offset = 0;
 			double y_offset = 0;
