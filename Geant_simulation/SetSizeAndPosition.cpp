@@ -254,6 +254,10 @@ void DetectorConstruction::SetSizeAndPosition()
 	radiusAlphaFull = 12;
 	z_size_Alpha = 2;
 
+	//TPB
+	radiusTPB = 35;
+	z_size_TPB = 0.2;
+
 
 	//--------------------------------------------------------------------------------
 	//определение взаимного расположения объектов
@@ -293,6 +297,14 @@ void DetectorConstruction::SetSizeAndPosition()
 	position_Al_window_bottom = G4ThreeVector(0, 0, Al_window_bottom_center);
 	position_CryogenicChamberBottom = G4ThreeVector(0, 0, CryogenicChamberBottom_center);
 	position_ExternalColl = G4ThreeVector(0, 0, ExternalColl_center);
+
+	//TPB
+	double x_pos_TPB = x_size_LAr_inner / 2.0 - z_size_TPB/2.0;
+	double z_pos_TPB = -z_size_LAr_inner/2.0 + z_pos_PMT;
+	position_TPB_0 = G4ThreeVector(-x_pos_TPB, 0, z_pos_TPB);
+	position_TPB_1 = G4ThreeVector(x_pos_TPB, 0, z_pos_TPB);
+	position_TPB_2 = G4ThreeVector(0, -x_pos_TPB, z_pos_TPB);
+	position_TPB_3 = G4ThreeVector(0, x_pos_TPB, z_pos_TPB);
 
 	//Cd109
 	position_Cd109 = G4ThreeVector(0, 0, Cd109_center);

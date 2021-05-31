@@ -142,6 +142,12 @@ void PhysicsList::ConstructOptical()
   G4OpAbsorption* theAbsorptionProcess = new G4OpAbsorption();
   /*G4OpRayleigh* theRayleighScattering=new G4OpRayleigh();*/
 
+  G4OpWLS* fWLSProcess = new G4OpWLS();
+  fWLSProcess->UseTimeProfile("delta");
+  //fWLSProcess->UseTimeProfile("exponential");
+
+ 
+
   G4OpBoundaryProcess* theBoundaryProcess = new G4OpBoundaryProcess();
  
   G4ProcessManager * pManager = G4OpticalPhoton::OpticalPhoton()->GetProcessManager();
@@ -149,6 +155,7 @@ void PhysicsList::ConstructOptical()
   pManager->AddDiscreteProcess(theAbsorptionProcess);
   //pManager->AddDiscreteProcess(theRayleighScattering);
   pManager->AddDiscreteProcess(theBoundaryProcess);
+  pManager->AddDiscreteProcess(fWLSProcess);
 
   Scintillation* theScintProcess = new Scintillation();
   theScintProcess->SetScintillationYieldFactor(1.);
@@ -175,6 +182,17 @@ void PhysicsList::ConstructOptical()
   {
 		G4ParticleDefinition* particle = theParticleIterator->value();
 		pManager = particle->GetProcessManager();
+
+		G4String particleName = particle->GetParticleName();
+		pManager = particle->GetProcessManager();
+		if (!pManager) {
+			std::ostringstream o;
+			o << "Particle " << particleName << "without a Process Manager";
+			G4Exception("WLSOpticalPhysics::ConstructProcess()", "",
+				FatalException, o.str().c_str());
+		}
+
+
 		if(theCerenkovProcess->IsApplicable(*particle)){
 		  pManager->AddProcess(theCerenkovProcess);
 		  pManager->SetProcessOrdering(theCerenkovProcess,idxPostStep);

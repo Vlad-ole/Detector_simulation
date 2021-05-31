@@ -138,6 +138,30 @@ void DetectorConstruction::defineMaterials()
 	//------------------------------
 
 
+	////TPB
+	materialTPB = new G4Material("TPB", 1.18*g / cm3, 3);
+	materialTPB->AddElement(C, 5);
+	materialTPB->AddElement(O, 2);
+	materialTPB->AddElement(H, 8);
+
+	const int ne = 6;
+	G4double photonEnergyTPB[] = { 0.1*eV,
+		1240.0 / 411.0 *eV, 1240.0 / 409.0 *eV, 1240.0 / 401.0 *eV, 1240.0 / 399.0 *eV, 10.0*eV };
+	G4double RIndexTPB[] = { 1.23, 1.23, 1.23, 1.23, 1.23, 1.23 };
+	G4double AbsTPB[] = { 10 * m, 10.0 * m, 10.0 * m, 0.01 * mm, 0.01 * mm, 10 * m };
+	G4double EmissionTPB[] = { 0.0, 0.0, 1.0, 0.0, 0.0, 0.0 };
+	/*const int ne = 2;
+	G4double photonEnergyTPB[] = { 0.1*eV, 10.0*eV };
+	G4double RIndexTPB[] = { 1.23, 1.23 };
+	G4double AbsTPB[] = { 0.01*mm, 0.01*mm };
+	G4double EmissionTPB[] = { 0.0, 0.0 };*/
+	G4MaterialPropertiesTable* tableTPB = new G4MaterialPropertiesTable();
+	tableTPB->AddProperty("RINDEX", photonEnergyTPB, RIndexTPB, ne);
+	tableTPB->AddProperty("WLSABSLENGTH", photonEnergyTPB, AbsTPB, ne);
+	tableTPB->AddProperty("WLSCOMPONENT", photonEnergyTPB, EmissionTPB, ne);
+	tableTPB->AddConstProperty("WLSTIMECONSTANT", 0.5*ns);
+	materialTPB->SetMaterialPropertiesTable(tableTPB);
+
 
 	//------------------------------
 	// PMMA_UV

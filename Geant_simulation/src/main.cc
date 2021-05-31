@@ -45,7 +45,7 @@ int main(int argc, char** argv)
 
 	int N_runs;
 	int N_events_per_run;
-	if (isLowStaticticsAndView) { N_runs = /*1*/ 500; N_events_per_run = /*10000*/1; }
+	if (isLowStaticticsAndView) { N_runs = /*1*/ 100; N_events_per_run = /*10000*/1; }
 	else { N_runs = 200000; N_events_per_run = 100; }
 
 	

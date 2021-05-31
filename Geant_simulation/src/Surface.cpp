@@ -161,7 +161,9 @@ void DetectorConstruction::defineSurfaces()
 	stainlessSteelMaterialProperty->AddProperty("EFFICIENCY", ener, stainlessSteelMaterialeff, 2);
 	stainlessSteel->SetMaterialPropertiesTable(stainlessSteelMaterialProperty);
 
-
+	//TPB
+	//surfaceTPB = new G4OpticalSurface("surfaceTPB");
+	
 
 	
 	//---------------------------------------------------------------------------

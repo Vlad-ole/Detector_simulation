@@ -124,14 +124,16 @@ private:
 	G4LogicalVolume*   logic_anode_grid;
 	G4VPhysicalVolume* phys_anode_grid;
 
-
-
+	//
+	G4Material* materialTPB;
+	//G4OpticalSurface *surfaceTPB;
 
 	// surfaces
 	G4OpticalSurface *world_scintillator;
 	G4OpticalSurface *scintillator_grease;
 	G4OpticalSurface *grease_glass;
 	G4OpticalSurface *glass_cathode;
+	
 
 
 	// arbitraryly valued variables (not changeable by user)
@@ -306,6 +308,10 @@ private:
 	double y_size_LArInactive; 
 	double z_size_LArInactive;
 
+	//TPB
+	double radiusTPB;
+	double z_size_TPB;
+
 	//PMMA_bottom
 	double x_size_PMMA_bottom;
 	double y_size_PMMA_bottom;
@@ -381,7 +387,7 @@ private:
 	double z_size_Cd109Detector;
 	double Cd109Detector_center;
 
-	//
+	//alpha
 	double radiusAlphaFull;
 	double z_size_Alpha;
 
@@ -421,6 +427,12 @@ private:
 	G4ThreeVector position_Al_window_bottom;
 	G4ThreeVector position_CryogenicChamberBottom;
 	G4ThreeVector position_ExternalColl;
+
+	//TPB
+	G4ThreeVector position_TPB_0;
+	G4ThreeVector position_TPB_1;
+	G4ThreeVector position_TPB_2;
+	G4ThreeVector position_TPB_3;
 
 	//bAlpha
 	G4ThreeVector positionbAlpha;

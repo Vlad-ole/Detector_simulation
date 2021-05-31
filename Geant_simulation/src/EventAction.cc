@@ -37,7 +37,7 @@ void EventAction::BeginOfEventAction(const G4Event* event)
 
 	if (eventNb % 100000 == 0)
 	{
-		cout << "event = " << eventNb << endl;
+		//cout << "event = " << eventNb << endl;
 		//cerr << "event = " << eventNb << endl;
 	}
 

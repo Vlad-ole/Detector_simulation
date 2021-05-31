@@ -78,6 +78,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	#define bTHGEM0
 	#define bFieldTHGEM
 	//#define bFieldWires
+	#define bTPB
 	#define bLArOuter 
 	#define bLArInner
 	//#define bAlpha
@@ -386,6 +387,44 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #endif
 
+#ifdef bTPB
+	G4Tubs* solidTPB
+		= new G4Tubs("solidTPB", 0, radiusTPB, z_size_TPB / 2.0, 0. *deg, 360.*deg);
+	G4LogicalVolume* logic_bTPB
+		= new G4LogicalVolume(solidTPB, G4Material::GetMaterial("TPB"), "logic_bTPB", 0, 0, 0);
+	G4VPhysicalVolume* phys_TPB_0 = new G4PVPlacement(rotY,               // no rotation
+		position_TPB_0, // at (x,y,z)
+		logic_bTPB,       // its logical volume
+		"phys_TPB_0",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+	G4VPhysicalVolume* phys_TPB_1 = new G4PVPlacement(rotY,               // no rotation
+		position_TPB_1, // at (x,y,z)
+		logic_bTPB,       // its logical volume
+		"phys_TPB_1",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+	G4VPhysicalVolume* phys_TPB_2 = new G4PVPlacement(rotX,               // no rotation
+		position_TPB_2, // at (x,y,z)
+		logic_bTPB,       // its logical volume
+		"phys_TPB_2",       // its name
+		logic_LAr_inner,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+	G4VPhysicalVolume* phys_TPB_3 = new G4PVPlacement(rotX,               // no rotation
+		position_TPB_3, // at (x,y,z)
+		logic_bTPB,       // its logical volume
+		"phys_TPB_3",       // its name
+		logic_LAr_inner,     // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif
 
 	//-------------------------------------------------------------------------------
 	//create bCathode
@@ -1168,6 +1207,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* physiWorld2LAr_inner = new G4LogicalBorderSurface("physiWorld2LAr_inner", physiWorld, phys_LAr_inner, LAr_OpticalSurface);
 #endif
 
+#ifdef bTPB
+	//G4LogicalBorderSurface* physiWorld_2_TPB = new G4LogicalBorderSurface("physiWorld_2_TPB", physiWorld, phys_bTPB, surfaceTPB);
+#endif
+
 #ifdef bSiPM
 	//SiPM
 	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("tracker2SiPM", phys_tracker, phys_SiPM, SiPM_OpticalSurface /*silicaCathodeMaterial*/);
@@ -1300,6 +1343,11 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #ifdef bAlpha
 	G4VisAttributes* VisAtt_Alpha = new G4VisAttributes(G4Colour(1.0, 0.0, 0.0, 0.9));
 	logicbAlpha->SetVisAttributes(VisAtt_Alpha);
+#endif
+
+#ifdef bTPB
+	G4VisAttributes* TPB_VisAtt = new G4VisAttributes(G4Colour(1.0, 0.5, 0.0, 0.8));
+	logic_bTPB->SetVisAttributes(TPB_VisAtt);
 #endif
 
 #ifdef bAnode_grid
