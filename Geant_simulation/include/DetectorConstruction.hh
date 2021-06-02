@@ -248,7 +248,7 @@ private:
 	
 
 	//solid_tracker_THGEM_Cu_reflector
-	double z_size_tracker_THGEM_Cu_reflector = z_size_tracker_THGEM2 / 10.0;
+	double z_size_tracker_THGEM_Cu_reflector;
 
 	//THGEM_without_holes
 	double x_size_THGEM_without_holes;

@@ -122,12 +122,12 @@ void DetectorConstruction::defineSurfaces()
 	Cu_THGEM->SetFinish(ground);
 	Cu_THGEM->SetSigmaAlpha(50);//alpha in degrees, from 0 to 90.
 	G4MaterialPropertiesTable *Cu_THGEM_MaterialProperty = new G4MaterialPropertiesTable();
-	G4double Cu_THGEM_Materialrefl[2] = { 0.5, 0.5 };//
+	G4double Cu_THGEM_Materialrefl[2] = { 0.36, 0.36 };//
 	G4double Cu_THGEM_Materialeff[2] = { 0, 0 };
 	Cu_THGEM_MaterialProperty->AddProperty("REFLECTIVITY", ener, Cu_THGEM_Materialrefl, 2);
 	Cu_THGEM_MaterialProperty->AddProperty("EFFICIENCY", ener, Cu_THGEM_Materialeff, 2);
 
-	Cu_THGEM->SetMaterialPropertiesTable(Anode_wire_MaterialProperty);
+	Cu_THGEM->SetMaterialPropertiesTable(Cu_THGEM_MaterialProperty);
 	//-------------------------------------------------------------------------------
 	
 

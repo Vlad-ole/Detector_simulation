@@ -74,14 +74,15 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	#define bPMTs
 	#define bPMTAnodeGrid
 	#define bSteelBox
+	#define bCuReflector
 	#define bTHGEM1
 	#define bTHGEM0
-	#define bFieldTHGEM
-	//#define bFieldWires
-	#define bTPB
+	//#define bFieldTHGEM// option 1
+	#define bFieldWires //option 2
+	//#define bTPB
 	#define bLArOuter 
 	#define bLArInner
-	//#define bAlpha
+	//#define bAlpha //optional
 	#define bCathode
 #endif
 
@@ -952,7 +953,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Box* solid_tracker_THGEM2
 		= new G4Box("tracker", x_size_tracker_THGEM2 / 2.0, y_size_tracker_THGEM2 / 2.0, z_size_tracker_THGEM2 / 2.0);
 	G4LogicalVolume* logic_tracker_THGEM2
-		= new G4LogicalVolume(solid_tracker_THGEM2, G4Material::GetMaterial("Air"), "logic_tracker_THGEM2", 0, 0, 0);
+		= new G4LogicalVolume(solid_tracker_THGEM2, G4Material::GetMaterial("LAr"), "logic_tracker_THGEM2", 0, 0, 0);
 
 
 	G4LogicalVolume* logic_tracker_THGEM0_LAr
@@ -962,7 +963,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4Box* solid_tracker_THGEM_Cu_reflector
 		= new G4Box("solid_tracker_THGEM_Cu_reflector", x_size_tracker_THGEM2 / 2.0, y_size_tracker_THGEM2 / 2.0, z_size_tracker_THGEM_Cu_reflector / 2.0);
 	G4LogicalVolume* logic_tracker_THGEM_Cu_reflector
-		= new G4LogicalVolume(solid_tracker_THGEM_Cu_reflector, G4Material::GetMaterial("FR4"), "logic_tracker_THGEM_Cu_reflector", 0, 0, 0);
+		= new G4LogicalVolume(solid_tracker_THGEM_Cu_reflector, G4Material::GetMaterial("LAr"), "logic_tracker_THGEM_Cu_reflector", 0, 0, 0);
 	
 	G4VPhysicalVolume* phys_tracker_THGEM0_Cu_reflector = new G4PVPlacement(0,               // no rotation
 		position_tracker_THGEM0_Cu_reflector, // at (x,y,z)
