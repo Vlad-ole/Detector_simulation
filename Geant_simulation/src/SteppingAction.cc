@@ -177,14 +177,29 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
 								//absorbed but status was Detection
 				{
 
+					double costheta = theStep->GetPostStepPoint()->GetMomentumDirection().cosTheta();
+					double theta = 90 - acos(costheta) * 180 / 3.1416;//theta relive to PMT surface (0 = normal incidence to PMT)
 					if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT0")
+					{
 						pmt_hits->IncrValuebyOne(0);
+						pmt_hits->AddTheta(0, theta);
+					}						
 					else if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT1")
+					{
 						pmt_hits->IncrValuebyOne(1);
+						pmt_hits->AddTheta(1, theta);
+					}						
 					else if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT2")
+					{
 						pmt_hits->IncrValuebyOne(2);
+						pmt_hits->AddTheta(2, theta);
+					}						
 					else if (theStep->GetPostStepPoint()->GetPhysicalVolume()->GetName() == "phys_PMT3")
+					{
 						pmt_hits->IncrValuebyOne(3);
+						pmt_hits->AddTheta(3, theta);
+					}
+						
 					else
 					{
 						G4SDManager* SDman = G4SDManager::GetSDMpointer();

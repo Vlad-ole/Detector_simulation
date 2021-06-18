@@ -79,12 +79,13 @@ void DetectorConstruction::defineSurfaces()
 	FR4_unified = new G4OpticalSurface("FR4_unified");
 	FR4_unified->SetType(dielectric_metal);
 	FR4_unified->SetModel(unified);
-	FR4_unified->SetFinish(groundair);
-	FR4_unified->SetSigmaAlpha(10);//alpha in degrees, from 0 to 90.
+	FR4_unified->SetFinish(ground);
+	FR4_unified->SetSigmaAlpha(0);//alpha in degrees, from 0 to 90.
 
 
 	G4MaterialPropertiesTable *FR4_MaterialProperty = new G4MaterialPropertiesTable();
-	 G4double FR4_Materialrefl[2] = { 0.0, 0.0 };//dummy
+	G4double FR4_Materialrefl[2] = { 0.2, 0.2 };//model_25b
+	 //G4double FR4_Materialrefl[2] = { 0.0, 0.0 };//dummy
 	//G4double FR4_Materialrefl[2] = { 0.05, 0.05 };//https://www.cetem.gov.br/images/congressos/2008/CAC00560008.pdf Specular Reflectance Data for Quartz and Some Epoxy Resins –	Implications for Digital Image Analysis Based on Reflected Light Optical Microscopy
 	//G4double FR4_Materialrefl[2] = { 0.2, 0.2 };
 	G4double FR4_Materialeff[2] = { 0, 0 };
@@ -122,7 +123,8 @@ void DetectorConstruction::defineSurfaces()
 	Cu_THGEM->SetFinish(ground);
 	Cu_THGEM->SetSigmaAlpha(50);//alpha in degrees, from 0 to 90.
 	G4MaterialPropertiesTable *Cu_THGEM_MaterialProperty = new G4MaterialPropertiesTable();
-	G4double Cu_THGEM_Materialrefl[2] = { 0.36, 0.36 };//
+	G4double Cu_THGEM_Materialrefl[2] = { 0.36, 0.36 };//model_25b
+	//G4double Cu_THGEM_Materialrefl[2] = { 0.0, 0.0 };//dummy
 	G4double Cu_THGEM_Materialeff[2] = { 0, 0 };
 	Cu_THGEM_MaterialProperty->AddProperty("REFLECTIVITY", ener, Cu_THGEM_Materialrefl, 2);
 	Cu_THGEM_MaterialProperty->AddProperty("EFFICIENCY", ener, Cu_THGEM_Materialeff, 2);
@@ -138,7 +140,8 @@ void DetectorConstruction::defineSurfaces()
 	Cu_Cathode->SetFinish(polished);
 	//Cu_Cathode->SetSigmaAlpha(0.1);//alpha in degrees, from 0 to 90.
 	G4MaterialPropertiesTable *Cu_Cathode_MaterialProperty = new G4MaterialPropertiesTable();
-	G4double Cu_Cathode_Materialrefl[2] = { 0.36, 0.36 };
+	//G4double Cu_Cathode_Materialrefl[2] = { 0.0, 0.0 };//dummy
+	G4double Cu_Cathode_Materialrefl[2] = { 0.36, 0.36 };//model_25b
 	//(1-0.28)*0.5 ~ 0.36 
 	//Bass M. Handbook of optics, Vol.4 Edition3
 	G4double Cu_Cathode_Materialeff[2] = { 0, 0 };
@@ -154,7 +157,8 @@ void DetectorConstruction::defineSurfaces()
 	stainlessSteel->SetModel(unified);
 	stainlessSteel->SetFinish(polished);
 	G4MaterialPropertiesTable *stainlessSteelMaterialProperty = new G4MaterialPropertiesTable();
-	G4double stainlessSteelMaterialrefl[2] = { 0.5, 0.5 };
+	//G4double stainlessSteelMaterialrefl[2] = { 0.0, 0.0 };//dummy
+	G4double stainlessSteelMaterialrefl[2] = { 0.5, 0.5 };//model_25b
 	//DOI: 10.1063/1.2202915 Rubel20016_StainlessSteel_Mirror_test_for_International_Thermonuclear_Experi
 	G4double  stainlessSteelMaterialeff[2] = { 0, 0 };
 	stainlessSteelMaterialProperty->AddProperty("REFLECTIVITY", ener, stainlessSteelMaterialrefl, 2);

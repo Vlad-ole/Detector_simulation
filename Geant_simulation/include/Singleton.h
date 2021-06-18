@@ -30,6 +30,7 @@ public:
 	ofstream file_real_position_of_source;
 	ofstream file_total_num_of_reg_photons_SiPM;
 	ofstream file_num_of_photons_PMT;
+	ofstream file_PMT1_angles;
 	ofstream file_num_of_reg_photons;
 	ofstream file_ph_coll;
 	ofstream file_xy;

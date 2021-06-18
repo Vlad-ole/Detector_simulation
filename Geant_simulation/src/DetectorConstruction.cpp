@@ -68,6 +68,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 
 #ifdef SETUP3
 	#define bSiPM
+	#define bSiPMFR4
 	#define bPMMA_plate 
 	#define bAnode_grid
 	#define bInsulator_box
@@ -79,7 +80,7 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	#define bTHGEM0
 	//#define bFieldTHGEM// option 1
 	#define bFieldWires //option 2
-	//#define bTPB
+	//#define bTPB //for old setup
 	#define bLArOuter 
 	#define bLArInner
 	//#define bAlpha //optional
@@ -923,9 +924,20 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 //--------------------------------------------------------------------------------
 #endif //bSiPM
 
-
-
-
+#ifdef bSiPMFR4
+	G4Box* solid_SiPMFR4
+		= new G4Box("solid_SiPMFR4", x_size_tracker / 2.0, y_size_tracker / 2.0, z_size_SiPMFR4 / 2.0);
+	G4LogicalVolume* logic_SiPMFR4
+		= new G4LogicalVolume(solid_SiPMFR4, G4Material::GetMaterial("Air"), "logic_SiPMFR4", 0, 0, 0);
+	G4VPhysicalVolume* phys_SiPMFR4 = new G4PVPlacement(0,               // no rotation
+		position_SiPMFR4, // at (x,y,z)
+		logic_SiPMFR4,       // its logical volume
+		"phys_SiPMFR4",       // its name
+		logicWorld,         // its mother  volume
+		false,           // no boolean operations
+		0,               // copy number
+		fCheckOverlaps); // checking overlaps
+#endif
 
 
 
@@ -1217,6 +1229,9 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 	G4LogicalBorderSurface* tracker2SiPM = new G4LogicalBorderSurface("tracker2SiPM", phys_tracker, phys_SiPM, SiPM_OpticalSurface /*silicaCathodeMaterial*/);
 #endif //bSiPM
 
+#ifdef bSiPMFR4
+	G4LogicalBorderSurface* trackerSiPM_SiPMFR4 = new G4LogicalBorderSurface("trackerSiPM_SiPMFR4", phys_tracker, phys_SiPMFR4, FR4_unified);
+#endif
 
 #ifdef bCathode
 	//bCathode
@@ -1308,11 +1323,13 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #endif //bTHGEM2
 
 #ifdef bTHGEM1
-	G4LogicalBorderSurface* World2THGEM1_without_hole = new G4LogicalBorderSurface("World2THGEM1_without_hole", physiWorld, phys_THGEM1_without_holes, AbsorberMaterial);
+	G4LogicalBorderSurface* World2THGEM1_without_hole = new G4LogicalBorderSurface("World2THGEM1_without_hole", physiWorld, phys_THGEM1_without_holes, FR4_unified);
+	G4LogicalBorderSurface* phys_LAr_inner_2_THGEM1_without_hole = new G4LogicalBorderSurface("phys_LAr_inner_2_THGEM1_without_hole", phys_LAr_inner, phys_THGEM1_without_holes, FR4_unified);
 #endif //bTHGEM1
 
 #ifdef bTHGEM0
-	G4LogicalBorderSurface* phys_LAr_inner2THGEM0_without_hole = new G4LogicalBorderSurface("phys_LAr_inner2THGEM0_without_hole", phys_LAr_inner, phys_THGEM0_without_holes, AbsorberMaterial);
+	G4LogicalBorderSurface* phys_LAr_inner2THGEM0_without_hole = new G4LogicalBorderSurface("phys_LAr_inner2THGEM0_without_hole", phys_LAr_inner, phys_THGEM0_without_holes, FR4_unified);
+	//G4LogicalBorderSurface* phys_LAr_inner2THGEM0_without_hole = new G4LogicalBorderSurface("phys_LAr_inner2THGEM0_without_hole", phys_LAr_inner, phys_THGEM0_without_holes, AbsorberMaterial);
 #endif //bTHGEM0
 
 	//FieldTHGEMs
@@ -1381,6 +1398,10 @@ G4VPhysicalVolume * DetectorConstruction::Construct()
 #ifdef bSiPM
 	trackerLV->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 0.5, 0.5, 0.8)));
 #endif //bSiPM
+
+#ifdef bSiPMFR4
+	logic_SiPMFR4->SetVisAttributes(new G4VisAttributes(G4Colour(1.0, 0.5, 0.0, 0.8)));
+#endif
 
 
 	////THGEM

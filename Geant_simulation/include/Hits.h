@@ -11,6 +11,7 @@ public:
 
 	//vector<int> N_reg_v;
 	vector<double> N_reg_v;
+	vector<vector<double>> Theta_v;
 	vector<double> xpos_v;
 	vector<double> ypos_v;
 };

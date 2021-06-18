@@ -224,12 +224,14 @@ private:
 	int Ny_SiPMs;
 	double thickness_SiPM;
 	double size_SiPM;
-	double chamberSpacing;	
+	double chamberSpacing;
+	double z_size_SiPMFR4;
 
 	//tracker SiPM
 	double x_size_tracker;
 	double y_size_tracker;
 	double z_size_tracker;
+	
 
 	//tracker Anode_grid
 	double x_size_tracker_anode_grid;
@@ -395,6 +397,7 @@ private:
 	G4ThreeVector position_SingleTHGEMHole;
 	
 	G4ThreeVector positionTracker;
+	G4ThreeVector position_SiPMFR4;
 	G4ThreeVector position_PMMA_plate;
 	G4ThreeVector position_tracker_THGEM2;
 	G4ThreeVector position_tracker_THGEM1;

@@ -377,7 +377,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 #ifdef	TEST_POSITION_DIRECTION
 	double phi = 0*deg/*0 * pi*/;
-	double cosTheta = /*0.9085*/ /*0.9075*//* -0.90*/ /*0.98*/ cos( (180-15) * deg);
+	double cosTheta = /*0.9085*/ /*0.9075*//* -0.90*/ /*0.98*/ cos( (90 + 45) * deg);
 #endif
 
 	double sinTheta = sqrt(1 - cosTheta*cosTheta);
@@ -402,9 +402,9 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//y = g()->y_source;
 	//z = /*60*/ /*78*/ /*40*/ g()->z_source;
 
-	x = (G4UniformRand() - 0.5)*20;// (G4UniformRand() - 0.5)
-	y = (G4UniformRand() - 0.5) * 20;
-	z = 75;
+	x = 75 /*+ (G4UniformRand() - 0.5) * 5*/;// (G4UniformRand() - 0.5)
+	y = (G4UniformRand() - 0.5) * 5;
+	z = 60 + (G4UniformRand() - 0.5) * 5;
 #endif
 
 #ifdef	POSITION_FROM_MAIN

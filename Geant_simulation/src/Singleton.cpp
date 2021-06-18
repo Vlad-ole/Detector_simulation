@@ -22,6 +22,7 @@ Singleton::Singleton()
 	file_coord_from_SiPM.open(path_out + "coord_from_SiPM.dat");
 	file_real_position_of_source.open(path_out + "real_position_of_source.dat");	
 	file_total_num_of_reg_photons_SiPM.open(path_out + "total_num_of_reg_photons_SiPM.dat");
+	file_PMT1_angles.open(path_out + "PMT1_angles.dat");
 	file_num_of_photons_PMT.open(path_out + "num_of_photons_PMT.dat");
 	file_PE_map_SiPM.open(path_out + "PE_map_SiPM.dat");
 	file_LRF_SiPM.open(path_out + "LRF_SiPM.dat");

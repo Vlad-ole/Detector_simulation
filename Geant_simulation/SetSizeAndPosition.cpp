@@ -47,6 +47,8 @@ void DetectorConstruction::SetSizeAndPosition()
 	chamberSpacing = 10 * mm;
 	double z_SiPM_bottom = z_anode_grid_bottom + thickness_anode_grid + z_size_PMMA_plate + (0.1*mm /*small gap between PMMA and SiPM*/) /* 85.7*mm in case of two THGEM*/;
 	double z_SiPM_center = z_SiPM_bottom + thickness_SiPM / 2.0;
+	z_size_SiPMFR4 = 2*mm;
+
 
 	cout << "z_SiPM_bottom = " << z_SiPM_bottom << endl;
 
@@ -225,7 +227,7 @@ void DetectorConstruction::SetSizeAndPosition()
 	}
 
 	//PMTGridWire
-	PMTGridWireRadius = /*1500 test_value*/ 150 / 2.0 * um;
+	PMTGridWireRadius = /*1500 test_value*/ 150 /*200*/ / 2.0 * um;
 	PMTGridWirePitch = /*5 test_value*/ 1.2 * mm;
 
 	//PMTAnodeGridTracker
@@ -267,6 +269,7 @@ void DetectorConstruction::SetSizeAndPosition()
 	position_anode_grid = G4ThreeVector(0, 0, z_anode_grid_center);
 	positionTracker = G4ThreeVector(0, 0, z_SiPM_center);
 	position_PMMA_plate = G4ThreeVector(0, 0, z_PMMA_plate_center);
+	position_SiPMFR4 = G4ThreeVector(0, 0, z_SiPM_center + z_size_tracker /2.0 + z_size_SiPMFR4/2.0);
 
 	position_tracker_THGEM2 = G4ThreeVector(0, 0, z_tracker_THGEM2_center);
 	position_tracker_THGEM1 = G4ThreeVector(0, 0, g()->z_bottom_THGEM1 + z_size_tracker_THGEM2 / 2.0);

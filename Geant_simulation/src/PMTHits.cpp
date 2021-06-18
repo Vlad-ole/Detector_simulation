@@ -20,6 +20,16 @@ void PMTHits::IncrValuebyOne(unsigned short N_detector)
 
 }
 
+void PMTHits::AddTheta(unsigned short N_detector, double value)
+{
+	if (N_detector > 3)
+		cout << "Error! N_detector (PMT) > 3" << endl;
+	else
+	{
+		g()->PMT_hits->Theta_v[N_detector].push_back(value);
+	}
+}
+
 
 PMTHits::~PMTHits()
 {
@@ -30,5 +40,11 @@ PMTHits::~PMTHits()
 	g()->file_num_of_photons_PMT << 1 << "\t" << x_pos_PMT << "\t" << 0 << "\t" << g()->PMT_hits->N_reg_v[1] << endl;
 	g()->file_num_of_photons_PMT << 2 << "\t" << 0 << "\t" << -y_pos_PMT << "\t" << g()->PMT_hits->N_reg_v[2] << endl;
 	g()->file_num_of_photons_PMT << 3 << "\t" << 0 << "\t" << y_pos_PMT << "\t" << g()->PMT_hits->N_reg_v[3] << endl;
+
+	for (int i = 0; i < g()->PMT_hits->Theta_v[1].size(); i++)
+	{
+		g()->file_PMT1_angles << g()->PMT_hits->Theta_v[1][i] << endl;
+	}
+	
 	
 }

@@ -41,7 +41,7 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 
-	bool isLowStaticticsAndView = 1;
+	bool isLowStaticticsAndView = 0;
 
 	int N_runs;
 	int N_events_per_run;
@@ -66,10 +66,10 @@ int main(int argc, char** argv)
 	g()->is_Am_coll_14mm = false;
 	g()->is_Cd_standard_box = false;
 	g()->is_X_ray_coll_35mm_no_alpha = false;
-	g()->is_X_ray_coll_14mm_no_alpha = true;//
+	g()->is_X_ray_coll_14mm_no_alpha = false;//
 	g()->is_X_ray_coll_2mm_no_alpha = false;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
-	g()->is_alpha = false;
+	g()->is_alpha = true;
 	g()->is_point_source = false;
 
 	if ( (g()->is_Am_coll_14mm + g()->is_Cd_standard_box +
@@ -204,7 +204,7 @@ int main(int argc, char** argv)
 		}
 		else if (g()->is_X_ray_coll_14mm_no_alpha)
 		{
-			g()->h_c = 14;
+			g()->h_c = 14;//model_25b
 			g()->l_x = 112;
 			h_x = 2;
 			lambda_bar = 1.7;
@@ -269,6 +269,7 @@ int main(int argc, char** argv)
 				//cout << "h_s = " << g()->h_s << endl;
 
 				g()->radius = g()->h_s / 2.0;
+				//g()->radius = 30;//test, dummy
 			}			
 
 			double x_offset = 0;
