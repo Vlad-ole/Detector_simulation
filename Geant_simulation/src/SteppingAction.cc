@@ -23,7 +23,7 @@
 
 //#define bTHGEM2
 #define bTHGEM1
-#define bTHGEM0
+//#define bTHGEM0
 #define Cu_REFLECTION
 //#define bPASSTHROUGHTHGEMsREFLECTION
 

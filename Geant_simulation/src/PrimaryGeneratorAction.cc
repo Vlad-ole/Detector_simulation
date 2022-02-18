@@ -18,11 +18,11 @@ using namespace std;
 //#define TEST_POSITION_DIRECTION
 //#define DIRECT_INCIDENCE
 //#define TOP_HEMISPHERE
-#define SPHERE_4PI
+#define SPHERE_4PI // main
 //#define ANGLE_Cd_COLL6mm
 
 //set (x,y,z) position
-#define POSITION_FROM_MAIN
+#define POSITION_FROM_MAIN // main
 //#define CENTRAL_INCIDENCE
 //#define GEM_HOLE
 //#define EL_GAP 
@@ -339,7 +339,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 #ifdef DIRECT_INCIDENCE
 	double phi = 0 * deg;
 	//double theta = 0 * deg;
-	double cosTheta = cos(90 * deg);
+	double cosTheta = cos(15 * deg);
 	//cout << "inside DIRECT_INCIDENCE" << endl;
 	//system("pause");
 #endif //DIRECT_INCIDENCE	
@@ -432,8 +432,9 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	//z = g()->z_source;
 
 	
-	//x = /*g()->x_source*/ 6*(G4UniformRand() - 0.5);
-	//y = /*g()->y_source*/ 6*(G4UniformRand() - 0.5);
+	x = /*g()->x_source*/ 6*(G4UniformRand() - 0.5) + 37;
+	y = /*g()->y_source*/ 6*(G4UniformRand() - 0.5);
+	z = 0;
 	////g()->z_source = 54.7;//S2
 	//g()->z_source = 0;//S1
 	//z = g()->z_source;

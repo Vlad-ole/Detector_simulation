@@ -191,6 +191,12 @@ private:
 	double step_wire;
 	int N_wire; 
 
+	//Interface wire
+	double radius_Interface_wire;
+	double length_Interface_wire;
+	double step_Interface_wire;
+	int N_Interface_wire;
+
 	//Anode_grid
 	double thickness_anode_grid;
 	double size_anode_grid;
@@ -242,6 +248,15 @@ private:
 	double x_size_tracker_THGEM2;
 	double y_size_tracker_THGEM2;
 	double z_size_tracker_THGEM2;
+
+	//Interface_grid
+	double x_size_tracker_Interface_grid;
+	double y_size_tracker_Interface_grid;
+	//double z_size_tracker_Interface_grid;
+	double x_size_Interface_grid_substrate;
+	double y_size_Interface_grid_substrate;
+	double z_size_Interface_grid_substrate;
+
 
 	//SteelBox
 	double xSizeSteelBox;

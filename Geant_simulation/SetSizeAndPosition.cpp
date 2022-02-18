@@ -21,7 +21,11 @@ void DetectorConstruction::SetSizeAndPosition()
 	step_wire = 1 * mm;
 	N_wire = length_wire / step_wire - 1 /* 107 future case*/;
 
-	
+	//interface wire
+	radius_Interface_wire = 100 / 2.0 * um;//from Chegodaev
+	length_Interface_wire = 100 * mm; // active region
+	step_Interface_wire = 1 * mm; //from Chegodaev
+	N_Interface_wire = length_Interface_wire / step_wire - 1;
 
 	//Anode_grid
 	thickness_anode_grid = 0.5 * mm;
@@ -71,13 +75,23 @@ void DetectorConstruction::SetSizeAndPosition()
 	//solid_tracker_THGEM_Cu_reflector
 	z_size_tracker_THGEM_Cu_reflector = z_size_tracker_THGEM2 / 10.0;
 
+	//Interface_grid
+	x_size_tracker_Interface_grid = x_size_tracker_THGEM2;
+	y_size_tracker_Interface_grid = y_size_tracker_THGEM2;
+	x_size_Interface_grid_substrate = size_anode_grid;
+	y_size_Interface_grid_substrate = size_anode_grid;
+	z_size_Interface_grid_substrate = 5 * mm;
+	
+
+
 	//THGEM0
 	//const double z_THGEM0_bottom = 50.2 * mm;
 
 	//THGEM_without_holes
 	x_size_THGEM_without_holes = size_anode_grid;
-	y_size_THGEM_without_holes = size_anode_grid;
+	y_size_THGEM_without_holes = size_anode_grid;	
 	z_size_THGEM_without_holes = z_size_tracker_THGEM2;
+
 
 	//THGEM sizes
 	//const double hole_diameter_THGEM = 500 * um;

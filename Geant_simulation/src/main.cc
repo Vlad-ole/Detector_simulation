@@ -41,16 +41,16 @@ int main(int argc, char** argv)
 {
 	long t1 = clock();
 
-	bool isLowStaticticsAndView = 0;
+	bool isLowStaticticsAndView = 1;
 
 	int N_runs;
 	int N_events_per_run;
-	if (isLowStaticticsAndView) { N_runs = /*1*/ 100; N_events_per_run = /*10000*/1; }
+	if (isLowStaticticsAndView) { N_runs = 100 /*100*/; N_events_per_run = /*10000*/1; }
 	else { N_runs = 200000; N_events_per_run = 100; }
 
 	
-	//g()->radius_THGEM_hole = 0.25; g()->step_THGEM_hole = 0.9; g()->width_THGEM1 = 0.4; //[mm] //THGEM CERN 28%
-	g()->radius_THGEM_hole = 0.5; g()->step_THGEM_hole = 1.1; g()->width_THGEM1 = 1.0;//[mm] //THGEM Electroconnect 75%
+	g()->radius_THGEM_hole = 0.25; g()->step_THGEM_hole = 0.9; g()->width_THGEM1 = 0.4; //[mm] //THGEM CERN 28%
+	//g()->radius_THGEM_hole = 0.5; g()->step_THGEM_hole = 1.1; g()->width_THGEM1 = 1.0;//[mm] //THGEM Electroconnect 75%
 	g()->width_THGEM0 = g()->width_THGEM1;
 	g()->xyz_position_SingleTHGEMHole = 150;
 
@@ -66,10 +66,10 @@ int main(int argc, char** argv)
 	g()->is_Am_coll_14mm = false;
 	g()->is_Cd_standard_box = false;
 	g()->is_X_ray_coll_35mm_no_alpha = false;
-	g()->is_X_ray_coll_14mm_no_alpha = false;//
+	g()->is_X_ray_coll_14mm_no_alpha = true;//
 	g()->is_X_ray_coll_2mm_no_alpha = false;
 	g()->is_X_ray_coll_35mm_with_alpha = false;
-	g()->is_alpha = true;
+	g()->is_alpha = false;
 	g()->is_point_source = false;
 
 	if ( (g()->is_Am_coll_14mm + g()->is_Cd_standard_box +
